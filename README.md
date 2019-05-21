@@ -33,11 +33,11 @@ South Londoners(Member):
 
 ## Prototype:
 
-Website prototype is [here](https://www.figma.com/file/Pom80HoRieQ24tSmTzayO4WP/City-of-south?node-id=122%3A474).
+Website prototype is [here](https://www.figma.com/proto/Pom80HoRieQ24tSmTzayO4WP/City-of-south?scaling=min-zoom).
 
 ## How to use:
 
-- he project is still in builing stage..... In general:
+- This project is still in the builing stage..... In general:
 
   - clone the repo.
   - cd city-in-the-south
