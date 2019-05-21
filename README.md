@@ -7,15 +7,17 @@ Dominic and David believe that people in South London get to work without respec
 - get work from each other (connecting both online and face-to-face as part of that process).
 - offer and receive better quality and more sustainable work (we created the Growth Pathway to help businesses to become established, successful and ethical as partnerships and/or employers (‘establishment’ to involve training, mentoring, crowdfunding and incubation; ‘success’ to involve tailoring product-market fit South London buyers and developing the market-place in a sharing economy; ‘ethical’ to be about treating people fairly and considering their longer-term future and wellbeing).
 
-## Solution:
+## SOLUTION:
 
 Build a 'work together' website to help south londoners to get work from each other, save their rights, and also insure a good quality.
 
 ## BIG PICTURE GOAL & MAIN STAKEHOLDER:
 
+#### GOAL
+
 - help South Londoners (members of the co-operative) to get work with good quality.
 
-## MAIN USER:
+#### MAIN STAKEHOLDER:
 
 South Londoners(Member):
 
