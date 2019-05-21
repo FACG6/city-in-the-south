@@ -46,8 +46,9 @@ South Londoners(Member):
 
 ## USER JOURNEY:
 
-- As a member looking for work I want see suggested opportunities.
-- As a member looking for work or looking for someone to work with me I want to see/present the opportunities and connect with other members who are interested.
+- Looking for a job #1.
+- Post an opportunity #2.
+- Update profile #3.
 
 ## TWEET
 
