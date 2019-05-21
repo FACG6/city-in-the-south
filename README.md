@@ -1,13 +1,13 @@
 # City-of-the-south
 
-## Problem:
+## PROBLEM:
 
 Dominic and David believe that people in South London get to work without respective quality, so, they want to use technology to help South Londoners to:
 
 - get work from each other (connecting both online and face-to-face as part of that process).
 - offer and receive better quality and more sustainable work (we created the Growth Pathway to help businesses to become established, successful and ethical as partnerships and/or employers (‘establishment’ to involve training, mentoring, crowdfunding and incubation; ‘success’ to involve tailoring product-market fit South London buyers and developing the market-place in a sharing economy; ‘ethical’ to be about treating people fairly and considering their longer-term future and wellbeing).
 
-## Goals:
+## GOALS:
 
 - Help local people to get work from each other.
 - Save the rights for the workers.
@@ -46,9 +46,9 @@ South Londoners(Member):
 
 ## USER JOURNEY:
 
-- Looking for a job #1.
-- Post an opportunity #2.
-- Update profile #3.
+- Looking for a job [#1](https://github.com/FACG6/city-in-the-south/issues/1).
+- Post an opportunity [#2](https://github.com/FACG6/city-in-the-south/issues/2).
+- Update profile [#3](https://github.com/FACG6/city-in-the-south/issues/3).
 
 ## TWEET
 
