@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+  - 'node'
+before_script:
+  - 'psql -c "CREATE DATABASE db_travis;" -U postgres'
+  - 'psql -c "CREATE USER city WITH PASSWORD ''321396'';" -U postgres'
+env:
+  global:
+    - PGPORT=5432
+services:
+  - postgresql
+test:
+  adapter: postgresql
+  database: db_travis
