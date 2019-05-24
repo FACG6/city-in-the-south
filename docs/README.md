@@ -59,3 +59,5 @@ we'll be discussed on Sunday May 26th
   - active:
   - completed: someone been hired
   - Finished: contraced finished or the worker no longer work (this should be modified manually by the offer owner)!!
+### database schema
+![](https://cdn.discordapp.com/attachments/491491266090106884/581599237993791558/HvQwuHASYAESIAESIAESIAEfEqAEsunuNkYCZCAUwm4RlsZf2ckllNnjf3yBQFjlJVrxBUjsHwxA2yDBEiABEiABEiABEhAJ0CJx.png)
