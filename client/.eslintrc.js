@@ -34,7 +34,7 @@ module.exports = {
       'error',
       {
         trailingComma: 'es5',
-        jsxSingleQuote: true,
+        jsxSingleQuote: false,
         singleQuote: true,
       },
     ],
