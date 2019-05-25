@@ -4,7 +4,7 @@
   "description": "## PROBLEM:",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon server/index.js",
+    "server": "NODE_ENV=development nodemon server/index.js",
     "client": "npm start --prefix client",
     "kill": "fuser -k 5000/tcp; fuser -k 3000/tcp;",
     "dev": "concurrently \"npm run client\" \"npm run server\"",
