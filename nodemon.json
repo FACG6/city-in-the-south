@@ -1,9 +1,0 @@
-{
-  "verbose": false,
-  "events": {
-    "restart": "fuser -k 5000/tcp;",
-    "crash": "fuser -k 5000/tcp;",
-    "exit": "fuser -k 5000/tcp;"
-  },
-  "delay": "1500"
-}
