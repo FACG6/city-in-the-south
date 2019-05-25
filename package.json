@@ -4,6 +4,8 @@
   "description": "## PROBLEM:",
   "main": "index.js",
   "scripts": {
+    "start": "node ./server/index.js",
+    "heroku-postbuild": "cd client && npm install && npm run build",
     "server": "NODE_ENV=development nodemon server/index.js",
     "client": "npm start --prefix client",
     "kill": "fuser -k 5000/tcp; fuser -k 3000/tcp;",
