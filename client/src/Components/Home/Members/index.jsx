@@ -1,6 +1,5 @@
 import React from 'react';
-import UnderConstruction from '../../UnderConstruction';
 
-export default function Members(){
-  return <UnderConstruction />
+export default function Members() {
+  return <h1> members cards</h1>;
 }
