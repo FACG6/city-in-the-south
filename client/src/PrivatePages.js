@@ -18,12 +18,20 @@ function PrivatePages() {
       <>
         <Header />
         <Switch>
-          <Route exact path="/my-applications" Component={MyApplications} />
-          <Route exact path="/my-offers" Component={MyOffers} />
-          <Route exact path="/offers/:offerId" Component={OfferDetails} />
-          <Route exact path="/new-offer" Component={CreateOffer} />
-          <Route exact path="/saved-offers" Component={SavedOffers} />
-          <Route exact path="/profile/:username" Component={Profile} />
+          <Route
+            exact
+            path="/my-applications"
+            render={() => <MyApplications />}
+          />
+          <Route exact path="/my-offers" render={() => <MyOffers />} />
+          <Route
+            exact
+            path="/offers/:offerId"
+            render={() => <OfferDetails />}
+          />
+          <Route exact path="/new-offer" render={() => <CreateOffer />} />
+          <Route exact path="/saved-offers" render={() => <SavedOffers />} />
+          <Route exact path="/profile/:username" render={() => <Profile />} />
         </Switch>
         <Footer />
       </>
