@@ -23,6 +23,7 @@ function App() {
     <Router>
       <>
         <Header />
+        <i className="far fa-star" />
         <Switch>
           <Route exact path="/" Component={LandingPage} />
           <Route exact path="/login" Component={Login} />
