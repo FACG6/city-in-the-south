@@ -25,11 +25,11 @@ export default class App extends Component {
           <Header />
           <Switch>
             <Route exact path="/" render={() => <LandingPage />} />
-            <Route exact path="/login" render={() => <Login />} />
-            <Route exact path="/signup" render={() => <Signup />} />
-            <Route exact path="/home" render={() => <Home />} />
-            <Route exact path="/app" render={() => <PrivatePages />} />
-            <Route render={() => <PageNotFound />} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/signup" component={Signup} />
+            <Route exact path="/home" component={Home} />
+            <Route path="/app" component={PrivatePages} />
+            <Route component={PageNotFound} />
           </Switch>
           <Footer />
         </Router>

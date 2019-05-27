@@ -1,41 +1,29 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import {
-  Header,
-  Footer,
+  PageNotFound,
   MyApplications,
-  MyOffers,
   CreateOffer,
   OfferDetails,
   SavedOffers,
   Profile,
+  MyOffers,
 } from './Components';
 
 function PrivatePages() {
   return (
-    <Router>
-      <>
-        <Header />
-        <Switch>
-          <Route
-            exact
-            path="/my-applications"
-            render={() => <MyApplications />}
-          />
-          <Route exact path="/my-offers" render={() => <MyOffers />} />
-          <Route
-            exact
-            path="/offers/:offerId"
-            render={() => <OfferDetails />}
-          />
-          <Route exact path="/new-offer" render={() => <CreateOffer />} />
-          <Route exact path="/saved-offers" render={() => <SavedOffers />} />
-          <Route exact path="/profile/:username" render={() => <Profile />} />
-        </Switch>
-        <Footer />
-      </>
-    </Router>
+    <>
+      <Switch>
+        <Route exact path="/app/my-applications" component={MyApplications} />
+        <Route exact path="/app/my-offers" component={MyOffers} />
+        <Route exact path="/app/offers/:offerId" component={OfferDetails} />
+        <Route exact path="/app/new-offer" component={CreateOffer} />
+        <Route exact path="/app/saved-offers" component={SavedOffers} />
+        <Route exact path="/app/profile/:username" component={Profile} />
+        <Route component={PageNotFound} />
+      </Switch>
+    </>
   );
 }
 
