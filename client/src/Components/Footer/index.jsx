@@ -3,10 +3,10 @@ import './style.css';
 
 export default function Footer() {
   return (
-    <>
-      <div className="footer--container">
+    <footer className="footer">
+      <div className="footer__container">
         <span>© 2019 City Of The South, Inc.</span>
-        <ul className="footer--icons">
+        <ul className="footer__icons">
           <a href="#">
             <i className="fab fa-twitter" />
           </a>
@@ -19,6 +19,6 @@ export default function Footer() {
           </a>
         </ul>
       </div>
-    </>
+    </footer>
   );
 }
