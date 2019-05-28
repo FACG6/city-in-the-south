@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, Col, Dropdown } from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
 
 class Notification extends Component {
   state = {
