@@ -1,48 +1,137 @@
-import React from 'react';
-import { Navbar, Nav, Col } from 'react-bootstrap';
+import React, { Component } from 'react';
+import { NavLink, Link } from 'react-router-dom';
+import { Navbar, Nav, Col, Dropdown } from 'react-bootstrap';
 import './style.css';
 
-export default function Header(props) {
-  const { islooged } = props;
-  const route = window.location.href.split('/')[3];
-  return (
-    <div className="Navbar--container">
-      <Navbar collapseOnSelect expand="lg" variant="dark">
-        <Col className="ml-3 mr-5">
-          <Navbar.Brand href="#home" xs="auto" lg="2">
-            Work Together
-          </Navbar.Brand>
+class Header extends Component {
+  state = {
+    route: '/',
+    userInfo: {},
+  };
 
-          <img
-            src=""
-            width="30"
-            height="30"
-            className="d-inline-block align-top"
-            alt="logo"
-          />
-        </Col>
+  componentDidMount() {
+    const userInfo = localStorage.getItem('userInfo');
+    this.setState({ userInfo });
+  }
 
-        {!islooged && (
-          <div className="ml-auto">
-            <Nav className="ml-3">
-              <Nav.Link
-                href="/login"
-                className={`ml-3 nav--link ${route === 'login' &&
-                  'route--active'}`}
-              >
-                Login
-              </Nav.Link>
-              <Nav.Link
-                href="/signup"
-                className={`ml-3 mr-5 nav--link ${route === 'signup' &&
-                  'route--active'}`}
-              >
-                Signup
-              </Nav.Link>
-            </Nav>
-          </div>
-        )}
-      </Navbar>
-    </div>
-  );
+  render() {
+    const { islooged } = this.props;
+    const { userInfo } = this.state;
+    let fullName = 'Ayman AlQoqa';
+    let username = 'ayman321396';
+    let avatar =
+      'https://m.media-amazon.com/images/M/MV5BMTcxOTk4NzkwOV5BMl5BanBnXkFtZTcwMDE3MTUzNA@@._V1_.jpg';
+    if (userInfo) {
+      username = userInfo.username;
+      fullName = userInfo.fullName;
+      avatar = userInfo.avatar;
+    }
+    const notification = false;
+
+    return (
+      <div className="header__container">
+        <Navbar
+          collapseOnSelect
+          expand="lg"
+          variant="dark"
+          className="Navbar__container"
+        >
+          <Col className="ml-3 mr-5" xs>
+            <Navbar.Brand lg="2">
+              <Link to="/" className="navbar__link navbar__brand">
+                Work Together
+              </Link>
+            </Navbar.Brand>
+
+            <img
+              src=""
+              width="30"
+              height="30"
+              className="d-inline-block align-top"
+              alt="logo"
+            />
+          </Col>
+          {!islooged && (
+            <Col md="auto">
+              <Nav>
+                <NavLink to="/login" className="navbar__link">
+                  <div className="navbar__link--text">Login</div>
+                </NavLink>
+
+                <NavLink to="/Signup" className="navbar__link">
+                  <div className="navbar__link--text">Signup</div>
+                </NavLink>
+              </Nav>
+            </Col>
+          )}
+
+          {islooged && (
+            <>
+              <Col md="auto">
+                <Nav>
+                  <NavLink to="/home" className="navbar__link">
+                    <div className="navbar__link--text">Home</div>
+                  </NavLink>
+
+                  <NavLink to="/app/my-applications" className="navbar__link">
+                    <div className="navbar__link--text">My Applications</div>
+                  </NavLink>
+
+                  <NavLink to="/app/my-offers" className="navbar__link">
+                    <div className="navbar__link--text">My Offers</div>
+                  </NavLink>
+
+                  <NavLink to="/app/saved-offers" className="navbar__link">
+                    <div className="navbar__link--text">Saved Offers</div>
+                  </NavLink>
+
+                  <NavLink to="/app/new-offer" className="navbar__link">
+                    <div className="navbar__link--text">New Offer</div>
+                  </NavLink>
+                </Nav>
+              </Col>
+              <Col md="auto">
+                <Dropdown>
+                  <Dropdown.Toggle
+                    id="dropdown-basic"
+                    className="nav--dropdown"
+                  >
+                    <img src={avatar} alt="Avatar" className="nav--avatar" />{' '}
+                    {'    '}
+                    {fullName}
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu className="dropdown__menu">
+                    <Dropdown.Item>
+                      <Link
+                        to={`/app/profile/:${username}`}
+                        className="dropdown__item"
+                      >
+                        Profile
+                      </Link>
+                    </Dropdown.Item>
+                    <Dropdown.Divider />
+                    <Dropdown.Item>
+                      <Link to="/logout" className="dropdown__item">
+                        Logout
+                      </Link>
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </Col>
+              <Col md="auto">
+                {notification ? (
+                  <i className="fas fa-bell" />
+                ) : (
+                  <i className="far fa-bell" />
+                )}
+              </Col>
+            </>
+          )}
+        </Navbar>
+      </div>
+    );
+  }
 }
+
+export default Header;
