@@ -4,14 +4,15 @@
   "private": true,
   "proxy": "http://localhost:5000/",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.8.2",
     "bootstrap": "^4.3.1",
     "font-awesome": "^4.7.0",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.8",
+    "react-bootstrap-typeahead": "^4.0.0-alpha.10",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "3.0.1",
-    "@fortawesome/fontawesome-free": "^5.8.2"
+    "react-scripts": "3.0.1"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
