@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import PrivatePages from './PrivatePages';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import {
   LandingPage,
@@ -14,15 +15,16 @@ import {
 
 export default class App extends Component {
   state = {
-    islooged: true,
+    islooged: false,
     userInfo: null,
   };
 
   render() {
+    const { islooged } = this.state;
     return (
       <>
         <Router>
-          <Header />
+          <Header islooged={islooged} />
           <Switch>
             <Route exact path="/" component={LandingPage} />
             <Route exact path="/login" component={Login} />
