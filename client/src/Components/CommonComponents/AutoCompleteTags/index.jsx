@@ -8,7 +8,6 @@ import './style.css';
 export default class AutoCompleteTags extends Component {
   state = {
     options: null,
-    offer_type: null,
   };
 
   componentDidMount() {
@@ -17,7 +16,6 @@ export default class AutoCompleteTags extends Component {
 
     const { type } = this.props;
     if (type === 'skill') {
-      console.log(skills);
       this.setState({ options: skills });
     }
     if (type === 'offer_type') {
@@ -25,12 +23,15 @@ export default class AutoCompleteTags extends Component {
     }
   }
 
-  handleChange = () => {
+  handleChange = items => {
     /* filter the skills if the user enter new skills we will make a request to the back to add the skills the user adding it 
     and the same as for the offer_type
   */
-    const { options } = this.state;
-    console.log(options);
+    items.map(item => {
+      if (item.customOption) {
+        // make a requset to the back to add new item
+      }
+    });
   };
 
   render() {
@@ -40,7 +41,9 @@ export default class AutoCompleteTags extends Component {
         <>
           <Typeahead
             multiple
-            onChange={ss => console.log(1111111111, ss)}
+            onChange={items => {
+              this.handleChange(items);
+            }}
             id="this"
             key="id"
             selected={options.id}
