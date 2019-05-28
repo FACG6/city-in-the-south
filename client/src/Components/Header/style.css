@@ -1,0 +1,19 @@
+.Navbar--container {
+  background-color: #0f9caf;
+  color: #eeeeee;
+  font-family: 30px;
+}
+.nav--link {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 18px !important;
+  color: #eeeeee !important;
+}
+.nav--link:hover {
+  color: rgb(147, 246, 213) !important;
+}
+
+.route--active {
+  background-color: rgba(0, 0, 0, 0.15) !important;
+  border-radius: 5px !important;
+}
