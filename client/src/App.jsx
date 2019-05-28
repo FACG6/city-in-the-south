@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import PrivatePages from './PrivatePages';
+import './style.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import {
   LandingPage,
