@@ -10,14 +10,14 @@
   font-size: 30px;
 }
 
-.nav--avatar {
+.nav__avatar {
   width: 30px;
   height: 30px;
   border: 1px solid rgba(0, 0, 0, 0.6);
 
   border-radius: 50%;
 }
-.nav--dropdown {
+.nav__dropdown {
   background-color: #0f9caf !important;
   border: none !important;
 }
