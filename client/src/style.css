@@ -1,0 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Lato|Roboto&display=swap');
+
+html, body, * {
+  padding: 0;
+  margin: 0;
+  color: green;
+  font-family: 'Lato', sans-serif;
+}
