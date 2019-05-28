@@ -1,19 +1,46 @@
-.Navbar--container {
+.header__container {
   background-color: #0f9caf;
   color: #eeeeee;
-  font-family: 30px;
+  font-size: 20px;
 }
-.nav--link {
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
-    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  font-size: 18px !important;
-  color: #eeeeee !important;
+.Navbar__container {
+  margin: 0 30px;
 }
-.nav--link:hover {
-  color: rgb(147, 246, 213) !important;
+.navbar__brand {
+  font-size: 30px;
 }
 
-.route--active {
+.nav--avatar {
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+
+  border-radius: 50%;
+}
+.nav--dropdown {
+  background-color: #0f9caf !important;
+  border: none !important;
+}
+.navbar__link {
+  text-decoration: none !important;
+  color: #eeeeee !important;
+  margin: 0 5px !important;
+}
+.navbar__link:hover {
+  color: rgb(147, 246, 213) !important;
+}
+.Navbar__container .active {
   background-color: rgba(0, 0, 0, 0.15) !important;
   border-radius: 5px !important;
+}
+.navbar__link--text {
+  margin: 5px 10px;
+}
+.Navbar__container .dropdown__item {
+  color: #0f9caf !important;
+  text-decoration: none !important;
+}
+
+.dropdown__menu a:active {
+  background-color: rgb(147, 246, 213) !important;
 }
