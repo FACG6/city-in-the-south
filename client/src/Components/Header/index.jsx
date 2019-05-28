@@ -26,7 +26,7 @@ class Header extends Component {
       fullName = userInfo.fullName;
       avatar = userInfo.avatar;
     }
-    const notification = false;
+    const notification = true;
 
     return (
       <div className="header__container">
@@ -121,9 +121,13 @@ class Header extends Component {
               </Col>
               <Col md="auto">
                 {notification ? (
-                  <i className="fas fa-bell" />
+                  <span>
+                    <i className="fas fa-bell fa-lg">
+                      <span className="notification-no">10</span>
+                    </i>
+                  </span>
                 ) : (
-                  <i className="far fa-bell" />
+                  <i className="far fa-bell fa-lg" />
                 )}
               </Col>
             </>

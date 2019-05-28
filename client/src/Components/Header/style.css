@@ -44,3 +44,17 @@
 .dropdown__menu a:active {
   background-color: rgb(147, 246, 213) !important;
 }
+
+.header__container .fas {
+  position: relative;
+}
+.header__container .notification-no {
+  color: #eeeeee;
+  position: absolute;
+  z-index: 1;
+  top: -8px;
+  left: 12px;
+  font-size: 0.7em;
+  background-color: red;
+  padding: 2px;
+}
