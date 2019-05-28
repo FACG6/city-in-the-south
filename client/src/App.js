@@ -15,7 +15,7 @@ import {
 
 export default class App extends Component {
   state = {
-    islooged: false,
+    islooged: true,
     userInfo: null,
   };
 
