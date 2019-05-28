@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { Navbar, Nav, Col, Dropdown } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+import Notification from './notification';
 import './style.css';
 
 class Header extends Component {
   state = {
-    route: '/',
     userInfo: {},
   };
 
@@ -15,7 +16,7 @@ class Header extends Component {
   }
 
   render() {
-    const { islooged } = this.props;
+    const { islogged } = this.props;
     const { userInfo } = this.state;
     let fullName = 'Ayman AlQoqa';
     let username = 'ayman321396';
@@ -26,7 +27,6 @@ class Header extends Component {
       fullName = userInfo.fullName;
       avatar = userInfo.avatar;
     }
-    const notification = true;
 
     return (
       <div className="header__container">
@@ -51,7 +51,7 @@ class Header extends Component {
               alt="logo"
             />
           </Col>
-          {!islooged && (
+          {!islogged && (
             <Col md="auto">
               <Nav>
                 <NavLink to="/login" className="navbar__link">
@@ -65,7 +65,7 @@ class Header extends Component {
             </Col>
           )}
 
-          {islooged && (
+          {islogged && (
             <>
               <Col md="auto">
                 <Nav>
@@ -94,9 +94,9 @@ class Header extends Component {
                 <Dropdown>
                   <Dropdown.Toggle
                     id="dropdown-basic"
-                    className="nav--dropdown"
+                    className="nav__dropdown"
                   >
-                    <img src={avatar} alt="Avatar" className="nav--avatar" />{' '}
+                    <img src={avatar} alt="Avatar" className="nav__avatar" />{' '}
                     {'    '}
                     {fullName}
                   </Dropdown.Toggle>
@@ -120,15 +120,7 @@ class Header extends Component {
                 </Dropdown>
               </Col>
               <Col md="auto">
-                {notification ? (
-                  <span>
-                    <i className="fas fa-bell fa-lg">
-                      <span className="notification-no">10</span>
-                    </i>
-                  </span>
-                ) : (
-                  <i className="far fa-bell fa-lg" />
-                )}
+                <Notification />
               </Col>
             </>
           )}
@@ -137,5 +129,9 @@ class Header extends Component {
     );
   }
 }
+
+Header.propTypes = {
+  islogged: PropTypes.bool.isRequired,
+};
 
 export default Header;
