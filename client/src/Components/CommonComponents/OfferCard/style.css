@@ -100,8 +100,6 @@
   color: #fff;
 }
 
-
-
 .offer__card--green,
 .offer__card--orange,
 .offer__card--blue {
@@ -112,15 +110,18 @@
     top: -1px;
 }
 
-.offer__card:hover .offer__card--green {
+.offer__card:hover 
+.offer__card--green {
   background: green;
 }
 
-.offer__card:hover .offer__card--orange {
+.offer__card:hover 
+.offer__card--orange {
   background: orange;
 }
 
-.offer__card:hover .offer__card--blue {
+.offer__card:hover 
+.offer__card--blue {
   background:#1BA7E2;
 }
 
@@ -154,3 +155,4 @@
     width: 4.5rem
   }
 }
+
