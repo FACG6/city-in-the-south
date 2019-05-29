@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
-import 'react-bootstrap-typeahead/css/Typeahead.css';
-
+import { Spinner } from 'react-bootstrap';
 import { Typeahead } from 'react-bootstrap-typeahead';
+import PropTypes from 'prop-types';
+import 'react-bootstrap-typeahead/css/Typeahead.css';
 import { skills, offerType } from './staticData';
+
 import './style.css';
 
 export default class AutoCompleteTags extends Component {
   state = {
-    options: null,
+    options: [],
+    selectedTags: [],
   };
 
   componentDidMount() {
     // git the data form the back for skills and offer_type and setSatet for the skills and offer type
     // const selected = options.filter(item => _.find(fetched, id => id === item.id))
+    const { data, type } = this.props;
+    this.setState({ selectedTags: data });
 
-    const { type } = this.props;
     if (type === 'skill') {
       this.setState({ options: skills });
     }
@@ -27,36 +31,70 @@ export default class AutoCompleteTags extends Component {
     /* filter the skills if the user enter new skills we will make a request to the back to add the skills the user adding it 
     and the same as for the offer_type
   */
-    items.map(item => {
-      if (item.customOption) {
-        // make a requset to the back to add new item
+    const { onchange } = this.props;
+    if (items[0]) {
+      if (items[items.length - 1].customOption) {
+        // send request to db to add skills/offertypes then return newOptions
+        this.setState(prevState => {
+          const newOptions = [...prevState.options];
+          const newTags = [...prevState.selectedTags];
+
+          // push the newOptions
+          newOptions.push({ id: 222, name: items[items.length - 1].name });
+          newTags.push({ id: 222, name: items[items.length - 1].name });
+          return { options: newOptions, selectedTags: newTags };
+        });
       }
-    });
+    }
+    if (typeof onchange === 'function') onchange();
   };
 
   render() {
-    const { options } = this.state;
-    if (options) {
-      return (
-        <>
+    const { options, selectedTags } = this.state;
+    const { placeholder, type } = this.props;
+    return (
+      <>
+        {!options[0] ? (
+          <Spinner animation="border" variant="info" />
+        ) : (
           <Typeahead
             multiple
-            onChange={items => {
-              this.handleChange(items);
-            }}
-            id={options.id}
+            onChange={
+              this.handleChange
+              /* here we need another on change its comming from the filter it self */
+            }
+            id={`autoComplete${type}`}
             key="id"
-            selected={options.id}
+            selected={selectedTags}
             valueKey="id"
             labelKey="name"
             options={options}
             allowNew
             newSelectionPrefix="Add a new item: "
-            placeholder="Choose ..."
+            placeholder={placeholder}
+            className="autComplete-dev"
           />
-        </>
-      );
-    }
-    return <h1>loading</h1>;
+        )}
+      </>
+    );
   }
 }
+
+AutoCompleteTags.defaultProps = {
+  type: null,
+  data: [],
+  placeholder: '',
+  onchange: null,
+};
+
+AutoCompleteTags.propTypes = {
+  type: PropTypes.string,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+    })
+  ),
+  placeholder: PropTypes.string,
+  onchange: PropTypes.func,
+};
