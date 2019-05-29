@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
 import './style.css';
 import { withRouter } from 'react-router-dom';
 
@@ -15,33 +15,35 @@ class OfferCard extends React.Component {
   componentDidMount() {
     const { offer, status } = this.props;
     this.setState({ offer });
-    // console.log(999999, status);
     switch (status) {
       case 'completed':
         this.setState({
           statusLabel: 'offer__card--completed',
           statusDiv: 'offer__card--green',
         });
-        console.log(1, status);
         break;
       case 'in progress':
         this.setState({
           statusLabel: 'offer__card--inProgress',
           statusDiv: 'offer__card--orange',
         });
-        console.log(2, status);
         break;
       case 'pending':
         this.setState({
           statusLabel: 'offer__card--pending',
           statusDiv: 'offer__card--blue',
         });
-        console.log(3, status);
         break;
       default:
         this.setState({ statusLabel: 'offer__card--activeStatus' });
     }
   }
+
+  savedClassStatus = () => {
+    const { saved } = this.state;
+    if (saved) return 'offer__card--saved savedOffer';
+    return 'offer__card--saved unsavedOffer';
+  };
 
   handleSave = id => {
     const { saved } = this.state;
@@ -53,53 +55,43 @@ class OfferCard extends React.Component {
   };
 
   render() {
-    const { offer, hovered, statusLabel, statusDiv, saved } = this.state;
+    const { offer, hovered, statusLabel, statusDiv } = this.state;
     const { hover, history } = this.props;
     return (
       <>
         {offer ? (
           <Card className={`offer__card ${hovered}`} key={offer.id}>
-            {hover ? <div className={statusDiv}> </div> : null}
-            <div>
-              <Card.Header className="offer__card--header">
-                <div>
-                  <span className="offer__card--position">
-                    {offer.position}
-                  </span>
-                  <br />
-                  <span className="offer__card--title">{offer.title}</span>
-                </div>
-                <div>
-                  {hover
-                    ? () => this.setState({ hovered: 'card__hovered' })
-                    : null}
-                  {hover ? (
-                    <span className={statusLabel}> {offer.status}</span>
-                  ) : null}
-                  <i
-                    className={`far fa-bookmark offer__card--saved {
-                      saved ? 'savedOffer' : 'unsavedOffer'
-                    }`}
-                    onClick={() => this.handleSave(offer.id)}
-                  >
-                    {' '}
-                  </i>
-                </div>
-              </Card.Header>
-              <Card.Body
-                onClick={() => history.push(`/app/offers/${offer.id}`)}
+            {hover ? <span className={statusDiv}> </span> : null}
+            <Card.Header className="offer__card--header">
+              <div>
+                <span className="offer__card--position">{offer.position}</span>
+                <br />
+                <span className="offer__card--title">{offer.title}</span>
+              </div>
+              {hover ? () => this.setState({ hovered: 'card__hovered' }) : null}
+              {hover ? (
+                <span className={statusLabel}> {offer.status}</span>
+              ) : null}
+              <Button
+                onClick={() => this.handleSave(offer.id)}
+                className="card__save--btn"
               >
-                <Card.Text className="card__description">
-                  {offer.description}
-                </Card.Text>
-              </Card.Body>
-            </div>
+                <i className={`far fa-bookmark ${this.savedClassStatus()}`}>
+                  {' '}
+                </i>
+              </Button>
+            </Card.Header>
+            <Card.Body onClick={() => history.push(`/app/offers/${offer.id}`)}>
+              <Card.Text className="card__description">
+                {offer.description}
+              </Card.Text>
+            </Card.Body>
           </Card>
         ) : (
-          <>
-            <span> loading... </span>
-          </>
-        )}
+            <>
+              <span> loading... </span>
+            </>
+          )}
       </>
     );
   }
