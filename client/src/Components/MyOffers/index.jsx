@@ -28,12 +28,17 @@ class MyOffers extends Component {
 
   render() {
     const { offers } = this.state;
+    const { history } = this.props;
     return (
-      <Container>
+      <Container className="myOffers">
         {offers ? (
           offers.map(item => {
             return (
-              <Card bg="light" style={{ width: '18rem' }} key={item.id}>
+              <Card
+                className="card__myOffers"
+                key={item.id}
+                onClick={() => history.push(`/app/offers/${item.id}`)}
+              >
                 <Card.Header className="card__myOffers--header">
                   <Card.Text className={this.statusClassName(item.status)}>
                     {item.status}

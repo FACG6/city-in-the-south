@@ -1,7 +1,43 @@
+/* footer */
+h1:last-child {
+  height: 50px;
+  position: fixed;
+  bottom: 0
+}
+
+.myOffers{
+  min-height: calc(100vh-50);
+  padding: 0 auto;
+  text-align: center;
+}
+
+.card__myOffers{
+  width: 20rem;
+  float: left;
+  margin: 0.7rem;
+  border: 1px solid rgba(234, 234, 234, 0.9) !important;
+  border-radius: 0.3rem !important;
+  position: absolute;
+  height: 152px;
+  left: 45px;
+  top: 90px;
+  cursor: pointer;
+}
+
 .card__myOffers--status,
 .card__myOffers--title,
 .card__myOffers--position {
   display: block;
+  font-family: Lato;
+  letter-spacing: 0.4px;
+}
+
+.card__myOffers--position {
+  color: #0F9CAF !important;
+}
+
+.card__myOffers--title {
+  color: rgba(51, 51, 51, 0.8) !important ;
 }
 
 .card__myOffers--status {
@@ -14,23 +50,19 @@
 
 .card__myOffers--header{
   border-bottom: none !important;
-  /* background: red !important; */
+  background: #fff !important;
 }
 
 .card__myOffers--body {
   border-top: none;
 }
 
-.card__myOffers--body {
-  /* background: green; */
-}
-
 .myOffer__card--completed{
-  color: green;
+  color: #0A8F07;
 }
 
 .myOffer__card--inProgress {
-  color: orange;
+  color: #F77D0E;
 }
 
 .myOffer__card--ended {
@@ -38,5 +70,21 @@
 }
 
 .offer__card--activeStatus {
-  color: blue
+  color: #1BA7E2;
+}
+
+.myOffer__card--completed,
+.myOffer__card--inProgress,
+.myOffer__card--ended,
+.offer__card--activeStatus {
+  float: right;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .card__myOffers{
+    width: 15rem;
+    margin: 0.2rem;
+    left: 118px;
+  }
 }
