@@ -9,6 +9,28 @@ h1:last-child {
   min-height: calc(100vh-50);
   padding: 0 auto;
   text-align: center;
+  box-sizing: border-box
+}
+
+.myOffers--hr {
+  position: absolute;
+  width: 145px;
+  height: 0px;
+  left: 180px;
+  top: 133.5px;
+  border: 1px solid rgba(51, 51, 51, 0.36);
+  margin-bottom: 3rem
+}
+
+.myOffers__head--title {
+  position: absolute;
+  left: 180px;
+  color: rgba(51, 51, 51, 0.8);
+  font-size: 32px;
+}
+
+.myOffers__head{
+  margin-bottom: 2rem
 }
 
 .card__myOffers{
@@ -87,4 +109,17 @@ h1:last-child {
     margin: 0.2rem;
     left: 118px;
   }
+
+  .myOffers__head--title {
+    left: 130px;
+    font-size: 24px;
+  }
+
+  .myOffers--hr {
+    left: 135px;
+    top: 7rem;
+    margin-bottom: 0;
+    width: 105px
+  }
 }
+

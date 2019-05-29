@@ -10,6 +10,10 @@ class MyOffers extends Component {
   };
 
   componentDidMount() {
+    // send the request to the backend to get offers (by member_id 'take it from local storage')
+    // use `GET` : `/api/v1/my-offers/:memberId`
+    // the response will be as { error: null, data: [ { // offer details } ] }
+    // this.setState({ offers: result.data });
     this.setState({ offers: offersDetails });
   }
 
@@ -31,6 +35,10 @@ class MyOffers extends Component {
     const { history } = this.props;
     return (
       <Container className="myOffers">
+        <div className="myOffers__head">
+          <h1 className="myOffers__head--title"> My Offers </h1>
+          <hr className="myOffers--hr" />
+        </div>
         {offers ? (
           offers.map(item => {
             return (
