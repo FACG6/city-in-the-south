@@ -61,7 +61,7 @@ export default [
     title: 'Voice artist for short video ',
     description:
       'We are looking to hire a Marketing Manager who will be in charge of overseeing the promotion of our companys brands.  As a successful hire, you will be  responsible  for developing pricing  strategies identify identifying new customers, supporting lead',
-    status: 'pending',
+    status: 'ended',
   },
   {
     id: 9,

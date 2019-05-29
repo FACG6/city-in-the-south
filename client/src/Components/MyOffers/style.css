@@ -1,0 +1,42 @@
+.card__myOffers--status,
+.card__myOffers--title,
+.card__myOffers--position {
+  display: block;
+}
+
+.card__myOffers--status {
+  float: right;
+}
+
+.card__myOffers--body {
+  text-align: center;
+}
+
+.card__myOffers--header{
+  border-bottom: none !important;
+  /* background: red !important; */
+}
+
+.card__myOffers--body {
+  border-top: none;
+}
+
+.card__myOffers--body {
+  /* background: green; */
+}
+
+.myOffer__card--completed{
+  color: green;
+}
+
+.myOffer__card--inProgress {
+  color: orange;
+}
+
+.myOffer__card--ended {
+  color:  yellow
+}
+
+.offer__card--activeStatus {
+  color: blue
+}
