@@ -88,9 +88,9 @@ class OfferCard extends React.Component {
             </Card.Body>
           </Card>
         ) : (
-            <>
-              <span> loading... </span>
-            </>
+          <>
+            <span> loading... </span>
+          </>
           )}
       </>
     );
