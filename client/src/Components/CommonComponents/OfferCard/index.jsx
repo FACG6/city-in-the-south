@@ -76,7 +76,7 @@ class OfferCard extends React.Component {
                 onClick={() => this.handleSave(offer.id)}
                 className="card__save--btn"
               >
-                <i className={`far fa-bookmark ${this.savedClassStatus()}`}>
+                <i className={`fas fa-bookmark ${this.savedClassStatus()}`}>
                   {' '}
                 </i>
               </Button>

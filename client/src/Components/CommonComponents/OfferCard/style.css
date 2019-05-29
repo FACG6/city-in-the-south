@@ -56,11 +56,11 @@
   border: none !important;
 }
 
-.btn-primary{
-  position: absolute;
-  top: -1px;
-  right: 11px;
-  padding-top: 0
+.card__save--btn{
+  position: absolute !important;
+  top: -1px !important;
+  right: 11px !important;
+  padding-top: 0 !important;
 }
 
 .card__hovered:hover {
