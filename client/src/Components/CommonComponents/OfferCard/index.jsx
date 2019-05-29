@@ -10,6 +10,7 @@ class OfferCard extends React.Component {
     statusDiv: null,
     hovered: null,
     saved: false,
+    savedOffers: null,
   };
 
   componentDidMount() {
@@ -37,6 +38,10 @@ class OfferCard extends React.Component {
       default:
         this.setState({ statusLabel: 'offer__card--activeStatus' });
     }
+
+    // request for give id's saved offers (by member_id 'from local storage')
+    // response : array of saved id (e.g: data = [2,6,8,9])
+    // this.setState({savedOffers: data})
   }
 
   savedClassStatus = () => {
@@ -52,6 +57,11 @@ class OfferCard extends React.Component {
     // if(saved) axios.delete(`/api/v1/saved-offer/${id}`)
     // else axios.post('/api/v1/saved-offers', body: {member_id, id} )
     this.setState({ saved: !saved });
+  };
+
+  handleCheckSave = id => {
+    const { savedOffers, saved } = this.state;
+    if (savedOffers.includes(id)) this.setState({ saved: !saved });
   };
 
   render() {
