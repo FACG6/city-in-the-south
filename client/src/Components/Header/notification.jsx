@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Dropdown } from 'react-bootstrap';
 
 class Notification extends Component {
+  // this notification will fetched from back-end socket
   state = {
     notification: {
       seen: [
@@ -39,6 +40,7 @@ class Notification extends Component {
               </i>
             </Dropdown.Toggle>
             <Dropdown.Menu className="dropdown__menu">
+              {/* render un seen notifications */}
               {unSeen.map((item, index) => {
                 return (
                   <Dropdown.Item
@@ -51,7 +53,7 @@ class Notification extends Component {
                   </Dropdown.Item>
                 );
               })}
-
+              {/* render seen notifications */}
               {seen.map((item, index) => {
                 return (
                   <Dropdown.Item

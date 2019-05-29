@@ -18,6 +18,7 @@ class Header extends Component {
   render() {
     const { islogged } = this.props;
     const { userInfo } = this.state;
+    // default values
     let fullName = 'Ayman AlQoqa';
     let username = 'ayman321396';
     let avatar =
@@ -42,15 +43,8 @@ class Header extends Component {
                 Work Together
               </Link>
             </Navbar.Brand>
-
-            <img
-              src=""
-              width="30"
-              height="30"
-              className="d-inline-block align-top"
-              alt="logo"
-            />
           </Col>
+          {/* if the member is not logged in */}
           {!islogged && (
             <Col md="auto">
               <Nav>
@@ -64,7 +58,7 @@ class Header extends Component {
               </Nav>
             </Col>
           )}
-
+          {/* if the member is logged in */}
           {islogged && (
             <>
               <Col md="auto">
@@ -91,6 +85,7 @@ class Header extends Component {
                 </Nav>
               </Col>
               <Col md="auto">
+                {/* frop down menu to show member profile and logout */}
                 <Dropdown>
                   <Dropdown.Toggle
                     id="dropdown-basic"
@@ -121,6 +116,7 @@ class Header extends Component {
                 </Dropdown>
               </Col>
               <Col md="auto">
+                {/* show notificatios component */}
                 <Notification />
               </Col>
             </>
@@ -130,7 +126,7 @@ class Header extends Component {
     );
   }
 }
-
+// prop types validation
 Header.propTypes = {
   islogged: PropTypes.bool.isRequired,
 };
