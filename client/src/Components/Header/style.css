@@ -1,13 +1,13 @@
 .header__container {
   background-color: #0f9caf;
   color: #eeeeee;
-  font-size: 20px;
+  font-size: 14px;
 }
 .Navbar__container {
   margin: 0 30px;
 }
 .navbar__brand {
-  font-size: 30px;
+  font-size: 20px;
 }
 
 .nav__avatar {
@@ -41,45 +41,20 @@
   text-decoration: none !important;
 }
 
-.dropdown__menu a:active {
+.dropdown__menu a:active,
+.dropdown__menu-avatar a:active {
   background-color: #eee !important;
 }
-
+.dropdown__menu {
+  width: 350px;
+  overflow: hidden;
+  padding: 0 !important;
+}
+.dropdown__menu-avatar {
+  width: 80px;
+  overflow: hidden;
+  padding: 0 !important;
+}
 .header__container .fas {
   position: relative;
-}
-.header__container .notification-no {
-  color: #eeeeee;
-  position: absolute;
-  z-index: 1;
-  top: -8px;
-  left: 12px;
-  font-size: 0.7em;
-  background-color: red;
-  padding: 2px;
-}
-.dropdown_item-unseen {
-  background-color: #cecccc61 !important;
-  border-bottom: 1px solid #bcb6b6fc !important;
-  height: 100px !important ;
-}
-.dropdown_item-unseen p,
-.dropdown_item-seen p {
-  vertical-align: middle !important;
-}
-.dropdown__item-title {
-  margin-top: 10px !important;
-  font-weight: bold !important;
-}
-.dropdown_item-unseen span {
-}
-.dropdown_item-unseen:hover,
-.dropdown_item-seen:hover {
-  background-color: #c9c9c9 !important;
-  color: #000000 !important;
-}
-.dropdown_item-seen {
-  border-bottom: 1px solid #bcb6b6fc !important;
-  height: 100px !important ;
-  justify-content: center;
 }

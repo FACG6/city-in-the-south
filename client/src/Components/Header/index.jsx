@@ -2,32 +2,28 @@ import React, { Component } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { Navbar, Nav, Col, Dropdown } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import Notification from './notification';
+import Notification from './Notification';
 import './style.css';
 
 class Header extends Component {
   state = {
-    userInfo: {},
+    userInfo: {
+      fullName: 'Ayman AlQoqa',
+      username: 'Ayman321396',
+      avatar:
+        'https://m.media-amazon.com/images/M/MV5BMTcxOTk4NzkwOV5BMl5BanBnXkFtZTcwMDE3MTUzNA@@._V1_.jpg',
+    },
   };
 
   componentDidMount() {
-    const userInfo = localStorage.getItem('userInfo');
-    this.setState({ userInfo });
+    // const userInfo = localStorage.getItem('userInfo');
+    // this.setState({ userInfo });
   }
 
   render() {
     const { islogged } = this.props;
-    const { userInfo } = this.state;
     // default values
-    let fullName = 'Ayman AlQoqa';
-    let username = 'ayman321396';
-    let avatar =
-      'https://m.media-amazon.com/images/M/MV5BMTcxOTk4NzkwOV5BMl5BanBnXkFtZTcwMDE3MTUzNA@@._V1_.jpg';
-    if (userInfo) {
-      username = userInfo.username;
-      fullName = userInfo.fullName;
-      avatar = userInfo.avatar;
-    }
+    const { fullName, username, avatar } = this.state.userInfo;
 
     return (
       <div className="header__container">
@@ -96,7 +92,7 @@ class Header extends Component {
                     {fullName}
                   </Dropdown.Toggle>
 
-                  <Dropdown.Menu className="dropdown__menu">
+                  <Dropdown.Menu className="dropdown__menu-avatar">
                     <Dropdown.Item
                       as={Link}
                       to={`/app/profile/:${username}`}
