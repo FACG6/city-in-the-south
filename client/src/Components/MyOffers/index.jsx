@@ -11,16 +11,9 @@ class MyOffers extends Component {
 
   componentDidMount() {
     this.setState({ offers: offersDetails });
-    // console.log(offersDetails);
-    // const { offers } = this.state;
-    //   offersDetails.map(item => {
-    //     console.log(item.status);
-    //   })
   }
 
   statusClassName = status => {
-    // const { statusLabel } = this.state;
-    // console.log(status);
     switch (status) {
       case 'completed':
         return 'myOffer__card--completed';
@@ -34,7 +27,6 @@ class MyOffers extends Component {
   };
 
   render() {
-    // console.log(this.state.offers);
     const { offers } = this.state;
     return (
       <Container>
