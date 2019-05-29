@@ -102,19 +102,20 @@ class Header extends Component {
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu className="dropdown__menu">
-                    <Dropdown.Item>
-                      <Link
-                        to={`/app/profile/:${username}`}
-                        className="dropdown__item"
-                      >
-                        Profile
-                      </Link>
+                    <Dropdown.Item
+                      as={Link}
+                      to={`/app/profile/:${username}`}
+                      className="dropdown__item"
+                    >
+                      Profile
                     </Dropdown.Item>
                     <Dropdown.Divider />
-                    <Dropdown.Item>
-                      <Link to="/logout" className="dropdown__item">
-                        Logout
-                      </Link>
+                    <Dropdown.Item
+                      as={Link}
+                      to="/logout"
+                      className="dropdown__item"
+                    >
+                      Logout
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>

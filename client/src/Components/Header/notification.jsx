@@ -41,20 +41,26 @@ class Notification extends Component {
             <Dropdown.Menu className="dropdown__menu">
               {unSeen.map((item, index) => {
                 return (
-                  <Dropdown.Item eventKey={index} className="dropdown__item">
-                    <span>{item.title}</span>
+                  <Dropdown.Item
+                    key={unSeen.indexOf(item)}
+                    eventKey={index}
+                    className="dropdown__item dropdown_item-unseen"
+                  >
+                    <p className="dropdown__item-title">{item.title}</p>
                     <p>{item.message}</p>
-                    <hr />
                   </Dropdown.Item>
                 );
               })}
 
               {seen.map((item, index) => {
                 return (
-                  <Dropdown.Item eventKey={index} className="dropdown__item">
-                    <span>{item.title}</span>
+                  <Dropdown.Item
+                    key={seen.indexOf(item)}
+                    eventKey={index}
+                    className="dropdown__item dropdown_item-seen"
+                  >
+                    <p className="dropdown__item-title">{item.title}</p>
                     <p>{item.message}</p>
-                    <hr />
                   </Dropdown.Item>
                 );
               })}
