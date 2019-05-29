@@ -44,7 +44,7 @@ export default class AutoCompleteTags extends Component {
             onChange={items => {
               this.handleChange(items);
             }}
-            id="this"
+            id={options.id}
             key="id"
             selected={options.id}
             valueKey="id"
