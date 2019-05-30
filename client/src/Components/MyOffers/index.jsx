@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Card, Container } from 'react-bootstrap';
-import offersDetails from '../utilis/offers';
+import { Card, Row, Col, Container, Spinner } from 'react-bootstrap';
+import offersDetails from '../utilis/myOffers';
 import './style.css';
 
 class MyOffers extends Component {
@@ -21,10 +21,12 @@ class MyOffers extends Component {
     switch (status) {
       case 'completed':
         return 'myOffer__card--completed';
-      case 'in progress':
+      case 'pending':
         return 'myOffer__card--inProgress';
       case 'ended':
         return 'myOffer__card--ended';
+        case 'finished':
+          return 'myOffer__card--finished';
       default:
         return 'offer__card--activeStatus';
     }
@@ -34,38 +36,42 @@ class MyOffers extends Component {
     const { offers } = this.state;
     const { history } = this.props;
     return (
-      <Container className="myOffers">
-        <div className="myOffers__head">
-          <h1 className="myOffers__head--title"> My Offers </h1>
-          <hr className="myOffers--hr" />
+      <Container className="page__container ">
+        <div className="myOffers-head">
+          <h1 className="myOffers-head__title"> My Offers </h1>
         </div>
-        {offers ? (
-          offers.map(item => {
-            return (
-              <Card
-                className="card__myOffers"
-                key={item.id}
-                onClick={() => history.push(`/app/offers/${item.id}`)}
-              >
-                <Card.Header className="card__myOffers--header">
-                  <Card.Text className={this.statusClassName(item.status)}>
-                    {item.status}
-                  </Card.Text>
-                </Card.Header>
-                <Card.Body className="card__myOffers--body">
-                  <Card.Text className="card__myOffers--title">
-                    {item.title}
-                  </Card.Text>
-                  <Card.Text className="card__myOffers--position">
-                    {item.position}
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            );
-          })
-        ) : (
-          <span> loading... </span>
-        )}
+        <Row>
+          {offers ? (
+            offers.map(item => {
+              return (
+                <Col xs={12} md={6} lg={4}>
+                  <Card
+                    className="card-myOffers"
+                    key={item.id}
+                    onClick={() => history.push(`/app/offers/${item.id}`)}
+                  >
+                    <Card.Header className="card-myOffers__header">
+                      <Card.Text className={this.statusClassName(item.status)}>
+                        {item.status}
+                      </Card.Text>
+                    </Card.Header>
+                    <Card.Body className="card__myOffers--body">
+                      <Card.Text className="card__myOffers--title">
+                        {item.title}
+                      </Card.Text>
+                      <Card.Text className="card__myOffers--position">
+                        {item.position}
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              );
+            })
+          ) : (
+            <Spinner animation="border" variant="info" />
+            )}
+        </Row>
+
       </Container>
     );
   }

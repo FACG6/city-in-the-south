@@ -1,51 +1,24 @@
-/* footer */
-h1:last-child {
-  height: 50px;
-  position: fixed;
-  bottom: 0
-}
-
-.myOffers{
-  min-height: calc(100vh-50);
-  padding: 0 auto;
+ .myOffers-head{
   text-align: center;
-  box-sizing: border-box
 }
-
-.myOffers--hr {
-  position: absolute;
-  width: 145px;
-  height: 0px;
-  left: 180px;
-  top: 133.5px;
-  border: 1px solid rgba(51, 51, 51, 0.36);
-  margin-bottom: 3rem
+.page__container {
+  margin: 20px;
 }
-
-.myOffers__head--title {
-  position: absolute;
-  left: 180px;
+.myOffers-head__title {
   color: rgba(51, 51, 51, 0.8);
   font-size: 32px;
+  padding-bottom: 15px;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid rgba(51, 51, 51, 0.8);
+  width: fit-content; 
 }
 
-.myOffers__head{
-  margin-bottom: 2rem
-}
-
-.card__myOffers{
-  width: 20rem;
-  float: left;
-  margin: 0.7rem;
+.card-myOffers{
   border: 1px solid rgba(234, 234, 234, 0.9) !important;
   border-radius: 0.3rem !important;
-  position: absolute;
-  height: 152px;
-  left: 45px;
-  top: 90px;
   cursor: pointer;
+  margin: 0.2rem;
 }
-
 .card__myOffers--status,
 .card__myOffers--title,
 .card__myOffers--position {
@@ -70,7 +43,7 @@ h1:last-child {
   text-align: center;
 }
 
-.card__myOffers--header{
+.card-myOffers__header{
   border-bottom: none !important;
   background: #fff !important;
 }
@@ -87,39 +60,24 @@ h1:last-child {
   color: #F77D0E;
 }
 
-.myOffer__card--ended {
-  color:  yellow
-}
-
 .offer__card--activeStatus {
   color: #1BA7E2;
 }
 
+.myOffer__card--finished{
+  color: red;
+}
 .myOffer__card--completed,
 .myOffer__card--inProgress,
-.myOffer__card--ended,
+.myOffer__card--finished,
 .offer__card--activeStatus {
   float: right;
 }
 
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
-  .card__myOffers{
-    width: 15rem;
-    margin: 0.2rem;
-    left: 118px;
-  }
-
-  .myOffers__head--title {
+  .myOffers-head__title {
     left: 130px;
     font-size: 24px;
   }
-
-  .myOffers--hr {
-    left: 135px;
-    top: 7rem;
-    margin-bottom: 0;
-    width: 105px
-  }
-}
-
+} 
