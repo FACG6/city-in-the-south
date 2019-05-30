@@ -1,6 +1,8 @@
 import React from 'react';
 import './style.css';
 import { Form, Button, Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import signup from '../Signup';
 
 export default class Login extends React.Component {
   state = {
@@ -52,17 +54,18 @@ export default class Login extends React.Component {
             />
           </Form.Group>
 
-          <Button
-            variant="primary"
+          <button
             type="button"
             className="content-login__submit"
             onClick={this.handleClick}
           >
             Login
-          </Button>
+          </button>
           <Form.Text className="content-login__text-muted">
             Don’t have an account?{' '}
-            <span className="content-login__word-signup">Sign Up</span>
+            <span className="content-login__word-signup">
+              <Link to="/signup">Sign Up</Link>
+            </span>
           </Form.Text>
         </Form>
       </Container>

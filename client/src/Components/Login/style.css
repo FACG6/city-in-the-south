@@ -30,9 +30,11 @@
   font-weight: 500;
   font-size: 18px;
   line-height: 22px;
-  background-color: #0F9CAF !important;
+  background-color: #0F9CAF ;
+  border:none ;
+  color: #eee;
+  border-radius: 4px;
 }
-
 .content-login__text-muted {
   margin: 0 37px 0 64px;
 }
