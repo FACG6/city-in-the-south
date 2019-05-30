@@ -7,7 +7,7 @@ import './style.css';
 export default function MyApplications() {
   return (
     <>
-      <Container className="my-applications__container">
+      <Container className="page__container">
         <div className="my-applications__title">
           <span>My Applications</span>
         </div>
