@@ -10,11 +10,11 @@ class OfferCard extends React.Component {
     statusDiv: null,
     hovered: null,
     saved: false,
-    savedOffers: null,
   };
 
   componentDidMount() {
-    const { offer, status } = this.props;
+    const { offer, status, saved } = this.props;
+    if (saved) this.setState({ saved: true });
     this.setState({ offer });
     switch (status) {
       case 'completed':
@@ -38,10 +38,6 @@ class OfferCard extends React.Component {
       default:
         this.setState({ statusLabel: 'offer__card--activeStatus' });
     }
-
-    // request for give id's saved offers (by member_id 'from local storage')
-    // response : array of saved id (e.g: data = [2,6,8,9])
-    // this.setState({savedOffers: data})
   }
 
   savedClassStatus = () => {
@@ -59,10 +55,7 @@ class OfferCard extends React.Component {
     this.setState({ saved: !saved });
   };
 
-  handleCheckSave = id => {
-    const { savedOffers, saved } = this.state;
-    if (savedOffers.includes(id)) this.setState({ saved: !saved });
-  };
+  handleHover = () => this.setState({ hovered: 'card__hovered' });
 
   render() {
     const { offer, hovered, statusLabel, statusDiv } = this.state;
@@ -70,7 +63,11 @@ class OfferCard extends React.Component {
     return (
       <>
         {offer ? (
-          <Card className={`offer__card ${hovered}`} key={offer.id}>
+          <Card
+            className={`offer__card ${hovered ? 'card__hovered' : ''}`}
+            key={offer.id}
+            onClick={() => history.push(`/app/offers/${offer.id}`)}
+          >
             {hover ? <span className={statusDiv}> </span> : null}
             <Card.Header className="offer__card--header">
               <div>
@@ -78,12 +75,14 @@ class OfferCard extends React.Component {
                 <br />
                 <span className="offer__card--title">{offer.title}</span>
               </div>
-              {hover ? () => this.setState({ hovered: 'card__hovered' }) : null}
               {hover ? (
                 <span className={statusLabel}> {offer.status}</span>
               ) : null}
               <Button
-                onClick={() => this.handleSave(offer.id)}
+                onClick={e => {
+                  e.stopPropagation();
+                  this.handleSave(offer.id);
+                }}
                 className="card__save--btn"
               >
                 <i className={`fas fa-bookmark ${this.savedClassStatus()}`}>
@@ -91,9 +90,9 @@ class OfferCard extends React.Component {
                 </i>
               </Button>
             </Card.Header>
-            <Card.Body onClick={() => history.push(`/app/offers/${offer.id}`)}>
+            <Card.Body>
               <Card.Text className="card__description">
-                {offer.description}
+                {offer.description.substring(0, 300)}
               </Card.Text>
             </Card.Body>
           </Card>
@@ -101,7 +100,7 @@ class OfferCard extends React.Component {
           <>
             <span> loading... </span>
           </>
-          )}
+        )}
       </>
     );
   }
