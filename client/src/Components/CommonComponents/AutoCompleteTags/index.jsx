@@ -32,8 +32,6 @@ export default class AutoCompleteTags extends Component {
     and the same as for the offer_type
   */
     const { onchange } = this.props;
-    console.log(items);
-
     this.setState(prevState => {
       const newOptions = [...prevState.options];
       const newTags = [...prevState.selectedTags];
@@ -56,10 +54,6 @@ export default class AutoCompleteTags extends Component {
   render() {
     const { options, selectedTags } = this.state;
     const { placeholder, type } = this.props;
-    // console.log('plac', placeholder);
-    // console.log('type', type);
-    // console.log('option', options);
-    // console.log('select', selectedTags);
 
     return (
       <>
