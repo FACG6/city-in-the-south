@@ -1,0 +1,19 @@
+.offer-details__header {
+  background-color: rgba(234, 234, 234, 0.3);
+}
+.offer-details__position {
+  color: #0f9caf;
+  font-size: 1.375rem;
+  text-transform: capitalize;
+}
+.offer-details__title {
+  color: rgba(51, 51, 51, 0.7);
+  font-size: 1.375rem;
+  text-transform: capitalize;
+}
+.offer-details__description {
+  border-right: 2px solid rgba(51, 51, 51, 0.4);
+}
+.offer-details__row {
+  margin: 10px 0;
+}
