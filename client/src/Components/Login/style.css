@@ -1,26 +1,18 @@
-.content-page {
-  position: relative;
-}
-
-.content-page__content-login {
-  position: absolute;
-  height: 350px;
+.content-login {
+  height: 318px;
   width: 358px;
   left: 475px;
+  padding: 29px 0 0 20px;
+  margin: 54px 0 0 375px;
   box-sizing: border-box;
+  border-radius: 2px;
   background: #FFFFFF;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 2px;
-  padding-top: 29px;
-  padding-left: 20px;
-  margin-top: 54px;
 }
 
-.content-page__content-login__word-login {
-  font-family: Lato;
-  font-style: normal;
-  font-weight: 600;
+.content-login__word-login {
   margin-left: 115px;
+  font-weight: 600;
   font-size: 24px;
   line-height: 29px;
   align-items: center;
@@ -29,55 +21,46 @@
   color: rgba(51, 51, 51, 0.58);
 }
 
-.content-page__content-login__username {
-  margin-right: 37px;
-  margin-left: 24px;
-  font-family: Lato;
-  font-style: normal;
-  align-items: center;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 17px;
-  letter-spacing: 0.03em;
-  color: #929292;
-  border-radius: 3px;
-}
-
-.content-page__content-login__password {
-  margin-right: 37px;
-  margin-left: 24px;
-  font-family: Lato;
-  font-style: normal;
-  align-items: center;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 17px;
-  letter-spacing: 0.03em;
-  color: #929292;
-  border-radius: 3px;
-}
-
-.content-page__content-login__submit {
+.content-login__submit {
   height: 50px;
-  background-color: #0F9CAF !important;
   width: 277px;
   margin-left: 24px;
   align-items: center;
   letter-spacing: 0.08em;
-  font-family: Lato;
-  font-style: normal;
   font-weight: 500;
   font-size: 18px;
   line-height: 22px;
+  background-color: #0F9CAF !important;
 }
 
-.content-page__content-login__text-muted {
-  margin-right: 37px;
-  margin-left: 64px;
+.content-login__text-muted {
+  margin: 0 37px 0 64px;
 }
 
-.content-page__content-login__word-signup {
+.content-login__word-signup {
   text-align: center;
   color: #0F9CAF;
   cursor: pointer;
+}
+      
+.content-login .content-login__word-login .content-login__input .content-login__submit .content-login__text-muted .content-login__word-signup {
+  margin: 0 auto;
+}
+
+.content-login__input {
+  width: 275px;
+  margin-right: 37px;
+  margin-left: 24px;
+  align-items: center;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0.03em;
+  color: #929292;
+  border-radius: 3px;
+}
+
+.content-login__word-login .content-login__submit .content-login__username .content-login__password {
+  font-family: Lato;
+  font-style: normal;
 }
