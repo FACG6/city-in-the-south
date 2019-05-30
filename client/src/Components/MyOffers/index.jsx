@@ -45,7 +45,7 @@ class MyOffers extends Component {
           {offers ? (
             offers.map(item => {
               return (
-                <Col xs={12} md={6} lg={4}>
+                <Col xs={12} md={6} lg={4} key={item.id}>
                   <Card
                     className="card-myOffers"
                     key={item.id}
