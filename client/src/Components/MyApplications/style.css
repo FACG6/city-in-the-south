@@ -1,0 +1,11 @@
+.my-applications__container {
+  min-height: calc(100vh - (60));
+}
+.my-applications__title {
+  font-size: 20px;
+  color: rgba(51, 51, 51, 0.8);
+  border-bottom: 1px solid rgba(51, 51, 51, 0.8);
+  padding-bottom: 3px;
+  width: 213px;
+  margin-bottom: 18px;
+}
