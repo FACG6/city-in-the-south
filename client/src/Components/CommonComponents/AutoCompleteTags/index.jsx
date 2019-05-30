@@ -11,6 +11,7 @@ export default class AutoCompleteTags extends Component {
   state = {
     options: [],
     selectedTags: [],
+    allownew: true,
   };
 
   componentDidMount() {
@@ -48,24 +49,32 @@ export default class AutoCompleteTags extends Component {
       }
       return { selectedTags: items };
     });
+    /* here we need another on change its comming from the filter it self */
     if (typeof onchange === 'function') onchange();
   };
 
-  render() {
-    const { options, selectedTags } = this.state;
-    const { placeholder, type } = this.props;
+  handleInputChange = item => {
+    const { options } = this.state;
+    options.filter(option => {
+      if (option.name.toLowerCase() === item.toLowerCase())
+        return this.setState({ allownew: false });
+      return this.setState({ allownew: true });
+    });
+  };
 
+  render() {
+    const { options, selectedTags, allownew } = this.state;
+    const { placeholder, type } = this.props;
     return (
       <>
         {!options[0] ? (
           <Spinner animation="border" variant="info" />
         ) : (
           <Typeahead
+            clearButton
             multiple
-            onChange={
-              this.handleChange
-              /* here we need another on change its comming from the filter it self */
-            }
+            onInputChange={this.handleInputChange}
+            onChange={this.handleChange}
             id={`autoComplete${type}`}
             key="id"
             // defaultSelected={selectedTags}
@@ -73,7 +82,7 @@ export default class AutoCompleteTags extends Component {
             valueKey="id"
             labelKey="name"
             options={options}
-            allowNew
+            allowNew={allownew}
             newSelectionPrefix="Add a new item: "
             placeholder={placeholder}
             className="autComplete-dev"
