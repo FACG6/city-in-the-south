@@ -34,6 +34,7 @@ class MyOffers extends Component {
 
   render() {
     const { offers } = this.state;
+    // eslint-disable-next-line react/prop-types
     const { history } = this.props;
     return (
       <Container className="page__container ">
