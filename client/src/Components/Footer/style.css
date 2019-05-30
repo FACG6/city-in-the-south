@@ -1,0 +1,32 @@
+.footer__container {
+  background-color: #0f9caf;
+  height: 50px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  color: #eeeeee;
+  justify-content: space-between;
+  font-size: 16px;
+  margin: 0 30px;
+}
+.footer__icons {
+  align-self: center;
+}
+.footer__icons .fab {
+  margin-left: 12px;
+}
+.footer__container a {
+  text-decoration: none;
+  color: #eeeeee;
+  cursor: pointer;
+}
+
+.footer__container span,
+.footer__container ul {
+  margin: 0 40px;
+}
+
+.footer {
+  background-color: #0f9caf;
+  bottom: 0;
+}
