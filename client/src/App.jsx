@@ -16,15 +16,16 @@ import {
 
 export default class App extends Component {
   state = {
-    islooged: true,
+    islogged: true,
     userInfo: null,
   };
 
   render() {
+    const { islogged } = this.state;
     return (
       <>
         <Router>
-          <Header />
+          <Header islogged={islogged} />
           <Switch>
             <Route exact path="/" component={LandingPage} />
             <Route exact path="/login" component={Login} />
