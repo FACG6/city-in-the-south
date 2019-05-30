@@ -14,7 +14,7 @@ export default [
     title: 'Buisness setup plan',
     description:
       ' Prepare balance sheets, profit and loss statements and other financial reports. Responsibilities also include analyzing trends, costs, revenues,  financial commitments and obligations incurred to predict future revenues and expenses. Reports',
-    status: 'in progress',
+    status: 'finished',
     saved: true,
   },
   {
@@ -32,7 +32,7 @@ export default [
     title: 'Small Shop seeks workers',
     description:
       'We are looking to hire a Marketing Manager who will be in charge of overseeing the promotion of our companys brands.  As a successful hire, you will be  responsible  for developing pricing  strategies identify identifying new customers, supporting lead',
-    status: 'in progress',
+    status: 'finished',
     saved: true,
   },
   {

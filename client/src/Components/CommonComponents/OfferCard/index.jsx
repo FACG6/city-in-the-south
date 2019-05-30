@@ -1,49 +1,50 @@
 import React from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, Spinner } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 import './style.css';
 import { withRouter } from 'react-router-dom';
 
 class OfferCard extends React.Component {
   state = {
     offer: null,
-    statusLabel: null,
-    statusDiv: null,
-    hovered: null,
+    statusLabel: '',
+    statusDiv: '',
+    hovered: '',
     saved: false,
   };
 
   componentDidMount() {
-    const { offer, status, saved } = this.props;
-    if (saved) this.setState({ saved: true });
+    const { offer, status } = this.props;
+    if (offer.saved) this.setState({ saved: true });
     this.setState({ offer });
     switch (status) {
       case 'completed':
         this.setState({
-          statusLabel: 'offer__card--completed',
-          statusDiv: 'offer__card--green',
+          statusLabel: 'offer-card__status--completed',
+          statusDiv: 'offer-card__border--green',
         });
         break;
-      case 'in progress':
+      case 'finished':
         this.setState({
           statusLabel: 'offer__card--inProgress',
-          statusDiv: 'offer__card--orange',
+          statusDiv: 'offer-card__border--orange',
         });
         break;
       case 'pending':
         this.setState({
           statusLabel: 'offer__card--pending',
-          statusDiv: 'offer__card--blue',
+          statusDiv: 'offer-card__border--blue',
         });
         break;
       default:
-        this.setState({ statusLabel: 'offer__card--activeStatus' });
+        return null;
     }
   }
 
   savedClassStatus = () => {
     const { saved } = this.state;
-    if (saved) return 'offer__card--saved savedOffer';
-    return 'offer__card--saved unsavedOffer';
+    if (saved) return 'offer-card__favourite--saved';
+    return 'offer-card__favourite--unsaved';
   };
 
   handleSave = id => {
@@ -55,50 +56,58 @@ class OfferCard extends React.Component {
     this.setState({ saved: !saved });
   };
 
-  handleHover = () => this.setState({ hovered: 'card__hovered' });
+  handleHover = () => this.setState({ hovered: 'card-hovered' });
 
   render() {
     const { offer, hovered, statusLabel, statusDiv } = this.state;
+    // eslint-disable-next-line react/prop-types
     const { hover, history } = this.props;
     return (
       <>
         {offer ? (
           <Card
-            className={`offer__card ${hovered ? 'card__hovered' : ''}`}
+            className={`offer-card ${hovered ? 'card-hovered' : ''}`}
             key={offer.id}
             onClick={() => history.push(`/app/offers/${offer.id}`)}
           >
-            {hover ? <span className={statusDiv}> </span> : null}
-            <Card.Header className="offer__card--header">
+            {hover ? (
+              <span className={`offer-card__border ${statusDiv}`}> </span>
+            ) : null}
+            <Card.Header className="offer-card--header">
               <div>
-                <span className="offer__card--position">{offer.position}</span>
+                <span className="offer-card__position">{offer.position}</span>
                 <br />
-                <span className="offer__card--title">{offer.title}</span>
+                <span className="offer-card__title">{offer.title}</span>
               </div>
               {hover ? (
-                <span className={statusLabel}> {offer.status}</span>
+                <span className={`offer-card__status ${statusLabel}`}>
+                  {' '}
+                  {offer.status}
+                </span>
               ) : null}
               <Button
                 onClick={e => {
                   e.stopPropagation();
                   this.handleSave(offer.id);
                 }}
-                className="card__save--btn"
+                className="offer-card__save-btn"
               >
-                <i className={`fas fa-bookmark ${this.savedClassStatus()}`}>
+                <i
+                  className={`fas fa-bookmark offer-card__favourite ${this.savedClassStatus()}`}
+                >
                   {' '}
                 </i>
               </Button>
             </Card.Header>
             <Card.Body>
-              <Card.Text className="card__description">
+              <Card.Text className="offer-card-description">
                 {offer.description.substring(0, 300)}
               </Card.Text>
             </Card.Body>
           </Card>
         ) : (
           <>
-            <span> loading... </span>
+            <Spinner animation="border" variant="info" />
           </>
         )}
       </>
@@ -107,3 +116,22 @@ class OfferCard extends React.Component {
 }
 
 export default withRouter(OfferCard);
+
+OfferCard.defaultProps = {
+  offer: {},
+  hover: '',
+  status: 'active',
+};
+
+OfferCard.propTypes = {
+  offer: PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    position: PropTypes.string,
+    description: PropTypes.string,
+    status: PropTypes.string,
+    saved: PropTypes.bool,
+  }),
+  hover: PropTypes.bool,
+  status: PropTypes.string,
+};
