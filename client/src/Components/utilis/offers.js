@@ -6,6 +6,17 @@ export default [
     description:
       'We are looking to hire a Marketing Manager who will be in charge of overseeing the promotion of our companys brands.  As a successful hire, you will be  responsible  for developing pricing  strategies identify identifying new customers, supporting lead',
     status: 'completed',
+    skill: [
+      { id: 1, name: 'javascript' },
+      { id: 2, name: 'node js' },
+      { id: 3, name: 'express js' },
+      { id: 5, name: 'python' },
+    ],
+    offer_type: [
+      { id: 1, name: 'fixed price' },
+      { id: 2, name: 'part time' },
+      { id: 3, name: 'full time' },
+    ],
   },
   {
     id: 2,
@@ -14,6 +25,13 @@ export default [
     description:
       ' Prepare balance sheets, profit and loss statements and other financial reports. Responsibilities also include analyzing trends, costs, revenues,  financial commitments and obligations incurred to predict future revenues and expenses. Reports',
     status: 'in progress',
+    saved: true,
+    skill: [{ id: 2, name: 'node js' }],
+    offer_type: [
+      { id: 1, name: 'fixed price' },
+      { id: 2, name: 'part time' },
+      { id: 3, name: 'full time' },
+    ],
   },
   {
     id: 3,
@@ -22,6 +40,9 @@ export default [
     description:
       'We are looking to hire a Marketing Manager who will be in charge of overseeing the promotion of our companys brands.  As a successful hire, you will be  responsible  for developing pricing  strategies identify identifying new customers, supporting lead',
     status: 'completed',
+    saved: false,
+    skill: [{ id: 1, name: 'javascript' }, { id: 5, name: 'python' }],
+    offer_type: [{ id: 1, name: 'fixed price' }],
   },
   {
     id: 4,
@@ -30,6 +51,9 @@ export default [
     description:
       'We are looking to hire a Marketing Manager who will be in charge of overseeing the promotion of our companys brands.  As a successful hire, you will be  responsible  for developing pricing  strategies identify identifying new customers, supporting lead',
     status: 'in progress',
+    saved: true,
+    skill: [{ id: 5, name: 'python' }],
+    offer_type: [{ id: 3, name: 'full time' }],
   },
   {
     id: 5,
@@ -38,6 +62,9 @@ export default [
     description:
       'We are looking to hire a Marketing Manager who will be in charge of overseeing the promotion of our companys brands.  As a successful hire, you will be  responsible  for developing pricing  strategies identify identifying new customers, supporting lead',
     status: 'completed',
+    saved: false,
+    skill: [{ id: 2, name: 'node js' }, { id: 3, name: 'express js' }],
+    offer_type: [{ id: 2, name: 'part time' }, { id: 3, name: 'full time' }],
   },
   {
     id: 6,
@@ -46,6 +73,13 @@ export default [
     description:
       'We are looking to hire a Marketing Manager who will be in charge of overseeing the promotion of our companys brands.  As a successful hire, you will be  responsible  for developing pricing  strategies identify identifying new customers, supporting lead',
     status: 'active',
+    saved: false,
+    skill: [
+      { id: 2, name: 'node js' },
+      { id: 3, name: 'express js' },
+      { id: 5, name: 'python' },
+    ],
+    offer_type: [{ id: 1, name: 'fixed price' }, { id: 2, name: 'part time' }],
   },
   {
     id: 7,
@@ -54,6 +88,13 @@ export default [
     description:
       'We are looking to hire a Marketing Manager who will be in charge of overseeing the promotion of our companys brands.  As a successful hire, you will be  responsible  for developing pricing  strategies identify identifying new customers, supporting lead',
     status: 'active',
+    saved: false,
+    skill: [
+      { id: 1, name: 'javascript' },
+      { id: 2, name: 'node js' },
+      { id: 5, name: 'python' },
+    ],
+    offer_type: [{ id: 1, name: 'fixed price' }, { id: 3, name: 'full time' }],
   },
   {
     id: 8,
@@ -62,6 +103,9 @@ export default [
     description:
       'We are looking to hire a Marketing Manager who will be in charge of overseeing the promotion of our companys brands.  As a successful hire, you will be  responsible  for developing pricing  strategies identify identifying new customers, supporting lead',
     status: 'pending',
+    saved: true,
+    skill: [{ id: 1, name: 'javascript' }, { id: 5, name: 'python' }],
+    offer_type: [{ id: 2, name: 'part time' }, { id: 3, name: 'full time' }],
   },
   {
     id: 9,
@@ -70,5 +114,12 @@ export default [
     description:
       'We are looking to hire a Marketing Manager who will be in charge of overseeing the promotion of our companys brands.  As a successful hire, you will be  responsible  for developing pricing  strategies identify identifying new customers, supporting lead',
     status: 'active',
+    saved: false,
+    skill: [
+      { id: 1, name: 'javascript' },
+      { id: 2, name: 'node js' },
+      { id: 3, name: 'express js' },
+    ],
+    offer_type: [{ id: 1, name: 'fixed price' }, { id: 3, name: 'full time' }],
   },
 ];
