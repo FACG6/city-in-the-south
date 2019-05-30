@@ -1,3 +1,31 @@
-.autComplete-dev .form-control  {
+.autComplete-dev .form-control {
   height: auto !important;
+}
+
+.autComplete-dev .form-control .rbt-token {
+  background-color: #0F9CAF;
+  border: 0;
+  color: #eee;
+  display: inline-block;
+  line-height: 1em;
+  margin: 0 3px 3px 0;
+  padding: 10px 32px 10px 14px;
+  position: relative;
+  border-radius: 25px;
+  height: 37px;
+}
+
+.autComplete-dev .form-control .rbt-token .rbt-token-remove-button {
+  bottom: 0;
+  color: inherit;
+  font-size: inherit;
+  font-weight: normal;
+  opacity: 1;
+  outline: none;
+  padding: 3px 7px;
+  position: absolute;
+  right: 7px;
+  text-shadow: none;
+  top: 2px;
+  margin: 2px;
 }

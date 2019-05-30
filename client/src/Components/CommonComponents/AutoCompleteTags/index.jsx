@@ -32,26 +32,35 @@ export default class AutoCompleteTags extends Component {
     and the same as for the offer_type
   */
     const { onchange } = this.props;
-    if (items[0]) {
-      if (items[items.length - 1].customOption) {
-        // send request to db to add skills/offertypes then return newOptions
-        this.setState(prevState => {
-          const newOptions = [...prevState.options];
-          const newTags = [...prevState.selectedTags];
+    console.log(items);
 
+    this.setState(prevState => {
+      const newOptions = [...prevState.options];
+      const newTags = [...prevState.selectedTags];
+      if (items.length > newTags.length) {
+        if (items[items.length - 1].customOption) {
+          // send request to db to add skills/offertypes then return newOptions
           // push the newOptions
           newOptions.push({ id: 222, name: items[items.length - 1].name });
           newTags.push({ id: 222, name: items[items.length - 1].name });
-          return { options: newOptions, selectedTags: newTags };
-        });
+        } else {
+          newTags.push(items[items.length - 1]);
+        }
+        return { options: newOptions, selectedTags: newTags };
       }
-    }
+      return { selectedTags: items };
+    });
     if (typeof onchange === 'function') onchange();
   };
 
   render() {
     const { options, selectedTags } = this.state;
     const { placeholder, type } = this.props;
+    // console.log('plac', placeholder);
+    // console.log('type', type);
+    // console.log('option', options);
+    // console.log('select', selectedTags);
+
     return (
       <>
         {!options[0] ? (
@@ -65,6 +74,7 @@ export default class AutoCompleteTags extends Component {
             }
             id={`autoComplete${type}`}
             key="id"
+            // defaultSelected={selectedTags}
             selected={selectedTags}
             valueKey="id"
             labelKey="name"
