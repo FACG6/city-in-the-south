@@ -6,8 +6,8 @@ import Slider from './Slider';
 export default function LandingPage() {
   return (
     <>
-      <div className="header">
-        <h2 className="header-tweet">
+      <div className="landing__header">
+        <h2 className="landing__tweet">
           Want good (fair and meaningful) work or want to offer good work? Join
           us and find/show opportunities to connect and work together.
         </h2>
@@ -17,7 +17,6 @@ export default function LandingPage() {
           flat button
         </Button>
       </div>
-
       <div className="about">
         <Alert dismissible variant="danger">
           <Alert.Heading>Oh snap! You got an error!</Alert.Heading>

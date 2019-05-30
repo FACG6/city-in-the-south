@@ -1,29 +1,31 @@
-html, body, *{
-  padding: 0;
-  margin: 0;
-}
-.header{
+.landing__header{
   width: 100%;
   height: 500px;
-  background-image: url('header.jpg');
+  background:
+    linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+    url('header.jpg');
   background-repeat: no-repeat;
-  margin-top: 30px;
   background-size: cover;
+  position: relative;
 }
-.header::after{
-  background-color: #000;
-  content: "";
-  display: block;
-  position: absolute;
-  top: 70px;
-  left: 0px;
-  width: 100%;
-  height: 500px;
-  z-index: 0;
-  opacity: 0.3;
-}
-.header-tweet{
-  text-align: center;
+
+.landing__tweet {
   color: white;
-  padding: 15% 30%;
+  align-content: center;
+  margin: 0 auto;
+  width: 60%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.landing__tweet::before {
+  margin-right: 0.6rem;
+  content: open-quote;
+}
+
+.landing__tweet::after {
+  margin-left: 0.6rem;
+  content: close-quote;
 }
