@@ -25,8 +25,8 @@ class MyOffers extends Component {
         return 'myOffer__card--inProgress';
       case 'ended':
         return 'myOffer__card--ended';
-        case 'finished':
-          return 'myOffer__card--finished';
+      case 'finished':
+        return 'myOffer__card--finished';
       default:
         return 'offer__card--activeStatus';
     }
@@ -52,7 +52,11 @@ class MyOffers extends Component {
                     onClick={() => history.push(`/app/offers/${item.id}`)}
                   >
                     <Card.Header className="card-myOffers__header">
-                      <Card.Text className={this.statusClassName(item.status)}>
+                      <Card.Text
+                        className={`myoffers-card__status ${this.statusClassName(
+                          item.status
+                        )}`}
+                      >
                         {item.status}
                       </Card.Text>
                     </Card.Header>
@@ -70,9 +74,8 @@ class MyOffers extends Component {
             })
           ) : (
             <Spinner animation="border" variant="info" />
-            )}
+          )}
         </Row>
-
       </Container>
     );
   }

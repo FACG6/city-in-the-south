@@ -56,6 +56,11 @@
   color: #0A8F07;
 }
 
+.myoffers-card__status{
+  float: right;
+  text-transform: capitalize;
+}
+
 .myOffer__card--inProgress {
   color: #F77D0E;
 }
@@ -66,12 +71,6 @@
 
 .myOffer__card--finished{
   color: red;
-}
-.myOffer__card--completed,
-.myOffer__card--inProgress,
-.myOffer__card--finished,
-.offer__card--activeStatus {
-  float: right;
 }
 
 @media only screen and (max-width: 768px) {
