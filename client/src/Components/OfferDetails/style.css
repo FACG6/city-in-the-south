@@ -17,3 +17,13 @@
 .offer-details__row {
   margin: 10px 0;
 }
+.offer-details__status {
+  margin-top: 10px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+.offet-details__end-button {
+  margin-left: 15px !important;
+  font-size: 14px !important;
+}
