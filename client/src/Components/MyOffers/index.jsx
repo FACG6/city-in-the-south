@@ -20,15 +20,13 @@ class MyOffers extends Component {
   statusClassName = status => {
     switch (status) {
       case 'completed':
-        return 'myOffer__card--completed';
+        return 'card-myoffers__status--completed';
       case 'pending':
-        return 'myOffer__card--inProgress';
-      case 'ended':
-        return 'myOffer__card--ended';
+        return 'card-myoffers__status--pending';
       case 'finished':
-        return 'myOffer__card--finished';
+        return 'card-myoffers__status--finished';
       default:
-        return 'offer__card--activeStatus';
+        return 'card-myoffers__status--active';
     }
   };
 
@@ -37,9 +35,9 @@ class MyOffers extends Component {
     // eslint-disable-next-line react/prop-types
     const { history } = this.props;
     return (
-      <Container className="page__container ">
+      <Container className="page__container myoffers-container">
         <div className="myOffers-head">
-          <h1 className="myOffers-head__title"> My Offers </h1>
+          <h1 className="card-myoffers-head__title"> My Offers </h1>
         </div>
         <Row>
           {offers ? (
@@ -47,24 +45,24 @@ class MyOffers extends Component {
               return (
                 <Col xs={12} md={6} lg={4} key={item.id}>
                   <Card
-                    className="card-myOffers"
+                    className="card-myoffers"
                     key={item.id}
                     onClick={() => history.push(`/app/offers/${item.id}`)}
                   >
-                    <Card.Header className="card-myOffers__header">
+                    <Card.Header className="card-myoffers__header">
                       <Card.Text
-                        className={`myoffers-card__status ${this.statusClassName(
+                        className={`card-myoffers__status ${this.statusClassName(
                           item.status
                         )}`}
                       >
                         {item.status}
                       </Card.Text>
                     </Card.Header>
-                    <Card.Body className="card__myOffers--body">
-                      <Card.Text className="card__myOffers--title">
+                    <Card.Body className="card-myoffers__body">
+                      <Card.Text className="card-myoffers__body--title">
                         {item.title}
                       </Card.Text>
-                      <Card.Text className="card__myOffers--position">
+                      <Card.Text className="card-myoffers__body--position">
                         {item.position}
                       </Card.Text>
                     </Card.Body>

@@ -1,81 +1,79 @@
- .myOffers-head{
+ .myoffers-head{
   text-align: center;
 }
-.page__container {
+.page__container,
+.myoffers-container {
   margin: 20px;
 }
-.myOffers-head__title {
+.card-myoffers-head__title {
   color: rgba(51, 51, 51, 0.8);
   font-size: 32px;
   padding-bottom: 15px;
-  margin-bottom: 1rem;
+  margin-bottom: 1.3rem;
   border-bottom: 2px solid rgba(51, 51, 51, 0.8);
   width: fit-content; 
+  margin-left: 7px;
 }
 
-.card-myOffers{
+.card-myoffers{
   border: 1px solid rgba(234, 234, 234, 0.9) !important;
   border-radius: 0.3rem !important;
   cursor: pointer;
   margin: 0.2rem;
 }
-.card__myOffers--status,
-.card__myOffers--title,
-.card__myOffers--position {
-  display: block;
+
+.card-myoffers:hover {
+  box-shadow:  0 0 30px -15px rgba(0, 0, 0, 0.3);
+}
+
+.card-myoffers__body {
   font-family: Lato;
   letter-spacing: 0.4px;
 }
 
-.card__myOffers--position {
+.card-myoffers__body--position {
   color: #0F9CAF !important;
 }
 
-.card__myOffers--title {
+.card-myoffers__body--title {
   color: rgba(51, 51, 51, 0.8) !important ;
 }
 
-.card__myOffers--status {
-  float: right;
-}
-
-.card__myOffers--body {
+.card-myoffers__body {
   text-align: center;
 }
 
-.card-myOffers__header{
+.card-myoffers__header{
   border-bottom: none !important;
-  background: #fff !important;
+  background: rgba(255, 255, 255, 0.5) !important;
+  /* background: rgba(238, 238, 238, 0.5) !important; */
 }
 
-.card__myOffers--body {
-  border-top: none;
-}
-
-.myOffer__card--completed{
+.card-myoffers__status--completed{
   color: #0A8F07;
 }
 
-.myoffers-card__status{
+.card-myoffers__status{
   float: right;
   text-transform: capitalize;
+  letter-spacing: 1px;
 }
 
-.myOffer__card--inProgress {
+.card-myoffers__status--pending {
   color: #F77D0E;
 }
 
-.offer__card--activeStatus {
+.card-myoffers__status--active {
   color: #1BA7E2;
 }
 
-.myOffer__card--finished{
+.card-myoffers__status--finished{
   color: red;
 }
 
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
-  .myOffers-head__title {
+  .card-card-myoffers-head__title {
     left: 130px;
     font-size: 24px;
   }
