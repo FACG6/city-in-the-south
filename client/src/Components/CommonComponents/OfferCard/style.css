@@ -46,7 +46,7 @@
   color: rgba(134, 133, 133, 0.6);
 }
 
-.offer-card-description .offer__card--inProgress,
+.offer-card-description .offer__card--finished,
 .offer-card__favourite:hover {
   cursor: pointer;
 }
@@ -81,15 +81,14 @@
 
 .offer-card__status {
   position: absolute;
-  /* top: 9px; */
   top: 1.3rem;
   right: 50px;
-  /* right: 40px; */
   border-radius: 2px;
   color: rgba(255, 255, 255);
   padding: 0.3rem;
   width: 100px;
   text-align: center;
+  text-transform: capitalize;
 }
 
 .offer-card:hover 
@@ -97,8 +96,8 @@
   background: green;
 }
 .offer-card:hover
-.offer__card--inProgress {
-  background: orange;
+.offer__card--finished {
+  background: red;
 }
 
 .offer-card:hover
@@ -120,8 +119,8 @@
 }
 
 .offer-card:hover 
-.offer-card__border--orange {
-  background: orange;
+.offer-card__border--red {
+  background: red;
 }
 
 .offer-card:hover 

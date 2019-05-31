@@ -26,8 +26,8 @@ class OfferCard extends React.Component {
         break;
       case 'finished':
         this.setState({
-          statusLabel: 'offer__card--inProgress',
-          statusDiv: 'offer-card__border--orange',
+          statusLabel: 'offer__card--finished',
+          statusDiv: 'offer-card__border--red',
         });
         break;
       case 'pending':
