@@ -32,6 +32,10 @@ export default class OfferDetails extends Component {
     }
   };
 
+  handleEndContract = () => {
+    // handle end contract login here....
+  };
+
   render() {
     const { offer } = this.state;
     const offerColor = this.offerColor(offer.status);
@@ -49,7 +53,11 @@ export default class OfferDetails extends Component {
                 ? offer.status.replace(/_/g, ' ').toUpperCase()
                 : null}
             </span>
-            <Button className="offet-details__end-button" variant="danger">
+            <Button
+              className="offet-details__end-button"
+              variant="danger"
+              onClick={this.handleEndContract}
+            >
               End Contract
             </Button>
           </Col>
