@@ -12,27 +12,71 @@
   margin-left: 7px;
 }
 
+/* .autocomplete-skills { */
+/* .autocomplete-title{
+  padding-left: 18px;
+} */
+
+.newoffer__content .row:nth-child(3) {
+  padding-left: 18px !important;
+} 
+
 .newoffer__content {
   padding-left: 0.7rem;
+}
+
+.newoffer__content--label{
+  color: rgba(51, 51, 51, 0.8);
 }
 
 .newoffer__content--description{
   width: 70% !important;
 }
 
-.newoffer__content-btn {
-  padding-left: 1.5rem !important;
-  padding-right: 1.5rem !important;
-  width: 7rem;
-  margin: 10px !important;
-  background: #0f9caf !important;
+.newoffer__content-btns {
+  margin-bottom: 2rem;
+  margin-top: 1.8rem;
 }
 
+.newoffer__content-btn--cancel,
+.newoffer__content-btn--apply {
+  width: 7rem;
+  margin-top: 10px !important;
+  background: #0f9caf !important;
+  color: #fff;
+  border: none !important;
+}
+ /***********************************/
+.autComplete-dev .form-control {
+  margin-left: 1rem;
+  width: 26rem;
+}
+/***********************************/
 
-@media only screen and (max-width: 768px) {
+@media only screen and (min-width: 576px) {
+  .col-lg-1 .newoffer__content-btn--cancel {
+    margin-left: 2rem
+  }
+}
+  @media (max-width: 576px) {
   /* For mobile phones: */
   .newoffer__content--description{
     width: 100% !important;
   }
+
+  .newoffer__content-btn--cancel {
+    width: 7rem;
+    margin-top: 10px !important;
+  }
+
+  .autComplete-dev .form-control {
+    margin-left: 0;
+  }
+
+
+.autComplete-dev .form-control {
+  width: 22.9rem;
+}
+
 } 
 
