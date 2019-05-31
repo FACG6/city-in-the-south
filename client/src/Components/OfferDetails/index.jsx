@@ -37,8 +37,8 @@ export default class OfferDetails extends Component {
     const offerColor = this.offerColor(offer.status);
     return (
       <Container className="page__container">
-        <Row className="justify-content-around offer-details__header">
-          <Col>
+        <Row className="offer-details__header">
+          <Col className="offer-details__header-col">
             <span className="offer-details__position">{offer.position}</span>
             <p className="offer-details__title">{offer.title}</p>
           </Col>

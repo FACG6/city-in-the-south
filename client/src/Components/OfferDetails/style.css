@@ -1,5 +1,6 @@
 .offer-details__header {
   background-color: rgba(234, 234, 234, 0.3);
+  justify-content: center;
 }
 .offer-details__position {
   color: #0f9caf;
@@ -18,7 +19,6 @@
   margin: 10px 0;
 }
 .offer-details__status {
-  margin-top: 10px;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
@@ -26,4 +26,9 @@
 .offet-details__end-button {
   margin-left: 15px !important;
   font-size: 14px !important;
+}
+.offer-details__header-col {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
 }
