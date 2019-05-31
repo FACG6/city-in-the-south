@@ -56,7 +56,7 @@ export default class AutoCompleteTags extends Component {
   handleInputChange = item => {
     const { options } = this.state;
     options.filter(option => {
-      if (option.name.toLowerCase() === item.toLowerCase())
+      if (option.name.toLowerCase() === item.toLowerCase().trim())
         return this.setState({ allownew: false });
       return this.setState({ allownew: true });
     });
@@ -67,9 +67,10 @@ export default class AutoCompleteTags extends Component {
     const { placeholder, type } = this.props;
     return (
       <>
-        {!options[0] ? (
-          <Spinner animation="border" variant="info" />
-        ) : (
+        <h1 className="autocomplete-title">
+          {type === 'skill' ? 'Skills ' : 'Offer Type'}
+        </h1>
+        {options[0] ? (
           <Typeahead
             clearButton
             multiple
@@ -87,6 +88,8 @@ export default class AutoCompleteTags extends Component {
             placeholder={placeholder}
             className="autComplete-dev"
           />
+        ) : (
+          <Spinner animation="border" variant="info" />
         )}
       </>
     );
