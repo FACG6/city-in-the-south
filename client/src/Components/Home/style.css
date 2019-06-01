@@ -1,0 +1,115 @@
+.home__filter {
+  padding: 30px;
+  height: 350px;
+  background: #FFFFFF;
+  margin: 1%;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.25);
+}
+
+.home__filter .autComplete-dev .form-control {
+  min-height: 109px !important;
+  height: auto !important;
+  border-radius: 2px !important;
+  background: #FFFFFF;
+  border: 1px solid rgba(208, 208, 208, 0.6) !important;
+}
+
+.home__main {
+  margin: 1%;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.25);
+  padding: 20px;
+}
+
+.home-search-btn, .home-search-btn:hover {
+  border-color: rgba(0, 0, 0, 0.13) !important;
+  border-right: none !important;
+  cursor: none;
+  background-color: #6c757d00 !important;
+  cursor: text !important;
+}
+
+.home-search-btn {
+  padding-left: 5px !important;
+  width: 24px;
+}
+
+.home__search-icon {
+  border-color: rgba(0, 0, 0, 0.13) !important;
+  transform: rotateY(180deg);
+  color: #C4C4C4;
+}
+
+.home__search input {
+  border-left: none !important;
+  border-color: rgba(0, 0, 0, 0.13) !important;
+}
+
+.home__search input:focus {
+  box-shadow: none;
+  outline: 0;
+}
+
+.home__result-label {
+  padding:10px 0px !important;
+}
+
+.home__result-label, .dropdown-label {
+  color: rgba(51, 51, 51, 0.8);
+  font-size: 14px;
+  padding-top: 10px;
+}
+
+.dropdown-label {
+  color: #0F9CAF;
+  cursor: pointer;
+}
+
+.dropdwon-list {
+  top: 2% !important;
+  left: -17px !important;
+  min-width: 100% !important;
+  padding: 6px 6px !important;
+}
+
+.dropdown-header {
+  color: #0F9CAF !important;
+  cursor: pointer;
+}
+
+.dropdown-header:hover {
+  background-color: #eee;
+}
+
+.dropdown-item {
+  font-size: 14px !important;
+  color: #595858 !important;
+}
+
+.dropdown-item:active {
+  color: #595858 !important;
+  background-color: #eee !important;
+}
+
+.dropdown-btn {
+  padding: 0 10px;
+  background: none;
+  border: none;
+  color: #333333ba;
+  float: right;
+  padding-top: 10px;
+}
+
+.dropdown-btn :focus {
+  box-shadow: none;
+  outline: 0 !important;
+}
+
+.hr-line {
+  border: 1px solid rgba(0, 0, 0, .1);
+}
+
+.main-spinner {
+  text-align: center;
+  margin: 25% auto;
+}
