@@ -1,20 +1,38 @@
-import React, { Component } from "react";
-import { Card, Image } from "react-bootstrap";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-export default class Cards extends Component {
-  render() {
-    return (
-      <Card style={{ width: "18rem" }}>
-        <Image src="https://pbs.twimg.com/profile_images/758084549821730820/_HYHtD8F.jpg" roundedCircle />
-        <Card.Body>
-          <Card.Title>Card Title</Card.Title>
-          <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </Card.Text>
-          <Card.Link href="#">Card Link</Card.Link>
-        </Card.Body>
-      </Card>
-    );
-  }
-}
+import './style.css';
+
+const renderCard = data =>
+  data.map(({ id, imageUrl, fullName, profession, text }) => (
+    <Link key={id} to="/" className="cards__card">
+      <div className="cards__img">
+        <img width="100%" src={imageUrl} alt={`${fullName} profile img`} />
+      </div>
+      <div>
+        <h3 className="cards__title">{fullName}</h3>
+        <h4 className="cards__sub-title">{profession}</h4>
+        <p className="cards__desc">{text}</p>
+      </div>
+    </Link>
+  ));
+
+const Cards = ({ data }) => {
+  return <section className="cards__container">{renderCard(data)}</section>;
+};
+
+Cards.defaultProps = { data: [] };
+
+Cards.propTypes = {
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      imageUrl: PropTypes.string,
+      fullName: PropTypes.string,
+      profession: PropTypes.string,
+      text: PropTypes.string,
+    })
+  ),
+};
+
+export default Cards;
