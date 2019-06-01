@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 // import axios from "axios";
+import { withRouter } from 'react-router-dom';
 import AutoCompleteTags from '../CommonComponents/AutoCompleteTags';
+import { newOfferValidation } from './validationSchema';
 import './style.css';
 
-export default class CreateOffer extends Component {
+class CreateOffer extends Component {
   state = {
     data: {},
     // skills: null, // skills id's
     // offer_types: null  //offer_types id's
     // member_id: 2,
+    errMsg: '',
   };
 
   componentDidMount() {
     // const member_id = get member_id from local storage
     // this.setState({ member_id })
-    // request for backend to get member skills (array of skills id's)
+    // request for backend to get member skills and offer_types (array of skills and offer_types )
     // `GET` : `/api/v1/filter/:memberId`
     // response: { error: null, data: { skills: ['node.js', 'postgres', 'react.js'], offer_types: ['fixed_price', 'part_time']} }
     // const { skills, offer_types } = result.data;
@@ -23,7 +26,9 @@ export default class CreateOffer extends Component {
   }
 
   handleSubmit = () => {
-    const { title, position, description, skills } = this.state;
+    // eslint-disable-next-line react/prop-types
+    const { history } = this.props;
+    const { title, position, description } = this.state;
     let { data } = this.state;
     data = {
       title,
@@ -31,9 +36,22 @@ export default class CreateOffer extends Component {
       description,
     };
 
-    // send request to the backend with body
-    // axios
-    // .post('/api/v1/offers', { data })
+    newOfferValidation
+      .validate(data)
+      .then(() => {
+        // console.log(8989, data);
+        this.setState({ errMsg: '' });
+        // send request to the backend with body
+        // axios
+        // .post('/api/v1/offers', { data })
+        // history.push('/home');
+      })
+      .catch(err => {
+        const { errors = [] } = JSON.parse(JSON.stringify(err));
+        // errors[0] ? console.log(errors[0]) : console.log(errors);
+        // eslint-disable-next-line no-unused-expressions
+        errors[0] ? this.setState({ errMsg: 'All fields are required' }) : '';
+      });
 
     // send request with new skills from memeber (which don't exist in autocomplete) to update filters table `PUT` : `/api/v1/filter/:memberId`
     // and the same for offer_types
@@ -51,16 +69,23 @@ export default class CreateOffer extends Component {
   // }
 
   render() {
-    // console.log(333, this.state);
-    const { skills } = this.state;
+    // eslint-disable-next-line react/prop-types
+    const { history } = this.props;
+    const { errMsg } = this.state;
     return (
       <Container className="page__container newoffer__container">
         <h1 className="newoffer-head__title"> New Offer </h1>
+        {errMsg ? (
+          <div className="newoffer-errMsg">
+            <i className="fas fa-exclamation newoffer-errMsg__icon" />{' '}
+            <span className="newoffer-errMsg__text">{errMsg}</span>{' '}
+          </div>
+        ) : null}
         <Form>
-          <div className="newoffer__content">
-            <Row>
-              <Col sm={12} md={12} lg={6}>
-                <Form.Group>
+          <Form.Group>
+            <div className="newoffer__content">
+              <Row>
+                <Col sm={12} md={12} lg={6}>
                   <Form.Label className="newoffer__content--label">
                     {' '}
                     Title:{' '}
@@ -69,9 +94,9 @@ export default class CreateOffer extends Component {
                     type="text"
                     placeholder="eg:  Small Shop seeks workers "
                     onChange={({ target }) => this.handleTitle(target.value)}
+                    required
                   />
-                </Form.Group>
-                <Form.Group>
+
                   <Form.Label className="newoffer__content--label">
                     {' '}
                     Position:{' '}
@@ -81,18 +106,21 @@ export default class CreateOffer extends Component {
                     placeholder="eg:   Marketing Manager"
                     onChange={({ target }) => this.handlePosition(target.value)}
                   />
-                </Form.Group>
-              </Col>
-              <Col sm={12} md={12} lg={6} className="autocomplete-offer__type">
-                <AutoCompleteTags
-                  type="offer_type"
-                  placeholder="eg:  fixed price"
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Form.Group>
+                </Col>
+                <Col
+                  sm={12}
+                  md={12}
+                  lg={6}
+                  className="autocomplete-offer__type"
+                >
+                  <AutoCompleteTags
+                    type="offer_type"
+                    placeholder="eg:  fixed price"
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col>
                   <Form.Label className="newoffer__content--label">
                     {' '}
                     Description:{' '}
@@ -105,38 +133,41 @@ export default class CreateOffer extends Component {
                       this.handleDescription(target.value)
                     }
                   />
-                </Form.Group>
-              </Col>
-            </Row>
-            <Row>
-              <AutoCompleteTags
-                className="autocomplete-skills"
-                type="skill"
-                placeholder=" select skills"
-                // onInputChange={e => this.handleSkills(e)}
-                options={skills}
-              />
-            </Row>
-            <div>
-              <Row className="newoffer__content-btns">
-                <Col sm={12} md={12} lg={1} className="newoffer__content-btn">
-                  <Button
-                    className="newoffer__content-btn--apply"
-                    onClick={this.handleSubmit}
-                  >
-                    Apply
-                  </Button>
-                </Col>
-                <Col sm={12} md={12} lg={1} className="newoffer__content-btn">
-                  <Button className="newoffer__content-btn--cancel">
-                    Cancel
-                  </Button>
                 </Col>
               </Row>
+              <Row>
+                <AutoCompleteTags
+                  className="autocomplete-skills"
+                  type="skill"
+                  placeholder=" select skills"
+                />
+              </Row>
+              <div>
+                <Row className="newoffer__content-btns">
+                  <Col sm={12} md={12} lg={1} className="newoffer__content-btn">
+                    <Button
+                      className="newoffer__content-btn--apply"
+                      onClick={this.handleSubmit}
+                    >
+                      Apply
+                    </Button>
+                  </Col>
+                  <Col sm={12} md={12} lg={1} className="newoffer__content-btn">
+                    <Button
+                      className="newoffer__content-btn--cancel"
+                      onClick={() => history.push('/home')}
+                    >
+                      Cancel
+                    </Button>
+                  </Col>
+                </Row>
+              </div>
             </div>
-          </div>
+          </Form.Group>
         </Form>
       </Container>
     );
   }
 }
+
+export default withRouter(CreateOffer);

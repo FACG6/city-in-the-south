@@ -12,11 +12,6 @@
   margin-left: 7px;
 }
 
-/* .autocomplete-skills { */
-/* .autocomplete-title{
-  padding-left: 18px;
-} */
-
 .newoffer__content .row:nth-child(3) {
   padding-left: 18px !important;
 } 
@@ -31,6 +26,7 @@
 
 .newoffer__content--description{
   width: 70% !important;
+  margin-bottom: 1rem;
 }
 
 .newoffer__content-btns {
@@ -52,6 +48,17 @@
   width: 26rem;
 }
 /***********************************/
+
+.newoffer-errMsg {
+  color: red;
+  padding-bottom: 1.5rem;
+  padding-left: 0.6rem;
+}
+
+.newoffer-errMsg__icon {
+  font-size: 1rem;
+  padding-right: 0.5rem;
+}
 
 @media only screen and (min-width: 576px) {
   .col-lg-1 .newoffer__content-btn--cancel {
