@@ -133,7 +133,7 @@ export default class OfferDetails extends Component {
             </Col>
           ),
           offer.status && memberApplication[0] && (
-            <Col>
+            <Col xs lg="9">
               <ApplicationCard
                 application={memberApplication[0]}
                 offerColor={this.offerColor}
