@@ -1,9 +1,9 @@
 const yup = require('yup');
 
-const schema = yup.object().shape({
+const newOfferValidation = yup.object().shape({
   title: yup.string().required(),
   position: yup.string().required(),
   description: yup.string().required(),
 });
 
-export { schema };
+export { newOfferValidation };
