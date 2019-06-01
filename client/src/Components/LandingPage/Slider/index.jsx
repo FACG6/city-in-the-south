@@ -1,53 +1,42 @@
-import React from "react";
-import { Carousel } from "react-bootstrap";
-import Cards from "./../Cards";
+import React from 'react';
+import { Carousel } from 'react-bootstrap';
+
+import './style.css';
+
+import Cards from '../Cards';
+import storiesData from '../../utils/stories';
 
 export default class ControlledCarousel extends React.Component {
-  constructor(props, context) {
-    super(props, context);
+  state = {
+    data: [],
+  };
 
-    this.handleSelect = this.handleSelect.bind(this);
-
-    this.state = {
-      index: 0,
-      direction: null
-    };
-  }
-
-  handleSelect(selectedIndex, e) {
-    this.setState({
-      index: selectedIndex,
-      direction: e.direction
+  componentDidMount() {
+    const newData = [{ id: 0, stories: [] }];
+    storiesData.forEach((story, index) => {
+      newData[newData.length - 1].stories.push(story);
+      if ((index + 1) % 4 === 0) {
+        newData.push({ id: (index + 1) / 4, stories: [] });
+      }
     });
+    this.setState({ data: newData });
   }
 
   render() {
-    const { index, direction } = this.state;
+    const { data } = this.state;
 
     return (
       <Carousel
-        activeIndex={index}
-        direction={direction}
-        onSelect={this.handleSelect}
+        controls
+        indicators
+        nextIcon={<i className="slider__control fas fa-angle-double-right" />}
+        prevIcon={<i className="slider__control fas fa-angle-double-left" />}
       >
-        <Carousel.Item>
-        <Cards />
-          <Carousel.Caption>
-            <h3>Second slide label</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <div>
-            <h1>hello header</h1>
-            <p>hell fodjfnsd </p>
-          </div>
-
-          <Carousel.Caption>
-            <h3>Second slide label</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </Carousel.Caption>
-        </Carousel.Item>
+        {data.map(({ id, stories }) => (
+          <Carousel.Item key={id}>
+            <Cards data={stories} />
+          </Carousel.Item>
+        ))}
       </Carousel>
     );
   }
