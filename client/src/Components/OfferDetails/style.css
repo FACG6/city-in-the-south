@@ -42,3 +42,11 @@
   margin-bottom: 10px;
   text-transform: capitalize;
 }
+.offer-details__proposal-container {
+  padding: 0px;
+  display: flex;
+  flex-flow: column;
+}
+.offer-details__proposal-container__button {
+  align-self: flex-end !important;
+}

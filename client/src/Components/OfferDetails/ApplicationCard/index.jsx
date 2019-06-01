@@ -8,7 +8,6 @@ class ApplicationCard extends Component {
   handleProfile = () => {
     // handle profile button
     const { member_id: applicantMemberId } = this.props.application;
-    console.log(applicantMemberId);
   };
 
   handleHireMe = () => {
@@ -20,11 +19,10 @@ class ApplicationCard extends Component {
     const {
       full_name: fullName,
       avatar,
-      proposal,
+      discription,
       status,
     } = this.props.application;
     const offerColor = this.props.offerColor(status);
-
     return (
       <div className="application-card__container">
         <Card style={{ borderColor: '#eaeaea' }}>
@@ -35,13 +33,13 @@ class ApplicationCard extends Component {
             </Card.Title>
           </Card.Header>
           <Card.Body>
-            <Card.Text>{proposal}</Card.Text>
+            <Card.Text>{discription}</Card.Text>
             <div className="application-card__button__container">
               <Button
                 className="application-card__button"
                 onClick={this.handleProfile}
               >
-                View Profile
+                {this.props.viewMyProfile ? 'View My Profile' : 'View Profile'}
               </Button>
               {!status ? (
                 <Button

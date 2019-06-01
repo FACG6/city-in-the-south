@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import './style.css';
 import SideCard from './SideCard';
 import ApplicationCard from './ApplicationCard';
@@ -13,7 +13,7 @@ export default class OfferDetails extends Component {
     offer: {},
     applications: [],
     userInfo: {
-      id: 1,
+      id: 3,
       fullName: 'Ayman AlQoqa',
       username: 'Ayman321396',
       avatar:
@@ -59,6 +59,9 @@ export default class OfferDetails extends Component {
     const { applications } = this.state;
     const offerColor = this.offerColor(offer.status);
     const { id: memberId } = this.state.userInfo;
+    const memberApplication = applications.filter(
+      application => application.member_id === memberId
+    );
 
     return (
       <Container className="page__container">
@@ -116,7 +119,28 @@ export default class OfferDetails extends Component {
           </div>
         ) : (
           // if logged in member is not offer owner
-          <div>if logged in member is not offer owner</div>
+          (!offer.status && (
+            <Col xs lg="9" className="offer-details__proposal-container">
+              <Form.Control
+                as="textarea"
+                rows="8"
+                placeholder="Write your proposal here !!!"
+                style={{ marginBottom: '10px' }}
+              />
+              <Button className="offer-details__proposal-container__button">
+                Apply
+              </Button>
+            </Col>
+          ),
+          offer.status && memberApplication[0] && (
+            <Col>
+              <ApplicationCard
+                application={memberApplication[0]}
+                offerColor={this.offerColor}
+                viewMyProfile
+              />
+            </Col>
+          ))
         )}
       </Container>
     );

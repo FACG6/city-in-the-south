@@ -1,5 +1,5 @@
 const offer = {
-  id: 21,
+  id: 3,
   status: 'pending',
   title: 'Ui application for website',
   position: 'front end developer',

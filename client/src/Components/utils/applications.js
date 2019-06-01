@@ -1,13 +1,13 @@
 const applications = [
   {
-    member_id: 2,
+    member_id: 3,
     username: 'Ayman321396',
     full_name: 'Ayman Alqoqa',
     avatar:
       'https://m.media-amazon.com/images/M/MV5BMTcxOTk4NzkwOV5BMl5BanBnXkFtZTcwMDE3MTUzNA@@._V1_.jpg',
-    proposal:
+    discription:
       'In my former Full stack role, I exercise a calculated and methodical approach to problem solving. While I am independently motivated, I appreciate collective efforts and collaborate productively within group settings. Moreover, I am competent in javascript and SQL with proficiency in ASP.',
-    status: '', // from hired_member
+    status: 'pending', // from hired_member
   },
 
   {
@@ -16,7 +16,7 @@ const applications = [
     full_name: 'Angham',
     avatar:
       'https://m.media-amazon.com/images/M/MV5BMTcxOTk4NzkwOV5BMl5BanBnXkFtZTcwMDE3MTUzNA@@._V1_.jpg',
-    proposal: 'lorem ipsum',
+    discription: 'lorem ipsum',
     status: 'accepted', // from hired_member
   },
 ];
