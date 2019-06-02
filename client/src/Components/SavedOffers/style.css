@@ -1,8 +1,13 @@
-.saved-offer-title{
+.saved-offer__title {
   color: rgba(51, 51, 51, 0.8);
   font-size: 32px;
   padding-bottom: 15px;
   margin-bottom: 1rem;
   border-bottom: 2px solid rgba(51, 51, 51, 0.8);
-  width: fit-content; 
+  width: fit-content;
+}
+
+.saved-offer__spinner {
+  text-align: center;
+  margin: 25% auto;
 }

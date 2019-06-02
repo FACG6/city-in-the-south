@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container } from 'react-bootstrap';
+import { Container, Spinner } from 'react-bootstrap';
 import OfferCard from '../CommonComponents/OfferCard';
 
 import offersDetails from './staticData';
@@ -12,6 +12,7 @@ export default class SavedOffers extends Component {
   };
 
   componentDidMount() {
+    // here we will make a request to the back to get the saved-offers
     this.setState({ offers: offersDetails });
   }
 
@@ -19,21 +20,24 @@ export default class SavedOffers extends Component {
     const { offers } = this.state;
     return (
       <Container className="page__container">
-        <h1 className="saved-offer-title"> Saved Offers </h1>
-        {offers
-          ? offers.map(item => {
-              if (item.saved) {
-                return (
-                  <OfferCard
-                    hover
-                    offer={item}
-                    key={item.id}
-                    status={item.status}
-                  />
-                );
-              }
-            })
-          : null}
+        <h1 className="saved-offer__title"> Saved Offers </h1>
+        {offers ? (
+          offers.map(item => {
+            return (
+              <OfferCard
+                hover
+                offer={item}
+                key={item.id}
+                status={item.status}
+              />
+            );
+          })
+        ) : (
+          <div className="saved-offer__spinner">
+            {' '}
+            <Spinner animation="border" variant="info" />
+          </div>
+        )}
       </Container>
     );
   }
