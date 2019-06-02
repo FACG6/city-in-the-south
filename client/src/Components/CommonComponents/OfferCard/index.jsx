@@ -47,7 +47,7 @@ class OfferCard extends React.Component {
     this.setState({ saved: !saved });
   };
 
-  handleHover = () => this.setState({ hovered: 'card-hovered' });
+  handleHover = () => this.setState({ hovered: 'offer-card--hovered' });
 
   render() {
     const { offer, hovered, statusLabel, statusDiv } = this.state;
@@ -57,7 +57,7 @@ class OfferCard extends React.Component {
       <>
         {offer ? (
           <Card
-            className={`offer-card ${hovered ? 'card-hovered' : ''}`}
+            className={`offer-card ${hovered ? 'offer-card--hovered' : ''}`}
             key={offer.id}
             onClick={() => history.push(`/app/offers/${offer.id}`)}
           >
