@@ -1,19 +1,31 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
+
 import ApplicationCard from '../CommonComponents/OfferCard';
-import applications from '../utils/myApplications';
+import myApplicationsData from '../utils/myApplications';
+
 import './style.css';
 
-export default function MyApplications() {
-  return (
-    <>
-      <Container className="page__container">
-        <div className="my-applications__title">
-          <span>My Applications</span>
-        </div>
-        {applications
-          ? applications.map(item => {
-              if (item.status !== 'active') {
+export default class MyApplications extends React.Component {
+  state = {
+    myApplications: [],
+  };
+
+  componentDidMount() {
+    // fetch for myApplications data and store it in the state
+    this.setState({ myApplications: myApplicationsData });
+  }
+
+  render() {
+    const { myApplications } = this.state;
+    return (
+      <>
+        <Container className="page__container">
+          <div className="my-applications__title">
+            <span>My Applications</span>
+          </div>
+          {myApplications
+            ? myApplications.map(item => {
                 return (
                   <ApplicationCard
                     hover
@@ -23,10 +35,10 @@ export default function MyApplications() {
                     status={item.status}
                   />
                 );
-              }
-            })
-          : null}
-      </Container>
-    </>
-  );
+              })
+            : null}
+        </Container>
+      </>
+    );
+  }
 }
