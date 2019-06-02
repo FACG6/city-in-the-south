@@ -1,7 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Lato|Roboto&display=swap');
 
-html, body, * {
+html,
+body,
+* {
   padding: 0;
   margin: 0;
   font-family: 'Lato', sans-serif;
+}
+.page__container {
+  min-height: calc(100vh - 108px) !important;
+  margin: 50px 0;
 }
