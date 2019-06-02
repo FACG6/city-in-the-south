@@ -39,7 +39,6 @@ export default class Login extends React.Component {
               value={username}
               placeholder="Enter your username"
               onChange={this.handleChange}
-              required
             />
           </Form.Group>
 
@@ -54,7 +53,6 @@ export default class Login extends React.Component {
               value={password}
               placeholder="Enter your password"
               onChange={this.handleChange}
-              required
             />
           </Form.Group>
           <p className="message">{message}</p>
