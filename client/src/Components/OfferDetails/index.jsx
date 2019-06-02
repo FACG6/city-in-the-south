@@ -14,13 +14,6 @@ export default class OfferDetails extends Component {
     // default value, should be removed if fetch offer details implemented
     offer: {},
     applications: [],
-    userInfo: {
-      id: 3,
-      fullName: 'Ayman AlQoqa',
-      username: 'Ayman321396',
-      avatar:
-        'https://m.media-amazon.com/images/M/MV5BMTcxOTk4NzkwOV5BMl5BanBnXkFtZTcwMDE3MTUzNA@@._V1_.jpg',
-    },
   };
 
   componentDidMount() {
@@ -33,8 +26,6 @@ export default class OfferDetails extends Component {
     // fetch applications by offerId and save it in state
     this.setState({ applications: applicationsData });
     // take logged in userInfo from local storage and store it in state
-    // const userInfo = localStorage.getItem('userInfo');
-    // this.setState(userInfo);
   }
 
   offerColor = status => {
@@ -74,7 +65,6 @@ export default class OfferDetails extends Component {
     const memberApplication = applications.filter(
       application => application.member_id === memberId
     );
-    console.log(memberApplication);
     return (
       <Container className="page__container">
         <Row className="offer-details__header">
