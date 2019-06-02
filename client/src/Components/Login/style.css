@@ -18,17 +18,15 @@
   align-items: center;
   text-align: center;
   letter-spacing: 0.04em;
-  color: rgba(51, 51, 51, 0.58);
+  color: #3d9caf;
 }
 
 .content-login__submit {
-  height: 50px;
+  height: 40px;
   width: 277px;
   margin-left: 24px;
   align-items: center;
-  letter-spacing: 0.08em;
   font-weight: 500;
-  font-size: 18px;
   line-height: 22px;
   background-color: #0F9CAF ;
   border:none ;
@@ -44,10 +42,6 @@
   color: #0F9CAF;
   cursor: pointer;
 }
-      
-.content-login .content-login__word-login .content-login__input .content-login__submit .content-login__text-muted .content-login__word-signup {
-  margin: 0 auto;
-}
 
 .content-login__input {
   width: 275px;
@@ -62,7 +56,7 @@
   border-radius: 3px;
 }
 
-.content-login__word-login .content-login__submit .content-login__username .content-login__password {
-  font-family: Lato;
-  font-style: normal;
+.message{
+  padding: 0 22px;
+  color: red;
 }
