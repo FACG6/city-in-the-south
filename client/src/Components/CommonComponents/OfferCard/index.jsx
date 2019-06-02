@@ -20,7 +20,8 @@ class OfferCard extends React.Component {
     const borderColor = {
       completed: 'green',
       finished: 'red',
-      pending: 'blue',
+      pending: 'orange',
+      active: 'blue',
     };
     this.setState(() => {
       return {
