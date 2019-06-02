@@ -1,11 +1,8 @@
- .myoffers-head{
-  text-align: center;
-}
 .page__container,
-.myoffers-container {
+.myoffers__container__card__container {
   margin: 20px;
 }
-.card-myoffers-head__title {
+.myoffers__container--title {
   color: rgba(51, 51, 51, 0.8);
   font-size: 32px;
   padding-bottom: 15px;
@@ -15,65 +12,64 @@
   margin-left: 7px;
 }
 
-.card-myoffers{
+.myoffers__container__card{
   border: 1px solid rgba(234, 234, 234, 0.9) !important;
   border-radius: 0.3rem !important;
   cursor: pointer;
   margin: 0.2rem;
 }
 
-.card-myoffers:hover {
+.myoffers__container__card:hover {
   box-shadow:  0 0 30px -15px rgba(0, 0, 0, 0.3);
 }
 
-.card-myoffers__body {
+.myoffers__container__card__body {
   font-family: Lato;
   letter-spacing: 0.4px;
 }
 
-.card-myoffers__body--position {
+.myoffers__container__card__body--position {
   color: #0F9CAF !important;
 }
 
-.card-myoffers__body--title {
+.myoffers__container__card__body--title {
   color: rgba(51, 51, 51, 0.8) !important ;
 }
 
-.card-myoffers__body {
+.myoffers__container__card__body {
   text-align: center;
 }
 
-.card-myoffers__header{
+.myoffers__container__card--header{
   border-bottom: none !important;
-  background: rgba(255, 255, 255, 0.5) !important;
-  /* background: rgba(238, 238, 238, 0.5) !important; */
+  background: rgba(238, 238, 238, 0.3) !important;
 }
 
-.card-myoffers__status--completed{
+.myoffers__container__card__status--completed{
   color: #0A8F07;
 }
 
-.card-myoffers__status{
+.myoffers__container__card__status{
   float: right;
   text-transform: capitalize;
   letter-spacing: 1px;
 }
 
-.card-myoffers__status--pending {
+.myoffers__container__card__status--pending {
   color: #F77D0E;
 }
 
-.card-myoffers__status--active {
+.myoffers__container__card__status--active {
   color: #1BA7E2;
 }
 
-.card-myoffers__status--finished{
+.myoffers__container__card__status--finished{
   color: red;
 }
 
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
-  .card-card-myoffers-head__title {
+  .myoffers__container--title {
     left: 130px;
     font-size: 24px;
   }
