@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Container } from 'react-bootstrap';
 import OfferCard from '../CommonComponents/OfferCard';
+
 import offersDetails from './staticData';
+
 import './style.css';
 
 export default class SavedOffers extends Component {
@@ -16,7 +18,7 @@ export default class SavedOffers extends Component {
   render() {
     const { offers } = this.state;
     return (
-      <Container class="page__container">
+      <Container className="page__container">
         <h1 className="saved-offer-title"> Saved Offers </h1>
         {offers
           ? offers.map(item => {
