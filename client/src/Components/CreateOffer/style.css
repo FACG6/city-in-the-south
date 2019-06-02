@@ -2,7 +2,7 @@
   margin-top: 1rem;
 }
 
-.newoffer-head__title {
+.newoffer--title {
   color: rgba(51, 51, 51, 0.8);
   font-size: 32px;
   padding-bottom: 15px;
@@ -12,67 +12,66 @@
   margin-left: 7px;
 }
 
-.newoffer__content .row:nth-child(3) {
+.newoffer--content .row:nth-child(3) {
   padding-left: 18px !important;
 } 
 
-.newoffer__content {
+.newoffer--content {
   padding-left: 0.7rem;
 }
 
-.newoffer__content--label{
+.newoffer--label{
   color: rgba(51, 51, 51, 0.8);
 }
 
-.newoffer__content--description{
+.newoffer--description{
   width: 70% !important;
   margin-bottom: 1rem;
 }
 
-.newoffer__content-btns {
+.newoffer-btns {
   margin-bottom: 2rem;
   margin-top: 1.8rem;
 }
 
-.newoffer__content-btn--cancel,
-.newoffer__content-btn--apply {
+.newoffer-btn--cancel,
+.newoffer-btn--apply {
   width: 7rem;
   margin-top: 10px !important;
   background: #0f9caf !important;
   color: #fff;
   border: none !important;
 }
- /***********************************/
-.autComplete-dev .form-control {
+
+.newoffer__container .autComplete-dev .form-control {
   margin-left: 1rem;
-  width: 26rem;
+  width: 100%;
 }
-/***********************************/
 
 .newoffer-errMsg {
   color: red;
   padding-bottom: 1.5rem;
   padding-left: 0.6rem;
+  margin-top: 0.7rem;
 }
 
 .newoffer-errMsg__icon {
   font-size: 1rem;
   padding-right: 0.5rem;
-  color: red;
 }
 
 @media only screen and (min-width: 576px) {
-  .col-lg-1 .newoffer__content-btn--cancel {
+  .col-lg-1 .newoffer-btn--cancel {
     margin-left: 2rem
   }
 }
   @media (max-width: 576px) {
   /* For mobile phones: */
-  .newoffer__content--description{
+  .newoffer--description{
     width: 100% !important;
   }
 
-  .newoffer__content-btn--cancel {
+  .newoffer-btn--cancel {
     width: 7rem;
     margin-top: 10px !important;
   }

@@ -75,28 +75,25 @@ class CreateOffer extends Component {
     const { errMsg } = this.state;
     return (
       <Container className="page__container newoffer__container">
-        <h1 className="newoffer-head__title"> New Offer </h1>
+        <h1 className="newoffer--title"> New Offer </h1>
         <Form>
           <Form.Group>
-            <div className="newoffer__content">
+            <div className="newoffer--content">
               <Row>
                 <Col sm={12} md={12} lg={6}>
-                  <Form.Label className="newoffer__content--label">
-                    {' '}
-                    Title:{' '}
-                  </Form.Label>
+                  <Form.Label className="newoffer--label"> Title: </Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="eg:  Small Shop seeks workers "
                     onChange={({ target }) => this.handleTitle(target.value)}
                   />
-                  {errMsg.position && (
+                  {errMsg.title && (
                     <div className="newoffer-errMsg">
                       <i className="fas fa-exclamation newoffer-errMsg__icon" />{' '}
                       {errMsg.title}
                     </div>
                   )}
-                  <Form.Label className="newoffer__content--label">
+                  <Form.Label className="newoffer--label">
                     {' '}
                     Position:{' '}
                   </Form.Label>
@@ -124,7 +121,7 @@ class CreateOffer extends Component {
                     placeholder="eg:  fixed price"
                     onchange={this.handleOfferTypes}
                   />
-                  {errMsg.position && (
+                  {errMsg.offerType && (
                     <div className="newoffer-errMsg">
                       <i className="fas fa-exclamation newoffer-errMsg__icon" />{' '}
                       Offertype is required field
@@ -134,19 +131,19 @@ class CreateOffer extends Component {
               </Row>
               <Row>
                 <Col>
-                  <Form.Label className="newoffer__content--label">
+                  <Form.Label className="newoffer--label">
                     {' '}
                     Description:{' '}
                   </Form.Label>
                   <Form.Control
                     as="textarea"
-                    className="newoffer__content--description"
+                    className="newoffer--description"
                     rows="3"
                     onChange={({ target }) =>
                       this.handleDescription(target.value)
                     }
                   />
-                  {errMsg.position && (
+                  {errMsg.description && (
                     <div className="newoffer-errMsg">
                       <i className="fas fa-exclamation newoffer-errMsg__icon" />{' '}
                       {errMsg.description}
@@ -163,18 +160,18 @@ class CreateOffer extends Component {
                 />
               </Row>
               <div>
-                <Row className="newoffer__content-btns">
-                  <Col sm={12} md={12} lg={1} className="newoffer__content-btn">
+                <Row className="newoffer-btns">
+                  <Col sm={12} md={12} lg={1} className="newoffer--btn">
                     <Button
-                      className="newoffer__content-btn--apply"
+                      className="newoffer-btn--apply"
                       onClick={this.handleSubmit}
                     >
                       Create
                     </Button>
                   </Col>
-                  <Col sm={12} md={12} lg={1} className="newoffer__content-btn">
+                  <Col sm={12} md={12} lg={1} className="newoffer--btn">
                     <Button
-                      className="newoffer__content-btn--cancel"
+                      className="newoffer-btn--cancel"
                       onClick={() => history.push('/home')}
                     >
                       Cancel
