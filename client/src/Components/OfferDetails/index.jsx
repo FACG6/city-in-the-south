@@ -107,7 +107,7 @@ export default class OfferDetails extends Component {
             <Row className="offer-details__Applications-title">
               Applications
             </Row>
-            <Col xs lg="9" style={{ padding: '0px' }}>
+            <Col xs lg="9" style={{ padding: '0px !important' }}>
               {applications &&
                 applications.map(item => (
                   <div key={item.member_id}>

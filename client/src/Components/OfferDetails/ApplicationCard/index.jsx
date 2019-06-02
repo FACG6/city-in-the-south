@@ -37,7 +37,9 @@ class ApplicationCard extends Component {
             </Card.Title>
           </Card.Header>
           <Card.Body>
-            <Card.Text>{discription}</Card.Text>
+            <Card.Text style={{ color: 'rgba(51, 51, 51, 0.8)' }}>
+              {discription}
+            </Card.Text>
             <div className="application-card__button__container">
               <Button
                 className="application-card__button"
