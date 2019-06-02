@@ -10,7 +10,7 @@
   box-shadow:  0 0 30px -15px rgba(0, 0, 0, 0.3)
 }
 
-.offer-card--header {
+.offer-card__header {
   display: flex;
 }
 

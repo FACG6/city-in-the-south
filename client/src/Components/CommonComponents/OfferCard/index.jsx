@@ -64,7 +64,7 @@ class OfferCard extends React.Component {
             {hover ? (
               <span className={`offer-card__border ${statusDiv}`}> </span>
             ) : null}
-            <Card.Header className="offer-card--header">
+            <Card.Header className="offer-card__header">
               <div>
                 <span className="offer-card__position">{offer.position}</span>
                 <br />
