@@ -45,25 +45,25 @@
   background: rgba(238, 238, 238, 0.3) !important;
 }
 
-.myoffers__container__card__status--completed{
+.myoffers__card__status--completed{
   color: #0A8F07;
 }
 
-.myoffers__container__card__status{
+.myoffers__card__status{
   float: right;
   text-transform: capitalize;
   letter-spacing: 1px;
 }
 
-.myoffers__container__card__status--pending {
+.myoffers__card__status--pending {
   color: #F77D0E;
 }
 
-.myoffers__container__card__status--active {
+.myoffers__card__status--active {
   color: #1BA7E2;
 }
 
-.myoffers__container__card__status--finished{
+.myoffers__card__status--finished{
   color: red;
 }
 
