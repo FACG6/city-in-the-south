@@ -8,6 +8,7 @@ const savedOffers = require('./savedOffers');
 const applications = require('./applications');
 const offerApplications = require('./offerApplications');
 const myApplications = require('./myApplications');
+const hiredMember = require('./hiredMember');
 
 router.use('/login', login);
 router.get('/logout', logout);
@@ -17,5 +18,6 @@ router.use('/saved-offers', savedOffers);
 router.use('/applications', applications);
 router.use('/offer-applications', offerApplications);
 router.use('/my-applications', myApplications);
+router.use('/hired-member', hiredMember);
 
 module.exports = router;
