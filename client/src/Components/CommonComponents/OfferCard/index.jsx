@@ -15,8 +15,6 @@ class OfferCard extends React.Component {
 
   componentDidMount() {
     const { offer, status } = this.props;
-    if (offer.saved) this.setState({ saved: true });
-    this.setState({ offer });
     const borderColor = {
       completed: 'green',
       finished: 'red',
@@ -92,7 +90,7 @@ class OfferCard extends React.Component {
               </Button>
             </Card.Header>
             <Card.Body>
-              <Card.Text className="offer-card-description">
+              <Card.Text className="offer-card__description">
                 {offer.description.substring(0, 300)}
               </Card.Text>
             </Card.Body>

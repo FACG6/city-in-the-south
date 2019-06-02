@@ -14,7 +14,7 @@
   display: flex;
 }
 
-.offer-card-description{
+.offer-card__description{
   line-height: 1.5rem;
   letter-spacing: 0.5px;
 }
@@ -46,7 +46,7 @@
   color: rgba(134, 133, 133, 0.6);
 }
 
-.offer-card-description .offer__card--finished,
+.offer-card__description,
 .offer-card__favourite:hover {
   cursor: pointer;
 }
@@ -71,7 +71,7 @@
   box-shadow: 0px 0px 3px rgba(0, 0, 0, 1);
 }
 
-.offer-card-description{
+.offer-card__description{
   color: rgba(51, 51, 51, 0.8);
   font-family: Lato;
   font-style: normal;
