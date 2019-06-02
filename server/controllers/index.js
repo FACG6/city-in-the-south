@@ -10,6 +10,7 @@ const offerApplications = require('./offerApplications');
 const myApplications = require('./myApplications');
 const hiredMember = require('./hiredMember');
 const skills = require('./skills');
+const filter = require('./filter');
 
 router.use('/login', login);
 router.get('/logout', logout);
@@ -21,5 +22,6 @@ router.use('/offer-applications', offerApplications);
 router.use('/my-applications', myApplications);
 router.use('/hired-member', hiredMember);
 router.use('/skills', skills);
+router.use('/filter', filter);
 
 module.exports = router;
