@@ -96,12 +96,12 @@
   background: green;
 }
 .offer-card:hover
-.offer__card--finished {
+.offer-card__status--finished {
   background: red;
 }
 
 .offer-card:hover
-.offer__card--pending {
+.offer-card__status--pending {
   background: #1BA7E2;
 }
 

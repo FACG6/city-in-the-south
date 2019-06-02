@@ -17,28 +17,19 @@ class OfferCard extends React.Component {
     const { offer, status } = this.props;
     if (offer.saved) this.setState({ saved: true });
     this.setState({ offer });
-    switch (status) {
-      case 'completed':
-        this.setState({
-          statusLabel: 'offer-card__status--completed',
-          statusDiv: 'offer-card__border--green',
-        });
-        break;
-      case 'finished':
-        this.setState({
-          statusLabel: 'offer__card--finished',
-          statusDiv: 'offer-card__border--red',
-        });
-        break;
-      case 'pending':
-        this.setState({
-          statusLabel: 'offer__card--pending',
-          statusDiv: 'offer-card__border--blue',
-        });
-        break;
-      default:
-        return null;
-    }
+    const borderColor = {
+      completed: 'green',
+      finished: 'red',
+      pending: 'blue',
+    };
+    this.setState(() => {
+      return {
+        offer,
+        saved: offer.saved,
+        statusLabel: `offer-card__status--${status}`,
+        statusDiv: `offer-card__border--${borderColor[status]}`,
+      };
+    });
   }
 
   savedClassStatus = () => {
