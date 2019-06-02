@@ -2,23 +2,27 @@ import React from 'react';
 import './style.css';
 import { Form, Button, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import signup from '../Signup';
 
 export default class Login extends React.Component {
   state = {
     username: '',
     password: '',
+    message: '',
   };
 
   handleClick = () => {
-    // make a requset to the back with method post and data{username , password}
+    if (this.state.username && this.state.password) {
+      // make a requset to the back with method post and data{username , password}
+    } else {
+      this.setState({ message: 'Please enter all fields' });
+    }
   };
 
   handleChange = ({ target: { value, name } }) =>
     this.setState({ [name]: value });
 
   render() {
-    const { username, password } = this.state;
+    const { username, password, message } = this.state;
 
     return (
       <Container>
@@ -53,14 +57,14 @@ export default class Login extends React.Component {
               required
             />
           </Form.Group>
-
-          <button
+          <p className="message">{message}</p>
+          <Button
             type="button"
             className="content-login__submit"
             onClick={this.handleClick}
           >
             Login
-          </button>
+          </Button>
           <Form.Text className="content-login__text-muted">
             Don’t have an account?{' '}
             <span className="content-login__word-signup">
