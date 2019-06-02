@@ -1,8 +1,9 @@
 import React from 'react';
 import { Card, Button, Spinner } from 'react-bootstrap';
-import PropTypes from 'prop-types';
-import './style.css';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+import './style.css';
 
 class OfferCard extends React.Component {
   state = {
