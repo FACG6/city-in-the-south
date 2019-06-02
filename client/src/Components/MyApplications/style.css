@@ -1,0 +1,9 @@
+.my-applications__title {
+  color: rgba(51, 51, 51, 0.8);
+  font-size: 32px;
+  padding-bottom: 15px;
+  margin-bottom: 1.3rem;
+  border-bottom: 2px solid rgba(51, 51, 51, 0.8);
+  width: fit-content;
+  margin-left: 7px;
+}
