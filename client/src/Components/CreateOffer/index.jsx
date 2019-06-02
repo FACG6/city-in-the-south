@@ -3,7 +3,7 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 // import axios from "axios";
 import { withRouter } from 'react-router-dom';
 import AutoCompleteTags from '../CommonComponents/AutoCompleteTags';
-import { newOfferValidation } from './validationSchema';
+import newOfferValidation from './validationSchema';
 import './style.css';
 
 class CreateOffer extends Component {

@@ -6,4 +6,4 @@ const newOfferValidation = yup.object().shape({
   description: yup.string().required(),
 });
 
-export { newOfferValidation };
+export default newOfferValidation;
