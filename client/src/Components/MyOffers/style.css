@@ -1,46 +1,41 @@
-.page__container,
-.myoffers__container__card__container {
-  margin: 20px;
-}
 .myoffers__container--title {
   color: rgba(51, 51, 51, 0.8);
   font-size: 32px;
   padding-bottom: 15px;
-  margin-bottom: 1.3rem;
   border-bottom: 2px solid rgba(51, 51, 51, 0.8);
-  width: fit-content; 
-  margin-left: 7px;
+  width: fit-content;
+  margin: 2rem 0 1.3rem 0.4rem;
 }
 
-.myoffers__container__card{
+.myoffer__card{
   border: 1px solid rgba(234, 234, 234, 0.9) !important;
   border-radius: 0.3rem !important;
   cursor: pointer;
   margin: 0.2rem;
 }
 
-.myoffers__container__card:hover {
+.myoffer__card:hover {
   box-shadow:  0 0 30px -15px rgba(0, 0, 0, 0.3);
 }
 
-.myoffers__container__card__body {
+.myoffers-card__body {
   font-family: Lato;
   letter-spacing: 0.4px;
 }
 
-.myoffers__container__card__body--position {
+.myoffers-card__body--position {
   color: #0F9CAF !important;
 }
 
-.myoffers__container__card__body--title {
+.myoffers-card__body--title {
   color: rgba(51, 51, 51, 0.8) !important ;
 }
 
-.myoffers__container__card__body {
+.myoffers-card__body {
   text-align: center;
 }
 
-.myoffers__container__card--header{
+.myoffer__card--header{
   border-bottom: none !important;
   background: rgba(238, 238, 238, 0.3) !important;
 }

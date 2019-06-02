@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Card, Row, Col, Container, Spinner } from 'react-bootstrap';
 
-import offersDetails from '../utilis/myOffers';
+import offersDetails from '../utils/myOffers';
 
 import './style.css';
 
@@ -36,11 +36,11 @@ class MyOffers extends Component {
               return (
                 <Col xs={12} md={6} lg={4} key={item.id}>
                   <Card
-                    className="myoffers__container__card"
+                    className="myoffer__card"
                     key={item.id}
                     onClick={() => history.push(`/app/offers/${item.id}`)}
                   >
-                    <Card.Header className="myoffers__container__card--header">
+                    <Card.Header className="myoffer__card--header">
                       <Card.Text
                         className={`myoffers__status ${this.statusClassName(
                           item.status
@@ -49,11 +49,11 @@ class MyOffers extends Component {
                         {item.status}
                       </Card.Text>
                     </Card.Header>
-                    <Card.Body className="myoffers__container__card__body">
-                      <Card.Text className="myoffers__container__card__body--title">
+                    <Card.Body className="myoffers-card__body">
+                      <Card.Text className="myoffers-card__body--title">
                         {item.title}
                       </Card.Text>
-                      <Card.Text className="myoffers__container__card__body--position">
+                      <Card.Text className="myoffers-card__body--position">
                         {item.position}
                       </Card.Text>
                     </Card.Body>
