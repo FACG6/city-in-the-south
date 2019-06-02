@@ -26,7 +26,8 @@ export default class AutoCompleteTags extends Component {
       } else if (type === 'offer_type') {
         options = offerType;
       }
-      return { selectedTags: data, options };
+      if (data) return { selectedTags: data, options };
+      return { options };
     });
   }
 
@@ -34,7 +35,6 @@ export default class AutoCompleteTags extends Component {
     /* filter the skills if the user enter new skills we will make a request to the back to add the skills the user adding it 
     and the same as for the offer_type
   */
-    const { selectedTags } = this.state;
     const { onchange } = this.props;
     this.setState(
       prevState => {
@@ -55,6 +55,7 @@ export default class AutoCompleteTags extends Component {
       },
       /* here we need another on change its comming from the filter it self */
       () => {
+        const { selectedTags } = this.state;
         if (typeof onchange === 'function') onchange(selectedTags);
       }
     );
