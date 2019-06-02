@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
-import './style.css';
+
 import SideCard from './SideCard';
 import ApplicationCard from './ApplicationCard';
 // dummy data
 import offerData from '../utils/offer';
 import applicationsData from '../utils/applications';
+
+import './style.css';
 
 export default class OfferDetails extends Component {
   state = {
@@ -22,8 +24,10 @@ export default class OfferDetails extends Component {
   };
 
   componentDidMount() {
-    const offerIdLength = window.location.href.split('/').length;
-    const offerId = window.location.href.split('/')[offerIdLength - 1];
+    const {
+      // eslint-disable-next-line react/prop-types
+      match: { params: offerId },
+    } = this.props;
     // fetch offer details by offerId and save it in state
     this.setState({ offer: offerData });
     // fetch applications by offerId and save it in state
@@ -37,14 +41,14 @@ export default class OfferDetails extends Component {
     switch (status) {
       case 'completed':
       case 'accepted':
-        return 'green';
+        return '#0A8F07';
       case 'pending':
-        return '#1BA7E2';
-      case 'in_progress':
-        return 'orange';
+        return '#F77D0E';
       case 'finished':
       case 'refused':
         return 'red';
+      case 'inactive':
+        return '#1BA7E2';
       default:
         return null;
     }
@@ -55,14 +59,22 @@ export default class OfferDetails extends Component {
   };
 
   render() {
-    const { offer } = this.state;
-    const { applications } = this.state;
+    // get useInfo from local storage
+    // const userInfo = localStorage.getItem('userInfo');
+    const userInfo = {
+      id: 3,
+      fullName: 'Ayman AlQoqa',
+      username: 'Ayman321396',
+      avatar:
+        'https://m.media-amazon.com/images/M/MV5BMTcxOTk4NzkwOV5BMl5BanBnXkFtZTcwMDE3MTUzNA@@._V1_.jpg',
+    };
+    const { offer, applications } = this.state;
     const offerColor = this.offerColor(offer.status);
-    const { id: memberId } = this.state.userInfo;
+    const { id: memberId } = userInfo;
     const memberApplication = applications.filter(
       application => application.member_id === memberId
     );
-
+    console.log(memberApplication);
     return (
       <Container className="page__container">
         <Row className="offer-details__header">
@@ -119,7 +131,7 @@ export default class OfferDetails extends Component {
           </div>
         ) : (
           // if logged in member is not offer owner
-          (!offer.status && (
+          (!memberApplication[0] && (
             <Col xs lg="9" className="offer-details__proposal-container">
               <Form.Control
                 as="textarea"
@@ -131,8 +143,8 @@ export default class OfferDetails extends Component {
                 Apply
               </Button>
             </Col>
-          ),
-          offer.status && memberApplication[0] && (
+          )) ||
+          (offer.status && memberApplication[0] && (
             <Col xs lg="9">
               <ApplicationCard
                 application={memberApplication[0]}
