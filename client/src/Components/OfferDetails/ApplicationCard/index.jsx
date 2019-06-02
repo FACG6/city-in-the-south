@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Image, Card, Button } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+
 import './style.css';
 
 class ApplicationCard extends Component {
@@ -23,6 +25,7 @@ class ApplicationCard extends Component {
       status,
     } = this.props.application;
     const offerColor = this.props.offerColor(status);
+
     return (
       <div className="application-card__container">
         <Card style={{ borderColor: '#eaeaea' }}>
@@ -62,3 +65,13 @@ class ApplicationCard extends Component {
 }
 
 export default ApplicationCard;
+
+ApplicationCard.propTypes = {
+  application: PropTypes.shape({
+    member_id: PropTypes.number.isRequired,
+    full_name: PropTypes.string.isRequired,
+    avatar: PropTypes.string.isRequired,
+    discription: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+  }).isRequired,
+};
