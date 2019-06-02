@@ -1,4 +1,4 @@
-.myoffers__container--title {
+.myoffers__header {
   color: rgba(51, 51, 51, 0.8);
   font-size: 32px;
   padding-bottom: 15px;
@@ -18,24 +18,24 @@
   box-shadow:  0 0 30px -15px rgba(0, 0, 0, 0.3);
 }
 
-.myoffers-card__body {
+.myoffers__body {
   font-family: Lato;
   letter-spacing: 0.4px;
 }
 
-.myoffers-card__body--position {
+.myoffers__position {
   color: #0F9CAF !important;
 }
 
-.myoffers-card__body--title {
+.myoffers__title {
   color: rgba(51, 51, 51, 0.8) !important ;
 }
 
-.myoffers-card__body {
+.myoffers__body {
   text-align: center;
 }
 
-.myoffer__card--header{
+.myoffer__card-header{
   border-bottom: none !important;
   background: rgba(238, 238, 238, 0.3) !important;
 }
@@ -64,7 +64,7 @@
 
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
-  .myoffers__container--title {
+  .myoffers__title {
     left: 130px;
     font-size: 24px;
   }

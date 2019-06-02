@@ -29,7 +29,7 @@ class MyOffers extends Component {
     const { history } = this.props;
     return (
       <Container>
-        <h1 className="myoffers__container--title"> My Offers </h1>
+        <h1 className="myoffers__header"> My Offers </h1>
         <Row>
           {offers ? (
             offers.map(item => {
@@ -40,7 +40,7 @@ class MyOffers extends Component {
                     key={item.id}
                     onClick={() => history.push(`/app/offers/${item.id}`)}
                   >
-                    <Card.Header className="myoffer__card--header">
+                    <Card.Header className="myoffer__card-header">
                       <Card.Text
                         className={`myoffers__status ${this.statusClassName(
                           item.status
@@ -49,11 +49,11 @@ class MyOffers extends Component {
                         {item.status}
                       </Card.Text>
                     </Card.Header>
-                    <Card.Body className="myoffers-card__body">
-                      <Card.Text className="myoffers-card__body--title">
+                    <Card.Body className="myoffers__body">
+                      <Card.Text className="myoffers__title">
                         {item.title}
                       </Card.Text>
-                      <Card.Text className="myoffers-card__body--position">
+                      <Card.Text className="myoffers__position">
                         {item.position}
                       </Card.Text>
                     </Card.Body>
