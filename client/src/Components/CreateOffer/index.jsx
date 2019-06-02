@@ -1,61 +1,58 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-// import axios from "axios";
 import { withRouter } from 'react-router-dom';
+
 import AutoCompleteTags from '../CommonComponents/AutoCompleteTags';
 import newOfferValidation from './validationSchema';
+
 import './style.css';
 
 class CreateOffer extends Component {
   state = {
-    data: {},
-    // skills: null, // skills id's
-    // offer_types: null  //offer_types id's
-    // member_id: 2,
+    title: '',
+    position: '',
+    description: '',
+    skills: null, // skills id's
+    offerType: null, // offer_types id's
+    // member_id: '',
     errMsg: '',
   };
 
   componentDidMount() {
     // const member_id = get member_id from local storage
     // this.setState({ member_id })
-    // request for backend to get member skills and offer_types (array of skills and offer_types )
-    // `GET` : `/api/v1/filter/:memberId`
-    // response: { error: null, data: { skills: ['node.js', 'postgres', 'react.js'], offer_types: ['fixed_price', 'part_time']} }
-    // const { skills, offer_types } = result.data;
-    // this.setState({ skills, offer_types })
   }
 
   handleSubmit = () => {
     // eslint-disable-next-line react/prop-types
-    const { history } = this.props;
-    const { title, position, description } = this.state;
-    let { data } = this.state;
-    data = {
-      title,
-      position,
-      description,
-    };
+    // const { history } = this.props;
+    const { title, position, description, skills, offerType } = this.state;
 
     newOfferValidation
-      .validate(data)
+      .validate(
+        { title, position, description, offerType },
+        { abortEarly: false }
+      )
       .then(() => {
-        // console.log(8989, data);
         this.setState({ errMsg: '' });
         // send request to the backend with body
         // axios
-        // .post('/api/v1/offers', { data })
+        // .post('/api/v1/offers', { title, position, description, skills, offerType })
         // history.push('/home');
       })
-      .catch(err => {
-        const { errors = [] } = JSON.parse(JSON.stringify(err));
-        // errors[0] ? console.log(errors[0]) : console.log(errors);
-        // eslint-disable-next-line no-unused-expressions
-        errors[0] ? this.setState({ errMsg: 'All fields are required' }) : '';
+      .catch(({ inner }) => {
+        if (inner) {
+          const errors = inner.reduce(
+            (acc, item) => ({ ...acc, [item.path]: item.message }),
+            {}
+          );
+          this.setState({ errMsg: { ...errors } });
+        }
       });
 
     // send request with new skills from memeber (which don't exist in autocomplete) to update filters table `PUT` : `/api/v1/filter/:memberId`
-    // and the same for offer_types
-    // body of the request { skills: this.state.skills , offer_types: this.state.offer_types}
+    // and the same for offerTypes
+    // body of the request { skills: this.state.skills , offerTypes: this.state.offerTypes}
   };
 
   handleTitle = title => this.setState({ title });
@@ -64,9 +61,13 @@ class CreateOffer extends Component {
 
   handleDescription = description => this.setState({ description });
 
-  // handleSkills = e => {
-  // console.log(111111);
-  // }
+  handleSkills = skills => {
+    this.setState({ skills });
+  };
+
+  handleOfferTypes = offerType => {
+    this.setState({ offerType });
+  };
 
   render() {
     // eslint-disable-next-line react/prop-types
@@ -75,12 +76,6 @@ class CreateOffer extends Component {
     return (
       <Container className="page__container newoffer__container">
         <h1 className="newoffer-head__title"> New Offer </h1>
-        {errMsg ? (
-          <div className="newoffer-errMsg">
-            <i className="fas fa-exclamation newoffer-errMsg__icon" />{' '}
-            <span className="newoffer-errMsg__text">{errMsg}</span>{' '}
-          </div>
-        ) : null}
         <Form>
           <Form.Group>
             <div className="newoffer__content">
@@ -94,9 +89,13 @@ class CreateOffer extends Component {
                     type="text"
                     placeholder="eg:  Small Shop seeks workers "
                     onChange={({ target }) => this.handleTitle(target.value)}
-                    required
                   />
-
+                  {errMsg.position && (
+                    <div className="newoffer-errMsg">
+                      <i className="fas fa-exclamation newoffer-errMsg__icon" />{' '}
+                      {errMsg.title}
+                    </div>
+                  )}
                   <Form.Label className="newoffer__content--label">
                     {' '}
                     Position:{' '}
@@ -105,7 +104,14 @@ class CreateOffer extends Component {
                     type="text"
                     placeholder="eg:   Marketing Manager"
                     onChange={({ target }) => this.handlePosition(target.value)}
+                    name="position"
                   />
+                  {errMsg.position && (
+                    <div className="newoffer-errMsg">
+                      <i className="fas fa-exclamation newoffer-errMsg__icon" />{' '}
+                      {errMsg.position}
+                    </div>
+                  )}
                 </Col>
                 <Col
                   sm={12}
@@ -116,7 +122,14 @@ class CreateOffer extends Component {
                   <AutoCompleteTags
                     type="offer_type"
                     placeholder="eg:  fixed price"
+                    onchange={this.handleOfferTypes}
                   />
+                  {errMsg.position && (
+                    <div className="newoffer-errMsg">
+                      <i className="fas fa-exclamation newoffer-errMsg__icon" />{' '}
+                      Offertype is required field
+                    </div>
+                  )}
                 </Col>
               </Row>
               <Row>
@@ -133,6 +146,12 @@ class CreateOffer extends Component {
                       this.handleDescription(target.value)
                     }
                   />
+                  {errMsg.position && (
+                    <div className="newoffer-errMsg">
+                      <i className="fas fa-exclamation newoffer-errMsg__icon" />{' '}
+                      {errMsg.description}
+                    </div>
+                  )}
                 </Col>
               </Row>
               <Row>
@@ -140,6 +159,7 @@ class CreateOffer extends Component {
                   className="autocomplete-skills"
                   type="skill"
                   placeholder=" select skills"
+                  onchange={this.handleSkills}
                 />
               </Row>
               <div>
@@ -149,7 +169,7 @@ class CreateOffer extends Component {
                       className="newoffer__content-btn--apply"
                       onClick={this.handleSubmit}
                     >
-                      Apply
+                      Create
                     </Button>
                   </Col>
                   <Col sm={12} md={12} lg={1} className="newoffer__content-btn">
