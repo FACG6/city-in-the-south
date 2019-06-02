@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Container, Spinner } from 'react-bootstrap';
-import OfferCard from '../CommonComponents/OfferCard';
 
-import offersDetails from './staticData';
+import OfferCard from '../CommonComponents/OfferCard';
+import offersDetails from '../utils/savedOffers';
 
 import './style.css';
 
