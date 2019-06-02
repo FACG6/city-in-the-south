@@ -1,4 +1,6 @@
 import React from 'react';
+import PorpTypes from 'prop-types';
+
 import './style.css';
 
 const SideCard = props => {
@@ -25,3 +27,8 @@ const SideCard = props => {
 };
 
 export default SideCard;
+
+SideCard.porpTypes = {
+  title: PorpTypes.string.isRequired,
+  items: PorpTypes.array.isRequired,
+};
