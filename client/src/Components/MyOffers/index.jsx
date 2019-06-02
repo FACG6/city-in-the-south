@@ -20,7 +20,7 @@ class MyOffers extends Component {
   }
 
   statusClassName = status => {
-    return `myoffers__card__status--${status}`;
+    return `myoffers__status--${status}`;
   };
 
   render() {
@@ -42,7 +42,7 @@ class MyOffers extends Component {
                   >
                     <Card.Header className="myoffers__container__card--header">
                       <Card.Text
-                        className={`myoffers__card__status ${this.statusClassName(
+                        className={`myoffers__status ${this.statusClassName(
                           item.status
                         )}`}
                       >
