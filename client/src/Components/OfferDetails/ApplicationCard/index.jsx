@@ -25,6 +25,7 @@ class ApplicationCard extends Component {
       status,
     } = this.props.application;
     const offerColor = this.props.offerColor(status);
+    const { viewMyProfile } = this.props;
 
     return (
       <div className="application-card__container">
@@ -42,7 +43,7 @@ class ApplicationCard extends Component {
                 className="application-card__button"
                 onClick={this.handleProfile}
               >
-                {this.props.viewMyProfile ? 'View My Profile' : 'View Profile'}
+                {viewMyProfile ? 'View My Profile' : 'View Profile'}
               </Button>
               {!status ? (
                 <Button
@@ -66,6 +67,10 @@ class ApplicationCard extends Component {
 
 export default ApplicationCard;
 
+ApplicationCard.defaultProps = {
+  viewMyProfile: false,
+};
+
 ApplicationCard.propTypes = {
   application: PropTypes.shape({
     member_id: PropTypes.number.isRequired,
@@ -74,4 +79,5 @@ ApplicationCard.propTypes = {
     discription: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
   }).isRequired,
+  viewMyProfile: PropTypes.bool,
 };
