@@ -75,25 +75,25 @@ class CreateOffer extends Component {
     const { errMsg } = this.state;
     return (
       <Container className="page__container newoffer__container">
-        <h1 className="newoffer--title"> New Offer </h1>
+        <h1 className="newoffer__title"> New Offer </h1>
         <Form>
           <Form.Group>
-            <div className="newoffer--content">
+            <div className="newoffer__content">
               <Row>
                 <Col sm={12} md={12} lg={6}>
-                  <Form.Label className="newoffer--label"> Title: </Form.Label>
+                  <Form.Label className="newoffer__label"> Title: </Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="eg:  Small Shop seeks workers "
                     onChange={({ target }) => this.handleTitle(target.value)}
                   />
                   {errMsg.title && (
-                    <div className="newoffer-errMsg">
-                      <i className="fas fa-exclamation newoffer-errMsg__icon" />{' '}
+                    <div className="newoffer__errMsg">
+                      <i className="fas fa-exclamation newoffer__errMsg--icon" />{' '}
                       {errMsg.title}
                     </div>
                   )}
-                  <Form.Label className="newoffer--label">
+                  <Form.Label className="newoffer__label">
                     {' '}
                     Position:{' '}
                   </Form.Label>
@@ -104,8 +104,8 @@ class CreateOffer extends Component {
                     name="position"
                   />
                   {errMsg.position && (
-                    <div className="newoffer-errMsg">
-                      <i className="fas fa-exclamation newoffer-errMsg__icon" />{' '}
+                    <div className="newoffer__errMsg">
+                      <i className="fas fa-exclamation newoffer__errMsg--icon" />{' '}
                       {errMsg.position}
                     </div>
                   )}
@@ -122,8 +122,8 @@ class CreateOffer extends Component {
                     onchange={this.handleOfferTypes}
                   />
                   {errMsg.offerType && (
-                    <div className="newoffer-errMsg">
-                      <i className="fas fa-exclamation newoffer-errMsg__icon" />{' '}
+                    <div className="newoffer__errMsg">
+                      <i className="fas fa-exclamation newoffer__errMsg--icon" />{' '}
                       Offertype is required field
                     </div>
                   )}
@@ -131,7 +131,7 @@ class CreateOffer extends Component {
               </Row>
               <Row>
                 <Col>
-                  <Form.Label className="newoffer--label">
+                  <Form.Label className="newoffer__label">
                     {' '}
                     Description:{' '}
                   </Form.Label>
@@ -144,8 +144,8 @@ class CreateOffer extends Component {
                     }
                   />
                   {errMsg.description && (
-                    <div className="newoffer-errMsg">
-                      <i className="fas fa-exclamation newoffer-errMsg__icon" />{' '}
+                    <div className="newoffer__errMsg">
+                      <i className="fas fa-exclamation newoffer__errMsg--icon" />{' '}
                       {errMsg.description}
                     </div>
                   )}
@@ -160,7 +160,7 @@ class CreateOffer extends Component {
                 />
               </Row>
               <div>
-                <Row className="newoffer-btns">
+                <Row className="newoffer__btns">
                   <Col sm={12} md={12} lg={1} className="newoffer--btn">
                     <Button
                       className="newoffer-btn--apply"

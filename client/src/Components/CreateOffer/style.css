@@ -2,7 +2,7 @@
   margin-top: 1rem;
 }
 
-.newoffer--title {
+.newoffer__title {
   color: rgba(51, 51, 51, 0.8);
   font-size: 32px;
   padding-bottom: 15px;
@@ -12,15 +12,15 @@
   margin-left: 7px;
 }
 
-.newoffer--content .row:nth-child(3) {
+.newoffer__content .row:nth-child(3) {
   padding-left: 18px !important;
 } 
 
-.newoffer--content {
+.newoffer__content {
   padding-left: 0.7rem;
 }
 
-.newoffer--label{
+.newoffer__label{
   color: rgba(51, 51, 51, 0.8);
 }
 
@@ -29,7 +29,7 @@
   margin-bottom: 1rem;
 }
 
-.newoffer-btns {
+.newoffer__btns {
   margin-bottom: 2rem;
   margin-top: 1.8rem;
 }
@@ -43,19 +43,21 @@
   border: none !important;
 }
 
-.newoffer__container .autComplete-dev .form-control {
+.newoffer__container 
+.autComplete-dev 
+.form-control {
   margin-left: 1rem;
   width: 100%;
 }
 
-.newoffer-errMsg {
+.newoffer__errMsg {
   color: red;
   padding-bottom: 1.5rem;
   padding-left: 0.6rem;
   margin-top: 0.7rem;
 }
 
-.newoffer-errMsg__icon {
+.newoffer__errMsg--icon {
   font-size: 1rem;
   padding-right: 0.5rem;
 }
