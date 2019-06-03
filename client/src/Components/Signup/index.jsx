@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './style.css';
 import { Form, Button } from 'react-bootstrap';
-// import signupValidation from '../Helpers/validation';
+import signupValidation from '../Helpers/validation';
 
 export default class SignUp extends Component {
   state = {
@@ -44,11 +44,10 @@ export default class SignUp extends Component {
           <span className="content-signup__word-sigup">Sign Up</span>
           <Form.Group
             controlId="formBasicUsername"
-            className="content-signup__username"
+            className="content-signup__input"
           >
             <Form.Label>
-              Username :{' '}
-              <span className="content-signup__username-star">*</span>
+              Username : <span className="content-signup__star">*</span>
             </Form.Label>
             <Form.Control
               name="username"
@@ -61,10 +60,10 @@ export default class SignUp extends Component {
 
           <Form.Group
             controlId="formBasicEmail"
-            className="content-signup__email"
+            className="content-signup__input"
           >
             <Form.Label>
-              E-mail : <span className="content-signup__email-star">*</span>
+              E-mail : <span className="content-signup__star">*</span>
             </Form.Label>
             <Form.Control
               name="email"
@@ -77,11 +76,10 @@ export default class SignUp extends Component {
 
           <Form.Group
             controlId="formBasicPassword"
-            className="content-signup__password"
+            className="content-signup__input"
           >
             <Form.Label>
-              Password :{' '}
-              <span className="content-signup__password-star">*</span>
+              Password : <span className="content-signup__star">*</span>
             </Form.Label>
             <Form.Control
               name="password"
@@ -94,11 +92,10 @@ export default class SignUp extends Component {
 
           <Form.Group
             controlId="formBasicPassword"
-            className="content-signup__confirm-password"
+            className="content-signup__input"
           >
             <Form.Label>
-              Confirm Password :{' '}
-              <span className="content-signup__confirm-password-star">*</span>
+              Confirm Password : <span className="content-signup__star">*</span>
             </Form.Label>
             <Form.Control
               name="confPassword"
