@@ -26,7 +26,7 @@ class CreateOffer extends Component {
   handleSubmit = () => {
     // eslint-disable-next-line react/prop-types
     // const { history } = this.props;
-    const { title, position, description, skills, offerType } = this.state;
+    const { title, position, description, offerType } = this.state;
 
     newOfferValidation
       .validate(
@@ -38,7 +38,11 @@ class CreateOffer extends Component {
         // send request to the backend with body
         // axios
         // .post('/api/v1/offers', { title, position, description, skills, offerType })
-        // history.push('/home');
+        // get offer_id from response
+        // history.push(`/app/${offer_id}`);
+        // send request with new skills from memeber (which don't exist in autocomplete) to update filters table `PUT` : `/api/v1/filter/:memberId`
+        // and the same for offerTypes
+        // body of the request { skills: this.state.skills , offerTypes: this.state.offerTypes}
       })
       .catch(({ inner }) => {
         if (inner) {
@@ -49,10 +53,6 @@ class CreateOffer extends Component {
           this.setState({ errMsg: { ...errors } });
         }
       });
-
-    // send request with new skills from memeber (which don't exist in autocomplete) to update filters table `PUT` : `/api/v1/filter/:memberId`
-    // and the same for offerTypes
-    // body of the request { skills: this.state.skills , offerTypes: this.state.offerTypes}
   };
 
   handleTitle = title => this.setState({ title });
@@ -61,13 +61,9 @@ class CreateOffer extends Component {
 
   handleDescription = description => this.setState({ description });
 
-  handleSkills = skills => {
-    this.setState({ skills });
-  };
+  handleSkills = skills => this.setState({ skills });
 
-  handleOfferTypes = offerType => {
-    this.setState({ offerType });
-  };
+  handleOfferTypes = offerType => this.setState({ offerType });
 
   render() {
     // eslint-disable-next-line react/prop-types
