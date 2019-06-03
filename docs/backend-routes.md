@@ -73,9 +73,9 @@
   }
   ```
 
-`PUT` : `/api/v1/filter/:memberId`
+`PATCH` : `/api/v1/filter/:memberId`
 
-- request:
+- body:
   ```
   {
     skills:[
@@ -288,7 +288,7 @@
     }
   }
   ```
-  `DELETE` : `/api/v1/saved-offer/:offerId`
+  `DELETE` : `/api/v1/saved-offers/:memberId`
 - body:
   ```
   {
@@ -332,7 +332,7 @@
   `POST` : `/api/v1/offers`
 - body:
   ```
-  data: {
+  {
       title: 'Ui application for website',
       position: 'front end developer',
       description: 'lorem ipsum',
@@ -346,7 +346,7 @@
             {id:10, name:'Fixed price'}
             ] ,  // array of objects
       member_id: 2,
-    }
+  }
   ```
 - response:
   ```
