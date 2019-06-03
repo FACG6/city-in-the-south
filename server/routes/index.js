@@ -8,6 +8,7 @@ const {
   offer,
   offerType,
   skills,
+  erros,
 } = require('../controllers');
 
 router.get('/login', authentication.login);
@@ -53,5 +54,8 @@ router.post('/offer-type', offerType.addOfferType);
 router.get('/skiils', skills.getSkills);
 router.post('/skills/:memberId', skills.getMemberSkills);
 router.post('/skills', skills.addSkills);
+
+router.use(erros.notFound);
+router.use(erros.serverError);
 
 module.exports = router;

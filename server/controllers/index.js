@@ -5,6 +5,7 @@ const member = require('./member');
 const offer = require('./offer');
 const offerType = require('./offer-type');
 const skills = require('./skills');
+const erros = require('./errors');
 
 module.exports = {
   authentication,
@@ -14,5 +15,5 @@ module.exports = {
   offer,
   offerType,
   skills,
+  erros,
 };
-
