@@ -35,7 +35,7 @@
 }
 
 .newoffer__btn--cancel,
-.newoffer-btn--apply {
+.newoffer__btn--apply {
   width: 7rem;
   margin-top: 10px !important;
   background: #0f9caf !important;

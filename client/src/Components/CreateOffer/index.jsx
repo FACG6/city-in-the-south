@@ -35,7 +35,6 @@ class CreateOffer extends Component {
       )
       .then(() => {
         this.setState({ errMsg: '' });
-        console.log(this.state);
         // send request to the backend with body
         // axios
         // .post('/api/v1/offers', { title, position, description, skills, offerType })
@@ -157,15 +156,15 @@ class CreateOffer extends Component {
               </Row>
               <div>
                 <Row className="newoffer__btns">
-                  <Col sm={12} md={12} lg={1} className="newoffer--btn">
+                  <Col sm={12} md={12} lg={1}>
                     <Button
-                      className="newoffer-btn--apply"
+                      className="newoffer__btn--apply"
                       onClick={this.handleSubmit}
                     >
                       Create
                     </Button>
                   </Col>
-                  <Col sm={12} md={12} lg={1} className="newoffer--btn">
+                  <Col sm={12} md={12} lg={1}>
                     <Button
                       className="newoffer__btn--cancel"
                       onClick={() => history.goBack()}
