@@ -1,32 +1,26 @@
 .content-signup{
     margin: 0 auto;
     width: 358px;
-    height: 494px;
-    left: 475px;
+    height: auto;
     box-sizing: border-box;
     background: #FFFFFF;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
     border-radius: 2px;
-    padding-top: 29px;
-    padding-left: 20px;
-    margin-top: 54px;
-
-}
-.content-signup__word-sigup{
+    padding: 15px;
+    margin: 50px auto;
+    }
+    .content-signup__word-sigup{
     font-family: Lato;
     font-style: normal;
     font-weight: 600;
-    margin-left: 115px;
-
-font-size: 24px;
-line-height: 29px;
-align-items: center;
-text-align: center;
-letter-spacing: 0.04em;
-
-color: rgba(51, 51, 51, 0.58);
-}
-.content-signup__username{
+    font-size: 24px;
+    line-height: 29px;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.04em;
+    color:#3d9caf;
+    }
+    .content-signup__username{
     margin-right: 37px;
     margin-left: 24px;
     font-family: Lato;
@@ -36,14 +30,14 @@ color: rgba(51, 51, 51, 0.58);
     font-size: 14px;
     line-height: 17px;
     letter-spacing: 0.03em;
-    color: #929292;
+    color: black;
     border-radius: 3px;
-
-}
-.content-signup__username-star{
+    
+    }
+    .content-signup__username-star{
     color: red;
-}
-.content-signup__email{
+    }
+    .content-signup__email{
     margin-right: 37px;
     margin-left: 24px;
     font-style: normal;
@@ -52,14 +46,14 @@ color: rgba(51, 51, 51, 0.58);
     font-size: 14px;
     line-height: 17px;
     letter-spacing: 0.03em;
-    color: #929292;
+    color: black;
     border-radius: 3px;
-
-}
-.content-page__content-signup__email-star{
+    
+    }
+    .content-signup__email-star{
     color: red;
-}
-.content-page__content-signup__password{
+    }
+    .content-signup__password{
     margin-right: 37px;
     margin-left: 24px;
     color: black;
@@ -69,14 +63,14 @@ color: rgba(51, 51, 51, 0.58);
     font-size: 14px;
     line-height: 17px;
     letter-spacing: 0.03em;
-    color: #929292;
+    color: black;
     border-radius: 3px;
-
-}
-.content-signup__password-star{
+    
+    }
+    .content-signup__password-star{
     color: red;
-}
-.content-signup__confirm-password{
+    }
+    .content-signup__confirm-password{
     margin-right: 37px;
     margin-left: 24px;
     font-style: normal;
@@ -85,16 +79,16 @@ color: rgba(51, 51, 51, 0.58);
     font-size: 14px;
     line-height: 17px;
     letter-spacing: 0.03em;
-    color: #929292;
+    color: black;
     border-radius: 3px;
-
-}
-.content-signup__confirm-password-star{
+    
+    }
+    .content-signup__confirm-password-star{
     color: red;
-}
-
-.content-signup__submit{
-    height: 50px;
+    }
+    
+    .content-signup__submit{
+    height: 40px;
     width: 277px;
     background-color: #0F9CAF !important;
     margin-left: 24px;
@@ -105,15 +99,19 @@ color: rgba(51, 51, 51, 0.58);
     font-weight: 500;
     font-size: 18px;
     line-height: 22px;
-}
-
-.content-signup__text-muted{
-    margin-right: 37px;
-    margin-left: 64px;
-    margin-top: 20px;
-}
-.content-signup__word-login{
+    }
+    
+    .content-signup__text-muted{
+    text-align: center;
+    padding: 10px 0;
+    }
+    .content-signup__word-login{
     text-align: center;
     color: #0F9CAF;
     cursor: pointer;
-}    
+    } 
+    .errormsg{
+    color: red;
+    padding: 0 24px;
+    }
+    
