@@ -106,12 +106,7 @@ class CreateOffer extends Component {
                     </div>
                   )}
                 </Col>
-                <Col
-                  sm={12}
-                  md={12}
-                  lg={6}
-                  className="autocomplete-offer__type"
-                >
+                <Col sm={12} md={12} lg={6}>
                   <AutoCompleteTags
                     type="offer_type"
                     placeholder="eg:  fixed price"
@@ -148,7 +143,6 @@ class CreateOffer extends Component {
               </Row>
               <Row>
                 <AutoCompleteTags
-                  className="autocomplete-skills"
                   type="skill"
                   placeholder=" select skills"
                   onchange={this.handleSkills}
