@@ -24,7 +24,7 @@
   color: rgba(51, 51, 51, 0.8);
 }
 
-.newoffer--description{
+.newoffer__description{
   width: 70% !important;
   margin-bottom: 1rem;
 }
@@ -34,7 +34,7 @@
   margin-top: 1.8rem;
 }
 
-.newoffer-btn--cancel,
+.newoffer__btn--cancel,
 .newoffer-btn--apply {
   width: 7rem;
   margin-top: 10px !important;
@@ -63,17 +63,17 @@
 }
 
 @media only screen and (min-width: 576px) {
-  .col-lg-1 .newoffer-btn--cancel {
+  .col-lg-1 .newoffer__btn--cancel {
     margin-left: 2rem
   }
 }
   @media (max-width: 576px) {
   /* For mobile phones: */
-  .newoffer--description{
+  .newoffer__description{
     width: 100% !important;
   }
 
-  .newoffer-btn--cancel {
+  .newoffer__btn--cancel {
     width: 7rem;
     margin-top: 10px !important;
   }

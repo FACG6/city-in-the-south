@@ -35,6 +35,7 @@ class CreateOffer extends Component {
       )
       .then(() => {
         this.setState({ errMsg: '' });
+        console.log(this.state);
         // send request to the backend with body
         // axios
         // .post('/api/v1/offers', { title, position, description, skills, offerType })
@@ -55,15 +56,14 @@ class CreateOffer extends Component {
       });
   };
 
-  handleTitle = title => this.setState({ title });
-
-  handlePosition = position => this.setState({ position });
-
-  handleDescription = description => this.setState({ description });
-
   handleSkills = skills => this.setState({ skills });
 
   handleOfferTypes = offerType => this.setState({ offerType });
+
+  handleInput = event => {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+  };
 
   render() {
     // eslint-disable-next-line react/prop-types
@@ -80,8 +80,9 @@ class CreateOffer extends Component {
                   <Form.Label className="newoffer__label"> Title: </Form.Label>
                   <Form.Control
                     type="text"
+                    name="title"
                     placeholder="eg:  Small Shop seeks workers "
-                    onChange={({ target }) => this.handleTitle(target.value)}
+                    onChange={this.handleInput}
                   />
                   {errMsg.title && (
                     <div className="newoffer__errMsg">
@@ -95,9 +96,9 @@ class CreateOffer extends Component {
                   </Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="eg:   Marketing Manager"
-                    onChange={({ target }) => this.handlePosition(target.value)}
                     name="position"
+                    placeholder="eg:   Marketing Manager"
+                    onChange={this.handleInput}
                   />
                   {errMsg.position && (
                     <div className="newoffer__errMsg">
@@ -133,11 +134,10 @@ class CreateOffer extends Component {
                   </Form.Label>
                   <Form.Control
                     as="textarea"
-                    className="newoffer--description"
+                    name="description"
+                    className="newoffer__description"
                     rows="3"
-                    onChange={({ target }) =>
-                      this.handleDescription(target.value)
-                    }
+                    onChange={this.handleInput}
                   />
                   {errMsg.description && (
                     <div className="newoffer__errMsg">
@@ -167,8 +167,8 @@ class CreateOffer extends Component {
                   </Col>
                   <Col sm={12} md={12} lg={1} className="newoffer--btn">
                     <Button
-                      className="newoffer-btn--cancel"
-                      onClick={() => history.push('/home')}
+                      className="newoffer__btn--cancel"
+                      onClick={() => history.goBack()}
                     >
                       Cancel
                     </Button>
