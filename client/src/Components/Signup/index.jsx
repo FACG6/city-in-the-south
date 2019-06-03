@@ -43,26 +43,16 @@ export default class SignUp extends Component {
             console.log(item, 'hhhh');
 
             console.log(item.message);
-            if (
-              item.message === 'username must be at least 3 characters' &&
-              item.message === 'username is a required field'
-            )
-              this.setState({ errmsgUsername: item.message });
-            else if (
-              item.message === 'email must be at least 3 characters' &&
-              item.message === 'email is a required field'
-            )
-              this.setState({ errmsgEmail: item.message });
-            else if (
-              item.message === 'password must be at least 3 characters' &&
-              item.message === 'password is a required field'
-            )
-              this.setState({ errmsgPassword: item.message });
-            else if (
-              item.message === 'confPassword must be at least 3 characters' &&
-              item.message === 'confPassword is a required field'
-            )
-              this.setState({ errmsgconfPassword: item.message });
+            console.log(item.path, 'path');
+
+            if ((item.path = 'username'))
+              this.setState({ errmsgUsername: item.path });
+            else if ((item.path = 'email'))
+              this.setState({ errmsgUsername: item.path });
+            else if ((item.path = 'password'))
+              this.setState({ errmsgUsername: item.path });
+            else if ((item.path = 'confPassword'))
+              this.setState({ errmsgUsername: item.path });
           });
         }
       });
