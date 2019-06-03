@@ -9,13 +9,25 @@ export default class SignUp extends Component {
     email: '',
     password: '',
     confPassword: '',
-    errormsg: '',
+    errmsg: '',
   };
 
   handleClick = e => {
     e.preventDefault();
     const { username, email, password, confPassword } = this.state;
-    signupValidation(username, email, password, confPassword);
+    signupValidation
+      .validate(
+        { username, email, password, confPassword },
+        { abortEarly: false }
+      )
+      .then(() => {
+        console.log('gggg');
+
+        this.setState({ errmsg: 'true' });
+      })
+      .catch(() => {
+        this.setState({ errmsg: 'false' });
+      });
   };
 
   handleChange = ({ target: { value, name } }) => {

@@ -3,7 +3,6 @@ const yup = require('yup');
 const signupValidation = yup.object().shape({
   username: yup
     .string()
-    .require()
     .min(3)
     .max(15),
   email: yup
@@ -21,4 +20,4 @@ const signupValidation = yup.object().shape({
     .min(3)
     .max(15),
 });
-export default { signupValidation };
+export default signupValidation;
