@@ -1,3 +1,3 @@
 module.exports = (req, res, next) => {
-  res.send('logout route');
+  res.send('update filter route');
 };

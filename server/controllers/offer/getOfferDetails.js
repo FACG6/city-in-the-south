@@ -1,3 +1,3 @@
 module.exports = (req, res) => {
-  res.send('new application');
+  res.send(' get offer details ');
 };
