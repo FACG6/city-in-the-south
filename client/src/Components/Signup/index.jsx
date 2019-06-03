@@ -14,22 +14,8 @@ export default class SignUp extends Component {
 
   handleClick = e => {
     e.preventDefault();
-    if (
-      this.state.username &&
-      this.state.email &&
-      this.state.password &&
-      this.state.confPassword
-    ) {
-      signupValidation(
-        this.state.username,
-        this.state.email,
-        this.state.password,
-        this.state.confPassword
-      );
-      // make a requset to the back with method post and data{username , password}
-    } else {
-      this.setState({ errormsg: 'Please enter all fields' });
-    }
+    const { username, email, password, confPassword } = this.state;
+    signupValidation(username, email, password, confPassword);
   };
 
   handleChange = ({ target: { value, name } }) => {
