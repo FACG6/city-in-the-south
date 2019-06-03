@@ -1,6 +1,7 @@
 #Back-end routes
 
 `POST` : `/api/v1/members`
+
 - body:
   ```
   {
@@ -9,7 +10,7 @@
     pass: '123321123abc$'
   }
   ```
-- response:
+- response: on success should return cookie in the response header and the body will be like:
   ```
   {
     error: null,
@@ -25,7 +26,7 @@
     }
   }
   ```
-`POST` : `/api/v1/login`
+  `POST` : `/api/v1/login`
 - body:
   ```
   {
@@ -43,6 +44,7 @@
   ```
 
 `GET` : `/api/v1/logout`
+
 - response: clear cookie / delete localstorage front end
   ```
   {
@@ -52,23 +54,38 @@
   ```
 
 `GET` : `/api/v1/filter/:memberId`
+
 - response:
   ```
   {
     error: null,
     data: {
-      skills: ['node.js', 'postgres', 'react.js'],
-      offer_types: ['fixed_price', 'part_time']
+      skills: [
+                 {id:1, name:'javascript'},
+                 {id:10, name:'Node js'},
+                 {id:5, name:'Express'}
+              ],
+      offer_types: [
+                 {id:1, name:'Full Time'} ,
+                 {id:10, name:'Fixed price'}
+                   ]
     }
   }
   ```
 
 `PUT` : `/api/v1/filter/:memberId`
+
 - request:
   ```
   {
-    skills: ['node.js', 'postgres', 'react.js']
-    offer_types: ['fixed_price', 'part_time']
+    skills:[
+             {id:1, name:'javascript'},
+             {id:10, name:'Node js'},
+           ],
+       offer_type: [
+              {id:1, name:'Full Time'} ,
+              {id:10, name:'Fixed price'}
+         ]
   }
   ```
 - response:
@@ -77,26 +94,33 @@
     error: null,
     data: {
       member_id: 2,
-      skills: ['node.js', 'postgres', 'react.js']
-      offer_types: ['fixed_price', 'part_time']
+     skills:[
+           {id:1, name:'javascript'},
+           {id:10, name:'Node js'},
+             ],
+       offer_type: [
+            {id:1, name:'Full Time'} ,
+            {id:10, name:'Fixed price'}
+            ]
     }
   }
   ```
 
 `GET` : `/api/v1/skills/:memberId`
+
 - response:
   ```
-  {
+   {
     error: null,
-    data: {
-      member_id: 2,
-      skills: ['node.js', 'postgres', 'react.js']
-      offer_types: ['fixed_price', 'part_time']
-    }
+    data: [
+            {id:1, name:'javascript'},
+            {id:10, name:'Node js'},
+         ]
   }
   ```
 
 `GET` : `/api/v1/skills`
+
 - response:
   ```
   {
@@ -108,7 +132,7 @@
     ]
   }
   ```
-`POST` : `/api/v1/skills`
+  `POST` : `/api/v1/skills`
 - body:
   ```
   {
@@ -125,7 +149,7 @@
     }
   }
   ```
-`GET` : `/api/v1/offer_type`
+  `GET` : `/api/v1/offer-type`
 - response:
   ```
   {
@@ -136,7 +160,7 @@
     ]
   }
   ```
-`POST` : `/api/v1/offer_type`
+  `POST` : `/api/v1/offer-type`
 - body:
   ```
   {
@@ -153,54 +177,92 @@
     }
   }
   ```
-`GET` : `/api/v1/offers/:offset`
--response:
+  `GET` : `/api/v1/offers/:offset`
+  -response:
   ```
   {
     error: null,
     data: [
       {
-        // get offer details
-        , skill
-        , offer_type
+        offers:[
+                 {
+                  id:2,
+                  title:'offer title',
+                  position: 'offer position',
+                  description: 'offer description',
+                  status: 'pending',
+                  member_id: 5,
+                 },
+                 {
+                  ...
+                 }
+        ],
+        skills:[
+                  { id: 1, name: 'node.js' },
+                  { id: 2, name: 'postgres' },
+                  { id: 3, name: 'react.js' }
+               ],
+        offer_type:[
+                      { id: 1, name: 'full_time' },
+                      { id: 2, name: 'part_time' }
+                   ],
       }
     ]
   }
   ```
-`GET` : `/api/v1/my-offers/:memberId`
+  `GET` : `/api/v1/my-offers/:memberId`
 - response:
   ```
-  {
+   {
     error: null,
     data: [
       {
-        // get offer details
-        , skill
-        , offer_type
+        id: 3,
+        status: 'completed',
+        position: 'developer',
+        title: 'hire someone for something',
+        description: 'aaaaa',
+        member_id: 5
+      },
+      {
+        ...
       }
     ]
   }
   ```
 
 `GET` : `/api/v1/members/:offset`
+
 - response:
   ```
-  {
+   {
     error: null,
     data: [
-      {...data}
+      {
+          id: 2,
+          username : 'fatma123',
+          email : 'fatma@gmail.com'
+          avatar : 'fatma.png'
+          address: null,
+          bio: null,  // from member table
+          skills:  [
+              {id:1, name:'javascript'},
+              {id:10, name:'Node js'},
+              {id:5, name:'Express'}
+              ] // from member_skill table
+       },
     ]
   }
   ```
-`GET` : `/api/v1/saved-offers/:memberId`
+  `GET` : `/api/v1/saved-offers/:memberId`
 - response:
   ```
   {
     error: null
     data: [
       {
-        memberId: 1,
-        offerId: 2,
+        member_id: 1,
+        offer_id: 2,
         title: 'aaa',
         description: '',
         position:''
@@ -208,12 +270,12 @@
     ]
   }
   ```
-`POST` : `/api/v1/saved-offers`
+  `POST` : `/api/v1/saved-offers`
 - body:
   ```
   {
-    memberId: 1,
-    offerId: 2
+    member_id: 1,
+    offer_id: 2
   }
   ```
 - response:
@@ -221,17 +283,17 @@
   {
     error: null
     data: {
-      memberId: 1,
-      offerId: 2
+      member_id: 1,
+      offer_id: 2
     }
   }
   ```
-`DELETE` : `/api/v1/saved-offer/:offerId`
+  `DELETE` : `/api/v1/saved-offer/:offerId`
 - body:
   ```
   {
-    memberId: 1,
-    offerId: 2
+    member_id: 1,
+    offer_id: 2
   }
   ```
 - response:
@@ -241,10 +303,10 @@
     data: 'success'
   }
   ```
-`GET` : `/api/v1/offer/:offerId`
+  `GET` : `/api/v1/offer/:offerId`
 - response:
   ```
-  {
+   {
     error: null,
     data: {
       id:1,
@@ -252,23 +314,37 @@
       title: 'Ui application for website',
       position: 'front end developer',
       description: 'lorem ipsum',
-      skills: ['node.js', 'postgres'],
-      offer_type: ['full_time', 'part_time'],
+      skills: [
+              {id:1, name:'javascript'},
+              {id:10, name:'Node js'},
+              {id:5, name:'Express'}
+              ] ,//aray of objects
+      offer_type: [
+             {id:1, name:'Full Time'} ,
+            {id:10, name:'Fixed price'}
+            ] ,//array of objects
       member_id: 2,
       full_name: 'ahmedsh',
       avatar: 'bal/bla.jpg'
     }
   }
   ```
-`POST` : `/api/v1/offers`
+  `POST` : `/api/v1/offers`
 - body:
   ```
   data: {
       title: 'Ui application for website',
       position: 'front end developer',
       description: 'lorem ipsum',
-      skills: [1, 2, 3], // skills id
-      offer_type: [2,3,3],  //offer_type id
+     skills: [
+              {id:1, name:'javascript'},
+              {id:10, name:'Node js'},
+              {id:5, name:'Express'}
+              ], // array of objects
+      offer_type: [
+             {id:1, name:'Full Time'} ,
+            {id:10, name:'Fixed price'}
+            ] ,  // array of objects
       member_id: 2,
     }
   ```
@@ -285,7 +361,7 @@
     }
   }
   ```
-`DELETE` : `/api/v1/offers/:offerId`
+  `DELETE` : `/api/v1/offers/:offerId`
 - response:
   ```
   {
@@ -293,7 +369,7 @@
     data: 'success'
   }
   ```
-`GET` : `/api/v1/my-applications/:memberId`
+  `GET` : `/api/v1/my-applications/:memberId?offerId=offerId`
 - response:
   ```
   {
@@ -310,7 +386,7 @@
     ]
   }
   ```
-`GET` : `/api/v1/offer-applications/:offerId`
+  `GET` : `/api/v1/offer-applications/:offerId`
 - response:
   ```
   {
@@ -327,7 +403,7 @@
     ]
   }
   ```
-`POST` : `/api/v1/applications`
+  `POST` : `/api/v1/applications`
 - body:
   ```
   {
@@ -347,7 +423,7 @@
     }
   }
   ```
-`POST` : `/api/v1/hired_member`
+  `POST` : `/api/v1/hired_member`
 - body:
   ```
   {
@@ -367,9 +443,10 @@
     }
   }
   ```
-`PATCH` : `/api/v1/hired_member/:member_id`
+  `PATCH` : `/api/v1/hired_member/:member_id`
 
 if body status === accepted change offer status to completed
+
 - body:
   ```
   {
