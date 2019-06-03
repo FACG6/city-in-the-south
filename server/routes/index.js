@@ -23,12 +23,10 @@ router.post('/application', application.addApplication);
 router.post('/hired_member', application.addHireMember);
 router.patch('/hired_member/:memberId', application.updateHireMember);
 
+/* filter */
 router.route('/filter/:member_id')
   .get(filter.getFilter)
   .patch(filter.updateFilter);
-/* Filter */
-// router.get('/filter/:memberId', filter.getFilter);
-// router.patch('/filter/:memberId', filter.updateFilter);
 
 /* Member */
 router.get('/members/:offset', member.getMembers);
