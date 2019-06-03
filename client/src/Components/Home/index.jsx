@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  Container,
   Row,
   Col,
   InputGroup,
@@ -8,11 +7,18 @@ import {
   FormControl,
   Dropdown,
   Spinner,
+  Card,
 } from 'react-bootstrap';
+
 import AutoCompleteTags from '../CommonComponents/AutoCompleteTags';
-import './style.css';
 import OfferCard from '../CommonComponents/OfferCard';
+
+import membetDetails from '../utils/members';
 import offersDetails from '../utils/offers';
+import filter from '../utils/filter';
+import memberSkills from '../utils/skills';
+
+import './style.css';
 
 export default class Home extends Component {
   state = {
@@ -22,6 +28,9 @@ export default class Home extends Component {
     filteredOffers: [],
     isActive: '',
     filteredMembers: [],
+    skills: [],
+    offerType: [],
+    members: [],
   };
 
   // get the filter from the back and passing it into the AutoComplete Component with props name --data--
@@ -30,18 +39,63 @@ export default class Home extends Component {
   with offset +100 */
 
   componentDidMount() {
+    if (filter.skills[0]) this.setState({ skills: filter.skills });
+    // make a request to get the skills from the member_skill
+    else this.setState({ skills: memberSkills });
+
+    if (filter.offer_type[0]) this.setState({ offerType: filter.offer_type });
+
     this.setState({ offers: offersDetails });
     this.setState({ filteredOffers: offersDetails });
-    this.setState({ isActive: 'Members' });
+    this.setState({ isActive: 'Offers' });
     this.setState({ offset: 100 });
+    this.setState({ filteredMembers: membetDetails });
+    this.setState({ members: membetDetails });
   }
 
-  handleSkillOnChange = () => {
+  handleSkillOnChange = skills => {
     // here we make a filter and check the length for both the members and the offers
+    // make a request to the filter with patch
+    const { isActive, members } = this.state;
+    let newfilteredMember;
+    if (isActive === 'Members') {
+      console.log(newfilteredMember);
+      console.log(newfilteredMember);
+      newfilteredMember = [];
+      newfilteredMember.length = 0;
+      members.filter(member => {
+        member.skill.filter(memberSkill => {
+          skills.filter(skill => {
+            if (memberSkill.name === skill.name) {
+              newfilteredMember.push(member);
+              console.log(newfilteredMember);
+            }
+          });
+        });
+        this.setState({ filteredMembers: newfilteredMember });
+      });
+
+      //   // console.log(skills);
+      //   // console.log(members);
+      // }
+      // if (isActive === 'Members') {
+      //   members.filter(member => {
+      //     console.log(member);
+      //     skills.map(memberskill => {
+      //       console.log(memberskill);
+      //       if (member.skills.name === memberskill.name) {
+      //         this.setState({ filteredMembers: member });
+      //       }
+      //     });
+      //   });
+      // }
+    }
   };
 
-  handleOfferTypeOnChange = () => {
+  handleOfferTypeOnChange = offertype => {
     // here we make a filter and check the length for  the members
+    // make a request to the filter with patch
+    console.log('offertype', offertype);
   };
 
   render() {
@@ -51,16 +105,28 @@ export default class Home extends Component {
       filteredOffers,
       isActive,
       filteredMembers,
+      skills,
+      offerType,
     } = this.state;
+    // eslint-disable-next-line react/prop-types
+    const { history } = this.props;
     return (
-      <Container className="page__container">
-        <Row>
+      <>
+        <Row className="home__contanier">
           <Col className="home__filter" sm={12} lg={3} md={3}>
-            {isActive === 'Offers' ? (
-              <AutoCompleteTags type="offer_type" />
-            ) : null}
+            <AutoCompleteTags
+              type="skill"
+              data={skills}
+              onchange={this.handleSkillOnChange}
+            />
             <br />
-            <AutoCompleteTags type="skill" />
+            {isActive === 'Offers' && (
+              <AutoCompleteTags
+                type="offer_type"
+                data={offerType}
+                onchange={this.handleOfferTypeOnChange}
+              />
+            )}
           </Col>
           <Col className="home__main" sm={12} lg={8} md={8}>
             <Row>
@@ -69,7 +135,7 @@ export default class Home extends Component {
                   <InputGroup.Prepend>
                     <Button
                       variant="outline-secondary"
-                      className="home-search-btn"
+                      className="home__search-btn"
                     >
                       <i className="fas fa-search home__search-icon" />
                     </Button>
@@ -136,24 +202,74 @@ export default class Home extends Component {
                 )}{' '}
               </div>
             ) : (
-              <div>
-                {' '}
+              <Row>
                 {filteredMembers[0] ? (
-                  filteredMembers.map(item => {
-                    if (item.status === 'active') {
-                      // Members Card
-                    }
+                  filteredMembers.map(member => {
+                    return (
+                      <Col xs={12} md={4} lg={4} key={member.id}>
+                        <Card
+                          className="member-card"
+                          key={member.id}
+                          onClick={() =>
+                            history.push(`/profile/${member.username}`)
+                          }
+                        >
+                          <Card.Body>
+                            <Row>
+                              <Col xs={6} md={5}>
+                                <Card.Img
+                                  src={member.avatar}
+                                  className="member-card__avatar"
+                                />
+                              </Col>
+                              <Col
+                                xs={6}
+                                md={7}
+                                className="member-card__username"
+                              >
+                                <Card.Text>{member.username}</Card.Text>
+                              </Col>
+                            </Row>
+                            <br />
+                            <div>
+                              Skills :
+                              <br />
+                              <br />
+                              {member.skill[0] && (
+                                <>
+                                  {member.skill[0] && (
+                                    <span className="member-card__skill">
+                                      {member.skill[0].name}
+                                    </span>
+                                  )}
+                                  {member.skill[1] && (
+                                    <span className="member-card__skill">
+                                      {member.skill[1].name}
+                                    </span>
+                                  )}
+                                  {member.skill[2] && (
+                                    <span className="member-card__skill">
+                                      {member.skill[2].name}
+                                    </span>
+                                  )}
+                                </>
+                              )}
+                            </div>
+                          </Card.Body>
+                        </Card>
+                      </Col>
+                    );
                   })
                 ) : (
                   <div className="main-spinner">
                     <Spinner animation="border" variant="info" />
                   </div>
-                )}{' '}
-              </div>
+                )}
+              </Row>
             )}
           </Col>
         </Row>
-      </Container>
+      </>
     );
   }
 }
