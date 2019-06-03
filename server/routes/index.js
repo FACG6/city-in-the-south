@@ -45,8 +45,8 @@ router.get('/saved-offers/:memberId', offer.getSavedOffers);
 router.delete('/saved-offer/:offerId', offer.deleteSavedOffer);
 
 /* Offer Type */
-router.get('/offert_type', offerType.getOfferTypes);
-router.post('/offer_type', offerType.addOfferType);
+router.get('/offer-type', offerType.getOfferTypes);
+router.post('/offer-type', offerType.addOfferType);
 
 
 /* Skills */
