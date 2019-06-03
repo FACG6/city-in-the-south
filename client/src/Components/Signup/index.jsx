@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './style.css';
 import { Form, Button } from 'react-bootstrap';
-// import signupValidation from '../Helpers/validation';
+import signupValidation from './validation';
 
 export default class SignUp extends Component {
   state = {
@@ -14,22 +14,20 @@ export default class SignUp extends Component {
 
   handleClick = e => {
     e.preventDefault();
-    if (
-      this.state.username &&
-      this.state.email &&
-      this.state.password &&
-      this.state.confPassword
-    ) {
-      signupValidation(
-        this.state.username,
-        this.state.email,
-        this.state.password,
-        this.state.confPassword
-      );
-      // make a requset to the back with method post and data{username , password}
-    } else {
-      this.setState({ errormsg: 'Please enter all fields' });
-    }
+
+    const { username, password, email, confPassword } = this.state;
+
+    signupValidation
+      .validate({
+        email,
+        password,
+        confPassword,
+        username,
+      })
+      .then(() => {
+        // fetch to back end
+      })
+      .catch(err => this.setState({ errormsg: err.errors }));
   };
 
   handleChange = ({ target: { value, name } }) => {
@@ -37,11 +35,11 @@ export default class SignUp extends Component {
   };
 
   render() {
-    const { username, email, password, confPassword } = this.state;
+    const { username, email, password, confPassword, errormsg } = this.state;
     return (
       <>
         <Form className="content-signup">
-          <span className="content-signup__word-sigup">Sign Up</span>
+          <h2 className="content-signup__word-sigup">Sign Up</h2>
           <Form.Group
             controlId="formBasicUsername"
             className="content-signup__username"
@@ -91,7 +89,6 @@ export default class SignUp extends Component {
               placeholder="Password"
             />
           </Form.Group>
-
           <Form.Group
             controlId="formBasicPassword"
             className="content-signup__confirm-password"
@@ -108,7 +105,7 @@ export default class SignUp extends Component {
               placeholder="Password"
             />
           </Form.Group>
-
+          <p className="errormsg">{errormsg}</p>
           <Button
             variant="primary"
             type="submit"
