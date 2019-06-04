@@ -27,11 +27,7 @@ export default [
     profession_id: null,
     avatar:
       'https://images.vexels.com/media/users/3/145908/preview2/52eabf633ca6414e60a7677b0b917d92-male-avatar-maker.jpg',
-    skill: [
-      { id: 3, name: 'Express JS' },
-      { id: 4, name: 'React Native' },
-      { id: 5, name: 'Asp.net' },
-    ], // array of object
+    skill: [{ id: 4, name: 'React Native' }, { id: 5, name: 'Asp.net' }], // array of object
   },
   {
     id: 3,
@@ -122,9 +118,21 @@ export default [
     skill: [
       { id: 1, name: 'React' },
       { id: 2, name: 'Node Js' },
-      { id: 3, name: 'Express JS' },
       { id: 4, name: 'React Native' },
       { id: 5, name: 'Asp.net' },
     ], // array of object
+  },
+  {
+    id: 8,
+    username: 'Octavia',
+    full_name: null,
+    email: 'octavia@gmail.com',
+    bio: null,
+    address: null,
+    phone: null,
+    profession_id: null,
+    avatar:
+      'https://images.vexels.com/media/users/3/145908/preview2/52eabf633ca6414e60a7677b0b917d92-male-avatar-maker.jpg',
+    skill: [{ id: 3, name: 'Express JS' }], // array of object
   },
 ];
