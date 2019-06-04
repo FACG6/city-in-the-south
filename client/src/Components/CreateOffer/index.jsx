@@ -35,7 +35,6 @@ class CreateOffer extends Component {
       )
       .then(() => {
         this.setState({ errMsg: '' });
-        console.log(11111, this.state);
         // send request to the backend with body
         // axios
         // .post('/api/v1/offers', { title, position, description, skills, offerType })
