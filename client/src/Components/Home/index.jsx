@@ -56,10 +56,11 @@ export default class Home extends Component {
   handleSkillOnChange = skills => {
     // here we make a filter and check the length for both the members and the offers
     // make a request to the filter with patch
+    console.log(111111111, skills);
     const { isActive, members } = this.state;
     let newfilteredMember;
+    this.setState({ filteredMembers: [] });
     if (isActive === 'Members') {
-      console.log(newfilteredMember);
       console.log(newfilteredMember);
       newfilteredMember = [];
       newfilteredMember.length = 0;
@@ -67,11 +68,15 @@ export default class Home extends Component {
         member.skill.filter(memberSkill => {
           skills.filter(skill => {
             if (memberSkill.name === skill.name) {
-              newfilteredMember.push(member);
               console.log(newfilteredMember);
+              newfilteredMember.push(member);
+              newfilteredMember.filter(newfilter => {
+                // if (newfilter.id !== member.id)
+              });
             }
           });
         });
+        skills.filter(skill => console.log(skill));
         this.setState({ filteredMembers: newfilteredMember });
       });
 
