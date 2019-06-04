@@ -1,5 +1,62 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { Card, Row, Col } from 'react-bootstrap';
 
-export default function Members() {
-  return <h1> members cards</h1>;
+import './style.css';
+
+// eslint-disable-next-line react/prop-types
+export default function Members({ filtered, history }) {
+  return (
+    <Row>
+      {filtered[0] ? (
+        filtered.map(member => {
+          return (
+            <Col xs={12} md={4} lg={4} key={member.id}>
+              <Card
+                className="member-card"
+                key={member.id}
+                onClick={() => history.push(`/profile/${member.username}`)}
+              >
+                <Card.Body>
+                  <Row>
+                    <Col xs={6} md={5}>
+                      <Card.Img
+                        src={member.avatar}
+                        className="member-card__avatar"
+                      />
+                    </Col>
+                    <Col xs={6} md={7} className="member-card__username">
+                      <Card.Text>{member.username}</Card.Text>
+                    </Col>
+                  </Row>
+                  <br />
+                  <div>
+                    Skills :
+                    <br />
+                    <br />
+                    <div className="member-card__skills">
+                      {member.skill.map(skill => (
+                        <h1 className="member-card__skill">{skill.name}</h1>
+                      ))}
+                    </div>
+                  </div>
+                </Card.Body>
+              </Card>
+            </Col>
+          );
+        })
+      ) : (
+        <div className="main-spinner">There is no result</div>
+      )}
+    </Row>
+  );
 }
+
+Members.propTypes = {
+  filtered: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      ...PropTypes.string,
+    })
+  ).isRequired,
+};
