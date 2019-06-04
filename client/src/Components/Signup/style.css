@@ -1,118 +1,69 @@
 .content-signup{
     margin: 0 auto;
+    padding: 15px;
     width: 358px;
     height: auto;
     box-sizing: border-box;
     background: #FFFFFF;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
     border-radius: 2px;
-    padding: 15px;
-    margin: 50px auto;
     }
-    .content-signup__word-sigup{
-    font-family: Lato;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 29px;
-    align-items: center;
-    text-align: center;
-    letter-spacing: 0.04em;
-    color:#3d9caf;
-    }
-    .content-signup__username{
-    margin-right: 37px;
-    margin-left: 24px;
-    font-family: Lato;
-    font-style: normal;
-    align-items: center;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 17px;
-    letter-spacing: 0.03em;
-    color: black;
-    border-radius: 3px;
-    
-    }
-    .content-signup__username-star{
+  
+    .content-signup__star{
     color: red;
     }
-    .content-signup__email{
-    margin-right: 37px;
-    margin-left: 24px;
-    font-style: normal;
-    align-items: center;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 17px;
-    letter-spacing: 0.03em;
-    color: black;
-    border-radius: 3px;
-    
-    }
-    .content-signup__email-star{
-    color: red;
-    }
-    .content-signup__password{
-    margin-right: 37px;
-    margin-left: 24px;
-    color: black;
-    font-style: normal;
-    align-items: center;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 17px;
-    letter-spacing: 0.03em;
-    color: black;
-    border-radius: 3px;
-    
-    }
-    .content-signup__password-star{
-    color: red;
-    }
-    .content-signup__confirm-password{
-    margin-right: 37px;
-    margin-left: 24px;
-    font-style: normal;
-    align-items: center;
-    margin: 0 37px 0 24px;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 17px;
-    letter-spacing: 0.03em;
-    color: black;
-    border-radius: 3px;
-    
-    }
-    .content-signup__confirm-password-star{
-    color: red;
-    }
-    
+
     .content-signup__submit{
     height: 40px;
-    width: 277px;
+    width: 329px;
     background-color: #0F9CAF !important;
-    margin-left: 24px;
-    align-items: center;
-    letter-spacing: 0.08em;
-    font-family: Lato;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 22px;
     }
     
     .content-signup__text-muted{
-    text-align: center;
     padding: 10px 0;
+    margin-left: 70px;
     }
     .content-signup__word-login{
-    text-align: center;
-    color: #0F9CAF;
     cursor: pointer;
+    color: #0F9CAF;
     } 
     .errormsg{
     color: red;
     padding: 0 24px;
+    }
+    
+    .content-signup__word-sigup  .content-signup__username   .content-signup__confirm-password .content-signup__submit .content-signup__text-muted .content-signup__word-login{
+    font-family: Lato;
+    font-style: normal;
+    letter-spacing: 0.04em;
+    align-items: center;
+    text-align: center;
+    }
+
+    .content-signup__username 
+    .content-signup__email 
+    .content-signup__password  
+     .content-signup__confirm-password
+   {
+    margin: 0 37px 0 24px;
+    color: black;
+    font-style: normal;
+    align-items: center;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0.03em;
+    color: black;
+    border-radius: 3px;
+   }
+    .content-signup__word-sigup
+     .content-signup__submit{
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 29px;
+    }
+
+    .content-signup__word-sigup{
+        color: #0F9CAF;
     }
     

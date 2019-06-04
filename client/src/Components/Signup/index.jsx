@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './style.css';
 import { Form, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import signupValidation from './validation';
 
 export default class SignUp extends Component {
@@ -113,7 +114,9 @@ export default class SignUp extends Component {
           </Button>
           <Form.Text className="content-signup__text-muted">
             Already have an account?{' '}
-            <span className="content-signup__word-login">Login</span>
+            <span className="content-signup__word-login">
+              <Link to="/login">Login</Link>
+            </span>
           </Form.Text>
         </Form>
       </>
