@@ -16,7 +16,6 @@ const signupValidation = yup.object().shape({
     .string()
     .email()
     .required()
-    .min(3)
     .max(254),
   username: yup
     .string()
