@@ -35,6 +35,7 @@ class CreateOffer extends Component {
       )
       .then(() => {
         this.setState({ errMsg: '' });
+        console.log(11111, this.state);
         // send request to the backend with body
         // axios
         // .post('/api/v1/offers', { title, position, description, skills, offerType })
@@ -59,8 +60,8 @@ class CreateOffer extends Component {
 
   handleOfferTypes = offerType => this.setState({ offerType });
 
-  handleInput = event => {
-    const { name, value } = event.target;
+  handleInput = ({ target: { name, value } }) => {
+    // const { name, value } = event.target;
     this.setState({ [name]: value });
   };
 
