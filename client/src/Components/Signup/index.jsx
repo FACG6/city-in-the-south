@@ -29,7 +29,7 @@ export default class SignUp extends Component {
         { abortEarly: false }
       )
       .then(() => {
-        // fetch to back end
+        // fetch to back-end
       })
       .catch(({ inner }) => {
         if (inner) {
