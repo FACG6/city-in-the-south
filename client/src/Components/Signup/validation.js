@@ -3,24 +3,27 @@ import * as yup from 'yup';
 const signupValidation = yup.object().shape({
   confPassword: yup
     .string()
-    .required()
-    .oneOf([yup.ref('password'), null], 'Passwords must match')
+    .oneOf(
+      [yup.ref('password'), null],
+      'Password did not match: Please try again...'
+    )
     .min(8)
-    .max(254),
+    .max(254)
+    .required(),
   password: yup
     .string()
-    .required()
     .min(8, 'Password is too short - should be 8 chars minimum.')
+    .required()
     .max(254),
   email: yup
     .string()
+    .max(254)
     .email()
-    .required()
-    .max(254),
+    .required(),
   username: yup
     .string()
-    .required()
+    .max(254)
     .min(3)
-    .max(254),
+    .required(),
 });
 export default signupValidation;
