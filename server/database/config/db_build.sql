@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS member, offer, application, skill, review, profession,
 
 CREATE TABLE profession (
   id SERIAL PRIMARY KEY,
-  name VARCHAR
+  name VARCHAR UNIQUE
 );
 
 CREATE TABLE member (
@@ -15,6 +15,7 @@ CREATE TABLE member (
   username VARCHAR NOT NULL UNIQUE,
   full_name VARCHAR,
   email VARCHAR,
+  pass VARCHAR,
   bio TEXT,
   address VARCHAR,
   phone VARCHAR,
@@ -34,7 +35,7 @@ CREATE TABLE offer (
 CREATE TABLE application (
   offer_id INTEGER REFERENCES offer(id),
   member_id INTEGER REFERENCES member(id),
-  propsal TEXT,
+  proposal TEXT,
   PRIMARY KEY(offer_id, member_id)
 );
 
