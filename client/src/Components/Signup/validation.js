@@ -7,14 +7,14 @@ const signupValidation = yup.object().shape({
       [yup.ref('password'), null],
       'Password did not match: Please try again...'
     )
-    .min(8)
     .max(254)
+    .min(8)
     .required(),
   password: yup
     .string()
+    .max(254)
     .min(8, 'Password is too short - should be 8 chars minimum.')
-    .required()
-    .max(254),
+    .required(),
   email: yup
     .string()
     .max(254)
