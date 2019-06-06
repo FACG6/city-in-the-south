@@ -19,3 +19,68 @@ INSERT INTO offer (title, position, description, status, member_id) VALUES
 INSERT INTO application (offer_id, member_id, proposal) VALUES
   (1, (SELECT id FROM member LIMIT 1 OFFSET 2),'In my former Full stack role, I exercise a calculated and methodical approach to problem solving. While I am independently motivated, I appreciate collective efforts and collaborate productively within group settings. Moreover, I am competent in javascript and SQL with proficiency in ASP.'),
   (1, (SELECT id FROM member LIMIT 1 OFFSET 1),'I am passion about Front End Development. I have a lot of experience working with small teams to develop a good websites interfaces');
+
+INSERT INTO skill (name) VALUES 
+  ('react js'),
+  ('java'),
+  ('javascript');
+
+INSERT INTO review (offer_id, member_id, rate, description) VALUES 
+  (1, (SELECT id FROM member LIMIT 1 OFFSET 1),4 , 'Great to work with we had intresting design and he worked had to get it the way we needed it.'),
+  (2, (SELECT id FROM member LIMIT 1 OFFSET 2),4.5 , 'very good work with only minor supervision - top rate');
+
+INSERT INTO education (title, date, university, description, member_id) VALUES
+  ('Certified Computer Professional2002', '2016-12-17 07:37:16-08', 'Brunel University', 'Institute for the Certification of Computing Professionals', (SELECT id FROM member LIMIT 1 OFFSET 1)),
+  ('Bachelor of Science in Computer and Information Systems', '2013-06-22 19:10:25-07', 'Imperial College London', 'An education team lead acts as a liaison between different school departments to keep things running smoothly', (SELECT id FROM member LIMIT 1 OFFSET 2));
+
+
+INSERT INTO experience (title, start_date, end_date, location, description, member_id) VALUES
+  ('Assistant Director', '2013-06-22 19:10:25-07', '2018-08-14 05:10:40-15', 'Brunel University','The assistant director at an educational institution oversees academic, cultural, and recreational matters at the school.', (SELECT id FROM member LIMIT 1 OFFSET 1)),
+  ('Director', '2013-06-22 19:10:25-07', '2018-08-14 05:10:40-15', 'Imperial College London','An education director supervises school curriculums and teaching standards', (SELECT id FROM member LIMIT 1 OFFSET 2));
+
+INSERT INTO offer_type (name) VALUES 
+  ('full-time'),
+  ('fixed-price');
+
+INSERT INTO offer_offer_type (offer_type_id, offer_id) VALUES 
+  ((SELECT id FROM offer_type LIMIT 1 OFFSET 1), (SELECT id FROM offer LIMIT 1 OFFSET 1)),
+  ((SELECT id FROM offer_type LIMIT 1 OFFSET 2), (SELECT id FROM offer LIMIT 1 OFFSET 1)),
+  ((SELECT id FROM offer_type LIMIT 1 OFFSET 2), (SELECT id FROM offer LIMIT 1 OFFSET 2));
+
+INSERT INTO offer_skill (skill_id, offer_id) VALUES 
+  ((SELECT id FROM skill LIMIT 1 OFFSET 1), (SELECT id FROM offer LIMIT 1 OFFSET 1)),
+  ((SELECT id FROM skill LIMIT 1 OFFSET 2), (SELECT id FROM offer LIMIT 1 OFFSET 1)),
+  ((SELECT id FROM skill LIMIT 1 OFFSET 2), (SELECT id FROM offer LIMIT 1 OFFSET 2)),
+  ((SELECT id FROM skill LIMIT 1 OFFSET 3), (SELECT id FROM offer LIMIT 1 OFFSET 2));
+
+INSERT INTO member_skill (skill_id, member_id) VALUES 
+  ((SELECT id FROM skill LIMIT 1 OFFSET 1), (SELECT id FROM member LIMIT 1 OFFSET 1)),
+  ((SELECT id FROM skill LIMIT 1 OFFSET 2), (SELECT id FROM member LIMIT 1 OFFSET 1)),
+  ((SELECT id FROM skill LIMIT 1 OFFSET 2), (SELECT id FROM member LIMIT 1 OFFSET 2)),
+  ((SELECT id FROM skill LIMIT 1 OFFSET 3), (SELECT id FROM member LIMIT 1 OFFSET 2));
+
+INSERT INTO filter (member_id, skills, offer_type) VALUES 
+  ((SELECT id FROM member LIMIT 1 OFFSET 1), 'react js', 'fixed-price'),
+  ((SELECT id FROM member LIMIT 1 OFFSET 1), 'posgresql', 'full-time'),
+  ((SELECT id FROM member LIMIT 1 OFFSET 2), 'java', 'fixed-price'),
+  ((SELECT id FROM member LIMIT 1 OFFSET 2), 'python', 'part-time');
+
+INSERT INTO saved_offer (offet_id, member_id) VALUES 
+  ((SELECT id FROM offer LIMIT 1 OFFSET 1), (SELECT id FROM member LIMIT 1 OFFSET 1)),
+  ((SELECT id FROM offer LIMIT 1 OFFSET 2), (SELECT id FROM member LIMIT 1 OFFSET 2));
+
+INSERT INTO notification (title, msg, url, seen, tag, member_id) VALUES 
+  (null, null, null, null, null, null);
+
+INSERT INTO hired_member (offet_id, member_id, status) VALUES 
+  ((SELECT id FROM offer LIMIT 1 OFFSET 1), (SELECT id FROM member LIMIT 1 OFFSET 1), 'pending'),
+  ((SELECT id FROM offer LIMIT 1 OFFSET 2), (SELECT id FROM member LIMIT 1 OFFSET 2), 'completed');
+
+
+
+
+
+
+
+
+
