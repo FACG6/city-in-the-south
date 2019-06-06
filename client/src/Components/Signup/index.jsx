@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './style.css';
 import { Form, Button } from 'react-bootstrap';
 import signupValidation from './validation';
@@ -18,16 +19,27 @@ export default class SignUp extends Component {
     const { username, password, email, confPassword } = this.state;
 
     signupValidation
-      .validate({
-        email,
-        password,
-        confPassword,
-        username,
-      })
+      .validate(
+        {
+          email,
+          password,
+          confPassword,
+          username,
+        },
+        { abortEarly: false }
+      )
       .then(() => {
         // fetch to back end
       })
-      .catch(err => this.setState({ errormsg: err.errors }));
+      .catch(({ inner }) => {
+        if (inner) {
+          const errors = inner.reduce(
+            (acc, item) => ({ ...acc, [item.path]: item.message }),
+            {}
+          );
+          this.setState({ errormsg: { ...errors } });
+        }
+      });
   };
 
   handleChange = ({ target: { value, name } }) => {
@@ -55,6 +67,7 @@ export default class SignUp extends Component {
               type="username"
               placeholder="e.g: emily1234"
             />
+            {errormsg && <span className="errormsg">{errormsg.username}</span>}
           </Form.Group>
 
           <Form.Group
@@ -71,6 +84,7 @@ export default class SignUp extends Component {
               type="email"
               placeholder="example@mail.com"
             />
+            {errormsg && <span className="errormsg">{errormsg.email}</span>}
           </Form.Group>
 
           <Form.Group
@@ -88,6 +102,7 @@ export default class SignUp extends Component {
               type="password"
               placeholder="Password"
             />
+            {errormsg && <span className="errormsg">{errormsg.password}</span>}
           </Form.Group>
           <Form.Group
             controlId="formBasicPassword"
@@ -104,8 +119,10 @@ export default class SignUp extends Component {
               type="password"
               placeholder="Password"
             />
+            {errormsg && (
+              <span className="errormsg">{errormsg.confPassword}</span>
+            )}
           </Form.Group>
-          <p className="errormsg">{errormsg}</p>
           <Button
             variant="primary"
             type="submit"
@@ -116,7 +133,9 @@ export default class SignUp extends Component {
           </Button>
           <Form.Text className="content-signup__text-muted">
             Already have an account?{' '}
-            <span className="content-signup__word-login">Login</span>
+            <Link to="/login" className="content-signup__word-login">
+              Login
+            </Link>
           </Form.Text>
         </Form>
       </>
