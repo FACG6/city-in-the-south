@@ -72,7 +72,7 @@ INSERT INTO saved_offer (offet_id, member_id) VALUES
 INSERT INTO notification (title, msg, url, seen, tag, member_id) VALUES 
   (null, null, null, null, null, null);
 
-INSERT INTO hired_member (offet_id, member_id, status) VALUES 
+INSERT INTO hired_member (offer_id, member_id, status) VALUES 
   ((SELECT id FROM offer LIMIT 1 OFFSET 4), (SELECT id FROM member LIMIT 1 OFFSET 1), 'pending'),
   ((SELECT id FROM offer LIMIT 1 OFFSET 1), (SELECT id FROM member LIMIT 1 OFFSET 1), 'completed'),
   ((SELECT id FROM offer LIMIT 1 OFFSET 2), (SELECT id FROM member LIMIT 1 OFFSET 2), 'completed');
