@@ -17,7 +17,7 @@ export default class SignUp extends Component {
     e.preventDefault();
 
     const { username, password, email, confPassword } = this.state;
-
+    this.setState({ errormsg: '' });
     signupValidation
       .validate(
         {
