@@ -21,7 +21,7 @@ INSERT INTO application (offer_id, member_id, proposal) VALUES
   (1, (SELECT id FROM member LIMIT 1 OFFSET 1),'I am passion about Front End Development. I have a lot of experience working with small teams to develop a good websites interfaces');
 
 INSERT INTO skill (name) VALUES 
-  ('react js'),
+  ('react.js'),
   ('java'),
   ('javascript');
 
@@ -32,7 +32,6 @@ INSERT INTO review (offer_id, member_id, rate, description) VALUES
 INSERT INTO education (title, date, university, description, member_id) VALUES
   ('Certified Computer Professional2002', '2016-12-17 07:37:16-08', 'Brunel University', 'Institute for the Certification of Computing Professionals', (SELECT id FROM member LIMIT 1 OFFSET 1)),
   ('Bachelor of Science in Computer and Information Systems', '2013-06-22 19:10:25-07', 'Imperial College London', 'An education team lead acts as a liaison between different school departments to keep things running smoothly', (SELECT id FROM member LIMIT 1 OFFSET 2));
-
 
 INSERT INTO experience (title, start_date, end_date, location, description, member_id) VALUES
   ('Assistant Director', '2013-06-22 19:10:25-07', '2018-08-14 05:10:40-15', 'Brunel University','The assistant director at an educational institution oversees academic, cultural, and recreational matters at the school.', (SELECT id FROM member LIMIT 1 OFFSET 1)),
@@ -76,12 +75,3 @@ INSERT INTO hired_member (offer_id, member_id, status) VALUES
   ((SELECT id FROM offer LIMIT 1 OFFSET 4), (SELECT id FROM member LIMIT 1 OFFSET 1), 'pending'),
   ((SELECT id FROM offer LIMIT 1 OFFSET 1), (SELECT id FROM member LIMIT 1 OFFSET 1), 'completed'),
   ((SELECT id FROM offer LIMIT 1 OFFSET 2), (SELECT id FROM member LIMIT 1 OFFSET 2), 'completed');
-
-
-
-
-
-
-
-
-
