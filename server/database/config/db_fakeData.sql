@@ -69,7 +69,12 @@ INSERT INTO saved_offer (offet_id, member_id) VALUES
   ((SELECT id FROM offer LIMIT 1 OFFSET 2), (SELECT id FROM member LIMIT 1 OFFSET 2));
 
 INSERT INTO notification (title, msg, url, seen, tag, member_id) VALUES 
-  (null, null, null, null, null, null);
+  ('Small Shop seeks workers', 'We are looking for a Front End Web Developer who is motivated to combine the art', '/app/offers/2', null, 'new-offer', (SELECT id FROM member LIMIT 1 OFFSET 1)),
+  ('Small Shop seeks workers', 'We are looking for a Front End Web Developer who is motivated to combine the art', '/app/offers/2', null, 'new-offer', (SELECT id FROM member LIMIT 1 OFFSET 0)),
+  ('Small Shop seeks workers', 'We are looking for a Front End Web Developer who is motivated to combine the art', '/app/offers/2', null, 'new-offer', (SELECT id FROM member LIMIT 1 OFFSET 2)),
+  ('Ui Application For Website', 'We are looking for a Front End Web Developer who is motivated to combine the art', '/app/offers/1', 'true', 'new-offer', (SELECT id FROM member LIMIT 1 OFFSET 1)),
+  ('Ui Application For Website', 'We are looking for a Front End Web Developer who is motivated to combine the art', '/app/offers/1', 'true', 'new-offer', (SELECT id FROM member LIMIT 1 OFFSET 0)),
+  ('Ui Application For Website', 'We are looking for a Front End Web Developer who is motivated to combine the art', '/app/offers/1', 'true', 'new-offer', (SELECT id FROM member LIMIT 1 OFFSET 2));
 
 INSERT INTO hired_member (offer_id, member_id, status) VALUES 
   ((SELECT id FROM offer LIMIT 1 OFFSET 4), (SELECT id FROM member LIMIT 1 OFFSET 1), 'pending'),
