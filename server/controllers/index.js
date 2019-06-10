@@ -1,7 +1,19 @@
-const router = require('express').Router();
+const authentication = require('./authentication');
+const application = require('./applications');
+const filter = require('./filter');
+const member = require('./member');
+const offer = require('./offer');
+const offerType = require('./offer-type');
+const skills = require('./skills');
+const erros = require('./errors');
 
-router.get('/', (req, res) => {
-  res.send('Server is running!!');
-});
-
-module.exports = router;
+module.exports = {
+  authentication,
+  application,
+  filter,
+  member,
+  offer,
+  offerType,
+  skills,
+  erros,
+};
