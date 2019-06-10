@@ -92,7 +92,6 @@ export default class Home extends Component {
   render() {
     const {
       isClicked,
-      filterQuery,
       skills,
       offerTypes,
       filteredOffers,
@@ -109,7 +108,7 @@ export default class Home extends Component {
               onchange={this.handleSkillOnChange}
             />
             <br />
-            {filterQuery === 'Offers' && (
+            {localStorage.getItem('filterQuery') === 'Offers' && (
               <AutoCompleteTags
                 type="offer_type"
                 data={offerTypes}
@@ -133,7 +132,7 @@ export default class Home extends Component {
                 </InputGroup>
               </Col>
               <Col className="home__result-label" xs={2}>
-                {filterQuery === 'Members'
+                {localStorage.getItem('filterQuery') === 'Members'
                   ? filterMembers.length
                   : filteredOffers.length}{' '}
                 results
@@ -182,7 +181,7 @@ export default class Home extends Component {
               </Col>
             </Row>
             <hr className="hr-line" />
-            {filterQuery === 'Offers' ? (
+            {localStorage.getItem('filterQuery') === 'Offers' ? (
               <Offers filtered={filteredOffers} />
             ) : (
               <Members filtered={filterMembers} {...this.props} />
