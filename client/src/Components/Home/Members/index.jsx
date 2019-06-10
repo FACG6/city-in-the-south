@@ -7,11 +7,11 @@ import './style.css';
 // eslint-disable-next-line react/prop-types
 export default function Members({ filtered, history }) {
   return (
-    <Row>
+    <Row key={Math.random()}>
       {filtered[0] ? (
         filtered.map(member => {
           return (
-            <Col xs={12} md={4} lg={4} key={member.id}>
+            <Col xs={12} md={4} lg={4} key={Math.random()}>
               <Card
                 className="member-card"
                 key={member.id}
@@ -19,7 +19,7 @@ export default function Members({ filtered, history }) {
               >
                 <Card.Body>
                   <Row>
-                    <Col xs={6} md={5}>
+                    <Col xs={6} md={5} key={member.id}>
                       <Card.Img
                         src={member.avatar}
                         className="member-card__avatar"
@@ -36,7 +36,9 @@ export default function Members({ filtered, history }) {
                     <br />
                     <div className="member-card__skills">
                       {member.skill.map(skill => (
-                        <h1 className="member-card__skill">{skill.name}</h1>
+                        <h1 className="member-card__skill" key={skill.id}>
+                          {skill.name}
+                        </h1>
                       ))}
                     </div>
                   </div>
@@ -52,11 +54,15 @@ export default function Members({ filtered, history }) {
   );
 }
 
+Members.defaultProps = {
+  filtered: [],
+};
+
 Members.propTypes = {
   filtered: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number,
-      ...PropTypes.string,
+      username: PropTypes.string,
     })
-  ).isRequired,
+  ),
 };

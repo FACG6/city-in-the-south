@@ -8,9 +8,7 @@ export default function Offers({ filtered }) {
     <div>
       {filtered[0] ? (
         filtered.map(item => {
-          if (item.status === 'active') {
-            return <OfferCard offer={item} key={item.id} hover={false} />;
-          }
+          return <OfferCard offer={item} key={item.id} hover={false} />;
         })
       ) : (
         <div className="main-spinner"> There is no result</div>
@@ -18,12 +16,16 @@ export default function Offers({ filtered }) {
     </div>
   );
 }
+Offers.defaultProps = {
+  filtered: [],
+};
 
 Offers.propTypes = {
   filtered: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number,
-      ...PropTypes.string,
+      position: PropTypes.string,
+      title: PropTypes.string,
     })
-  ).isRequired,
+  ),
 };

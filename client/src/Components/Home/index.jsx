@@ -24,10 +24,11 @@ export default class Home extends Component {
     offset: 0,
     isClicked: false,
     offers: [],
-    isActive: '',
+    filterQuery: '',
     members: [],
     skills: [],
     offerType: [],
+    filteredOffers: [],
   };
 
   componentDidMount() {
@@ -38,14 +39,14 @@ export default class Home extends Component {
     if (filter.offer_type[0]) this.setState({ offerType: filter.offer_type });
 
     this.setState({ offers: offersDetails });
-    this.setState({ isActive: localStorage.getItem('isActive') });
+    this.setState({ filteredOffers: offersDetails });
+    this.setState({ filterQuery: localStorage.getItem('filterQuery') });
     this.setState({ members: membetDetails });
   }
 
   handleSkillOnChange = skills => {
-    const { isActive, members, offers } = this.state;
-
-    if (isActive === 'Members') {
+    const { filterQuery, members, offers } = this.state;
+    if (filterQuery === 'Members') {
       let memberArray = [];
       this.setState({ members: [] });
       memberArray = members.filter(
@@ -57,17 +58,19 @@ export default class Home extends Component {
       );
       this.setState({ members: memberArray });
     }
-    if (isActive === 'Offers') {
+
+    if (filterQuery === 'Offers') {
       let offerArray = [];
-      this.setState({ offers: [] });
-      offerArray = offers.filter(
-        offer =>
-          !skills.filter(
+      this.setState({ filteredOffers: [] });
+      offerArray = offers.filter(offer => {
+        if (offer.status === 'active') {
+          return !skills.filter(
             skill =>
               !offer.skill.filter(_skill => _skill.id === skill.id).length
-          ).length
-      );
-      this.setState({ offers: offerArray });
+          ).length;
+        }
+      });
+      this.setState({ filteredOffers: offerArray });
     }
   };
 
@@ -76,11 +79,11 @@ export default class Home extends Component {
   render() {
     const {
       isClicked,
-      offers,
-      isActive,
+      filterQuery,
       members,
       skills,
       offerType,
+      filteredOffers,
     } = this.state;
     // eslint-disable-next-line react/prop-types
     return (
@@ -93,7 +96,7 @@ export default class Home extends Component {
               onchange={this.handleSkillOnChange}
             />
             <br />
-            {isActive === 'Offers' && (
+            {filterQuery === 'Offers' && (
               <AutoCompleteTags
                 type="offer_type"
                 data={offerType}
@@ -117,7 +120,9 @@ export default class Home extends Component {
                 </InputGroup>
               </Col>
               <Col className="home__result-label" xs={2}>
-                {isActive === 'Members' ? members.length : offers.length}{' '}
+                {filterQuery === 'Members'
+                  ? members.length
+                  : filteredOffers.length}{' '}
                 results
               </Col>
               <Col className="dropdown-toggled" xs={3}>
@@ -126,10 +131,10 @@ export default class Home extends Component {
                     <Dropdown.Header
                       onClick={() => {
                         this.setState({
-                          isActive: 'Offers',
+                          filterQuery: 'Offers',
                           isClicked: false,
                         });
-                        localStorage.setItem('isActive', 'Offers');
+                        localStorage.setItem('filterQuery', 'Offers');
                       }}
                     >
                       Offers
@@ -138,10 +143,10 @@ export default class Home extends Component {
                       eventKey="2"
                       onClick={() => {
                         this.setState({
-                          isActive: 'Members',
+                          filterQuery: 'Members',
                           isClicked: false,
                         });
-                        localStorage.setItem('isActive', 'Members');
+                        localStorage.setItem('filterQuery', 'Members');
                       }}
                     >
                       Members
@@ -154,7 +159,7 @@ export default class Home extends Component {
                     onClick={() => this.setState({ isClicked: true })}
                   >
                     <span className="dropdown-label">
-                      {isActive === 'Members' ? 'Members' : 'Offers'}{' '}
+                      {filterQuery === 'Members' ? 'Members' : 'Offers'}{' '}
                     </span>
                     <i className="fa fa-angle-down" />
                   </button>
@@ -162,8 +167,8 @@ export default class Home extends Component {
               </Col>
             </Row>
             <hr className="hr-line" />
-            {isActive === 'Offers' ? (
-              <Offers filtered={offers} />
+            {filterQuery === 'Offers' ? (
+              <Offers filtered={filteredOffers} />
             ) : (
               <Members filtered={members} {...this.props} />
             )}
