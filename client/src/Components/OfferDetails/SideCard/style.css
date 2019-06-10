@@ -1,0 +1,12 @@
+.side-card__title {
+  font-size: 1.375rem;
+  color: rgba(51, 51, 51, 0.8);
+  border-bottom: 1px solid rgba(102, 102, 102, 0.4);
+  width: 166px;
+  margin-bottom: 10px;
+  text-transform: capitalize;
+}
+.side-card__li {
+  list-style: none;
+  color: rgba(51, 51, 51, 0.7);
+}
