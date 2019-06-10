@@ -34,10 +34,6 @@ export default class Home extends Component {
     filterMembers: [],
   };
 
-  // if (filter.skills[0]) this.setState({ skills: filter.skills });
-  // make a request to get the skills from the member_skill    /*this.setState({ skills: memberSkills });*/
-  // this.setState({ offerType: filter.offer_type });
-
   componentDidMount() {
     let skills = [];
     let offerTypes;
@@ -49,35 +45,27 @@ export default class Home extends Component {
     skills = filter.skills[0] ? filter.skills : memberSkills;
 
     if (filter.offer_type[0]) offerTypes = filter.offer_type;
-    // const { filterQuery } = this.state;
-    // this.setState({
-    //   filterQuery: ,
-    // });
+    const filterQuery = localStorage.getItem('filterQuery') || 'Offers';
+
     members = memberDetails;
     filterMembers = filterData(members, skills);
 
     offers = offersDetails;
     filteredOffers = filterData(offers, skills);
 
-    this.setState(
-      {
-        offers,
-        members,
-        skills,
-        offerTypes,
-        filterMembers,
-        filteredOffers,
-      },
-      () => {
-        //   if (filterQuery === 'Members')
-        //     this.setState({ filterMembers: filterData(members, skills) });
-        //   if (filterQuery === 'Offers')
-        //     this.setState({ filteredOffers: filterData(offers, skills) });
-      }
-    );
+    this.setState({
+      offers,
+      members,
+      skills,
+      offerTypes,
+      filterMembers,
+      filteredOffers,
+      filterQuery,
+    });
   }
 
   handleSkillOnChange = skills => {
+    this.setState({ skills });
     const { filterQuery, members, offers } = this.state;
     if (filterQuery === 'Members') {
       this.setState({ filterMembers: filterData(members, skills) });
