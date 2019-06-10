@@ -43,7 +43,11 @@ export default class SignUp extends Component {
   };
 
   handleChange = ({ target: { value, name } }) => {
-    this.setState({ [name]: value });
+    this.setState(({ errormsg }) => {
+      const newErrormsg = { ...errormsg };
+      newErrormsg[name] = '';
+      return { [name]: value, errormsg: newErrormsg };
+    });
   };
 
   render() {
