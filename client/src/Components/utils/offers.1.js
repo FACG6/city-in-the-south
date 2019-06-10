@@ -7,11 +7,7 @@ export default [
       'We are looking to hire a Marketing Manager who will be in charge of overseeing the promotion of our companys brands.  As a successful hire, you will be  responsible  for developing pricing  strategies identify identifying new customers, supporting lead',
     status: 'completed',
     skill: [{ id: 1, name: 'React' }, { id: 2, name: 'Node Js' }],
-    offer_type: [
-      { id: 1, name: 'fixed price' },
-      { id: 2, name: 'part time' },
-      { id: 3, name: 'full time' },
-    ],
+    offer_type: [{ id: 1, name: 'fixed price' }],
   },
   {
     id: 2,
@@ -28,11 +24,7 @@ export default [
       { id: 4, name: 'React Native' },
       { id: 5, name: 'Asp.net' },
     ],
-    offer_type: [
-      { id: 1, name: 'fixed price' },
-      { id: 2, name: 'part time' },
-      { id: 3, name: 'full time' },
-    ],
+    offer_type: [{ id: 1, name: 'fixed price' }],
   },
   {
     id: 3,
@@ -54,11 +46,11 @@ export default [
     status: 'active',
     saved: true,
     skill: [{ id: 5, name: 'python' }],
-    offer_type: [{ id: 3, name: 'full time' }],
+    offer_type: [{ id: 1, name: 'Full time' }, { id: 2, name: 'fixed price' }],
   },
   {
     id: 5,
-    position: 'Marketing Manager',
+    position: 'New Marketing Manager',
     title: 'Small Shop seeks workers',
     description:
       'We are looking to hire a Marketing Manager who will be in charge of overseeing the promotion of our companys brands.  As a successful hire, you will be  responsible  for developing pricing  strategies identify identifying new customers, supporting lead',
@@ -71,11 +63,11 @@ export default [
       { id: 4, name: 'React Native' },
       { id: 5, name: 'Asp.net' },
     ],
-    offer_type: [{ id: 2, name: 'part time' }, { id: 3, name: 'full time' }],
+    offer_type: [{ id: 1, name: 'Full time' }, { id: 2, name: 'fixed price' }],
   },
   {
     id: 6,
-    position: 'Marketing Manager',
+    position: 'Newww1 Marketing Manager',
     title: 'Small Shop seeks workers',
     description:
       'We are looking to hire a Marketing Manager who will be in charge of overseeing the promotion of our companys brands.  As a successful hire, you will be  responsible  for developing pricing  strategies identify identifying new customers, supporting lead',
@@ -86,11 +78,11 @@ export default [
       { id: 4, name: 'React Native' },
       { id: 5, name: 'Asp.net' },
     ],
-    offer_type: [{ id: 1, name: 'fixed price' }, { id: 2, name: 'part time' }],
+    offer_type: [{ id: 2, name: 'fixed price' }],
   },
   {
     id: 7,
-    position: 'Vice President of Sales',
+    position: 'newww1 Vice President of Sales',
     title: 'Voice artist for short video ',
     description:
       'We are looking to hire a Marketing Manager who will be in charge of overseeing the promotion of our companys brands.  As a successful hire, you will be  responsible  for developing pricing  strategies identify identifying new customers, supporting lead',
@@ -101,11 +93,11 @@ export default [
       { id: 4, name: 'React Native' },
       { id: 5, name: 'Asp.net' },
     ],
-    offer_type: [{ id: 1, name: 'fixed price' }, { id: 3, name: 'full time' }],
+    offer_type: [{ id: 2, name: 'fixed price' }],
   },
   {
     id: 8,
-    position: 'Vice President of Sales',
+    position: 'new Vice President of Sales',
     title: 'Voice artist for short video ',
     description:
       'We are looking to hire a Marketing Manager who will be in charge of overseeing the promotion of our companys brands.  As a successful hire, you will be  responsible  for developing pricing  strategies identify identifying new customers, supporting lead',
@@ -118,6 +110,6 @@ export default [
       { id: 4, name: 'React Native' },
       { id: 5, name: 'Asp.net' },
     ],
-    offer_type: [{ id: 2, name: 'part time' }, { id: 3, name: 'full time' }],
+    offer_type: [{ id: 1, name: 'Full time' }, { id: 2, name: 'fixed price' }],
   },
 ];
