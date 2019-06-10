@@ -12,7 +12,9 @@ import AutoCompleteTags from '../CommonComponents/AutoCompleteTags';
 import Offers from './Offers';
 import Members from './Members';
 
-import membetDetails from '../utils/members';
+import { filterData } from './heplers';
+
+import memberDetails from '../utils/members';
 import offersDetails from '../utils/offers.1';
 import filter from '../utils/filter';
 import memberSkills from '../utils/skills';
@@ -27,50 +29,61 @@ export default class Home extends Component {
     filterQuery: '',
     members: [],
     skills: [],
-    offerType: [],
+    offerTypes: [],
     filteredOffers: [],
+    filterMembers: [],
   };
 
+  // if (filter.skills[0]) this.setState({ skills: filter.skills });
+  // make a request to get the skills from the member_skill    /*this.setState({ skills: memberSkills });*/
+  // this.setState({ offerType: filter.offer_type });
+
   componentDidMount() {
-    if (filter.skills[0]) this.setState({ skills: filter.skills });
-    // make a request to get the skills from the member_skill
-    else this.setState({ skills: memberSkills });
+    let skills = [];
+    let offerTypes;
+    let members = [];
+    let offers = [];
+    let filterMembers = [];
+    let filteredOffers = [];
 
-    if (filter.offer_type[0]) this.setState({ offerType: filter.offer_type });
+    skills = filter.skills[0] ? filter.skills : memberSkills;
 
-    this.setState({ offers: offersDetails });
-    this.setState({ filteredOffers: offersDetails });
-    this.setState({ filterQuery: localStorage.getItem('filterQuery') });
-    this.setState({ members: membetDetails });
+    if (filter.offer_type[0]) offerTypes = filter.offer_type;
+    // const { filterQuery } = this.state;
+    // this.setState({
+    //   filterQuery: ,
+    // });
+    members = memberDetails;
+    filterMembers = filterData(members, skills);
+
+    offers = offersDetails;
+    filteredOffers = filterData(offers, skills);
+
+    this.setState(
+      {
+        offers,
+        members,
+        skills,
+        offerTypes,
+        filterMembers,
+        filteredOffers,
+      },
+      () => {
+        //   if (filterQuery === 'Members')
+        //     this.setState({ filterMembers: filterData(members, skills) });
+        //   if (filterQuery === 'Offers')
+        //     this.setState({ filteredOffers: filterData(offers, skills) });
+      }
+    );
   }
 
   handleSkillOnChange = skills => {
     const { filterQuery, members, offers } = this.state;
     if (filterQuery === 'Members') {
-      let memberArray = [];
-      this.setState({ members: [] });
-      memberArray = members.filter(
-        member =>
-          !skills.filter(
-            skill =>
-              !member.skill.filter(_skill => _skill.id === skill.id).length
-          ).length
-      );
-      this.setState({ members: memberArray });
+      this.setState({ filterMembers: filterData(members, skills) });
     }
-
     if (filterQuery === 'Offers') {
-      let offerArray = [];
-      this.setState({ filteredOffers: [] });
-      offerArray = offers.filter(offer => {
-        if (offer.status === 'active') {
-          return !skills.filter(
-            skill =>
-              !offer.skill.filter(_skill => _skill.id === skill.id).length
-          ).length;
-        }
-      });
-      this.setState({ filteredOffers: offerArray });
+      this.setState({ filteredOffers: filterData(offers, skills) });
     }
   };
 
@@ -80,10 +93,10 @@ export default class Home extends Component {
     const {
       isClicked,
       filterQuery,
-      members,
       skills,
-      offerType,
+      offerTypes,
       filteredOffers,
+      filterMembers,
     } = this.state;
     // eslint-disable-next-line react/prop-types
     return (
@@ -99,7 +112,7 @@ export default class Home extends Component {
             {filterQuery === 'Offers' && (
               <AutoCompleteTags
                 type="offer_type"
-                data={offerType}
+                data={offerTypes}
                 onchange={this.handleOfferTypeOnChange}
               />
             )}
@@ -121,7 +134,7 @@ export default class Home extends Component {
               </Col>
               <Col className="home__result-label" xs={2}>
                 {filterQuery === 'Members'
-                  ? members.length
+                  ? filterMembers.length
                   : filteredOffers.length}{' '}
                 results
               </Col>
@@ -159,7 +172,9 @@ export default class Home extends Component {
                     onClick={() => this.setState({ isClicked: true })}
                   >
                     <span className="dropdown-label">
-                      {filterQuery === 'Members' ? 'Members' : 'Offers'}{' '}
+                      {localStorage.getItem('filterQuery') === 'Members'
+                        ? 'Members'
+                        : 'Offers'}{' '}
                     </span>
                     <i className="fa fa-angle-down" />
                   </button>
@@ -170,7 +185,7 @@ export default class Home extends Component {
             {filterQuery === 'Offers' ? (
               <Offers filtered={filteredOffers} />
             ) : (
-              <Members filtered={members} {...this.props} />
+              <Members filtered={filterMembers} {...this.props} />
             )}
           </Col>
         </Row>
