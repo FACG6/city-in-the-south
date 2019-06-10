@@ -19,12 +19,12 @@ module.exports = (req, res, next) => {
               const token = sign(payload, process.env.SECRET);
               res.cookie('jwt', token, { maxAge: 1000 * 60 * 60 * 24 * 1 }, { httpOnly: true });
               res.status(200).send({ error: null, data: 'Login Success' });
-            } else next({ code: 401, msg: 'Check your password' });
+            } else next({ code: 400, msg: 'Check your password' });
           });
-        } else next({ code: 401, msg: 'Username does not exist' });
+        } else next({ code: 400, msg: 'Username does not exist' });
       })
       .catch(err => next(err));
   } else {
-    next({ code: 401, msg: 'Ensure you enter validly data ' });
+    next({ code: 400, msg: 'Ensure you enter validly data ' });
   }
 };
