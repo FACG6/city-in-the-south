@@ -36,7 +36,7 @@ export default class Home extends Component {
 
   componentDidMount() {
     let skills = [];
-    let offerTypes;
+    let offerTypes = [];
     let members = [];
     let offers = [];
     let filterMembers = [];
@@ -48,34 +48,45 @@ export default class Home extends Component {
     const filterQuery = localStorage.getItem('filterQuery') || 'Offers';
 
     members = memberDetails;
-    filterMembers = filterData(members, skills);
+    filterMembers = filterData(members, skills, []);
 
     offers = offersDetails;
-    filteredOffers = filterData(offers, skills);
+    filteredOffers = filterData(offers, skills, offerTypes);
 
-    this.setState({
-      offers,
-      members,
-      skills,
-      offerTypes,
-      filterMembers,
-      filteredOffers,
-      filterQuery,
-    });
+    this.setState(
+      {
+        offers,
+        members,
+        skills,
+        offerTypes,
+        filterMembers,
+        filteredOffers,
+        filterQuery,
+      },
+      () => {
+        // this.setState({
+        //   filteredOffers: filterData(filteredOffers, offerTypes),
+        // });
+      }
+    );
   }
 
   handleSkillOnChange = skills => {
     this.setState({ skills });
     const { filterQuery, members, offers } = this.state;
     if (filterQuery === 'Members') {
-      this.setState({ filterMembers: filterData(members, skills) });
+      this.setState({ filterMembers: filterData(members, skills, []) });
     }
     if (filterQuery === 'Offers') {
-      this.setState({ filteredOffers: filterData(offers, skills) });
+      this.setState({ filteredOffers: filterData(offers, skills, []) });
     }
   };
 
-  handleOfferTypeOnChange = offertype => {};
+  handleOfferTypeOnChange = offerTypes => {
+    this.setState({ offerTypes });
+    const { offers, skills } = this.state;
+    this.setState({ filteredOffers: filterData(offers, skills, offerTypes) });
+  };
 
   render() {
     const {
@@ -85,6 +96,7 @@ export default class Home extends Component {
       filteredOffers,
       filterMembers,
     } = this.state;
+    console.log(filteredOffers);
     // eslint-disable-next-line react/prop-types
     return (
       <>
