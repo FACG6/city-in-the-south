@@ -2,7 +2,7 @@ const express = require('express');
 const cookie = require('cookie-parser');
 const { join } = require('path');
 
-const router = require('./controllers');
+const router = require('./routes');
 
 const app = express();
 
