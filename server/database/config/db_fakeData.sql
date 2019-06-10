@@ -64,7 +64,7 @@ INSERT INTO filter (member_id, skills, offer_type) VALUES
   ((SELECT id FROM member LIMIT 1 OFFSET 2), 'java', 'fixed-price'),
   ((SELECT id FROM member LIMIT 1 OFFSET 2), 'python', 'part-time');
 
-INSERT INTO saved_offer (offet_id, member_id) VALUES 
+INSERT INTO saved_offer (offer_id, member_id) VALUES 
   ((SELECT id FROM offer LIMIT 1 OFFSET 1), (SELECT id FROM member LIMIT 1 OFFSET 1)),
   ((SELECT id FROM offer LIMIT 1 OFFSET 2), (SELECT id FROM member LIMIT 1 OFFSET 2));
 

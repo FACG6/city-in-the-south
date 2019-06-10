@@ -1,3 +1,10 @@
+const { getSavedOffer } = require('../../database/queries/offers/getSavedOffer.js');
+
 module.exports = (req, res) => {
-  res.send(' get my saved offer');
+  const { memberId } = req.params;
+  getSavedOffer(memberId)
+    .then(result => res.send({
+      error: null,
+      data: result.rows,
+    }));
 };

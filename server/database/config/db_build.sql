@@ -101,7 +101,7 @@ CREATE TABLE filter (
 
 CREATE TABLE saved_offer (
   member_id INTEGER REFERENCES member(id),
-  offet_id INTEGER REFERENCES offer(id)
+  offer_id INTEGER REFERENCES offer(id)
 );
 
 CREATE TABLE notification (
