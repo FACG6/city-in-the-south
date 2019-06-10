@@ -8,7 +8,7 @@ test('Testing for saved-offers route', (t) => {
     .post('/api/v1/saved-offers')
     .send({
       member_id: 1,
-      offet_id: 2,
+      offer_id: 2,
     })
     .expect(200)
     .expect('Content-Type', /json/)
@@ -27,7 +27,7 @@ test('Testing for saved-offers route', (t) => {
     .post('/api/v1/saved-offers')
     .send({
       member_id: 2,
-      offet_id: 2,
+      offer_id: 2,
     })
     .expect(200)
     .expect('Content-Type', /json/)
