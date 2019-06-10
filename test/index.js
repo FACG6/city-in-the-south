@@ -1,7 +1,6 @@
-const test = require('tape');
+const { dbBuild, dbFakeData } = require('../server/database/config/db_build');
 
-test('sample test', (t) => {
-  t.equal(1, 1, 'test is ok');
-  t.end();
-});
-require('./saved-offer-test');
+dbBuild()
+  .then(dbFakeData)
+  .then(() => require('./saved-offer-test'))
+  .catch(err => console.log(err));
