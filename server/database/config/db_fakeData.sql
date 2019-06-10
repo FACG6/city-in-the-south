@@ -42,15 +42,15 @@ INSERT INTO offer_type (name) VALUES
   ('fixed-price');
 
 INSERT INTO offer_offer_type (offer_type_id, offer_id) VALUES 
+  ((SELECT id FROM offer_type LIMIT 1 OFFSET 0), (SELECT id FROM offer LIMIT 1 OFFSET 0)),
   ((SELECT id FROM offer_type LIMIT 1 OFFSET 1), (SELECT id FROM offer LIMIT 1 OFFSET 1)),
-  ((SELECT id FROM offer_type LIMIT 1 OFFSET 2), (SELECT id FROM offer LIMIT 1 OFFSET 1)),
-  ((SELECT id FROM offer_type LIMIT 1 OFFSET 2), (SELECT id FROM offer LIMIT 1 OFFSET 2));
+  ((SELECT id FROM offer_type LIMIT 1 OFFSET 1), (SELECT id FROM offer LIMIT 1 OFFSET 2));
 
 INSERT INTO offer_skill (skill_id, offer_id) VALUES 
   ((SELECT id FROM skill LIMIT 1 OFFSET 1), (SELECT id FROM offer LIMIT 1 OFFSET 1)),
   ((SELECT id FROM skill LIMIT 1 OFFSET 2), (SELECT id FROM offer LIMIT 1 OFFSET 1)),
   ((SELECT id FROM skill LIMIT 1 OFFSET 2), (SELECT id FROM offer LIMIT 1 OFFSET 2)),
-  ((SELECT id FROM skill LIMIT 1 OFFSET 3), (SELECT id FROM offer LIMIT 1 OFFSET 2));
+  ((SELECT id FROM skill LIMIT 1 OFFSET 0), (SELECT id FROM offer LIMIT 1 OFFSET 2));
 
 INSERT INTO member_skill (skill_id, member_id) VALUES 
   ((SELECT id FROM skill LIMIT 1 OFFSET 1), (SELECT id FROM member LIMIT 1 OFFSET 1)),
