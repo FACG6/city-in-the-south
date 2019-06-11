@@ -55,8 +55,8 @@ INSERT INTO offer_skill (skill_id, offer_id) VALUES
 INSERT INTO member_skill (skill_id, member_id) VALUES 
   ((SELECT id FROM skill LIMIT 1 OFFSET 1), (SELECT id FROM member LIMIT 1 OFFSET 1)),
   ((SELECT id FROM skill LIMIT 1 OFFSET 2), (SELECT id FROM member LIMIT 1 OFFSET 1)),
-  ((SELECT id FROM skill LIMIT 1 OFFSET 2), (SELECT id FROM member LIMIT 1 OFFSET 2)),
-  ((SELECT id FROM skill LIMIT 1 OFFSET 3), (SELECT id FROM member LIMIT 1 OFFSET 2));
+  ((SELECT id FROM skill LIMIT 1 OFFSET 2), (SELECT id FROM member LIMIT 1 OFFSET 0)),
+  ((SELECT id FROM skill LIMIT 1 OFFSET 3), (SELECT id FROM member LIMIT 1 OFFSET 0));
 
 INSERT INTO filter (member_id, skills, offer_type) VALUES 
   ((SELECT id FROM member LIMIT 1 OFFSET 1), 'react js', 'fixed-price'),
@@ -66,7 +66,7 @@ INSERT INTO filter (member_id, skills, offer_type) VALUES
 
 INSERT INTO saved_offer (offer_id, member_id) VALUES 
   ((SELECT id FROM offer LIMIT 1 OFFSET 1), (SELECT id FROM member LIMIT 1 OFFSET 1)),
-  ((SELECT id FROM offer LIMIT 1 OFFSET 2), (SELECT id FROM member LIMIT 1 OFFSET 2));
+  ((SELECT id FROM offer LIMIT 1 OFFSET 2), (SELECT id FROM member LIMIT 1 OFFSET 0));
 
 INSERT INTO notification (title, msg, url, seen, tag, member_id) VALUES 
   ('Small Shop seeks workers', 'We are looking for a Front End Web Developer who is motivated to combine the art', '/app/offers/2', null, 'new-offer', (SELECT id FROM member LIMIT 1 OFFSET 1)),
@@ -79,4 +79,4 @@ INSERT INTO notification (title, msg, url, seen, tag, member_id) VALUES
 INSERT INTO hired_member (offer_id, member_id, status) VALUES 
   ((SELECT id FROM offer LIMIT 1 OFFSET 4), (SELECT id FROM member LIMIT 1 OFFSET 1), 'pending'),
   ((SELECT id FROM offer LIMIT 1 OFFSET 1), (SELECT id FROM member LIMIT 1 OFFSET 1), 'completed'),
-  ((SELECT id FROM offer LIMIT 1 OFFSET 2), (SELECT id FROM member LIMIT 1 OFFSET 2), 'completed');
+  ((SELECT id FROM offer LIMIT 1 OFFSET 2), (SELECT id FROM member LIMIT 1 OFFSET 0), 'completed');
