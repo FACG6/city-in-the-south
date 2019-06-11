@@ -1,6 +1,6 @@
 const yup = require('yup');
 
-const getMyApplication = require('../../database/queries/applications/getMyApplication');
+const { getMyApplication } = require('../../database/queries/applications/index');
 
 module.exports = (req, res, next) => {
   const { memberId, offerId } = req.params;
