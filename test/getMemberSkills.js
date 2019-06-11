@@ -10,14 +10,6 @@ const insertSkill = () => connection.query('INSERT INTO skill (name) VALUES (\'p
 
 const insertMemberSkills = id => connection.query('INSERT INTO member_skill (member_id, skill_id) VALUES ($1, 1), ($1, 2) RETURNING *', [id]);
 
-const getMemberSkills = (id) => {
-  const sql = {
-    text: 'SELECT id, name FROM skill join member_skill on skill.id = member_skill.skill_id WHERE member_id = $1',
-    values: [id],
-  };
-  return connection.query(sql);
-};
-
 tape('Testing for route', (t) => {
   let memberId;
   const fields = ['id', 'name'];
@@ -26,7 +18,6 @@ tape('Testing for route', (t) => {
   insertMember().then(res => insertMemberSkills(res.rows[0].id))
     .then((res) => {
       memberId = res.rows[0].member_id;
-      return getMemberSkills(res.rows[0].member_id);
     })
     .then(() => {
       supertest(router)
