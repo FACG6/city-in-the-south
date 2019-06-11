@@ -7,8 +7,8 @@ test('Testing for saved-offers route', (t) => {
   supertest(app)
     .post('/api/v1/saved-offers')
     .send({
-      member_id: 1,
-      offer_id: 2,
+      memberId: 1,
+      offerId: 2,
     })
     .expect(200)
     .expect('Content-Type', /json/)
