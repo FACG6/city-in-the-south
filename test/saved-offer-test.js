@@ -22,25 +22,6 @@ test('Testing for saved-offers route', (t) => {
     });
 });
 
-test('Testing for saved-offers route', (t) => {
-  supertest(app)
-    .post('/api/v1/saved-offers')
-    .send({
-      member_id: 2,
-      offer_id: 2,
-    })
-    .expect(200)
-    .expect('Content-Type', /json/)
-    .end((err, res) => {
-      if (err) {
-        t.error(err);
-      } else {
-        t.deepEqual(res.body.data, { member_id: 2, offet_id: 2 }, 'Return Saved offer Data');
-        t.end();
-      }
-    });
-});
-
 
 test.onFinish(() => {
   process.exit(0);
