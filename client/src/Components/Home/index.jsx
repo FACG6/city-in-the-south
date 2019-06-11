@@ -12,7 +12,7 @@ import AutoCompleteTags from '../CommonComponents/AutoCompleteTags';
 import Offers from './Offers';
 import Members from './Members';
 
-import { filterData } from './heplers';
+import { filterOfferTypes, filterSkills } from './heplers';
 
 import memberDetails from '../utils/members';
 import offersDetails from '../utils/offers.1';
@@ -45,47 +45,63 @@ export default class Home extends Component {
     skills = filter.skills[0] ? filter.skills : memberSkills;
 
     if (filter.offer_type[0]) offerTypes = filter.offer_type;
-    const filterQuery = localStorage.getItem('filterQuery') || 'Offers';
+    const filterQuery =
+      localStorage.getItem('filterQuery') ||
+      localStorage.setItem('filterQuery', 'Offers');
 
     members = memberDetails;
-    filterMembers = filterData(members, skills, []);
+    filterMembers = filterSkills(members, skills);
 
     offers = offersDetails;
-    filteredOffers = filterData(offers, skills, offerTypes);
+    const filteredOffersSkills = filterSkills(offers, skills);
+    const filtereOffersOfferTypes = filterOfferTypes(offers, offerTypes);
 
-    this.setState(
-      {
-        offers,
-        members,
-        skills,
-        offerTypes,
-        filterMembers,
-        filteredOffers,
-        filterQuery,
-      },
-      () => {
-        // this.setState({
-        //   filteredOffers: filterData(filteredOffers, offerTypes),
-        // });
-      }
-    );
+    filteredOffers = filteredOffersSkills.filter(item => {
+      return filtereOffersOfferTypes.filter(_item => item.id !== _item.id);
+    });
+
+    this.setState({
+      offers,
+      members,
+      skills,
+      offerTypes,
+      filterMembers,
+      filteredOffers,
+      filterQuery,
+    });
   }
 
   handleSkillOnChange = skills => {
+    let filteredOffers = [];
+    // make a patch request to the back that add new values to filter
     this.setState({ skills });
-    const { filterQuery, members, offers } = this.state;
+    const { filterQuery, members, offers, offerTypes } = this.state;
     if (filterQuery === 'Members') {
-      this.setState({ filterMembers: filterData(members, skills, []) });
+      this.setState({ filterMembers: filterSkills(members, skills) });
     }
     if (filterQuery === 'Offers') {
-      this.setState({ filteredOffers: filterData(offers, skills, []) });
+      const filteredOffersSkills = filterSkills(offers, skills);
+      const filtereOffersOfferTypes = filterOfferTypes(offers, offerTypes);
+
+      filteredOffers = filteredOffersSkills.filter(item => {
+        return filtereOffersOfferTypes.filter(_item => item.id !== _item.id);
+      });
+      this.setState({ filteredOffers });
     }
   };
 
   handleOfferTypeOnChange = offerTypes => {
+    let filteredOffers = [];
+    // make a patch request to the back that add new values to filter
     this.setState({ offerTypes });
     const { offers, skills } = this.state;
-    this.setState({ filteredOffers: filterData(offers, skills, offerTypes) });
+    const filteredOffersSkills = filterSkills(offers, skills);
+    const filtereOffersOfferTypes = filterOfferTypes(offers, offerTypes);
+
+    filteredOffers = filteredOffersSkills.filter(item =>
+      filtereOffersOfferTypes.filter(_item => item.id === _item.id)
+    );
+    this.setState({ filteredOffers });
   };
 
   render() {
@@ -96,7 +112,6 @@ export default class Home extends Component {
       filteredOffers,
       filterMembers,
     } = this.state;
-    console.log(filteredOffers);
     // eslint-disable-next-line react/prop-types
     return (
       <>
