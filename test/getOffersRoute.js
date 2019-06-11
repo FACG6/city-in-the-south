@@ -13,7 +13,6 @@ LEFT outer JOIN offer_type ON offer_type.id = offer_offer_type.offer_type_id
 GROUP BY offer.id`);
 
 test('Testing for /api/v1/offers/:offset route', (t) => {
-  // const fields = ['id', 'title', 'position', 'description', 'status', 'member_id', 'skills', 'offer_types'];
   const fields = {
     id: 1,
     title: 'Ui Application For Website',
