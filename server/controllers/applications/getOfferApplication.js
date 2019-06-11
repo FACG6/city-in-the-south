@@ -1,4 +1,4 @@
-const getOfferApplications = require('../../database/queries/applications/getOfferApplications');
+const { getOfferApplications } = require('../../database/queries/applications/index');
 
 module.exports = (req, res, next) => {
   const { offerId } = req.params;
