@@ -12,10 +12,10 @@ module.exports = (req, res, next) => {
     .validate({ offerId, memberId, status })
     .then(() => {
       addHiredMember(memberId, offerId, status)
-        .then(() => {
+        .then((result) => {
           res.send({
             error: null,
-            data: [req.body],
+            data: result.rows,
           });
         })
         .catch(err => next({ code: 500, msg: err.message }));
