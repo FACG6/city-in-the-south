@@ -10,5 +10,6 @@ dbBuild()
   .then(() => require('./saved-offer-test'))
   .then(() => require('./getSavedOfferTest'))
   .then(() => require('./getOfferApplications'))
+  .then(() => require('./getMyOffersTest'))
   .then(() => require('./deleteOffer'))
   .catch(err => console.log(err));
