@@ -6,7 +6,7 @@ exports.notFound = (req, res) => {
 
 exports.serverError = (err, req, res, next) => {
   switch (err.code) {
-    case 401:
+    case 400:
       res.status(400).send(createError(400, err.msg));
       break;
     case 403:
