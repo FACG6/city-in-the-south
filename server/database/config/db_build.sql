@@ -33,7 +33,7 @@ CREATE TABLE offer (
 );
 
 CREATE TABLE application (
-  offer_id INTEGER REFERENCES offer(id),
+  offer_id INTEGER REFERENCES offer(id) ON DELETE CASCADE,
   member_id INTEGER REFERENCES member(id),
   proposal TEXT,
   PRIMARY KEY(offer_id, member_id)
@@ -49,7 +49,7 @@ CREATE TABLE review (
   rate INTEGER,
   description VARCHAR,
   member_id INTEGER REFERENCES member(id),
-  offer_id INTEGER REFERENCES offer(id)
+  offer_id INTEGER REFERENCES offer(id) ON DELETE CASCADE
 );
 
 
@@ -80,12 +80,12 @@ CREATE TABLE offer_type (
 
 CREATE TABLE offer_offer_type (
   offer_type_id INTEGER REFERENCES offer_type(id),
-  offer_id INTEGER REFERENCES offer(id)
+  offer_id INTEGER REFERENCES offer(id) ON DELETE CASCADE
 );
 
 CREATE TABLE offer_skill (
   skill_id INTEGER REFERENCES skill(id),
-  offer_id INTEGER REFERENCES offer(id)
+  offer_id INTEGER REFERENCES offer(id) ON DELETE CASCADE
 );
 
 CREATE TABLE member_skill (
@@ -101,7 +101,7 @@ CREATE TABLE filter (
 
 CREATE TABLE saved_offer (
   member_id INTEGER REFERENCES member(id),
-  offet_id INTEGER REFERENCES offer(id)
+  offet_id INTEGER REFERENCES offer(id) ON DELETE CASCADE
 );
 
 CREATE TABLE notification (
@@ -115,7 +115,7 @@ CREATE TABLE notification (
 );
 
 CREATE TABLE hired_member (
-  offer_id INTEGER REFERENCES offer(id),
+  offer_id INTEGER REFERENCES offer(id) ON DELETE CASCADE,
   member_id INTEGER REFERENCES member(id),
   status TEXT,
   PRIMARY KEY(offer_id, member_id) 
