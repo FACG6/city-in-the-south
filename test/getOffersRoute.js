@@ -2,15 +2,6 @@ const test = require('tape');
 const supertest = require('supertest');
 
 const router = require('../server/app');
-const connection = require('../server/database/config/db_connection');
-
-const getOffers = () => connection.query(`select offer.* , COALESCE(json_agg(skill) filter (where skill.id is not null),'[]') as skills,
-COALESCE(json_agg(offer_type) filter (where skill.id is not null),'[]') as offer_types from offer
-left outer join offer_skill ON offer_skill.offer_id = offer.id
-left outer JOIN skill ON skill.id = offer_skill.skill_id
-left outer join offer_offer_type ON offer_offer_type.offer_id = offer.id
-LEFT outer JOIN offer_type ON offer_type.id = offer_offer_type.offer_type_id
-GROUP BY offer.id`);
 
 test('Testing for /api/v1/offers/:offset route', (t) => {
   const fields = {
@@ -33,18 +24,15 @@ test('Testing for /api/v1/offers/:offset route', (t) => {
       },
     ],
   };
-  getOffers()
-    .then((result) => {
-      supertest(router)
-        .get('/api/v1/offers/100')
-        .expect(200)
-        .expect('content-type', /json/)
-        .end((err, res) => {
-          if (err) t.error(err);
-          t.deepEqual(res.body.data[0], fields, 'Should contain the same fileds');
-          t.end();
-        });
-    }).catch(err => t.error(err));
+  supertest(router)
+    .get('/api/v1/offers/0')
+    .expect(200)
+    .expect('content-type', /json/)
+    .end((err, res) => {
+      if (err) t.error(err);
+      t.deepEqual(res.body.data[0], fields, 'Should contain the same fileds');
+      t.end();
+    });
 });
 
 test.onFinish(() => {
