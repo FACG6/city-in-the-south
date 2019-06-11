@@ -7,8 +7,8 @@ before_script:
 env:
   global:
     - PGPORT=5432
-services:
-  - postgresql
+# services:
+#   - postgresql
 addons:
   postgresql: "10.7"
 test:
