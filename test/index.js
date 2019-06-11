@@ -1,6 +1,11 @@
-const test = require('tape');
+const { dbBuild, dbFakeData } = require('../server/database/config/db_build');
 
-test('sample test', (t) => {
-  t.equal(1, 1, 'test is ok');
-  t.end();
-});
+dbBuild()
+  .then(dbFakeData)
+  // eslint-disable-next-line global-require
+  .then(() => require('./getOffersRoute'))
+  .then(() => require('./getMyApplication'))
+  .then(() => require('./getMyApplications'))
+  .then(() => require('./saved-offer-test'))
+  .then(() => require('./getSavedOfferTest'))
+  .catch(err => console.log(err));
