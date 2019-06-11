@@ -9,8 +9,11 @@ exports.serverError = (err, req, res, next) => {
     case 400:
       res.status(400).send(createError(400, err.msg));
       break;
+    case 401:
+      res.status(401).send(createError(401, 'authentication error'));
+      break;
     case 403:
-      res.status(403).send(createError(403, 'unauthorization '));
+      res.status(403).send(createError(403, 'forbidden'));
       break;
     default:
       res.status(500).send(createError(500, 'Internal Server Error'));
