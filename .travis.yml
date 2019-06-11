@@ -12,3 +12,5 @@ services:
 test:
   adapter: postgresql
   database: db_travis
+addons:
+  postgresql: "9.4"
