@@ -2,7 +2,6 @@ const test = require('tape');
 const supertest = require('supertest');
 const app = require('../server/app');
 
-// getOfferApplications
 test('test getOfferApplications', (t) => {
   supertest(app)
     .get('/api/v1//offer-applications/1')
@@ -24,4 +23,8 @@ test('test getOfferApplications', (t) => {
       );
       t.end();
     });
+});
+
+test.onFinish(() => {
+  process.exit(0);
 });
