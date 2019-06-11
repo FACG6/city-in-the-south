@@ -8,6 +8,8 @@ const insertOffer = () => connection.query('INSERT INTO offer(title, position, m
 
 const selectOffer = () => connection.query('SELECT * FROM offer LIMIT 1');
 
+const selectDeletedOffer = id => connection.query('SELECT * FROM offer WHERE offer.id = $1', [id]);
+
 tape('Testing for DELETE : /api/v1/offers/:offerId', (t) => {
   insertOffer();
   let offerId;
@@ -20,11 +22,15 @@ tape('Testing for DELETE : /api/v1/offers/:offerId', (t) => {
         .expect('content-type', /json/)
         .end((err, response) => {
           if (err) t.error(err);
-          t.equal(response.body.data, 'success', 'Should return sucess message');
-          t.end();
+          selectDeletedOffer(offerId)
+            .then((result) => {
+              t.equal(result.rowCount, 0, 'Should return empty array');
+              t.end();
+            })
+            .catch(error => t.error(error));
         });
     })
-    .catch(err => console.log(err));
+    .catch(error => t.error(error));
 });
 
 tape.onFinish(() => {
