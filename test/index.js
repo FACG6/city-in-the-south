@@ -9,4 +9,5 @@ dbBuild()
   .then(() => require('./getMyApplications'))
   .then(() => require('./saved-offer-test'))
   .then(() => require('./getSavedOfferTest'))
+  .then(() => require('./getOfferApplications'))
   .catch(err => console.log(err));
