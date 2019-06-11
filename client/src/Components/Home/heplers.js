@@ -17,10 +17,15 @@ const filterOfferTypes = (arr, offerTypeQuery) => {
   );
 };
 
-const filteredOffers = (value1, value2) => {
-  value1.filter(item => {
-    return value2.filter(_item => item.id === _item.id);
-  });
+const searchLogic = (searchFor, dataArray) => {
+  console.log(searchFor, dataArray);
+  return dataArray.filter(obj =>
+    Object.values(obj).some(val =>
+      String(val)
+        .toLocaleLowerCase()
+        .includes(searchFor.toLocaleLowerCase())
+    )
+  );
 };
 
-module.exports = { filterSkills, filterOfferTypes, filteredOffers };
+module.exports = { filterSkills, filterOfferTypes, searchLogic };
