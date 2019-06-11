@@ -1,4 +1,4 @@
-const { getOfferType } = require('../../database/queries/offer-type/get-offer-type.js');
+const { getOfferType } = require('../../database/queries/offer-type/getOfferType.js');
 
 module.exports = (req, res, next) => {
   getOfferType()

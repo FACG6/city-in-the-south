@@ -2,5 +2,5 @@ const { dbBuild, dbFakeData } = require('../server/database/config/db_build');
 
 dbBuild()
   .then(dbFakeData)
-  .then(() => require('./get-offer-type-test'))
+  .then(() => require('./getOfferTypeTest'))
   .catch(err => console.log(err));
