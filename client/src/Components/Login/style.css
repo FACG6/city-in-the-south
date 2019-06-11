@@ -1,0 +1,62 @@
+.content-login {
+  height: 318px;
+  width: 358px;
+  left: 475px;
+  padding: 29px 0 0 20px;
+  margin: 54px 0 0 375px;
+  box-sizing: border-box;
+  border-radius: 2px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+}
+
+.content-login__word-login {
+  margin-left: 115px;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.04em;
+  color: #3d9caf;
+}
+
+.content-login__submit {
+  height: 40px;
+  width: 277px;
+  margin-left: 24px;
+  align-items: center;
+  font-weight: 500;
+  line-height: 22px;
+  background-color: #0F9CAF ;
+  border:none ;
+  color: #eee;
+  border-radius: 4px;
+}
+.content-login__text-muted {
+  margin: 0 37px 0 64px;
+}
+
+.content-login__word-signup {
+  text-align: center;
+  color: #0F9CAF;
+  cursor: pointer;
+}
+
+.content-login__input {
+  width: 275px;
+  margin-right: 37px;
+  margin-left: 24px;
+  align-items: center;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0.03em;
+  color: #929292;
+  border-radius: 3px;
+}
+
+.message{
+  padding: 0 22px;
+  color: red;
+}
