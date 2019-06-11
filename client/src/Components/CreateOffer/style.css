@@ -1,0 +1,91 @@
+.newoffer__container {
+  margin-top: 1rem;
+}
+
+.newoffer__title {
+  color: rgba(51, 51, 51, 0.8);
+  font-size: 32px;
+  padding-bottom: 15px;
+  margin-bottom: 1.3rem;
+  border-bottom: 2px solid rgba(51, 51, 51, 0.8);
+  width: fit-content; 
+  margin-left: 7px;
+}
+
+.newoffer__content .row:nth-child(3) {
+  padding-left: 18px !important;
+} 
+
+.newoffer__content {
+  padding-left: 0.7rem;
+}
+
+.newoffer__label{
+  color: rgba(51, 51, 51, 0.8);
+}
+
+.newoffer__description{
+  width: 70% !important;
+  margin-bottom: 1rem;
+}
+
+.newoffer__btns {
+  margin-bottom: 2rem;
+  margin-top: 1.8rem;
+}
+
+.newoffer__btn--cancel,
+.newoffer__btn--apply {
+  width: 7rem;
+  margin-top: 10px !important;
+  background: #0f9caf !important;
+  color: #fff;
+  border: none !important;
+}
+
+.newoffer__container 
+.autComplete-dev 
+.form-control {
+  margin-left: 1rem;
+  width: 100%;
+}
+
+.newoffer__errMsg {
+  color: red;
+  padding-bottom: 1.5rem;
+  padding-left: 0.6rem;
+  margin-top: 0.7rem;
+}
+
+.newoffer__errMsg--icon {
+  font-size: 1rem;
+  padding-right: 0.5rem;
+}
+
+@media only screen and (min-width: 576px) {
+  .col-lg-1 .newoffer__btn--cancel {
+    margin-left: 2rem
+  }
+}
+  @media (max-width: 576px) {
+  /* For mobile phones: */
+  .newoffer__description{
+    width: 100% !important;
+  }
+
+  .newoffer__btn--cancel {
+    width: 7rem;
+    margin-top: 10px !important;
+  }
+
+  .autComplete-dev .form-control {
+    margin-left: 0;
+  }
+
+
+.autComplete-dev .form-control {
+  width: 22.9rem;
+}
+
+} 
+
