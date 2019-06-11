@@ -18,17 +18,21 @@ export default class AutoCompleteTags extends Component {
   componentDidMount() {
     // git the data form the back for skills and offer_type and setSatet for the skills and offer type
     // const selected = options.filter(item => _.find(fetched, id => id === item.id))
-    const { data, type } = this.props;
-    this.setState(() => {
-      let options;
-      if (type === 'skill') {
-        options = skills;
-      } else if (type === 'offer_type') {
-        options = offerType;
+    const { type } = this.props;
+    this.setState(
+      () => {
+        let options;
+        if (type === 'skill') {
+          options = skills;
+        } else if (type === 'offer_type') {
+          options = offerType;
+        }
+        return { options };
+      },
+      () => {
+        this.setState({ selectedTags: this.props.data });
       }
-      if (data) return { selectedTags: data, options };
-      return { options };
-    });
+    );
   }
 
   handleChange = items => {
