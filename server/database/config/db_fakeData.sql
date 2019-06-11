@@ -80,4 +80,5 @@ INSERT INTO hired_member (offer_id, member_id, status) VALUES
   ((SELECT id FROM offer LIMIT 1 OFFSET 4), (SELECT id FROM member LIMIT 1 OFFSET 1), 'pending'),
   ((SELECT id FROM offer LIMIT 1 OFFSET 1), (SELECT id FROM member LIMIT 1 OFFSET 1), 'completed'),
   ((SELECT id FROM offer LIMIT 1 OFFSET 2), (SELECT id FROM member LIMIT 1 OFFSET 0), 'completed');
+
   
