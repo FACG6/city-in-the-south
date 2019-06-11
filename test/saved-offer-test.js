@@ -16,7 +16,7 @@ test('Testing for saved-offers route', (t) => {
       if (err) {
         t.error(err);
       } else {
-        t.deepEqual(res.body.data, { member_id: 1, offet_id: 2 }, 'Return Saved offer Data');
+        t.deepEqual(res.body.data, { member_id: 1, offer_id: 2 }, 'Return Saved offer Data');
         t.end();
       }
     });
