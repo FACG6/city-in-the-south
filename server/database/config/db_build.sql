@@ -49,7 +49,7 @@ CREATE TABLE review (
   rate INTEGER,
   description VARCHAR,
   member_id INTEGER REFERENCES member(id),
-  offer_id INTEGER REFERENCES offer(id)
+  offer_id INTEGER REFERENCES offer(id) ON DELETE CASCADE
 );
 
 
