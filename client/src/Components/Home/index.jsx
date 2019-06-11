@@ -1,66 +1,135 @@
 import React, { Component } from 'react';
 import {
-  Container,
   Row,
   Col,
   InputGroup,
   Button,
   FormControl,
   Dropdown,
-  Spinner,
 } from 'react-bootstrap';
+
 import AutoCompleteTags from '../CommonComponents/AutoCompleteTags';
+import Offers from './Offers';
+import Members from './Members';
+
+import { filterOfferTypes, filterSkills } from './heplers';
+
+import memberDetails from '../utils/members';
+import offersDetails from '../utils/offers.1';
+import filter from '../utils/filter';
+import memberSkills from '../utils/skills';
+
 import './style.css';
-import OfferCard from '../CommonComponents/OfferCard';
-import offersDetails from '../utils/offers';
 
 export default class Home extends Component {
   state = {
     offset: 0,
     isClicked: false,
     offers: [],
+    filterQuery: '',
+    members: [],
+    skills: [],
+    offerTypes: [],
     filteredOffers: [],
-    isActive: '',
-    filteredMembers: [],
+    filterMembers: [],
   };
-
-  // get the filter from the back and passing it into the AutoComplete Component with props name --data--
-  // and here we need to get 100 records from the data to filtering it
-  /* and we need to check if the length of filter data less than 10 we should make a request to the back to get more data 
-  with offset +100 */
 
   componentDidMount() {
-    this.setState({ offers: offersDetails });
-    this.setState({ filteredOffers: offersDetails });
-    this.setState({ isActive: 'Members' });
-    this.setState({ offset: 100 });
+    let skills = [];
+    let offerTypes = [];
+    let members = [];
+    let offers = [];
+    let filterMembers = [];
+    let filteredOffers = [];
+
+    skills = filter.skills[0] ? filter.skills : memberSkills;
+
+    if (filter.offer_type[0]) offerTypes = filter.offer_type;
+    const filterQuery =
+      localStorage.getItem('filterQuery') ||
+      localStorage.setItem('filterQuery', 'Offers');
+
+    members = memberDetails;
+    filterMembers = filterSkills(members, skills);
+
+    offers = offersDetails;
+    const filteredOffersSkills = filterSkills(offers, skills);
+    const filtereOffersOfferTypes = filterOfferTypes(offers, offerTypes);
+
+    filteredOffers = filteredOffersSkills.filter(item => {
+      return filtereOffersOfferTypes.filter(_item => item.id !== _item.id);
+    });
+
+    this.setState({
+      offers,
+      members,
+      skills,
+      offerTypes,
+      filterMembers,
+      filteredOffers,
+      filterQuery,
+    });
   }
 
-  handleSkillOnChange = () => {
-    // here we make a filter and check the length for both the members and the offers
+  handleSkillOnChange = skills => {
+    let filteredOffers = [];
+    // make a patch request to the back that add new values to filter
+    this.setState({ skills });
+    const { filterQuery, members, offers, offerTypes } = this.state;
+    if (filterQuery === 'Members') {
+      this.setState({ filterMembers: filterSkills(members, skills) });
+    }
+    if (filterQuery === 'Offers') {
+      const filteredOffersSkills = filterSkills(offers, skills);
+      const filtereOffersOfferTypes = filterOfferTypes(offers, offerTypes);
+
+      filteredOffers = filteredOffersSkills.filter(item => {
+        return filtereOffersOfferTypes.filter(_item => item.id !== _item.id);
+      });
+      this.setState({ filteredOffers });
+    }
   };
 
-  handleOfferTypeOnChange = () => {
-    // here we make a filter and check the length for  the members
+  handleOfferTypeOnChange = offerTypes => {
+    let filteredOffers = [];
+    // make a patch request to the back that add new values to filter
+    this.setState({ offerTypes });
+    const { offers, skills } = this.state;
+    const filteredOffersSkills = filterSkills(offers, skills);
+    const filtereOffersOfferTypes = filterOfferTypes(offers, offerTypes);
+
+    filteredOffers = filteredOffersSkills.filter(item =>
+      filtereOffersOfferTypes.filter(_item => item.id === _item.id)
+    );
+    this.setState({ filteredOffers });
   };
 
   render() {
     const {
       isClicked,
-      offers,
+      skills,
+      offerTypes,
       filteredOffers,
-      isActive,
-      filteredMembers,
+      filterMembers,
     } = this.state;
+    // eslint-disable-next-line react/prop-types
     return (
-      <Container className="page__container">
-        <Row>
+      <>
+        <Row className="home__contanier">
           <Col className="home__filter" sm={12} lg={3} md={3}>
-            {isActive === 'Offers' ? (
-              <AutoCompleteTags type="offer_type" />
-            ) : null}
+            <AutoCompleteTags
+              type="skill"
+              data={skills}
+              onchange={this.handleSkillOnChange}
+            />
             <br />
-            <AutoCompleteTags type="skill" />
+            {localStorage.getItem('filterQuery') === 'Offers' && (
+              <AutoCompleteTags
+                type="offer_type"
+                data={offerTypes}
+                onchange={this.handleOfferTypeOnChange}
+              />
+            )}
           </Col>
           <Col className="home__main" sm={12} lg={8} md={8}>
             <Row>
@@ -69,7 +138,7 @@ export default class Home extends Component {
                   <InputGroup.Prepend>
                     <Button
                       variant="outline-secondary"
-                      className="home-search-btn"
+                      className="home__search-btn"
                     >
                       <i className="fas fa-search home__search-icon" />
                     </Button>
@@ -78,8 +147,8 @@ export default class Home extends Component {
                 </InputGroup>
               </Col>
               <Col className="home__result-label" xs={2}>
-                {isActive === 'Members'
-                  ? filteredMembers.length
+                {localStorage.getItem('filterQuery') === 'Members'
+                  ? filterMembers.length
                   : filteredOffers.length}{' '}
                 results
               </Col>
@@ -88,16 +157,24 @@ export default class Home extends Component {
                   <Dropdown.Menu show className="dropdwon-list">
                     <Dropdown.Header
                       onClick={() => {
-                        this.setState({ isActive: 'Offers', isClicked: false });
+                        this.setState({
+                          filterQuery: 'Offers',
+                          isClicked: false,
+                        });
+                        localStorage.setItem('filterQuery', 'Offers');
                       }}
                     >
                       Offers
                     </Dropdown.Header>
                     <Dropdown.Item
                       eventKey="2"
-                      onClick={() =>
-                        this.setState({ isActive: 'Members', isClicked: false })
-                      }
+                      onClick={() => {
+                        this.setState({
+                          filterQuery: 'Members',
+                          isClicked: false,
+                        });
+                        localStorage.setItem('filterQuery', 'Members');
+                      }}
                     >
                       Members
                     </Dropdown.Item>
@@ -109,7 +186,9 @@ export default class Home extends Component {
                     onClick={() => this.setState({ isClicked: true })}
                   >
                     <span className="dropdown-label">
-                      {isActive === 'Members' ? 'Members' : 'Offers'}{' '}
+                      {localStorage.getItem('filterQuery') === 'Members'
+                        ? 'Members'
+                        : 'Offers'}{' '}
                     </span>
                     <i className="fa fa-angle-down" />
                   </button>
@@ -117,43 +196,14 @@ export default class Home extends Component {
               </Col>
             </Row>
             <hr className="hr-line" />
-
-            {isActive === 'Offers' ? (
-              <div>
-                {offers[0] ? (
-                  offers.map(item => {
-                    if (item.status === 'active') {
-                      return (
-                        <OfferCard offer={item} key={item.id} hover={false} />
-                      );
-                    }
-                  })
-                ) : (
-                  <div className="main-spinner">
-                    {' '}
-                    <Spinner animation="border" variant="info" />
-                  </div>
-                )}{' '}
-              </div>
+            {localStorage.getItem('filterQuery') === 'Offers' ? (
+              <Offers filtered={filteredOffers} />
             ) : (
-              <div>
-                {' '}
-                {filteredMembers[0] ? (
-                  filteredMembers.map(item => {
-                    if (item.status === 'active') {
-                      // Members Card
-                    }
-                  })
-                ) : (
-                  <div className="main-spinner">
-                    <Spinner animation="border" variant="info" />
-                  </div>
-                )}{' '}
-              </div>
+              <Members filtered={filterMembers} {...this.props} />
             )}
           </Col>
         </Row>
-      </Container>
+      </>
     );
   }
 }

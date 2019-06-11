@@ -4,6 +4,12 @@
   background: #FFFFFF;
   margin: 1%;
   box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.25);
+  height: fit-content;
+}
+
+.home__contanier {
+  width: 90%;
+  margin: 50px 10px 50px 99px !important
 }
 
 .home__filter .autComplete-dev .form-control {
@@ -21,7 +27,7 @@
   padding: 20px;
 }
 
-.home-search-btn, .home-search-btn:hover {
+.home__search-btn, .home__search-btn:hover {
   border-color: rgba(0, 0, 0, 0.13) !important;
   border-right: none !important;
   cursor: none;
@@ -29,7 +35,7 @@
   cursor: text !important;
 }
 
-.home-search-btn {
+.home__search-btn {
   padding-left: 5px !important;
   width: 24px;
 }
@@ -51,7 +57,7 @@
 }
 
 .home__result-label {
-  padding:10px 0px !important;
+  padding: 10px 0px !important;
 }
 
 .home__result-label, .dropdown-label {
@@ -111,5 +117,5 @@
 
 .main-spinner {
   text-align: center;
-  margin: 25% auto;
+  margin: 20% auto;
 }
