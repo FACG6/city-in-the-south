@@ -1,3 +1,4 @@
+
 const { getSavedOffer } = require('../../database/queries/offers/getSavedOffer.js');
 
 module.exports = (req, res, next) => {
