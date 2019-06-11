@@ -25,3 +25,7 @@ test('test getMyApplication', (t) => {
       t.end();
     });
 });
+
+test.onFinish(() => {
+  process.exit(0);
+});
