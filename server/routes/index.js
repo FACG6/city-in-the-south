@@ -17,7 +17,8 @@ router.get('/logout', authentication.logout);
 /* Application */
 router.get('/offer-applications/:offerId', application.getOfferApplication);
 
-router.get('/my-applications/:memberId', application.getMyApplication);
+router.get('/:memberId/my-applications', application.getMyApplications);
+router.get('/:memberId/my-applications/:offerId', application.getMyApplication);
 
 router.post('/applications', application.addApplication);
 
@@ -25,7 +26,8 @@ router.post('/hired_member', application.addHireMember);
 router.patch('/hired_member/:memberId', application.updateHireMember);
 
 /* filter */
-router.route('/filter/:member_id')
+router
+  .route('/filter/:member_id')
   .get(filter.getFilter)
   .patch(filter.updateFilter);
 
@@ -48,7 +50,6 @@ router.delete('/saved-offers/:memberId', offer.deleteSavedOffer);
 /* Offer Type */
 router.get('/offer-type', offerType.getOfferTypes);
 router.post('/offer-type', offerType.addOfferType);
-
 
 /* Skills */
 router.get('/skills', skills.getSkills);

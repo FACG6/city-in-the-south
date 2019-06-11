@@ -28,7 +28,7 @@ CREATE TABLE offer (
   title VARCHAR,
   position VARCHAR,
   description TEXT,
-  status VARCHAR,
+  status VARCHAR DEFAULT 'active',
   member_id INTEGER REFERENCES member(id)
 );
 
@@ -101,7 +101,7 @@ CREATE TABLE filter (
 
 CREATE TABLE saved_offer (
   member_id INTEGER REFERENCES member(id),
-  offet_id INTEGER REFERENCES offer(id) ON DELETE CASCADE
+  offer_id INTEGER REFERENCES offer(id) ON DELETE CASCADE
 );
 
 CREATE TABLE notification (
