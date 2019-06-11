@@ -1,7 +1,7 @@
 const { getOffers } = require('../../database/queries/offers/index');
 
 module.exports = (req, res, next) => {
-  getOffers()
+  getOffers(req.params.offset)
     .then((response) => {
       res.send({
         error: null,
