@@ -27,3 +27,7 @@ test('add hired member test', (t) => {
       t.end();
     });
 });
+
+test.onFinish(() => {
+  process.exit(0);
+});
