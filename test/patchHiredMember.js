@@ -7,7 +7,7 @@ const selectOfferStatus = () => connection.query('select status from offer where
 
 test('patch hired member test', (t) => {
   supertest(app)
-    .patch('/api/v1/hired-member')
+    .patch('/api/v1/hired-member/2')
     .expect(200)
     .send({
       member_id: 2,
