@@ -5,7 +5,7 @@ module.exports = (req, res, next) => {
   const secret = process.env.SECRET;
   if (jwt && secret) {
     verify(jwt, secret, (err, decoded) => {
-      if (decoded) req.auth = decoded;
+      if (decoded) req.user = decoded;
       else res.clearCookie('jwt');
       next();
     });

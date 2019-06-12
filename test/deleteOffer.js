@@ -3,6 +3,7 @@ const supertest = require('supertest');
 
 const connection = require('../server/database/config/db_connection');
 const router = require('../server/app');
+const { Cookie } = require('./testCookie');
 
 const insertOffer = () => connection.query('INSERT INTO offer(title, position, member_id) VALUES (\'small shop\', \'accountant\', 2)');
 
@@ -20,7 +21,7 @@ tape('Testing for DELETE : /api/v1/offers/:offerId', (t) => {
         .delete(`/api/v1/offers/${offerId}`)
         .expect(200)
         .expect('content-type', /json/)
-        .set('Cookie', ['jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhc2hhdGF0IiwiYXZhdGFyIjoiaHR0cHM6Ly9hdmF0YXJzMS5naXRodWJ1c2VyY29udGVudC5jb20vdS8xODE0OTQzOD9zPTQ2MCZ2PTQiLCJpYXQiOjE1NjAzMjQwMzd9.zHBY7N7vfbcNiybjvJkgZY-auGUGlUEJeq4JTUlnA50'])
+        .set('Cookie', [Cookie])
         .end((err, response) => {
           if (err) t.error(err);
           selectDeletedOffer(offerId)
