@@ -23,11 +23,13 @@ module.exports = (req, res, next) => {
                 data: result.rows,
               }))
               .catch(err => next({ code: 500, msg: err.message }));
-          } else {
+          } else if (result.rowCount) {
             res.send({
               error: null,
               data: result.rows,
             });
+          } else {
+            next({ code: 400, msg: 'Bad Request!' });
           }
         })
         .catch(err => next({ code: 500, msg: err.message }));
