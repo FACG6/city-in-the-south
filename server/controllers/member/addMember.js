@@ -21,15 +21,12 @@ module.exports = (req, res, next) => {
         })
         .then(hashedPass => addMmeber({ ...memberInfo, pass: hashedPass }))
         .then(({ rows: member }) => {
-          if (!member[0]) throw next({ code: 400, msg: 'Bad Request' });
-          else {
-            const payLoad = {
-              id: member[0].id, username: member[0].username, avatar: member[0].avatar,
-            };
-            const jwt = sign(payLoad, process.env.SECRET);
-            res.cookie('jwt', jwt, { maxAge: 7200000 });
-            res.status(200).send({ error: null, data: payLoad });
-          }
+          const payLoad = {
+            id: member[0].id, username: member[0].username, avatar: member[0].avatar,
+          };
+          const jwt = sign(payLoad, process.env.SECRET);
+          res.cookie('jwt', jwt, { maxAge: 7200000 });
+          res.status(200).send({ error: null, data: payLoad });
         })
         .catch(err => next(err));
     })
