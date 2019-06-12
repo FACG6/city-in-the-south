@@ -18,7 +18,8 @@ export default class AutoCompleteTags extends Component {
   componentDidMount() {
     // git the data form the back for skills and offer_type and setSatet for the skills and offer type
     // const selected = options.filter(item => _.find(fetched, id => id === item.id))
-    const { type } = this.props;
+    const { type, allowNew } = this.props;
+    this.setState({ allownew: allowNew });
     this.setState(
       () => {
         let options;
@@ -67,6 +68,8 @@ export default class AutoCompleteTags extends Component {
 
   handleInputChange = item => {
     const { options } = this.state;
+    const { allowNew } = this.props;
+    if (!allowNew) return;
     options.filter(option => {
       if (option.name.toLowerCase() === item.toLowerCase().trim())
         return this.setState({ allownew: false });
@@ -112,6 +115,7 @@ AutoCompleteTags.defaultProps = {
   data: [],
   placeholder: '',
   onchange: null,
+  allowNew: false,
 };
 
 AutoCompleteTags.propTypes = {
@@ -124,4 +128,5 @@ AutoCompleteTags.propTypes = {
   ),
   placeholder: PropTypes.string,
   onchange: PropTypes.func,
+  allowNew: PropTypes.bool,
 };
