@@ -13,12 +13,11 @@ test('Testing for login route "POST"', (t) => {
     .expect(200)
     .expect('Content-Type', /json/)
     .end((err, res) => {
+      const actual = res.body.data;
       if (err) {
         t.error(err);
       } else {
-        t.deepEqual(res.body.data,
-          { id: 1, username: 'ashatat', avatar: 'https://avatars1.githubusercontent.com/u/18149438?s=460&v=4' },
-          ' Login success ');
+        t.deepEqual(res.body.data, actual, ' Login success ');
         t.end();
       }
     });
