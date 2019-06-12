@@ -26,7 +26,7 @@ module.exports = (req, res, next) => {
           };
           const jwt = sign(payLoad, process.env.SECRET);
           res.cookie('jwt', jwt, { maxAge: 7200000 });
-          res.status(200).send({ error: null, data: payLoad });
+          res.status(200).send({ error: null, data: [payLoad] });
         })
         .catch(err => next(err));
     })
