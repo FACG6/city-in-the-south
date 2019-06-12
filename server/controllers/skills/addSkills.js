@@ -1,16 +1,19 @@
 const { checkSkills, insertSkills } = require('../../database/queries/skills/index');
+const { postSkillSchema } = require('../../helpers/validation-schema');
 
 module.exports = (req, res, next) => {
-  const { name } = req.body;
-  checkSkills(name)
+  const skillInfo = { ...req.body };
+  postSkillSchema
+    .validate(skillInfo)
+    .then(() => checkSkills(skillInfo.name))
     .then((result) => {
-      if (result.rows.length === 0) {
-        return insertSkills(name);
+      if (!result.rowCount) {
+        return insertSkills(skillInfo.name)
+          .then(response => res.send({
+            error: null,
+            data: response.rows[0],
+          }));
       } return next({ code: 400, msg: 'skill already exist' });
     })
-    .then(response => res.send({
-      error: null,
-      data: response.rows[0],
-    }))
     .catch(err => next(err));
 };
