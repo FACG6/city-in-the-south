@@ -42,7 +42,6 @@
 
 .home__search-icon {
   border-color: rgba(0, 0, 0, 0.13) !important;
-  transform: rotateY(180deg);
   color: #C4C4C4;
 }
 

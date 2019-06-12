@@ -11,7 +11,7 @@ export default function Members({ filtered, history }) {
       {filtered[0] ? (
         filtered.map(member => {
           return (
-            <Col xs={12} md={4} lg={4} key={Math.random()}>
+            <Col xs={12} md={4} lg={4} key={member.id}>
               <Card
                 className="member-card"
                 key={member.id}
@@ -19,13 +19,18 @@ export default function Members({ filtered, history }) {
               >
                 <Card.Body>
                   <Row>
-                    <Col xs={6} md={5} key={member.id}>
+                    <Col xs={6} md={5}>
                       <Card.Img
                         src={member.avatar}
                         className="member-card__avatar"
                       />
                     </Col>
-                    <Col xs={6} md={7} className="member-card__username">
+                    <Col
+                      xs={6}
+                      md={7}
+                      className="member-card__username"
+                      key={member.id}
+                    >
                       <Card.Text>{member.username}</Card.Text>
                     </Col>
                   </Row>
@@ -63,6 +68,7 @@ Members.propTypes = {
     PropTypes.shape({
       id: PropTypes.number,
       username: PropTypes.string,
+      avatar: PropTypes.string,
     })
   ),
 };
