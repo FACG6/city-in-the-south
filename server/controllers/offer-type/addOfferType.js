@@ -1,5 +1,6 @@
 const { addOfferType } = require('../../database/queries/offer-type/postOfferType.js');
 const yup = require('yup');
+const { checkofferTypeName } = require('../../database/queries/offer-type/checkofferTypeName.js');
 
 module.exports = (req, res, next) => {
   const name = req.body;
@@ -8,12 +9,20 @@ module.exports = (req, res, next) => {
   });
   schema.validate({ name })
     .then(() => {
-      addOfferType(name)
-        .then((result) => {
-          res.send({
-            error: null,
-            data: result.rows[0],
-          });
-        }).catch(() => next({ code: 500, msg: 'internal server error' }));
-    }).catch(() => next({ code: 400, msg: 'page not found' }));// validation error
+      checkofferTypeName(name)
+        .then((resultCheck) => {
+          if (!resultCheck) {
+            addOfferType(name)
+              .then((resultAdd) => {
+                res.send({
+                  error: null,
+                  data: resultAdd.rows[0],
+                });
+              })
+              .catch(() => next({ code: 500, msg: 'internal server error' }));
+          } else next({ code: 400, msg: 'offer_type already exist' });
+        })
+        .catch(() => next({ code: 500, msg: 'internal server error' }));
+    })
+    .catch(() => next({ code: 400, msg: 'sure enter valid data' }));
 };
