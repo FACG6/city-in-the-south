@@ -28,6 +28,7 @@ test('Testing for /api/v1/offers/:offset route', (t) => {
     .get('/api/v1/offers/0')
     .expect(200)
     .expect('content-type', /json/)
+    .set('Cookie', ['jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhc2hhdGF0IiwiYXZhdGFyIjoiaHR0cHM6Ly9hdmF0YXJzMS5naXRodWJ1c2VyY29udGVudC5jb20vdS8xODE0OTQzOD9zPTQ2MCZ2PTQiLCJpYXQiOjE1NjAzMjQwMzd9.zHBY7N7vfbcNiybjvJkgZY-auGUGlUEJeq4JTUlnA50'])
     .end((err, res) => {
       if (err) t.error(err);
       t.deepEqual(res.body.data[0], fields, 'Should contain the same fileds');
