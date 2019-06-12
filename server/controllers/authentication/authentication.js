@@ -9,5 +9,5 @@ module.exports = (req, res, next) => {
       else res.clearCookie('jwt');
       next();
     });
-  } else next({ code: 400, msg: 'you are not authenticated' });
+  } else next({ code: 400, msg: 'you are not authenticated ' });
 };
