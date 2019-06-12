@@ -19,8 +19,8 @@ const filterOfferTypes = (arr, offerTypeQuery) => {
 
 const searchLogic = (searchFor, dataArray) => {
   return dataArray.filter(obj =>
-    Object.values(obj).some(val =>
-      String(val)
+    Object.values(obj).some(value =>
+      String(value)
         .toLocaleLowerCase()
         .includes(searchFor.toLocaleLowerCase())
     )

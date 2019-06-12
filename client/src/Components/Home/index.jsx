@@ -206,7 +206,7 @@ export default class Home extends Component {
                         ? 'Members'
                         : 'Offers'}{' '}
                     </span>
-                    <i className="fa fa-angle-down" />
+                    <i className="fa  fa-angle-down" />
                   </button>
                 )}
               </Col>
