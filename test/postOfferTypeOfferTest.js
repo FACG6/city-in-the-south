@@ -15,14 +15,11 @@ test('Testing for post-offer-type route', (t) => {
       if (err) {
         t.error(err);
       } else {
-        console.log(res);
-
-        // t.deepEqual(res.body.data, );
-        // t.end();
+        t.deepEqual(res.body, { error: null, data: { id: 3, name: 'full-time' } }, 'insert successfully');
+        t.end();
       }
     });
 });
-
 
 test.onFinish(() => {
   process.exit(0);
