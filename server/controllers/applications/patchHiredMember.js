@@ -5,8 +5,8 @@ const updateOfferStatus = require('../../database/queries/offers/updateOfferStat
 module.exports = (req, res, next) => {
   const { member_id: memberId, offer_id: offerId, status } = req.body;
   const schema = yup.object({
-    offerId: yup.string().required(),
-    memberId: yup.string().required(),
+    offerId: yup.number().required(),
+    memberId: yup.number().required(),
     status: yup.string().required(),
   });
   schema
