@@ -3,10 +3,11 @@ const { patchHiredMember } = require('../../database/queries/applications/index'
 const updateOfferStatus = require('../../database/queries/offers/updateOfferStatus');
 
 module.exports = (req, res, next) => {
-  const { member_id: memberId, offer_id: offerId, status } = req.body;
+  const { offer_id: offerId, status } = req.body;
+  const { memberId } = req.params;
   const schema = yup.object({
     offerId: yup.number().required(),
-    memberId: yup.number().required(),
+    memberId: yup.string().required(),
     status: yup.string().required(),
   });
   schema
