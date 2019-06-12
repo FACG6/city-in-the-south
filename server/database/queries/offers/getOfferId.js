@@ -6,4 +6,4 @@ LEFT OUTER JOIN offer_skill ON offer_skill.offer_id = offer.id
 LEFT OUTER JOIN skill ON skill.id = offer_skill.skill_id
 LEFT OUTER JOIN offer_offer_type ON offer_offer_type.offer_id = offer.id
 LEFT OUTER JOIN offer_type ON offer_type.id = offer_offer_type.offer_type_id
-GROUP BY offer.id WHERE offer.id = $1`, [offerId]);
+GROUP BY offer.id   HAVING offer.id = $1`, [offerId]);
