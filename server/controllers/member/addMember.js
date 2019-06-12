@@ -2,7 +2,7 @@ const { sign } = require('jsonwebtoken');
 
 const { addMmeber } = require('../../database/queries/members/addMember');
 const { checkEmail } = require('../../database/queries/authentication/checkEmail');
-const { checkUsername } = require('../../database/queries/authentication/loginqueries');
+const { checkUsername } = require('../../database/queries/authentication/getUser');
 const { singUpSchema } = require('../../helpers/validation-schema');
 const { hashingPass } = require('../../helpers/hashPassword');
 
