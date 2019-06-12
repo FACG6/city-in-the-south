@@ -1,6 +1,17 @@
-const joi = require('joi');
+const yup = require('yup');
 
-exports.loginSchema = joi.object().keys({
-  username: joi.string().min(3).required(),
-  pass: joi.string().min(8).required(),
+exports.loginSchema = yup.object().shape({
+  username: yup.string().required(),
+  pass: yup.string().required(),
+});
+
+exports.SavedOfferSchema = yup.object().shape({
+  memberId: yup.number()
+    .required()
+    .positive()
+    .integer(),
+  offerId: yup.number()
+    .required()
+    .positive()
+    .integer(),
 });
