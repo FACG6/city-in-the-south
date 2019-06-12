@@ -16,7 +16,7 @@ module.exports = (req, res, next) => {
           else return checkEmail(memberInfo.email);
         })
         .then(({ rows: validEmail }) => {
-          if (validEmail[0]) throw next({ code: 400, msg: 'The email already exists ' });
+          if (validEmail[0]) throw next({ code: 400, msg: 'The email already exists' });
           else return hashingPass(memberInfo.pass);
         })
         .then(hashedPass => addMmeber({ ...memberInfo, pass: hashedPass }))
