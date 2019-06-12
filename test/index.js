@@ -1,8 +1,8 @@
+/* eslint-disable global-require */
 const { dbBuild, dbFakeData } = require('../server/database/config/db_build');
 
 dbBuild()
   .then(dbFakeData)
-  // eslint-disable-next-line global-require
   .then(() => require('./postSkill'))
   .then(() => require('./getMemberSkills'))
   .then(() => require('./getOffersRoute'))
@@ -16,6 +16,7 @@ dbBuild()
   .then(() => require('./addHiredMember'))
   .then(() => require('./deleteOffer'))
   .then(() => require('./getOfferTypeTest'))
+  .then(() => require('./patchHiredMember'))
   .then(() => require('./getOfferId'))
   .then(() => require('./addApplication'))
   .catch(err => console.log(err));
