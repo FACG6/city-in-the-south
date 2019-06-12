@@ -7,3 +7,5 @@ LEFT OUTER JOIN skill ON skill.id = offer_skill.skill_id
 LEFT OUTER JOIN offer_offer_type ON offer_offer_type.offer_id = offer.id
 LEFT OUTER JOIN offer_type ON offer_type.id = offer_offer_type.offer_type_id
 GROUP BY offer.id LIMIT 100 OFFSET $1`, [offset]);
+
+exports.deleteOffer = id => connection.query('DELETE FROM offer WHERE offer.id = $1 ', [id]);
