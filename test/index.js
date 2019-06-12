@@ -16,5 +16,6 @@ dbBuild()
   .then(() => require('./addHiredMember'))
   .then(() => require('./deleteOffer'))
   .then(() => require('./getOfferTypeTest'))
+  .then(() => require('./getOfferId'))
   .then(() => require('./addApplication'))
   .catch(err => console.log(err));
