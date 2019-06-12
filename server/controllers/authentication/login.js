@@ -1,6 +1,6 @@
 const { sign } = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const { checkUsername } = require('../../database/queries/authentication/checkData');
+const { checkUsername } = require('../../database/queries/authentication/getUser');
 const { loginSchema } = require('../../helpers/validation-schema');
 
 module.exports = (req, res, next) => {
