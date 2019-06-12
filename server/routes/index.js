@@ -23,7 +23,7 @@ router.get('/:memberId/my-applications/:offerId', application.getMyApplication);
 router.post('/applications', application.addApplication);
 
 router.post('/hired-member', application.addHireMember);
-router.patch('/hired-member/:memberId', application.updateHireMember);
+router.patch('/hired-member', application.updateHireMember);
 
 /* filter */
 router
