@@ -5,9 +5,13 @@ module.exports = (req, res, next) => {
   const secret = process.env.SECRET;
   if (jwt && secret) {
     verify(jwt, secret, (err, decoded) => {
-      if (decoded) req.user = decoded;
-      else res.clearCookie('jwt');
-      next();
+      if (decoded) {
+        req.user = decoded;
+        next();
+      } else {
+        res.clearCookie('jwt');
+        next({ code: 401, msg: 'you are not authenticated ' });
+      }
     });
-  } else next({ code: 400, msg: 'you are not authenticated ' });
+  } else next({ code: 401, msg: 'you are not authenticated ' });
 };
