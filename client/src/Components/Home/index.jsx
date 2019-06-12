@@ -30,8 +30,7 @@ export default class Home extends Component {
     members: [],
     skills: [],
     offerTypes: [],
-    filteredOffers: [],
-    filterMembers: [],
+    filterData: [],
   };
 
   componentDidMount() {
@@ -39,8 +38,7 @@ export default class Home extends Component {
     let offerTypes = [];
     let members = [];
     let offers = [];
-    let filterMembers = [];
-    let filteredOffers = [];
+    let filterData = [];
 
     skills = filter.skills[0] ? filter.skills : memberSkills;
 
@@ -50,13 +48,13 @@ export default class Home extends Component {
       localStorage.setItem('filterQuery', 'Offers');
 
     members = memberDetails;
-    filterMembers = filterSkills(members, skills);
+    filterData = filterSkills(members, skills);
 
     offers = offersDetails;
     const filteredOffersSkills = filterSkills(offers, skills);
     const filtereOffersOfferTypes = filterOfferTypes(offers, offerTypes);
 
-    filteredOffers = filteredOffersSkills.filter(item => {
+    filterData = filteredOffersSkills.filter(item => {
       return filtereOffersOfferTypes.filter(_item => item.id !== _item.id);
     });
 
@@ -65,43 +63,51 @@ export default class Home extends Component {
       members,
       skills,
       offerTypes,
-      filterMembers,
-      filteredOffers,
+      filterData,
       filterQuery,
     });
   }
 
   handleSkillOnChange = skills => {
-    let filteredOffers = [];
+    let filterData = [];
     // make a patch request to the back that add new values to filter
     this.setState({ skills });
     const { filterQuery, members, offers, offerTypes } = this.state;
     if (filterQuery === 'Members') {
-      this.setState({ filterMembers: filterSkills(members, skills) });
+      this.setState({ filterData: filterSkills(members, skills) });
     }
     if (filterQuery === 'Offers') {
       const filteredOffersSkills = filterSkills(offers, skills);
       const filtereOffersOfferTypes = filterOfferTypes(offers, offerTypes);
 
-      filteredOffers = filteredOffersSkills.filter(item => {
+      filterData = filteredOffersSkills.filter(item => {
         return filtereOffersOfferTypes.filter(_item => item.id !== _item.id);
       });
-      this.setState({ filteredOffers });
+      this.setState({ filterData });
     }
   };
 
   handleOfferTypeOnChange = offerTypes => {
-    let filteredOffers = [];
+    let filterData = [];
     // make a patch request to the back that add new values to filter
     this.setState({ offerTypes });
     const { offers, skills } = this.state;
     const filteredOffersSkills = filterSkills(offers, skills);
     const filtereOffersOfferTypes = filterOfferTypes(offers, offerTypes);
 
-    filteredOffers = filteredOffersSkills.filter(item =>
+    filterData = filteredOffersSkills.filter(item =>
       filtereOffersOfferTypes.filter(_item => item.id === _item.id)
     );
-    this.setState({ filteredOffers });
+    this.setState({ filterData });
+  };
+
+  handelSearch = ({ target: { value } }) => {
+    const { filterData } = this.state;
+    const newArray = searchLogic(value, filterData);
+    this.setState(() => {
+      if (newArray[0]) return { filterData: newArray };
+      return { filterData };
+    });
   };
 
   handelSearch = ({ target: { value } }) => {
@@ -116,13 +122,7 @@ export default class Home extends Component {
   };
 
   render() {
-    const {
-      isClicked,
-      skills,
-      offerTypes,
-      filteredOffers,
-      filterMembers,
-    } = this.state;
+    const { isClicked, skills, offerTypes, filterData } = this.state;
     // eslint-disable-next-line react/prop-types
     return (
       <>
@@ -164,8 +164,8 @@ export default class Home extends Component {
               </Col>
               <Col className="home__result-label" xs={2}>
                 {localStorage.getItem('filterQuery') === 'Members'
-                  ? filterMembers.length
-                  : filteredOffers.length}{' '}
+                  ? filterData.length
+                  : filterData.length}{' '}
                 results
               </Col>
               <Col className="dropdown-toggled" xs={3}>
@@ -213,9 +213,9 @@ export default class Home extends Component {
             </Row>
             <hr className="hr-line" />
             {localStorage.getItem('filterQuery') === 'Offers' ? (
-              <Offers filtered={filteredOffers} />
+              <Offers filtered={filterData} />
             ) : (
-              <Members filtered={filterMembers} {...this.props} />
+              <Members filtered={filterData} {...this.props} />
             )}
           </Col>
         </Row>
