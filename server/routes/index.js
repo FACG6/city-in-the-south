@@ -13,7 +13,9 @@ const {
 
 
 router.post('/login', authentication.login);
+
 router.use(authentication.authentication);
+
 router.get('/logout', authentication.logout);
 
 /* Application */
