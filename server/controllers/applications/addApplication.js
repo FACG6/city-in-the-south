@@ -5,8 +5,8 @@ module.exports = (req, res, next) => {
   const { member_id: memberId, offer_id: offerId, proposal } = req.body;
 
   const schema = yup.object({
-    offerId: yup.string().required(),
-    memberId: yup.string().required(),
+    offerId: yup.number().required(),
+    memberId: yup.number().required(),
     proposal: yup.string().required(),
   });
   schema
