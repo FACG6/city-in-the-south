@@ -17,5 +17,6 @@ dbBuild()
   .then(() => require('./deleteOffer'))
   .then(() => require('./getOfferTypeTest'))
   .then(() => require('./patchHiredMember'))
+  .then(() => require('./getOfferId'))
   .then(() => require('./addApplication'))
   .catch(err => console.log(err));
