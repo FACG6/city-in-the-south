@@ -1,17 +1,28 @@
-const { addOffer, addOfferType, addSkills, addOffersType } = require('./../../database/queries/offers/index');
+const {
+  addOfferDetails,
+  addOfferSkill,
+  addOfferTypes,
+} = require('./../../database/queries/offers/index');
 
 
-module.exports = async (req, res) => {
-  const { newSkills, newOffer_type, skills, offer_type, ...offer } = req.body;
-  const skillsId = skills.map(skill => skill.id);
-  const offer_typeIds = offer_type.map(type => type.id);
-
-  const newSkillsId = await addSkills(newSkills);
-  const allSkillsId = [...skillsId, ...newSkillsId];
-  const newoffer_typeId = await addOffersType(newOffer_type);
-  const offerId = (await addOffer(offer)).rows[0].id;
-  console.log('Offer ID  : ', offerId);
-  console.log('new offers ID  : ', [...newoffer_typeId, ...offer_typeIds]);
-  console.log('all skills  ID  : ', allSkillsId);
-  
+module.exports = (req, res, next) => {
+  const {
+    title, position, description, skills, offer_types, member_id,
+  } = req.body;
+  let offerDetails;
+  addOfferDetails(title, position, description, member_id)
+    .then((response) => {
+      skills.map((item) => {
+        offerDetails = { ...response.rows[0] };
+        addOfferSkill(offerDetails.id, item.id);
+      });
+    })
+    .then(() => offer_types.map(item => addOfferTypes(offerDetails.id, item.id)))
+    .then(() => {
+      res.send({
+        error: null,
+        data: offerDetails,
+      });
+    })
+    .catch(err => next(err));
 };
