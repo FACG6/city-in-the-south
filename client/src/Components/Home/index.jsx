@@ -1,11 +1,224 @@
-import React from 'react';
-import UnderConstruction from '../UnderConstruction';
+import React, { Component } from 'react';
+import {
+  Row,
+  Col,
+  InputGroup,
+  Button,
+  FormControl,
+  Dropdown,
+} from 'react-bootstrap';
 
-export default function Home() {
-  return (
-    <>
-      <h1>Home</h1>
-      <UnderConstruction />
-    </>
-  );
+import AutoCompleteTags from '../CommonComponents/AutoCompleteTags';
+import Offers from './Offers';
+import Members from './Members';
+
+import { filterOfferTypes, filterSkills, searchLogic } from './heplers';
+
+import memberDetails from '../utils/members';
+import offersDetails from '../utils/offers.1';
+import filter from '../utils/filter';
+import memberSkills from '../utils/skills';
+
+import './style.css';
+
+export default class Home extends Component {
+  state = {
+    offset: 0,
+    isClicked: false,
+    offers: [],
+    filterQuery: '',
+    members: [],
+    skills: [],
+    offerTypes: [],
+    filteredOffers: [],
+    filterMembers: [],
+  };
+
+  componentDidMount() {
+    let skills = [];
+    let offerTypes = [];
+    let members = [];
+    let offers = [];
+    let filterMembers = [];
+    let filteredOffers = [];
+
+    skills = filter.skills[0] ? filter.skills : memberSkills;
+
+    if (filter.offer_type[0]) offerTypes = filter.offer_type;
+    const filterQuery =
+      localStorage.getItem('filterQuery') ||
+      localStorage.setItem('filterQuery', 'Offers');
+
+    members = memberDetails;
+    filterMembers = filterSkills(members, skills);
+
+    offers = offersDetails;
+    const filteredOffersSkills = filterSkills(offers, skills);
+    const filtereOffersOfferTypes = filterOfferTypes(offers, offerTypes);
+
+    filteredOffers = filteredOffersSkills.filter(item => {
+      return filtereOffersOfferTypes.filter(_item => item.id !== _item.id);
+    });
+
+    this.setState({
+      offers,
+      members,
+      skills,
+      offerTypes,
+      filterMembers,
+      filteredOffers,
+      filterQuery,
+      filterData: filterQuery === 'Members' ? filterMembers : filteredOffers,
+    });
+  }
+
+  handleSkillOnChange = skills => {
+    let filteredOffers = [];
+    // make a patch request to the back that add new values to filter
+    this.setState({ skills });
+    const { filterQuery, members, offers, offerTypes } = this.state;
+    if (filterQuery === 'Members') {
+      this.setState({ filterMembers: filterSkills(members, skills) });
+    }
+    if (filterQuery === 'Offers') {
+      const filteredOffersSkills = filterSkills(offers, skills);
+      const filtereOffersOfferTypes = filterOfferTypes(offers, offerTypes);
+
+      filteredOffers = filteredOffersSkills.filter(item => {
+        return filtereOffersOfferTypes.filter(_item => item.id !== _item.id);
+      });
+      this.setState({ filteredOffers });
+    }
+  };
+
+  handleOfferTypeOnChange = offerTypes => {
+    let filteredOffers = [];
+    // make a patch request to the back that add new values to filter
+    this.setState({ offerTypes });
+    const { offers, skills } = this.state;
+    const filteredOffersSkills = filterSkills(offers, skills);
+    const filtereOffersOfferTypes = filterOfferTypes(offers, offerTypes);
+
+    filteredOffers = filteredOffersSkills.filter(item =>
+      filtereOffersOfferTypes.filter(_item => item.id === _item.id)
+    );
+    this.setState({ filteredOffers });
+  };
+
+  handelSearch = ({ target: { value } }) => {
+    let filterData = [];
+    const { filterMembers, filteredOffers, filterQuery } = this.state;
+    filterData = filterQuery === 'Members' ? filterMembers : filteredOffers;
+    const newArray = searchLogic(value, filterData);
+    this.setState(() => {
+      if (newArray) return { filterData: newArray };
+      return { filterData };
+    });
+  };
+
+  setFilterQueryToOffersOrMembers = e => {
+    const { filteredOffers, filterMembers } = this.state;
+    const type = e.target.textContent;
+    this.setState({
+      filterQuery: type,
+      isClicked: false,
+      filterData: type === 'Offers' ? filteredOffers : filterMembers,
+    });
+    localStorage.setItem('filterQuery', type);
+  };
+
+  render() {
+    const {
+      isClicked,
+      skills,
+      offerTypes,
+      filteredOffers,
+      filterMembers,
+      filterData,
+    } = this.state;
+    // eslint-disable-next-line react/prop-types
+    return (
+      <>
+        <Row className="home__contanier">
+          <Col className="home__filter" sm={12} lg={3} md={3}>
+            <AutoCompleteTags
+              type="skill"
+              data={skills}
+              onchange={this.handleSkillOnChange}
+            />
+            <br />
+            {localStorage.getItem('filterQuery') === 'Offers' && (
+              <AutoCompleteTags
+                type="offer_type"
+                data={offerTypes}
+                onchange={this.handleOfferTypeOnChange}
+              />
+            )}
+          </Col>
+          <Col className="home__main" sm={12} lg={8} md={8}>
+            <Row>
+              <Col xs={7}>
+                <InputGroup
+                  className="mb-2  home__search"
+                  onChange={this.handelSearch}
+                >
+                  <InputGroup.Prepend>
+                    <Button
+                      variant="outline-secondary"
+                      className="home__search-btn"
+                    >
+                      <i className="fas fa-search home__search-icon" />
+                    </Button>
+                  </InputGroup.Prepend>
+                  <FormControl aria-describedby="basic-addon1" />
+                </InputGroup>
+              </Col>
+              <Col className="home__result-label" xs={2}>
+                {localStorage.getItem('filterQuery') === 'Members'
+                  ? filterMembers.length
+                  : filteredOffers.length}{' '}
+                results
+              </Col>
+              <Col className="dropdown-toggled" xs={3}>
+                {isClicked ? (
+                  <Dropdown.Menu show className="dropdwon-list">
+                    <Dropdown.Header
+                      onClick={this.setFilterQueryToOffersOrMembers}
+                    >
+                      Offers
+                    </Dropdown.Header>
+                    <Dropdown.Item
+                      eventKey="2"
+                      onClick={this.setFilterQueryToOffersOrMembers}
+                    >
+                      Members
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                ) : (
+                  <button
+                    type="button"
+                    className="dropdown-label dropdown-btn"
+                    onClick={() => this.setState({ isClicked: true })}
+                  >
+                    <span className="dropdown-label">
+                      {localStorage.getItem('filterQuery') === 'Members'
+                        ? 'Members'
+                        : 'Offers'}{' '}
+                    </span>
+                    <i className="fa fa-angle-down" />
+                  </button>
+                )}
+              </Col>
+            </Row>
+            <hr className="hr-line" />
+            {localStorage.getItem('filterQuery') === 'Offers' ? (
+              <Offers filtered={filterData} />
+            ) : (
+              <Members filtered={filterData} {...this.props} />
+            )}
+          </Col>
+        </Row>
+      </>
+    );
+  }
 }

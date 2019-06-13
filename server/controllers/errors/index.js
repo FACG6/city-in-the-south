@@ -7,7 +7,7 @@ exports.notFound = (req, res) => {
 exports.serverError = (err, req, res, next) => {
   switch (err.code) {
     case 400:
-      res.status(400).send(createError(400, err.msg));
+      res.status(400).send(err);
       break;
     case 401:
       res.status(401).send(createError(401, 'authentication error'));
