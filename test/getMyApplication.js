@@ -1,6 +1,8 @@
 const test = require('tape');
 const supertest = require('supertest');
+
 const app = require('../server/app');
+const { Cookie } = require('./testCookie');
 
 // getMyApplication for specific offerId
 test('test getMyApplication', (t) => {
@@ -8,6 +10,7 @@ test('test getMyApplication', (t) => {
     .get('/api/v1/2/my-applications/1')
     .expect(200)
     .expect('content-type', /json/)
+    .set('Cookie', [Cookie])
     .end((err, response) => {
       if (err) {
         t.error(err);
@@ -24,8 +27,4 @@ test('test getMyApplication', (t) => {
       );
       t.end();
     });
-});
-
-test.onFinish(() => {
-  process.exit(0);
 });

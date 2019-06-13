@@ -10,7 +10,7 @@
     "client": "npm start --prefix client",
     "kill": "fuser -k 5000/tcp; fuser -k 3000/tcp;",
     "dev": "run-p server client",
-    "test": "NODE_ENV=testing node ./test/index.js | tap-spec"
+    "test": "NODE_ENV=testing node --trace-warnings ./test/index.js | tap-spec"
   },
   "repository": {
     "type": "git",
