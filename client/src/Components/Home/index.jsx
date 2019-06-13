@@ -110,6 +110,17 @@ export default class Home extends Component {
     });
   };
 
+  handelSearch = ({ target: { value } }) => {
+    let filterData = [];
+    const { filterMembers, filteredOffers, filterQuery } = this.state;
+    filterData = filterQuery === 'Members' ? filterMembers : filteredOffers;
+    const newArray = searchLogic(value, filterData);
+    this.setState(() => {
+      if (newArray[0]) return { filterData: newArray };
+      return { filterData };
+    });
+  };
+
   render() {
     const { isClicked, skills, offerTypes, filterData } = this.state;
     // eslint-disable-next-line react/prop-types
@@ -195,7 +206,7 @@ export default class Home extends Component {
                         ? 'Members'
                         : 'Offers'}{' '}
                     </span>
-                    <i className="fa fa-angle-down" />
+                    <i className="fa  fa-angle-down" />
                   </button>
                 )}
               </Col>
