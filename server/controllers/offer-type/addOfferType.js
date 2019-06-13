@@ -1,5 +1,5 @@
-const { addOfferType } = require('../../database/queries/offer-type/postOfferType.js');
 const yup = require('yup');
+const { addOfferType } = require('../../database/queries/offer-type/postOfferType.js');
 const { checkofferTypeName } = require('../../database/queries/offer-type/checkofferTypeName.js');
 
 module.exports = (req, res, next) => {
@@ -11,15 +11,14 @@ module.exports = (req, res, next) => {
     .then(() => {
       checkofferTypeName(name)
         .then((resultCheck) => {
-          if (!resultCheck) {
+          if (!resultCheck.rowCount) {
             addOfferType(name)
               .then((resultAdd) => {
                 res.send({
                   error: null,
-                  data: resultAdd.rows[0],
+                  data: resultAdd.rows,
                 });
-              })
-              .catch(() => next({ code: 500, msg: 'internal server error' }));
+              });
           } else next({ code: 400, msg: 'offer_type already exist' });
         })
         .catch(() => next({ code: 500, msg: 'internal server error' }));
