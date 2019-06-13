@@ -27,4 +27,5 @@ dbBuild()
   .then(() => require('./getMyOffersTest'))
   .then(() => require('./deleteSavedOffer'))
   .then(() => require('./deleteOffer'))
+  .then(() => require('./logout-controller'))
   .catch(err => console.log(err));
