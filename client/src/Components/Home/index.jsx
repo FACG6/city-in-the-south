@@ -68,6 +68,7 @@ export default class Home extends Component {
       filterMembers,
       filteredOffers,
       filterQuery,
+      filterData: filterQuery === 'Members' ? filterMembers : filteredOffers,
     });
   }
 
@@ -110,16 +111,18 @@ export default class Home extends Component {
     filterData = filterQuery === 'Members' ? filterMembers : filteredOffers;
     const newArray = searchLogic(value, filterData);
     this.setState(() => {
-      if (newArray[0]) return { filterData: newArray };
+      if (newArray) return { filterData: newArray };
       return { filterData };
     });
   };
 
   setFilterQueryToOffersOrMembers = e => {
+    const { filteredOffers, filterMembers } = this.state;
     const type = e.target.textContent;
     this.setState({
       filterQuery: type,
       isClicked: false,
+      filterData: type === 'Offers' ? filteredOffers : filterMembers,
     });
     localStorage.setItem('filterQuery', type);
   };
@@ -131,6 +134,7 @@ export default class Home extends Component {
       offerTypes,
       filteredOffers,
       filterMembers,
+      filterData,
     } = this.state;
     // eslint-disable-next-line react/prop-types
     return (
@@ -178,11 +182,11 @@ export default class Home extends Component {
               <Col className="dropdown-toggled" xs={3}>
                 {isClicked ? (
                   <Dropdown.Menu show className="dropdwon-list">
-                    <Dropdown.Item
+                    <Dropdown.Header
                       onClick={this.setFilterQueryToOffersOrMembers}
                     >
                       Offers
-                    </Dropdown.Item>
+                    </Dropdown.Header>
                     <Dropdown.Item
                       eventKey="2"
                       onClick={this.setFilterQueryToOffersOrMembers}
@@ -208,9 +212,9 @@ export default class Home extends Component {
             </Row>
             <hr className="hr-line" />
             {localStorage.getItem('filterQuery') === 'Offers' ? (
-              <Offers filtered={filteredOffers} />
+              <Offers filtered={filterData} />
             ) : (
-              <Members filtered={filterMembers} {...this.props} />
+              <Members filtered={filterData} {...this.props} />
             )}
           </Col>
         </Row>
