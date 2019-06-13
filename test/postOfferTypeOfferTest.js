@@ -15,7 +15,7 @@ test('Testing for post-offer-type route', (t) => {
       if (err) {
         t.error(err);
       } else {
-        t.deepEqual(res.body, { error: null, data: { id: 3, name: 'full-time' } }, 'insert successfully');
+        t.deepEqual(res.body.data[0].name, 'full-time', 'insert successfully');
         t.end();
       }
     });
