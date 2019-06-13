@@ -2,6 +2,7 @@ const test = require('tape');
 const supertest = require('supertest');
 
 const router = require('../server/app');
+const { Cookie } = require('./testCookie');
 
 test('Testing for /api/v1/members/:offset route', (t) => {
   const fields = {
@@ -21,6 +22,7 @@ test('Testing for /api/v1/members/:offset route', (t) => {
     .get('/api/v1/members/0')
     .expect(200)
     .expect('content-type', /json/)
+    .set('Cookie', [Cookie])
     .end((err, res) => {
       if (err) t.error(err);
       t.deepEqual(res.body.data[0], fields, 'Should contain the same fileds');
