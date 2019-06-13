@@ -8,7 +8,9 @@ const { hashingPass } = require('../../helpers/hashPassword');
 
 module.exports = (req, res, next) => {
   const memberInfo = { ...req.body };
-  singUpSchema.validate(memberInfo)
+  singUpSchema.validate(memberInfo, {
+    abortEarly: false,
+  })
     .then(() => {
       checkUsername(memberInfo.username)
         .then(({ rows: validUsername }) => {
@@ -30,5 +32,5 @@ module.exports = (req, res, next) => {
         })
         .catch(err => next(err));
     })
-    .catch(err => next({ code: 400, msg: 'Ensure you enter validly data ' }));
+    .catch(err => next({ code: 400, msg: err.errors }));
 };
