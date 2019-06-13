@@ -7,6 +7,7 @@ before_script:
 env:
   global:
     - PGPORT=5432
+    - SECRET=Fatmasiam
 services:
   - postgresql
 test:

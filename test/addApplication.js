@@ -1,10 +1,13 @@
 const test = require('tape');
 const supertest = require('supertest');
+
 const app = require('../server/app');
+const { Cookie } = require('./testCookie');
 
 test('add new Application test', (t) => {
   supertest(app)
     .post('/api/v1/applications')
+    .set('Cookie', [Cookie])
     .expect(200)
     .send({
       member_id: 1,
@@ -26,8 +29,4 @@ test('add new Application test', (t) => {
       );
       t.end();
     });
-});
-
-test.onFinish(() => {
-  process.exit(0);
 });
