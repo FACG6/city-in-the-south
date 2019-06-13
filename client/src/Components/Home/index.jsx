@@ -121,6 +121,15 @@ export default class Home extends Component {
     });
   };
 
+  setFilterQueryToOffersOrMembers = e => {
+    const type = e.target.textContent;
+    this.setState({
+      filterQuery: type,
+      isClicked: false,
+    });
+    localStorage.setItem('filterQuery', type);
+  };
+
   render() {
     const { isClicked, skills, offerTypes, filterData } = this.state;
     // eslint-disable-next-line react/prop-types
@@ -171,26 +180,14 @@ export default class Home extends Component {
               <Col className="dropdown-toggled" xs={3}>
                 {isClicked ? (
                   <Dropdown.Menu show className="dropdwon-list">
-                    <Dropdown.Header
-                      onClick={() => {
-                        this.setState({
-                          filterQuery: 'Offers',
-                          isClicked: false,
-                        });
-                        localStorage.setItem('filterQuery', 'Offers');
-                      }}
+                    <Dropdown.Item
+                      onClick={this.setFilterQueryToOffersOrMembers}
                     >
                       Offers
-                    </Dropdown.Header>
+                    </Dropdown.Item>
                     <Dropdown.Item
                       eventKey="2"
-                      onClick={() => {
-                        this.setState({
-                          filterQuery: 'Members',
-                          isClicked: false,
-                        });
-                        localStorage.setItem('filterQuery', 'Members');
-                      }}
+                      onClick={this.setFilterQueryToOffersOrMembers}
                     >
                       Members
                     </Dropdown.Item>
