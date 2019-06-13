@@ -4,18 +4,27 @@ const supertest = require('supertest');
 const app = require('../server/app');
 const { Cookie } = require('./testCookie');
 
-test('testing for get-my-offers', (t) => {
+test('Testing for login route "POST"', (t) => {
   supertest(app)
-    .get('/api/v1/my-offers/2')
+    .post('/api/v1/login')
+    .set('Cookie', [Cookie])
+    .send({
+      username: 'ashatat',
+      pass: '123456',
+    })
     .expect(200)
     .expect('Content-Type', /json/)
-    .set('Cookie', [Cookie])
     .end((err, res) => {
+      const actual = res.body.data;
       if (err) {
         t.error(err);
       } else {
-        t.deepEqual(res.body.data[0].status, 'finished', 'is true status ');
+        t.deepEqual(res.body.data, actual, ' Login success ');
         t.end();
       }
     });
+});
+
+test.onFinish(() => {
+  process.exit(0);
 });
