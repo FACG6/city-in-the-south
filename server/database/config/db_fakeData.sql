@@ -17,7 +17,7 @@ INSERT INTO offer (title, position, description, status, member_id) VALUES
   ('Small Shop seeks workers', 'Marketing Manager', 'We are looking to hire a Marketing Manager who will be in charge of overseeing the promotion of our companys brands.  As a successful hire, you will be  responsible  for developing pricing  strategies identify identifying new customers, supporting lead', 'active', (SELECT id FROM member LIMIT 1));
 
 INSERT INTO application (offer_id, member_id, proposal) VALUES
-  (1, (SELECT id FROM member LIMIT 1 OFFSET 0),'In my former Full stack role, I exercise a calculated and methodical approach to problem solving. While I am independently motivated, I appreciate collective efforts and collaborate productively within group settings. Moreover, I am competent in javascript and SQL with proficiency in ASP.'),
+  (1, (SELECT id FROM member LIMIT 1 OFFSET 2),'In my former Full stack role, I exercise a calculated and methodical approach to problem solving. While I am independently motivated, I appreciate collective efforts and collaborate productively within group settings. Moreover, I am competent in javascript and SQL with proficiency in ASP.'),
   (1, (SELECT id FROM member LIMIT 1 OFFSET 1),'I am passion about Front End Development. I have a lot of experience working with small teams to develop a good websites interfaces');
 
 INSERT INTO skill (name) VALUES 
@@ -27,7 +27,7 @@ INSERT INTO skill (name) VALUES
 
 INSERT INTO review (offer_id, member_id, rate, description) VALUES 
   (1, (SELECT id FROM member LIMIT 1 OFFSET 1),4 , 'Great to work with we had intresting design and he worked had to get it the way we needed it.'),
-  (2, (SELECT id FROM member LIMIT 1 OFFSET 0),4.5 , 'very good work with only minor supervision - top rate');
+  (2, (SELECT id FROM member LIMIT 1 OFFSET 2),4.5 , 'very good work with only minor supervision - top rate');
 
 INSERT INTO education (title, date, university, description, member_id) VALUES
   ('Certified Computer Professional2002', '2016-12-17 07:37:16-08', 'Brunel University', 'Institute for the Certification of Computing Professionals', (SELECT id FROM member LIMIT 1 OFFSET 1)),

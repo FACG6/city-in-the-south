@@ -2,6 +2,7 @@ const test = require('tape');
 const supertest = require('supertest');
 
 const app = require('../server/app');
+const { Cookie } = require('./testCookie');
 
 test('Testing for saved-offers route', (t) => {
   supertest(app)
@@ -12,6 +13,7 @@ test('Testing for saved-offers route', (t) => {
     })
     .expect(200)
     .expect('Content-Type', /json/)
+    .set('Cookie', [Cookie])
     .end((err, res) => {
       if (err) {
         t.error(err);
@@ -20,9 +22,4 @@ test('Testing for saved-offers route', (t) => {
         t.end();
       }
     });
-});
-
-
-test.onFinish(() => {
-  process.exit(0);
 });
