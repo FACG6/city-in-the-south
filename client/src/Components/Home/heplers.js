@@ -18,6 +18,7 @@ const filterOfferTypes = (arr, offerTypeQuery) => {
 };
 
 const searchLogic = (searchFor, dataArray) => {
+  console.log(searchFor);
   return dataArray.filter(obj =>
     Object.values(obj).some(value =>
       String(value)
