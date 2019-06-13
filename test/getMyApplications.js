@@ -28,7 +28,3 @@ test('test getMyApplications', (t) => {
       t.end();
     });
 });
-
-test.onFinish(() => {
-  process.exit(0);
-});

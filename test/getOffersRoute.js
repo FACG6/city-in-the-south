@@ -36,7 +36,3 @@ test('Testing for /api/v1/offers/:offset route', (t) => {
       t.end();
     });
 });
-
-test.onFinish(() => {
-  process.exit(0);
-});

@@ -19,6 +19,3 @@ test('testing for get-my-offers', (t) => {
       }
     });
 });
-test.onFinish(() => {
-  process.exit(0);
-});

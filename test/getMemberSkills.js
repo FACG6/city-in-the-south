@@ -34,7 +34,3 @@ tape('Testing for route', (t) => {
     })
     .catch(err => t.error(err));
 });
-
-tape.onFinish(() => {
-  process.exit(0);
-});

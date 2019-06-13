@@ -22,7 +22,7 @@ tape('Testing for DELETE : /api/v1/offers/:offerId', (t) => {
         .expect(200)
         .expect('content-type', /json/)
         .set('Cookie', [Cookie])
-        .end((err, response) => {
+        .end((err) => {
           if (err) t.error(err);
           selectDeletedOffer(offerId)
             .then((result) => {
@@ -33,8 +33,4 @@ tape('Testing for DELETE : /api/v1/offers/:offerId', (t) => {
         });
     })
     .catch(error => t.error(error));
-});
-
-tape.onFinish(() => {
-  process.exit(0);
 });

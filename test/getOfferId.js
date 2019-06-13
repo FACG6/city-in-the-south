@@ -4,17 +4,17 @@ const supertest = require('supertest');
 const app = require('../server/app');
 const { Cookie } = require('./testCookie');
 
-test('testing for get-my-offers', (t) => {
+test('testing for get offer id', (t) => {
   supertest(app)
-    .get('/api/v1/my-offers/2')
+    .get('/api/v1/offer/5')
+    .set('Cookie', [Cookie])
     .expect(200)
     .expect('Content-Type', /json/)
-    .set('Cookie', [Cookie])
     .end((err, res) => {
       if (err) {
         t.error(err);
       } else {
-        t.deepEqual(res.body.data[0].status, 'finished', 'is true status ');
+        t.deepEqual(res.body.data[0].id, 5, 'the offer id must be 5');
         t.end();
       }
     });

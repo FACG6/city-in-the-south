@@ -15,3 +15,7 @@ exports.SavedOfferSchema = yup.object().shape({
     .positive()
     .integer(),
 });
+
+exports.postSkillSchema = yup.object().shape({
+  name: yup.string().required(),
+});

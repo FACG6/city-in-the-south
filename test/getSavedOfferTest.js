@@ -19,6 +19,3 @@ test('testing for get-saved-offers ', (t) => {
       }
     });
 });
-test.onFinish(() => {
-  process.exit(0);
-});

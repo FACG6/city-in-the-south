@@ -23,8 +23,3 @@ test('Testing for saved-offers route', (t) => {
       }
     });
 });
-
-
-test.onFinish(() => {
-  process.exit(0);
-});

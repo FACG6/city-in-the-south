@@ -2,10 +2,12 @@ const test = require('tape');
 const supertest = require('supertest');
 
 const app = require('../server/app');
+const { Cookie } = require('./testCookie');
 
 test('Testing for login route "POST"', (t) => {
   supertest(app)
     .post('/api/v1/login')
+    .set('Cookie', [Cookie])
     .send({
       username: 'ashatat',
       pass: '123456',
@@ -22,7 +24,6 @@ test('Testing for login route "POST"', (t) => {
       }
     });
 });
-
 
 test.onFinish(() => {
   process.exit(0);
