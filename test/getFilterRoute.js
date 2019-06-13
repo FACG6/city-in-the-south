@@ -12,9 +12,9 @@ test('Testing for /api/v1/filter/:memberId route', (t) => {
     .set('Cookie', [Cookie])
     .end((err, res) => {
       if (err) t.error(err);
-      const skill = JSON.parse(res.body.data[0].skills[0]);
-      t.equal(skill.id, 3, 'Should contain the same skill id');
-      t.equal(skill.name, 'javascript', 'Should contain the same skill name');
+      const { skills } = res.body.data;
+      t.equal(skills[0].id, 3, 'Should contain the same skill id');
+      t.equal(skills[0].name, 'javascript', 'Should contain the same skill name');
       t.end();
     });
 });
