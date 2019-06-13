@@ -59,10 +59,8 @@ INSERT INTO member_skill (skill_id, member_id) VALUES
   ((SELECT id FROM skill LIMIT 1 OFFSET 3), (SELECT id FROM member LIMIT 1 OFFSET 0));
 
 INSERT INTO filter (member_id, skills, offer_type) VALUES 
-  ((SELECT id FROM member LIMIT 1 OFFSET 1), 'react js', 'fixed-price'),
-  ((SELECT id FROM member LIMIT 1 OFFSET 1), 'posgresql', 'full-time'),
-  ((SELECT id FROM member LIMIT 1 OFFSET 0), 'java', 'fixed-price'),
-  ((SELECT id FROM member LIMIT 1 OFFSET 0), 'python', 'part-time');
+  ((SELECT id FROM member LIMIT 1 OFFSET 0), '[{id:1 , name:"react.js"}]', '[{id:2 , name:"fixed-price"}]'),
+  ((SELECT id FROM member LIMIT 1 OFFSET 1), '[{id:3 , name:"javascript"}]', '[{id:1 , name:"full-time"}]');
 
 INSERT INTO saved_offer (offer_id, member_id) VALUES 
   ((SELECT id FROM offer LIMIT 1 OFFSET 1), (SELECT id FROM member LIMIT 1 OFFSET 1)),
