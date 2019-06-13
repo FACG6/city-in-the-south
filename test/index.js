@@ -21,4 +21,5 @@ dbBuild()
   .then(() => require('./addApplication'))
   .then(() => require('./deleteSavedOffer'))
   .then(() => require('./deleteOffer'))
+  .then(() => require('./logout-controller'))
   .catch(err => console.log(err));
