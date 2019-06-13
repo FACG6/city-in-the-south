@@ -1,6 +1,8 @@
 const test = require('tape');
 const supertest = require('supertest');
+
 const app = require('../server/app');
+const { Cookie } = require('./testCookie');
 
 test('add hired member test', (t) => {
   supertest(app)
@@ -12,6 +14,7 @@ test('add hired member test', (t) => {
       status: 'accepted',
     })
     .expect('content-type', /json/)
+    .set('Cookie', [Cookie])
     .end((err, response) => {
       if (err) {
         t.error(err);
@@ -26,8 +29,4 @@ test('add hired member test', (t) => {
       );
       t.end();
     });
-});
-
-test.onFinish(() => {
-  process.exit(0);
 });

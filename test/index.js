@@ -4,6 +4,7 @@ const { dbBuild, dbFakeData } = require('../server/database/config/db_build');
 dbBuild()
   .then(dbFakeData)
   .then(() => require('./postOfferTypeOfferTest'))
+  .then(() => require('./loginTest'))
   .then(() => require('./postSkill'))
   .then(() => require('./getMemberSkills'))
   .then(() => require('./getOffersRoute'))

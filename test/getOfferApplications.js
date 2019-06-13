@@ -1,12 +1,15 @@
 const test = require('tape');
 const supertest = require('supertest');
+
 const app = require('../server/app');
+const { Cookie } = require('./testCookie');
 
 test('test getOfferApplications', (t) => {
   supertest(app)
     .get('/api/v1//offer-applications/1')
     .expect(200)
     .expect('content-type', /json/)
+    .set('Cookie', [Cookie])
     .end((err, response) => {
       if (err) {
         t.error(err);
@@ -23,8 +26,4 @@ test('test getOfferApplications', (t) => {
       );
       t.end();
     });
-});
-
-test.onFinish(() => {
-  process.exit(0);
 });

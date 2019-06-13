@@ -3,6 +3,7 @@ const supertest = require('supertest');
 
 const connection = require('../server/database/config/db_connection');
 const router = require('../server/app');
+const { Cookie } = require('./testCookie');
 
 const insertMember = () => connection.query('INSERT INTO member(username, full_name) VALUES (\'maiseSoph\', \'maiseee Soph\') RETURNING *');
 
@@ -22,6 +23,7 @@ tape('Testing for route', (t) => {
     .then(() => {
       supertest(router)
         .get(`/api/v1/skills/${memberId}`)
+        .set('Cookie', [Cookie])
         .expect(200)
         .expect('content-type', /json/)
         .end((err, response) => {
@@ -31,8 +33,4 @@ tape('Testing for route', (t) => {
         });
     })
     .catch(err => t.error(err));
-});
-
-tape.onFinish(() => {
-  process.exit(0);
 });
