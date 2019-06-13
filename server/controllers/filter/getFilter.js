@@ -1,8 +1,12 @@
 const { getFilterData } = require('../../database/queries/filter/index');
 
-module.exports = (req, res) => {
-  console.log(req.params.member_id);
+module.exports = (req, res, next) => {
   getFilterData(req.params.member_id)
-    .then(response => res.send(response.rows))
-    .catch(err => console.log(err))
+    .then((response) => {
+      res.send({
+        error: null,
+        data: response.rows,
+      });
+    })
+    .catch(err => next(err));
 };
