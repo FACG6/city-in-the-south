@@ -1,9 +1,10 @@
 const yup = require('yup');
-const { addOfferType } = require('../../database/queries/offer-type/postOfferType.js');
-const { checkofferTypeName } = require('../../database/queries/offer-type/checkofferTypeName.js');
+
+const { checkofferTypeName, addOfferType } = require('../../database/queries/offer-type');
 
 module.exports = (req, res, next) => {
-  const name = req.body;
+  const { name } = req.body;
+
   const schema = yup.object({
     name: yup.string().required(),
   });

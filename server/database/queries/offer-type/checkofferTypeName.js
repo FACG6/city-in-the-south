@@ -7,10 +7,4 @@ const checkofferTypeName = (name) => {
   };
   return connection.query(sql);
 };
-// checkofferTypeName('full-time')
-//   .then(res => console.log(res.rows))// num--> so dont add(offer_type already exist)
-//   .catch(err => console.log(err));
-// checkofferTypeName('bbbbb')
-//   .then(res => console.log(res.rows))// empty--> so add it
-//   .catch(err => console.log(err));
-module.exports = { checkofferTypeName };
+module.exports = checkofferTypeName;
