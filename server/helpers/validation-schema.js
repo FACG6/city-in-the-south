@@ -1,5 +1,11 @@
 const yup = require('yup');
 
+exports.singUpSchema = yup.object().shape({
+  username: yup.string().min(3).required(),
+  email: yup.string().email({ minDomainAtoms: 2 }),
+  pass: yup.string().min(8).required(),
+});
+
 exports.loginSchema = yup.object().shape({
   username: yup.string().required(),
   pass: yup.string().required(),
