@@ -92,7 +92,7 @@ class OfferCard extends React.Component {
             </Card.Header>
             <Card.Body>
               <Card.Text className="offer-card__description">
-                {offer.description.substring(0, 300)}
+                {offer.description && offer.description.substring(0, 300)}
               </Card.Text>
             </Card.Body>
           </Card>
