@@ -40,7 +40,7 @@ export default function Members({ filtered, history }) {
                     <br />
                     <br />
                     <div className="member-card__skills">
-                      {member.skill.map(skill => (
+                      {member.skills.map(skill => (
                         <h1 className="member-card__skill" key={skill.id}>
                           {skill.name}
                         </h1>
