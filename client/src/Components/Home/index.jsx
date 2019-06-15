@@ -14,11 +14,6 @@ import Members from './Members';
 
 import { filterOfferTypes, filterSkills, searchLogic } from './heplers';
 
-import memberDetails from '../utils/members';
-import offersDetails from '../utils/offers.1';
-import filter from '../utils/filter';
-import memberSkills from '../utils/skills';
-
 import './style.css';
 
 export default class Home extends Component {
@@ -32,77 +27,146 @@ export default class Home extends Component {
     offerTypes: [],
     filteredOffers: [],
     filterMembers: [],
+    filterData: [],
+    memberId: 0,
   };
 
   componentDidMount() {
-    let skills = [];
-    let offerTypes = [];
-    let members = [];
-    let offers = [];
-    let filterMembers = [];
-    let filteredOffers = [];
-
-    skills = filter.skills[0] ? filter.skills : memberSkills;
-
-    if (filter.offer_type[0]) offerTypes = filter.offer_type;
-    const filterQuery =
-      localStorage.getItem('filterQuery') ||
-      localStorage.setItem('filterQuery', 'Offers');
-
-    members = memberDetails;
-    filterMembers = filterSkills(members, skills);
-
-    offers = offersDetails;
-    const filteredOffersSkills = filterSkills(offers, skills);
-    const filtereOffersOfferTypes = filterOfferTypes(offers, offerTypes);
-
-    filteredOffers = filteredOffersSkills.filter(item => {
-      return filtereOffersOfferTypes.filter(_item => item.id !== _item.id);
-    });
-
     this.setState({
-      offers,
-      members,
-      skills,
-      offerTypes,
-      filterMembers,
-      filteredOffers,
-      filterQuery,
-      filterData: filterQuery === 'Members' ? filterMembers : filteredOffers,
+      filterQuery:
+        localStorage.getItem('filterQuery') ||
+        localStorage.setItem('filterQuery', 'Offers'),
+      memberId: localStorage.getItem('memberId') || 2,
     });
+    const { offset, memberId } = this.state;
+
+    fetch(`/api/v1/filter/${memberId}`)
+      .then(res => res.json())
+      .then(res => {
+        const filterSkill = res.data.skills;
+        const { offer_type: filterOfferType } = res.data;
+        this.setState({
+          skills: filterSkill[0] ? filterSkill : [],
+          offerTypes: filterOfferType[0] ? filterOfferType : [],
+        });
+      })
+      .catch(err => console.log(err));
+
+    fetch(`/api/v1/members/${offset}`, { method: 'GET' })
+      .then(res => res.json())
+      .then(res => {
+        if (res.data) {
+          this.setState(
+            { members: res.data },
+            () => {
+              const { members, skills } = this.state;
+              const filterMembersData = filterSkills(members, skills);
+              if (members[0]) {
+                this.setState({
+                  filterMembers: filterMembersData,
+                });
+              }
+            },
+            () => {
+              const { filterMembers } = this.state;
+              this.setState({ filterData: filterMembers });
+            }
+          );
+        }
+      })
+      .catch(err => console.log(err));
+
+    fetch(`/api/v1/offers/${offset}`, { method: 'GET' })
+      .then(res => res.json())
+      .then(res => {
+        if (res.data) {
+          this.setState(
+            { offers: res.data },
+            () => {
+              const { offers, offerTypes, skills } = this.state;
+              if (offers[0]) {
+                const filteredOffersSkills = filterSkills(offers, skills);
+                const filtereOffersOfferTypes = filterOfferTypes(
+                  offers,
+                  offerTypes
+                );
+                const filteredOffersData = filteredOffersSkills.filter(item => {
+                  return filtereOffersOfferTypes.filter(
+                    _item => item.id !== _item.id
+                  );
+                });
+                this.setState({ filteredOffers: filteredOffersData });
+              }
+            },
+            () => {
+              const { filteredOffers } = this.state;
+              this.setState({ filterData: filteredOffers });
+            }
+          );
+        }
+      })
+      .catch(err => console.log(err));
   }
 
   handleSkillOnChange = skills => {
-    let filteredOffers = [];
-    // make a patch request to the back that add new values to filter
     this.setState({ skills });
-    const { filterQuery, members, offers, offerTypes } = this.state;
+    const { filterQuery, members, offers, offerTypes, memberId } = this.state;
     if (filterQuery === 'Members') {
-      this.setState({ filterMembers: filterSkills(members, skills) });
+      const filterMembersData = filterSkills(members, skills);
+      this.setState({ filterData: filterMembersData });
     }
     if (filterQuery === 'Offers') {
       const filteredOffersSkills = filterSkills(offers, skills);
       const filtereOffersOfferTypes = filterOfferTypes(offers, offerTypes);
-
-      filteredOffers = filteredOffersSkills.filter(item => {
+      const filteredOffers = filteredOffersSkills.filter(item => {
         return filtereOffersOfferTypes.filter(_item => item.id !== _item.id);
       });
-      this.setState({ filteredOffers });
+      this.setState({ filterData: filteredOffers });
     }
+    fetch(`/api/v1/filter/${memberId}`, {
+      method: 'PATCH',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        skills,
+        offer_type: offerTypes,
+      }),
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => console.log(err));
   };
 
   handleOfferTypeOnChange = offerTypes => {
-    let filteredOffers = [];
-    // make a patch request to the back that add new values to filter
     this.setState({ offerTypes });
-    const { offers, skills } = this.state;
+    const { offers, skills, memberId } = this.state;
     const filteredOffersSkills = filterSkills(offers, skills);
     const filtereOffersOfferTypes = filterOfferTypes(offers, offerTypes);
-
-    filteredOffers = filteredOffersSkills.filter(item =>
+    const filteredOffers = filteredOffersSkills.filter(item =>
       filtereOffersOfferTypes.filter(_item => item.id === _item.id)
     );
-    this.setState({ filteredOffers });
+    this.setState({ filterData: filteredOffers });
+
+    fetch(`/api/v1/filter/${memberId}`, {
+      method: 'PATCH',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        skills,
+        offer_type: offerTypes,
+      }),
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => console.log(err));
   };
 
   handelSearch = ({ target: { value } }) => {
@@ -128,14 +192,7 @@ export default class Home extends Component {
   };
 
   render() {
-    const {
-      isClicked,
-      skills,
-      offerTypes,
-      filteredOffers,
-      filterMembers,
-      filterData,
-    } = this.state;
+    const { isClicked, skills, offerTypes, filterData } = this.state;
     // eslint-disable-next-line react/prop-types
     return (
       <>
@@ -143,7 +200,7 @@ export default class Home extends Component {
           <Col className="home__filter" sm={12} lg={3} md={3}>
             <AutoCompleteTags
               type="skill"
-              data={skills}
+              data={skills[0]}
               onchange={this.handleSkillOnChange}
             />
             <br />
@@ -174,10 +231,7 @@ export default class Home extends Component {
                 </InputGroup>
               </Col>
               <Col className="home__result-label" xs={2}>
-                {localStorage.getItem('filterQuery') === 'Members'
-                  ? filterMembers.length
-                  : filteredOffers.length}{' '}
-                results
+                {filterData.length} results
               </Col>
               <Col className="dropdown-toggled" xs={3}>
                 {isClicked ? (
