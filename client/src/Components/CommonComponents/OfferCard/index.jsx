@@ -12,6 +12,7 @@ class OfferCard extends React.Component {
     statusDiv: '',
     hovered: '',
     saved: false,
+    memberId: 0,
   };
 
   componentDidMount() {
@@ -25,9 +26,10 @@ class OfferCard extends React.Component {
     this.setState(() => {
       return {
         offer,
-        saved: offer.saved,
+        saved: offer.saved || false,
         statusLabel: `offer-card__status--${status}`,
         statusDiv: `offer-card__border--${borderColor[status]}`,
+        memberId: localStorage.getItem('memberId') || 2,
       };
     });
   }
@@ -39,12 +41,54 @@ class OfferCard extends React.Component {
   };
 
   handleSave = id => {
-    const { saved } = this.state;
+    const { saved, memberId } = this.state;
+    console.log(saved, id);
+    if (saved) {
+      // delete
+      // this.setState({ saved: false });
+      fetch(`/api/v1/saved-offers/${memberId}`, {
+        method: 'DELETE',
+        body: JSON.stringify({ offerId: id }),
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      })
+        .then(res => res.json())
+        .then(res => {
+          if (res.data) {
+            this.setState({ saved: false });
+          }
+          if (res.msg) {
+            console.log(res.msg);
+          }
+        })
+        .catch(err => console.log(err));
+    } else {
+      fetch('/api/v1/saved-offers', {
+        method: 'POST',
+        body: JSON.stringify({ memberId, offerId: id }),
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      })
+        .then(res => res.json())
+        .then(res => {
+          if (res.data) {
+            this.setState({ saved: true });
+          }
+          if (res.msg) {
+            console.log(res.msg);
+          }
+        })
+        .catch(err => console.log(err));
+    }
     // send request to the backend to save (if this.state.saved === true) the offer
     // if this.state.saved is false, send request to unsave the offer
     // if(saved) axios.delete(`/api/v1/saved-offer/${id}`)
     // else axios.post('/api/v1/saved-offers', body: {member_id, id} )
-    this.setState({ saved: !saved });
+    // this.setState({ saved: !saved });
   };
 
   handleHover = () => this.setState({ hovered: 'offer-card--hovered' });
