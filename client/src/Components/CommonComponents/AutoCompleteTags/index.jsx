@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { Spinner } from 'react-bootstrap';
 import { Typeahead } from 'react-bootstrap-typeahead';
 
-import { skills, offerType } from './staticData';
-
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import './style.css';
 
@@ -20,40 +18,76 @@ export default class AutoCompleteTags extends Component {
     // const selected = options.filter(item => _.find(fetched, id => id === item.id))
     const { type, allowNew } = this.props;
     this.setState({ allownew: allowNew });
-    this.setState(
-      () => {
-        let options;
-        if (type === 'skill') {
-          options = skills;
-        } else if (type === 'offer_type') {
-          options = offerType;
-        }
-        return { options };
-      },
-      () => {
-        this.setState({ selectedTags: this.props.data });
-      }
-    );
+    if (type === 'skill') {
+      fetch('/api/v1/skills', { method: 'GET' })
+        .then(res => res.json())
+        .then(res => {
+          const { data } = this.props;
+          if (res.data)
+            this.setState({ options: res.data, selectedTags: data });
+        })
+        .catch(err => console.log(err));
+    } else if (type === 'offer_type') {
+      fetch('/api/v1/offer-type', { method: 'GET' })
+        .then(res => res.json())
+        .then(res => {
+          const { data } = this.props;
+          if (res.data)
+            this.setState({ options: res.data, selectedTags: data });
+        })
+        .catch(err => console.log(err));
+    }
   }
 
   handleChange = items => {
     /* filter the skills if the user enter new skills we will make a request to the back to add the skills the user adding it 
     and the same as for the offer_type
   */
-    const { onchange } = this.props;
+    const { onchange, type } = this.props;
     this.setState(
       prevState => {
         const newOptions = [...prevState.options];
         const newTags = [...prevState.selectedTags];
         if (items.length > newTags.length) {
           if (items[items.length - 1].customOption) {
-            // send request to db to add skills/offertypes then return newOptions
-            // push the newOptions
-            newOptions.push({ id: 222, name: items[items.length - 1].name });
-            newTags.push({ id: 222, name: items[items.length - 1].name });
-          } else {
-            newTags.push(items[items.length - 1]);
+            if (type === 'skill') {
+              fetch('/api/v1/skills', {
+                method: 'POST',
+                body: JSON.stringify({ name: items[items.length - 1].name }),
+                headers: {
+                  Accept: 'application/json',
+                  'Content-Type': 'application/json',
+                },
+              })
+                .then(res => res.json())
+                .then(res => {
+                  if (res.data) {
+                    newOptions.push(res.data);
+                    newTags.push(res.data);
+                  }
+                })
+                .catch(err => console.log(err));
+            }
+            if (type === 'offer_type') {
+              fetch('/api/v1/offer-type', {
+                method: 'POST',
+                body: JSON.stringify({ name: items[items.length - 1].name }),
+                headers: {
+                  Accept: 'application/json',
+                  'Content-Type': 'application/json',
+                },
+              })
+                .then(res => res.json())
+                .then(res => {
+                  if (res.data) {
+                    newOptions.push(res.data[0]);
+                    newTags.push(res.data[0]);
+                  }
+                })
+                .catch(err => console.log(err));
+            }
           }
+
           return { options: newOptions, selectedTags: newTags };
         }
         return { selectedTags: items };
