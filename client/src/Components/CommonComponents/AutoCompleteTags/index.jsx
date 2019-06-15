@@ -117,7 +117,7 @@ export default class AutoCompleteTags extends Component {
     return (
       <>
         <h1 className="autocomplete__title">
-          {type === 'skill' ? 'Skills ' : 'Offer Type'}
+          {type === 'skill' ? 'Skills' : 'Offer Type'}
         </h1>
         {options[0] ? (
           <Typeahead
