@@ -12,37 +12,57 @@ class CreateOffer extends Component {
     title: '',
     position: '',
     description: '',
-    skills: null, // skills id's
-    offerType: null, // offer_types id's
-    // member_id: '',
+    skills: [],
+    offerType: [],
+    memberId: 0,
     errMsg: '',
   };
 
   componentDidMount() {
-    // const member_id = get member_id from local storage
-    // this.setState({ member_id })
+    this.setState({ memberId: localStorage.getItem('memberId') || 2 });
   }
 
   handleSubmit = () => {
     // eslint-disable-next-line react/prop-types
     // const { history } = this.props;
-    const { title, position, description, offerType } = this.state;
+    const {
+      title,
+      position,
+      description,
+      offerType,
+      skills,
+      memberId,
+    } = this.state;
 
     newOfferValidation
       .validate(
-        { title, position, description, offerType },
+        { title, position, description, offerType, skills },
         { abortEarly: false }
       )
       .then(() => {
         this.setState({ errMsg: '' });
-        // send request to the backend with body
-        // axios
-        // .post('/api/v1/offers', { title, position, description, skills, offerType })
-        // get offer_id from response
-        // history.push(`/app/${offer_id}`);
-        // send request with new skills from memeber (which don't exist in autocomplete) to update filters table `PUT` : `/api/v1/filter/:memberId`
-        // and the same for offerTypes
-        // body of the request { skills: this.state.skills , offerTypes: this.state.offerTypes}
+        fetch('/api/v1/offers', {
+          method: 'POST',
+          body: JSON.stringify({
+            title,
+            position,
+            description,
+            offerType,
+            skills,
+            memberId,
+          }),
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+        })
+          .then(res => res.json())
+          .then(res => {
+            if (res.data) {
+              console.log(res);
+            }
+          })
+          .catch(err => console.log(err));
       })
       .catch(({ inner }) => {
         if (inner) {
@@ -110,6 +130,7 @@ class CreateOffer extends Component {
                     type="offer_type"
                     placeholder="eg:  fixed price"
                     onchange={this.handleOfferTypes}
+                    allowNew
                   />
                   {errMsg.offerType && (
                     <div className="newoffer__errMsg">
@@ -145,6 +166,7 @@ class CreateOffer extends Component {
                   type="skill"
                   placeholder=" select skills"
                   onchange={this.handleSkills}
+                  allowNew
                 />
               </Row>
               <div>
