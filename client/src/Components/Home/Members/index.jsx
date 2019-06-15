@@ -21,7 +21,11 @@ export default function Members({ filtered, history }) {
                   <Row>
                     <Col xs={6} md={5}>
                       <Card.Img
-                        src={member.avatar}
+                        src={
+                          member.avatar
+                            ? member.avatar
+                            : 'https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1'
+                        }
                         className="member-card__avatar"
                       />
                     </Col>
