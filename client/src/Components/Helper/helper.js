@@ -1,16 +1,15 @@
 const handleStatusColor = status => {
-  console.log('ttttttttttt');
   switch (status) {
     case 'completed':
     case 'accepted':
-      return '#0A8F07';
+      return status;
     case 'pending':
-      return '#F77D0E';
+      return status;
     case 'finished':
     case 'refused':
-      return 'red';
-    case 'inactive':
-      return '#1BA7E2';
+      return status;
+    case 'active':
+      return status;
     default:
       return null;
   }
