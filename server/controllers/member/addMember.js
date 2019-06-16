@@ -27,8 +27,9 @@ module.exports = (req, res, next) => {
             id: member[0].id, username: member[0].username, avatar: member[0].avatar,
           };
           const jwt = sign(payLoad, process.env.SECRET);
+          console.log(jwt);
           res.cookie('jwt', jwt, { maxAge: 7200000 });
-          res.status(200).send({ error: null, data: [payLoad] });
+          return res.status(200).send({ error: null, data: [payLoad] });
         })
         .catch(err => next(err));
     })

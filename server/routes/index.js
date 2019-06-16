@@ -13,6 +13,7 @@ const {
 
 router.post('/login', authentication.login);
 
+router.post('/members', member.addMember);
 router.use(authentication.authentication);
 
 router.get('/isAuthenticated', authentication.isAuthenticated);
@@ -38,7 +39,6 @@ router
 
 /* Member */
 router.get('/members/:offset', member.getMembers);
-router.post('/members', member.addMember);
 
 /* Offer */
 router.get('/offers/:offset', offer.getOffers);
