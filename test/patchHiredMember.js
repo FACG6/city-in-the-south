@@ -34,9 +34,9 @@ test('patch hired member test', (t) => {
     });
 });
 
-test('test if offer status is changed to completed', (t) => {
+test('test if offer status is changed to finished', (t) => {
   selectOfferStatus().then((result) => {
-    t.equal(result.rows[0].status, 'completed', 'offer table status is updated successfully');
+    t.equal(result.rows[0].status, 'finished', 'offer table status is updated successfully');
     t.end();
   });
 });
