@@ -1,9 +1,9 @@
 const connection = require('../../config/db_connection');
 
-const addHiredMember = (memberId, offerId, status) => {
+const addHiredMember = (memberId, offerId) => {
   const addMember = {
-    text: 'INSERT INTO HIRED_MEMBER (MEMBER_ID, OFFER_ID, STATUS) VALUES ($1, $2, $3) RETURNING *',
-    values: [memberId, offerId, status],
+    text: 'INSERT INTO hired_member (member_id, offer_id) VALUES ($1, $2) RETURNING *',
+    values: [memberId, offerId],
   };
   return connection.query(addMember);
 };

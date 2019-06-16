@@ -11,7 +11,6 @@ test('add hired member test', (t) => {
     .send({
       member_id: 1,
       offer_id: 1,
-      status: 'accepted',
     })
     .expect('content-type', /json/)
     .set('Cookie', [Cookie])
@@ -23,7 +22,7 @@ test('add hired member test', (t) => {
         response.body,
         {
           error: null,
-          data: [{ member_id: 1, offer_id: 1, status: 'accepted' }],
+          data: [{ member_id: 1, offer_id: 1, status: 'pending' }],
         },
         'hiredMember is added successfully',
       );
