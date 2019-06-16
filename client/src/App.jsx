@@ -50,9 +50,7 @@ export default class App extends Component {
     return (
       <>
         {islogged === null ? (
-          <Spinner animation="grow" variant="info" className="loading">
-            dsdffdggfh
-          </Spinner>
+          <Spinner animation="grow" variant="info" className="loading" />
         ) : (
           <Router>
             <Header islogged={islogged} isLoggedOut={this.isLoggedOut} />
