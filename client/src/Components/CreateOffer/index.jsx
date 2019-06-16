@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 
 import AutoCompleteTags from '../CommonComponents/AutoCompleteTags';
@@ -16,6 +16,9 @@ class CreateOffer extends Component {
     offerType: [],
     memberId: 0,
     errMsg: '',
+    errMsgAlert: '',
+    showAlert: false,
+    variant: '',
   };
 
   componentDidMount() {
@@ -59,10 +62,34 @@ class CreateOffer extends Component {
           .then(res => res.json())
           .then(res => {
             if (res.data) {
-              console.log(res);
+              this.setState(
+                {
+                  errMsgAlert: 'Added successfully ',
+                  showAlert: true,
+                  variant: 'success',
+                },
+                () =>
+                  setTimeout(() => {
+                    this.setState({ errMsgAlert: '', showAlert: false });
+                  }, 1000)
+              );
+            } else {
+              throw new Error();
             }
           })
-          .catch(err => console.log(err));
+          .catch(() => {
+            this.setState(
+              {
+                errMsgAlert: 'Something went wrong',
+                showAlert: true,
+                variant: 'danger',
+              },
+              () =>
+                setTimeout(() => {
+                  this.setState({ errMsgAlert: '', showAlert: false });
+                }, 3000)
+            );
+          });
       })
       .catch(({ inner }) => {
         if (inner) {
@@ -86,7 +113,7 @@ class CreateOffer extends Component {
   render() {
     // eslint-disable-next-line react/prop-types
     const { history } = this.props;
-    const { errMsg } = this.state;
+    const { errMsg, variant, showAlert, errMsgAlert } = this.state;
     return (
       <Container className="page__container newoffer__container">
         <h1 className="newoffer__title"> New Offer </h1>
@@ -186,7 +213,13 @@ class CreateOffer extends Component {
                     >
                       Cancel
                     </Button>
+                    <br />
                   </Col>
+                </Row>
+                <Row>
+                  <Alert show={showAlert} key={1} variant={variant}>
+                    {errMsgAlert}
+                  </Alert>
                 </Row>
               </div>
             </div>
