@@ -42,6 +42,7 @@ router.get('/members/:offset', member.getMembers);
 
 /* Offer */
 router.get('/offers/:offset', offer.getOffers);
+
 router.get('/offer/:offerId', offer.getOfferDetails);
 router.post('/offers', offer.addOffer);
 router.delete('/offers/:offerId', offer.deleteOffer);
