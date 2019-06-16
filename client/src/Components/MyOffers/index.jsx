@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Card, Row, Col, Container, Spinner, Alert } from 'react-bootstrap';
 
-import offersDetails from '../utils/myOffers';
-
 import './style.css';
 
 class MyOffers extends Component {
@@ -18,7 +16,6 @@ class MyOffers extends Component {
       id: 1,
     };
     const { id } = userInfo;
-    this.setState({ offers: offersDetails });
     fetch(`/api/v1/my-offers/${id}`, {
       method: 'GET',
     })
@@ -88,7 +85,7 @@ class MyOffers extends Component {
             </Row>
           </Container>
         ) : (
-          <span>there is no offers</span>
+          <span>there is no offers to show</span>
         )}
       </>
     );
