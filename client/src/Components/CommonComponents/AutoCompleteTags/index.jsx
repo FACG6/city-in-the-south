@@ -69,9 +69,6 @@ export default class AutoCompleteTags extends Component {
   }
 
   handleChange = items => {
-    /* filter the skills if the user enter new skills we will make a request to the back to add the skills the user adding it 
-    and the same as for the offer_type
-  */
     const { onchange, type } = this.props;
     const { selectedTags, options } = this.state;
     if (items.length > selectedTags.length) {
@@ -171,8 +168,9 @@ export default class AutoCompleteTags extends Component {
       } else {
         this.setState({ selectedTags: items });
       }
+    } else {
+      this.setState({ selectedTags: items });
     }
-    this.setState({ selectedTags });
     if (typeof onchange === 'function') onchange(items);
   };
 
