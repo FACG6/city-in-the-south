@@ -45,7 +45,7 @@ class MyOffers extends Component {
     return (
       <>
         {showWrongAlert && <Alert> Somthing went error! Try agailn </Alert>}
-        {offers ? (
+        {offers && offers.length ? (
           <Container>
             <h1 className="myoffers__header"> My Offers </h1>
             <Row>
