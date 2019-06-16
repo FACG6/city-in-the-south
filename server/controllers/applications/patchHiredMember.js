@@ -17,7 +17,7 @@ module.exports = (req, res, next) => {
         .then((result) => {
           if (result.rowCount && result.rows[0].status === 'accepted') {
             // update offer status if Hired_member status = accepted
-            updateOfferStatus(offerId, 'finished')
+            updateOfferStatus(offerId, 'completed')
               .then(() => res.send({
                 error: null,
                 data: result.rows,
