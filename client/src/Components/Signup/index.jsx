@@ -16,29 +16,33 @@ export default class SignUp extends Component {
   handleClick = e => {
     e.preventDefault();
 
-    const { username, password, email, confPassword } = this.state;
+    const { username, password: pass, email, confPassword } = this.state;
     this.setState({ errormsg: '' });
     signupValidation
       .validate(
         {
           email,
-          password,
+          pass,
           confPassword,
           username,
         },
         { abortEarly: false }
       )
       .then(() => {
-        fetch('url', {
+        fetch('api/v1/members', {
           method: 'POST',
           credentials: 'same-origin',
           headers: {
             'Content-Type': 'application/json',
           },
-          redirect: 'follow',
-          referrer: 'no-referrer',
-          body: JSON.stringify(data),
-        });
+          body: JSON.stringify({ username, email, pass }),
+        })
+          .then(res => res.json())
+          .then(res => localStorage.setItem('userInfo', JSON.stringify(response.data))
+          auth.isAuthenticated = true;
+          setUserInfo(response.data);
+          this.props.history.push('/home');
+          ).catch(err => auth.error=err);
       })
       .catch(({ inner }) => {
         if (inner) {
