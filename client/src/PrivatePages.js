@@ -10,18 +10,27 @@ import {
   Profile,
   MyOffers,
 } from './Components';
+import PrivateRoute from './auth/PrivateRoute';
 
 function PrivatePages() {
   return (
     <>
       <Switch>
-        <Route exact path="/app/my-applications" component={MyApplications} />
-        <Route exact path="/app/my-offers" component={MyOffers} />
-        <Route exact path="/app/offers/:offerId" component={OfferDetails} />
-        <Route exact path="/app/new-offer" component={CreateOffer} />
-        <Route exact path="/app/saved-offers" component={SavedOffers} />
-        <Route exact path="/app/profile/:username" component={Profile} />
-        <Route component={PageNotFound} />
+        <PrivateRoute
+          exact
+          path="/app/my-applications"
+          component={MyApplications}
+        />
+        <PrivateRoute exact path="/app/my-offers" component={MyOffers} />
+        <PrivateRoute
+          exact
+          path="/app/offers/:offerId"
+          component={OfferDetails}
+        />
+        <PrivateRoute exact path="/app/new-offer" component={CreateOffer} />
+        <PrivateRoute exact path="/app/saved-offers" component={SavedOffers} />
+        <PrivateRoute exact path="/app/profile/:username" component={Profile} />
+        <PrivateRoute component={PageNotFound} />
       </Switch>
     </>
   );
