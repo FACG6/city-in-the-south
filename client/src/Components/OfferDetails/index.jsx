@@ -1,20 +1,23 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Container, Row, Col, Button, Alert } from 'react-bootstrap';
 
 import SideCard from './SideCard';
 import ApplicationCard from './ApplicationCard';
+import CoverLetter from './CoverLetter';
 import PageNotFound from '../PageNotFound/index';
 
-import offerColor from '../Helper/helper';
+import statusColor from '../Helper/helper';
 
 import './style.css';
 
 export default class OfferDetails extends Component {
   state = {
     userInfo: '',
+    offerId: '',
     offer: '',
     applications: '',
     myApplication: '',
+    showWrongAlert: '',
   };
 
   componentDidMount() {
@@ -31,6 +34,7 @@ export default class OfferDetails extends Component {
       // eslint-disable-next-line react/prop-types
       params: { offerId },
     } = this.props.match;
+    this.setState({ offerId });
 
     // fetch offerDetails by offer_id
     fetch(`/api/v1/offer/${offerId}`, {
@@ -38,7 +42,17 @@ export default class OfferDetails extends Component {
     })
       .then(response => response.json())
       .then(res => this.setState({ offer: res.data }))
-      .catch(err => console.log(333, err));
+      .catch(() =>
+        this.setState(
+          {
+            showWrongAlert: true,
+          },
+          () =>
+            setTimeout(() => {
+              this.setState({ showWrongAlert: false });
+            }, 5000)
+        )
+      );
 
     // fetch applications by offerId and save it in state
     fetch(`/api/v1/offer-applications/${offerId}`, {
@@ -46,7 +60,17 @@ export default class OfferDetails extends Component {
     })
       .then(response => response.json())
       .then(res => this.setState({ applications: res }))
-      .catch(err => console.log(333, err));
+      .catch(() =>
+        this.setState(
+          {
+            showWrongAlert: true,
+          },
+          () =>
+            setTimeout(() => {
+              this.setState({ showWrongAlert: false });
+            }, 5000)
+        )
+      );
 
     const { id } = userInfo;
     // fetch myApplication by userId and offerId
@@ -55,7 +79,17 @@ export default class OfferDetails extends Component {
     })
       .then(response => response.json())
       .then(myApplication => this.setState({ myApplication }))
-      .catch(err => console.log('err', err));
+      .catch(() =>
+        this.setState(
+          {
+            showWrongAlert: true,
+          },
+          () =>
+            setTimeout(() => {
+              this.setState({ showWrongAlert: false });
+            }, 5000)
+        )
+      );
   }
 
   handleEndContract = () => {
@@ -63,11 +97,19 @@ export default class OfferDetails extends Component {
   };
 
   render() {
-    const { offer, applications, userInfo, myApplication } = this.state;
+    const {
+      offer,
+      offerId,
+      applications,
+      userInfo,
+      myApplication,
+      showWrongAlert,
+    } = this.state;
     const { data } = applications;
     return (
       <>
-        {offer.length ? (
+        {showWrongAlert && <Alert> Somthing went error! Try agailn </Alert>}
+        {offer && offer.length ? (
           <Container className="page__container">
             <Row className="offer-details__header">
               <Col className="offer-details__header-col">
@@ -78,14 +120,18 @@ export default class OfferDetails extends Component {
               </Col>
               {offer[0].member_id === userInfo.id && (
                 <>
-                  <span>{offer[0].status}</span>
-                  <Button
-                    className="offet-details__end-button"
-                    variant="danger"
-                    onClick={this.handleEndContract}
-                  >
-                    End Contract
-                  </Button>
+                  <span className={`status__${statusColor(offer[0].status)}`}>
+                    {offer[0].status}
+                  </span>
+                  {offer && offer[0] && offer[0].status === 'completed' ? (
+                    <Button
+                      className="offet-details__end-button"
+                      variant="danger"
+                      onClick={this.handleEndContract}
+                    >
+                      End Contract
+                    </Button>
+                  ) : null}
                 </>
               )}
             </Row>
@@ -112,10 +158,10 @@ export default class OfferDetails extends Component {
                     data.map(item => {
                       return (
                         <ApplicationCard
+                          viewProfile
                           defaultAvatar={userInfo.avatar}
                           key={Math.random()}
                           application={item}
-                          offerColor={this.offerColor}
                         />
                       );
                     })}
@@ -123,18 +169,18 @@ export default class OfferDetails extends Component {
               </>
             ) : (
               <>
-                {(myApplication && myApplication.data) &&  myApplication.data.length ? (
+                {myApplication &&
+                myApplication.data &&
+                myApplication.data.length ? (
                   <>
-                    <>{console.log(777, myApplication.data[0])}</>
                     <ApplicationCard
                       key={Math.random()}
                       application={myApplication.data[0]}
-                      offerColor={this.offerColor}
                     />
                   </>
                 ) : (
                   <>
-                    <span>cover letter</span>
+                    <CoverLetter offerId={offerId} userInfo={userInfo} />
                   </>
                 )}
               </>
