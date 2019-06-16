@@ -17,10 +17,9 @@ export default class AutoCompleteTags extends Component {
   };
 
   componentDidMount() {
-    const { type, allowNew, data } = this.props;
+    const { type, allowNew } = this.props;
     this.setState({ allownew: allowNew });
     if (type === 'skill') {
-      this.setState({ selectedTags: data });
       fetch('/api/v1/skills', { method: 'GET' })
         .then(res => res.json())
         .then(res => {
@@ -43,7 +42,6 @@ export default class AutoCompleteTags extends Component {
           )
         );
     } else if (type === 'offer_type') {
-      this.setState({ selectedTags: data });
       fetch('/api/v1/offer-type', { method: 'GET' })
         .then(res => res.json())
         .then(res => {
@@ -65,6 +63,13 @@ export default class AutoCompleteTags extends Component {
               }, 3000)
           )
         );
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { data } = this.props;
+    if (prevProps.data !== data) {
+      this.setState({ selectedTags: data });
     }
   }
 
@@ -200,33 +205,28 @@ export default class AutoCompleteTags extends Component {
         <h1 className="autocomplete__title">
           {type === 'skill' ? 'Skills' : 'Offer Type'}
         </h1>
-        {options[0] ? (
-          <>
-            <Typeahead
-              clearButton
-              multiple
-              onInputChange={this.handleInputChange}
-              onChange={this.handleChange}
-              id={`autoComplete${type}`}
-              key="id"
-              selected={selectedTags}
-              valueKey="id"
-              labelKey="name"
-              options={options}
-              allowNew={allownew}
-              newSelectionPrefix="Add a new item: "
-              placeholder={placeholder}
-              className="autComplete-dev"
-            />
-            <br />
 
-            <Alert show={showAlert} key={1} variant={variant}>
-              {errMSg}
-            </Alert>
-          </>
-        ) : (
-          <Spinner animation="border" variant="info" />
-        )}
+        <Typeahead
+          clearButton
+          multiple
+          onInputChange={this.handleInputChange}
+          onChange={this.handleChange}
+          id={`autoComplete${type}`}
+          key="id"
+          selected={selectedTags}
+          valueKey="id"
+          labelKey="name"
+          options={options}
+          allowNew={allownew}
+          newSelectionPrefix="Add a new item: "
+          placeholder={placeholder}
+          className="autComplete-dev"
+        />
+        <br />
+
+        <Alert show={showAlert} key={1} variant={variant}>
+          {errMSg}
+        </Alert>
       </>
     );
   }
