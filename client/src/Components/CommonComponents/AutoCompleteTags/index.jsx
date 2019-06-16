@@ -18,8 +18,9 @@ export default class AutoCompleteTags extends Component {
 
   componentDidMount() {
     const { type, allowNew, data } = this.props;
-    this.setState({ allownew: allowNew, selectedTags: data });
+    this.setState({ allownew: allowNew });
     if (type === 'skill') {
+      this.setState({ selectedTags: data });
       fetch('/api/v1/skills', { method: 'GET' })
         .then(res => res.json())
         .then(res => {
@@ -42,6 +43,7 @@ export default class AutoCompleteTags extends Component {
           )
         );
     } else if (type === 'offer_type') {
+      this.setState({ selectedTags: data });
       fetch('/api/v1/offer-type', { method: 'GET' })
         .then(res => res.json())
         .then(res => {
