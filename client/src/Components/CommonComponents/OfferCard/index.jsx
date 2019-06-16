@@ -26,13 +26,48 @@ class OfferCard extends React.Component {
       showAlert: false,
       variant: '',
     };
+    this.setState({
+      memberId:
+        JSON.parse(localStorage.getItem('userInfo')) &&
+        JSON.parse(localStorage.getItem('userInfo')).id,
+    });
+    const memberId =
+      JSON.parse(localStorage.getItem('userInfo')) &&
+      JSON.parse(localStorage.getItem('userInfo')).id;
+    fetch(`/api/v1/saved-offers/${memberId}`, { method: 'GET' })
+      .then(res => res.json())
+      .then(res => {
+        if (res.data) {
+          res.data.filter(savedOffer => {
+            if (offer.id === savedOffer.id) {
+              this.setState({ saved: true });
+            } else {
+              this.setState({ saved: false });
+            }
+          });
+        } else {
+          throw new Error();
+        }
+      })
+      .catch(() =>
+        this.setState(
+          {
+            errMSg: 'Something went wrong',
+            showAlert: true,
+            variant: 'danger',
+          },
+          () =>
+            setTimeout(() => {
+              this.setState({ errMSg: '', showAlert: false });
+            }, 3000)
+        )
+      );
+
     this.setState(() => {
       return {
         offer,
-        saved: offer.saved || false,
         statusLabel: `offer-card__status--${status}`,
         statusDiv: `offer-card__border--${borderColor[status]}`,
-        memberId: localStorage.getItem('memberId') || 2,
       };
     });
   }
@@ -46,8 +81,6 @@ class OfferCard extends React.Component {
   handleSave = id => {
     const { saved, memberId } = this.state;
     if (saved) {
-      // delete
-      // this.setState({ saved: false });
       fetch(`/api/v1/saved-offers/${memberId}`, {
         method: 'DELETE',
         body: JSON.stringify({ offerId: id }),
