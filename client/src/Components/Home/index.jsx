@@ -6,6 +6,7 @@ import {
   Button,
   FormControl,
   Dropdown,
+  Alert,
 } from 'react-bootstrap';
 
 import AutoCompleteTags from '../CommonComponents/AutoCompleteTags';
@@ -28,7 +29,12 @@ export default class Home extends Component {
     filteredOffers: [],
     filterMembers: [],
     filterData: [],
-    memberId: 0,
+    memberId:
+      JSON.parse(localStorage.getItem('userInfo')) &&
+      JSON.parse(localStorage.getItem('userInfo')).id,
+    errMSg: '',
+    showAlert: false,
+    variant: '',
   };
 
   componentDidMount() {
@@ -36,21 +42,39 @@ export default class Home extends Component {
       filterQuery:
         localStorage.getItem('filterQuery') ||
         localStorage.setItem('filterQuery', 'Offers'),
-      memberId: localStorage.getItem('memberId') || 2,
     });
+    localStorage.setItem(
+      'userInfo',
+      JSON.stringify({ id: 2, username: 'fatma', avatar: '' })
+    );
     const { offset, memberId } = this.state;
-
     fetch(`/api/v1/filter/${memberId}`)
       .then(res => res.json())
       .then(res => {
-        const filterSkill = res.data.skills;
-        const { offer_type: filterOfferType } = res.data;
-        this.setState({
-          skills: filterSkill[0] ? filterSkill : [],
-          offerTypes: filterOfferType[0] ? filterOfferType : [],
-        });
+        if (res.data) {
+          const filterSkill = res.data.skills;
+          const { offer_type: filterOfferType } = res.data;
+          this.setState({
+            skills: filterSkill[0] && filterSkill,
+            offerTypes: filterOfferType[0] && filterOfferType,
+          });
+        } else {
+          throw new Error();
+        }
       })
-      .catch(err => console.log(err));
+      .catch(() =>
+        this.setState(
+          {
+            errMSg: 'Something went wrong',
+            showAlert: true,
+            variant: 'danger',
+          },
+          () =>
+            setTimeout(() => {
+              this.setState({ errMSg: '', showAlert: false });
+            }, 3000)
+        )
+      );
 
     fetch(`/api/v1/members/${offset}`, { method: 'GET' })
       .then(res => res.json())
@@ -72,9 +96,23 @@ export default class Home extends Component {
               this.setState({ filterData: filterMembers });
             }
           );
+        } else {
+          throw new Error();
         }
       })
-      .catch(err => console.log(err));
+      .catch(err =>
+        this.setState(
+          {
+            errMSg: 'Something went wrong',
+            showAlert: true,
+            variant: 'danger',
+          },
+          () =>
+            setTimeout(() => {
+              this.setState({ errMSg: '', showAlert: false });
+            }, 3000)
+        )
+      );
 
     fetch(`/api/v1/offers/${offset}`, { method: 'GET' })
       .then(res => res.json())
@@ -103,9 +141,23 @@ export default class Home extends Component {
               this.setState({ filterData: filteredOffers });
             }
           );
+        } else {
+          throw new Error();
         }
       })
-      .catch(err => console.log(err));
+      .catch(() =>
+        this.setState(
+          {
+            errMSg: 'Something went wrong',
+            showAlert: true,
+            variant: 'danger',
+          },
+          () =>
+            setTimeout(() => {
+              this.setState({ errMSg: '', showAlert: false });
+            }, 3000)
+        )
+      );
   }
 
   handleSkillOnChange = skills => {
@@ -136,9 +188,21 @@ export default class Home extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res);
+        if (!res.data) throw new Error();
       })
-      .catch(err => console.log(err));
+      .catch(() =>
+        this.setState(
+          {
+            errMSg: 'Something went wrong',
+            showAlert: true,
+            variant: 'danger',
+          },
+          () =>
+            setTimeout(() => {
+              this.setState({ errMSg: '', showAlert: false });
+            }, 3000)
+        )
+      );
   };
 
   handleOfferTypeOnChange = offerTypes => {
@@ -164,9 +228,21 @@ export default class Home extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res);
+        if (res.data) throw new Error();
       })
-      .catch(err => console.log(err));
+      .catch(() =>
+        this.setState(
+          {
+            errMSg: 'Something went wrong',
+            showAlert: true,
+            variant: 'danger',
+          },
+          () =>
+            setTimeout(() => {
+              this.setState({ errMSg: '', showAlert: false });
+            }, 3000)
+        )
+      );
   };
 
   handelSearch = ({ target: { value } }) => {
@@ -192,7 +268,15 @@ export default class Home extends Component {
   };
 
   render() {
-    const { isClicked, skills, offerTypes, filterData } = this.state;
+    const {
+      isClicked,
+      skills,
+      offerTypes,
+      filterData,
+      errMSg,
+      showAlert,
+      variant,
+    } = this.state;
     // eslint-disable-next-line react/prop-types
     return (
       <>
@@ -200,7 +284,7 @@ export default class Home extends Component {
           <Col className="home__filter" sm={12} lg={3} md={3}>
             <AutoCompleteTags
               type="skill"
-              data={skills[0]}
+              data={skills}
               onchange={this.handleSkillOnChange}
             />
             <br />
@@ -211,6 +295,10 @@ export default class Home extends Component {
                 onchange={this.handleOfferTypeOnChange}
               />
             )}
+            <br />
+            <Alert show={showAlert} key={1} variant={variant}>
+              {errMSg}
+            </Alert>
           </Col>
           <Col className="home__main" sm={12} lg={8} md={8}>
             <Row>
