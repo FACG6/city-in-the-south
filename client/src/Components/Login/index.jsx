@@ -2,6 +2,7 @@ import React from 'react';
 import './style.css';
 import { Form, Button, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import auth from '../../auth/auth';
 
 export default class Login extends React.Component {
   state = {
@@ -11,8 +12,31 @@ export default class Login extends React.Component {
   };
 
   handleClick = () => {
-    if (this.state.username && this.state.password) {
+    const { username, password } = this.state;
+    const { setUserInfo } = this.props;
+    if (username && password) {
       // make a requset to the back with method post and data{username , password}
+      fetch('/api/v1/login', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          pass: password,
+        }),
+      })
+        .then(response => response.json())
+        .then(response => {
+          localStorage.setItem('userInfo', JSON.stringify(response.data));
+          auth.isAuthenticated = true;
+          setUserInfo(response.data);
+          this.props.history.push('/home');
+        })
+        .catch(err => {
+          console.log(err);
+        });
     } else {
       this.setState({ message: 'Please enter all fields' });
     }
@@ -23,7 +47,6 @@ export default class Login extends React.Component {
 
   render() {
     const { username, password, message } = this.state;
-
     return (
       <Container>
         <Form className="content-login">
