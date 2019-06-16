@@ -10,8 +10,8 @@ test('add new Application test', (t) => {
     .set('Cookie', [Cookie])
     .expect(200)
     .send({
-      memberId: 1,
-      offerId: 2,
+      member_id: 1,
+      offer_id: 2,
       proposal: 'this is test proposal',
     })
     .expect('content-type', /json/)

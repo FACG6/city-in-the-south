@@ -2,7 +2,7 @@ const yup = require('yup');
 const { addApplication } = require('../../database/queries/applications/index');
 
 module.exports = (req, res, next) => {
-  const { memberId, offerId, proposal } = { ...req.body };
+  const { member_id: memberId, offer_id: offerId, proposal } = req.body;
   const validationSchema = yup.object().shape({
     offerId: yup.string().required(),
     memberId: yup.number().required(),
