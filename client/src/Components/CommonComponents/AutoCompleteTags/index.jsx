@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Spinner, Alert } from 'react-bootstrap';
+import { Alert } from 'react-bootstrap';
 import { Typeahead } from 'react-bootstrap-typeahead';
 
 import 'react-bootstrap-typeahead/css/Typeahead.css';
@@ -69,6 +69,7 @@ export default class AutoCompleteTags extends Component {
   componentDidUpdate(prevProps) {
     const { data } = this.props;
     if (prevProps.data !== data) {
+      // eslint-disable-next-line react/no-did-update-set-state
       this.setState({ selectedTags: data });
     }
   }
