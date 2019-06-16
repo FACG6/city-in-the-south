@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Button, Spinner } from 'react-bootstrap';
+import { Card, Button, Spinner, Alert } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -22,6 +22,9 @@ class OfferCard extends React.Component {
       finished: 'red',
       pending: 'orange',
       active: 'blue',
+      errMSg: '',
+      showAlert: false,
+      variant: '',
     };
     this.setState(() => {
       return {
@@ -42,7 +45,6 @@ class OfferCard extends React.Component {
 
   handleSave = id => {
     const { saved, memberId } = this.state;
-    console.log(saved, id);
     if (saved) {
       // delete
       // this.setState({ saved: false });
@@ -57,13 +59,36 @@ class OfferCard extends React.Component {
         .then(res => res.json())
         .then(res => {
           if (res.data) {
-            this.setState({ saved: false });
+            this.setState(
+              {
+                saved: false,
+                errMSg: 'Deleted successfully ',
+                showAlert: true,
+                variant: 'success',
+              },
+              () =>
+                setTimeout(() => {
+                  this.setState({ errMSg: '', showAlert: false });
+                }, 1000)
+            );
           }
-          if (res.msg) {
-            console.log(res.msg);
+          if (res.error) {
+            throw new Error();
           }
         })
-        .catch(err => console.log(err));
+        .catch(() =>
+          this.setState(
+            {
+              errMSg: 'Something went wrong',
+              showAlert: true,
+              variant: 'danger',
+            },
+            () =>
+              setTimeout(() => {
+                this.setState({ errMSg: '', showAlert: false });
+              }, 3000)
+          )
+        );
     } else {
       fetch('/api/v1/saved-offers', {
         method: 'POST',
@@ -76,29 +101,57 @@ class OfferCard extends React.Component {
         .then(res => res.json())
         .then(res => {
           if (res.data) {
-            this.setState({ saved: true });
-          }
-          if (res.msg) {
-            console.log(res.msg);
+            this.setState(
+              {
+                saved: true,
+                errMSg: 'Added successfully ',
+                showAlert: true,
+                variant: 'success',
+              },
+              () =>
+                setTimeout(() => {
+                  this.setState({ errMSg: '', showAlert: false });
+                }, 1000)
+            );
+          } else {
+            throw new Error();
           }
         })
-        .catch(err => console.log(err));
+        .catch(() =>
+          this.setState(
+            {
+              errMSg: 'Something went wrong',
+              showAlert: true,
+              variant: 'danger',
+            },
+            () =>
+              setTimeout(() => {
+                this.setState({ errMSg: '', showAlert: false });
+              }, 3000)
+          )
+        );
     }
-    // send request to the backend to save (if this.state.saved === true) the offer
-    // if this.state.saved is false, send request to unsave the offer
-    // if(saved) axios.delete(`/api/v1/saved-offer/${id}`)
-    // else axios.post('/api/v1/saved-offers', body: {member_id, id} )
-    // this.setState({ saved: !saved });
   };
 
   handleHover = () => this.setState({ hovered: 'offer-card--hovered' });
 
   render() {
-    const { offer, hovered, statusLabel, statusDiv } = this.state;
+    const {
+      offer,
+      hovered,
+      statusLabel,
+      statusDiv,
+      errMSg,
+      showAlert,
+      variant,
+    } = this.state;
     // eslint-disable-next-line react/prop-types
     const { hover, history } = this.props;
     return (
       <>
+        <Alert show={showAlert} key={1} variant={variant}>
+          {errMSg}
+        </Alert>
         {offer ? (
           <Card
             className={`offer-card ${hovered ? 'offer-card--hovered' : ''}`}
