@@ -35,7 +35,7 @@ export default class Login extends React.Component {
           this.props.history.push('/home');
         })
         .catch(err => {
-          console.log(err);
+          auth.error = err;
         });
     } else {
       this.setState({ message: 'Please enter all fields' });
