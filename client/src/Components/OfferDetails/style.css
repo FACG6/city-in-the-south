@@ -20,11 +20,7 @@
   margin: 10px 0;
   padding: 15px;
 }
-.offer-details__status {
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-}
+
 .offet-details__end-button {
   margin-left: 15px !important;
   font-size: 14px !important;
@@ -51,4 +47,24 @@
 }
 .offer-details__proposal-container__button {
   align-self: flex-end !important;
+}
+
+.status__completed, .status__accepted {
+  color: green;
+}
+
+.status__completed, .status__accepted {
+  color: green;
+}
+
+.status__pending {
+  color: orange;
+}
+
+.status__finished, .status__refused {
+  color: red;
+}
+
+.status__active {
+  color: #1BA7E2;
 }
