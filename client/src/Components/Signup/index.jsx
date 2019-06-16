@@ -29,7 +29,16 @@ export default class SignUp extends Component {
         { abortEarly: false }
       )
       .then(() => {
-        // fetch to back-end
+        fetch('url', {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          redirect: 'follow',
+          referrer: 'no-referrer',
+          body: JSON.stringify(data),
+        });
       })
       .catch(({ inner }) => {
         if (inner) {
