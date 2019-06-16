@@ -41,7 +41,7 @@ test('Testing for add new member route "Failed "', (t) => {
       if (err) {
         t.error(err);
       } else {
-        t.equal(res.body.code, 400, 'check if the code 400');
+        t.equal(res.body.error.code, 400, 'check if the code 400');
         t.end();
       }
     });
