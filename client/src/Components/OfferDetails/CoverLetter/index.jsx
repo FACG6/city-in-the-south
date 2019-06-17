@@ -17,7 +17,7 @@ class CoverLetter extends Component {
   };
 
   handleApplyProposal = () => {
-    const { offerId, userInfo, history } = this.props;
+    const { offer_id, userInfo, history } = this.props;
     const { proposal } = this.state;
     validationSchema
       .validate({ proposal }, { abortEarly: false })
@@ -25,8 +25,8 @@ class CoverLetter extends Component {
         this.setState({ errMsg: '' });
         // fetch with method post
         const proposalDetails = {
-          offerId,
-          memberId: userInfo.id,
+          offer_id,
+          member_id: userInfo.id,
           proposal,
         };
         fetch('/api/v1/applications', {
