@@ -12,7 +12,7 @@ export default class MyApplications extends React.Component {
   };
 
   componentDidMount() {
-    // fetch for myApplications data and store it in the state
+    // fetch for myApplications data and store it in the state.
     this.setState({ myApplications: myApplicationsData });
   }
 
