@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import './style.css';
 
+const io = require('socket.io-client');
+
 class Notification extends Component {
   // this notification will fetched from back-end socket
   state = {
@@ -24,6 +26,14 @@ class Notification extends Component {
       ],
     },
   };
+
+  componentDidMount() {
+    this.socket = io();
+    this.socket.on('message', data => {
+      console.log(222);
+      console.log(data);
+    });
+  }
 
   render() {
     const {
