@@ -76,23 +76,22 @@ export default class Home extends Component {
     fetch(`/api/v1/members/${offset}`, { method: 'GET' })
       .then(res => res.json())
       .then(res => {
-        if (res.data) {
-          this.setState(
-            { members: res.data },
-            () => {
-              const { members, skills } = this.state;
-              if (skills[0] && members[0]) {
-                const filterMembersData = filterSkills(members, skills);
-                this.setState({ filterMembers: filterMembersData });
-              } else {
-                this.setState({ filterMembers: members });
-              }
-            },
-            () => {
-              const { filterMembers } = this.state;
-              this.setState({ filterData: filterMembers });
-            }
-          );
+        if (res.data[0]) {
+          const { skills } = this.state;
+          if (skills[0]) {
+            const filterMembersData = filterSkills(res.data, skills);
+            this.setState({
+              members: res.data,
+              filterMembers: filterMembersData,
+              filterData: filterMembersData,
+            });
+          } else {
+            this.setState({
+              members: res.data,
+              filterMembers: res.data,
+              filterData: res.data,
+            });
+          }
         } else {
           throw new Error();
         }
@@ -114,32 +113,55 @@ export default class Home extends Component {
     fetch(`/api/v1/offers/${offset}`, { method: 'GET' })
       .then(res => res.json())
       .then(res => {
-        if (res.data) {
-          this.setState(
-            { offers: res.data },
-            () => {
-              const { offers, offerTypes, skills } = this.state;
-              if (offers[0] && offerTypes[0]) {
-                const filteredOffersSkills = filterSkills(offers, skills);
-                const filtereOffersOfferTypes = filterOfferTypes(
-                  offers,
-                  offerTypes
+        if (res.data[0]) {
+          const { offerTypes, skills } = this.state;
+          if (offerTypes[0] && skills[0]) {
+            const filteredOffersSkills = filterSkills(res.data, skills);
+            const filtereOffersOfferTypes = filterOfferTypes(
+              res.data,
+              offerTypes
+            );
+            if (
+              filteredOffersSkills.length === 0 ||
+              filtereOffersOfferTypes.length === 0
+            ) {
+              this.setState({
+                offers: [],
+                filteredOffers: [],
+                filterData: [],
+              });
+            } else {
+              const filteredOffersData = filteredOffersSkills.filter(item => {
+                return filtereOffersOfferTypes.filter(
+                  _item => item.id === _item.id
                 );
-                const filteredOffersData = filteredOffersSkills.filter(item => {
-                  return filtereOffersOfferTypes.filter(
-                    _item => item.id !== _item.id
-                  );
-                });
-                this.setState({ filteredOffers: filteredOffersData });
-              } else {
-                this.setState({ filteredOffers: offers });
-              }
-            },
-            () => {
-              const { filteredOffers } = this.state;
-              this.setState({ filterData: filteredOffers });
+              });
+              this.setState({
+                offers: res.data,
+                filteredOffers: filteredOffersData,
+                filterData: filteredOffersData,
+              });
             }
-          );
+          } else if (offerTypes[0]) {
+            const filtereOffersOfferTypes = filterOfferTypes(
+              res.data,
+              offerTypes
+            );
+            this.setState({
+              offers: res.data,
+              filteredOffers: filtereOffersOfferTypes,
+              filterData: filtereOffersOfferTypes,
+            });
+          } else if (skills[0]) {
+            const filteredOffersSkills = filterSkills(res.data, skills);
+            this.setState({
+              offers: res.data,
+              filteredOffers: filteredOffersSkills,
+              filterData: filteredOffersSkills,
+            });
+          } else {
+            this.setState({ filteredOffers: res.data, filterData: res.data });
+          }
         } else {
           throw new Error();
         }
@@ -169,10 +191,17 @@ export default class Home extends Component {
     if (filterQuery === 'Offers') {
       const filteredOffersSkills = filterSkills(offers, skills);
       const filtereOffersOfferTypes = filterOfferTypes(offers, offerTypes);
-      const filteredOffers = filteredOffersSkills.filter(item => {
-        return filtereOffersOfferTypes.filter(_item => item.id !== _item.id);
-      });
-      this.setState({ filterData: filteredOffers });
+      if (
+        filteredOffersSkills.length === 0 ||
+        filtereOffersOfferTypes.length === 0
+      ) {
+        this.setState({ filterData: [] });
+      } else {
+        const filteredOffers = filteredOffersSkills.filter(item => {
+          return filtereOffersOfferTypes.filter(_item => item.id === _item.id);
+        });
+        this.setState({ filterData: filteredOffers });
+      }
     }
     fetch(`/api/v1/filter/${memberId}`, {
       method: 'PATCH',
@@ -209,10 +238,17 @@ export default class Home extends Component {
     const { offers, skills, memberId } = this.state;
     const filteredOffersSkills = filterSkills(offers, skills);
     const filtereOffersOfferTypes = filterOfferTypes(offers, offerTypes);
-    const filteredOffers = filteredOffersSkills.filter(item =>
-      filtereOffersOfferTypes.filter(_item => item.id === _item.id)
-    );
-    this.setState({ filterData: filteredOffers });
+    if (
+      filteredOffersSkills.length === 0 ||
+      filtereOffersOfferTypes.length === 0
+    ) {
+      this.setState({ filterData: [] });
+    } else {
+      const filteredOffers = filteredOffersSkills.filter(item =>
+        filtereOffersOfferTypes.filter(_item => item.id === _item.id)
+      );
+      this.setState({ filterData: filteredOffers });
+    }
 
     fetch(`/api/v1/filter/${memberId}`, {
       method: 'PATCH',
