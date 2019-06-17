@@ -22,7 +22,9 @@ class CreateOffer extends Component {
   };
 
   componentDidMount() {
-    this.setState({ memberId: localStorage.getItem('memberId') });
+    this.setState({
+      memberId: JSON.parse(localStorage.getItem('userInfo')).id,
+    });
   }
 
   handleSubmit = () => {
