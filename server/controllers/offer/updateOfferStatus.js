@@ -1,8 +1,8 @@
 const updateOfferStatus = require('../../database/queries/offers/updateOfferStatus');
 
 module.exports = (req, res, next) => {
-  const { offerId } = req.params;
-  updateOfferStatus(offerId, 'finished')
+  const { offerId, status } = req.params;
+  updateOfferStatus(offerId, status)
     .then(result => res.send({
       error: null,
       data: result.rows,
