@@ -1,4 +1,3 @@
-
 const { getSavedOffer } = require('../../database/queries/offers/getSavedOffer.js');
 
 module.exports = (req, res, next) => {
@@ -7,5 +6,6 @@ module.exports = (req, res, next) => {
     .then(result => res.send({
       error: null,
       data: result.rows,
-    })).catch(() => next({ code: 500, msg: 'internal server error' }));
+    }))
+    .catch(er => next(er));
 };
