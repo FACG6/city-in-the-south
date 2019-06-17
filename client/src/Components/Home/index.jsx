@@ -190,14 +190,7 @@ export default class Home extends Component {
 
   handleSkillOnChange = skills => {
     this.setState({ skills });
-    const {
-      filterQuery,
-      members,
-      offers,
-      offerTypes,
-      memberId,
-      filteredOffers,
-    } = this.state;
+    const { filterQuery, members, offers, offerTypes, memberId } = this.state;
     if (filterQuery === 'Members') {
       const filterMembersData = filterSkills(members, skills);
       this.setState({ filterData: filterMembersData });
@@ -209,12 +202,12 @@ export default class Home extends Component {
         filteredOffersSkills.length === 0 ||
         filtereOffersOfferTypes.length === 0
       ) {
-        this.setState({ filterData: filteredOffers });
+        this.setState({ filterData: [] });
       } else {
-        const filtereOffers = filteredOffersSkills.filter(item => {
+        const filteredOffers = filteredOffersSkills.filter(item => {
           return filtereOffersOfferTypes.filter(_item => item.id === _item.id);
         });
-        this.setState({ filterData: filtereOffers });
+        this.setState({ filterData: filteredOffers });
       }
     }
     fetch(`/api/v1/filter/${memberId}`, {
@@ -249,19 +242,19 @@ export default class Home extends Component {
 
   handleOfferTypeOnChange = offerTypes => {
     this.setState({ offerTypes });
-    const { offers, skills, memberId, filteredOffers } = this.state;
+    const { offers, skills, memberId } = this.state;
     const filteredOffersSkills = filterSkills(offers, skills);
     const filtereOffersOfferTypes = filterOfferTypes(offers, offerTypes);
     if (
       filteredOffersSkills.length === 0 ||
       filtereOffersOfferTypes.length === 0
     ) {
-      this.setState({ filterData: filteredOffers });
+      this.setState({ filterData: [] });
     } else {
-      const filterOffers = filteredOffersSkills.filter(item =>
+      const filteredOffers = filteredOffersSkills.filter(item =>
         filtereOffersOfferTypes.filter(_item => item.id === _item.id)
       );
-      this.setState({ filterData: filterOffers });
+      this.setState({ filterData: filteredOffers });
     }
 
     fetch(`/api/v1/filter/${memberId}`, {
