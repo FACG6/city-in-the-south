@@ -21,20 +21,12 @@ export default class OfferDetails extends Component {
   };
 
   componentDidMount() {
-    // from localStorage
-    const userInfo = {
-      id: 1,
-      fullName: 'Ayman AlQoqa',
-      username: 'Ayman321396',
-      avatar:
-        'https://m.media-amazon.com/images/M/MV5BMTcxOTk4NzkwOV5BMl5BanBnXkFtZTcwMDE3MTUzNA@@._V1_.jpg',
-    };
-    this.setState({ userInfo });
+    const userInfo = JSON.parse(window.localStorage.getItem('userInfo'));
     const {
       // eslint-disable-next-line react/prop-types
       params: { offerId },
     } = this.props.match;
-    this.setState({ offerId });
+    this.setState({ userInfo, offerId });
 
     // fetch offerDetails by offer_id
     fetch(`/api/v1/offer/${offerId}`, {
@@ -93,7 +85,38 @@ export default class OfferDetails extends Component {
   }
 
   handleEndContract = () => {
-    // handle end contract login here....
+    const { offerId } = this.state;
+    fetch(`/api/v1/offer/${offerId}`, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      method: 'PATCH',
+      body: JSON.stringify({
+        offerId,
+        status: 'finished',
+      }),
+    })
+      .then(res => res.json())
+      .then(res => {
+        const { status } = res.data[0];
+        this.setState(prevState => {
+          const updatedOffer = { ...prevState.offer[0] };
+          updatedOffer.status = status;
+          return { offer: updatedOffer };
+        });
+      })
+      .catch(() =>
+        this.setState(
+          {
+            showWrongAlert: true,
+          },
+          () =>
+            setTimeout(() => {
+              this.setState({ showWrongAlert: false });
+            }, 5000)
+        )
+      );
   };
 
   render() {
