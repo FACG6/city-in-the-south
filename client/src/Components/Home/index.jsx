@@ -86,13 +86,13 @@ export default class Home extends Component {
             this.setState({
               members: res.data,
               filterMembers: filterMembersData,
-              filterData: filterQuery === 'Members' && filterMembersData,
+              filterData: filterQuery === 'Members' ? filterMembersData : [],
             });
           } else {
             this.setState({
               members: res.data,
               filterMembers: res.data,
-              filterData: filterQuery === 'Members' && res.data,
+              filterData: filterQuery === 'Members' ? res.data : [],
             });
           }
         } else {
@@ -142,7 +142,7 @@ export default class Home extends Component {
               this.setState({
                 offers: res.data,
                 filteredOffers: filteredOffersData,
-                filterData: filterQuery === 'Offers' && filteredOffersData,
+                filterData: filterQuery === 'Offers' ? filteredOffersData : [],
               });
             }
           } else if (offerTypes[0]) {
@@ -153,19 +153,20 @@ export default class Home extends Component {
             this.setState({
               offers: res.data,
               filteredOffers: filtereOffersOfferTypes,
-              filterData: filterQuery === 'Offers' && filtereOffersOfferTypes,
+              filterData:
+                filterQuery === 'Offers' ? filtereOffersOfferTypes : [],
             });
           } else if (skills[0]) {
             const filteredOffersSkills = filterSkills(res.data, skills);
             this.setState({
               offers: res.data,
               filteredOffers: filteredOffersSkills,
-              filterData: filterQuery === 'Offers' && filteredOffersSkills,
+              filterData: filterQuery === 'Offers' ? filteredOffersSkills : [],
             });
           } else {
             this.setState({
               filteredOffers: res.data,
-              filterData: filterQuery === 'Offers' && res.data,
+              filterData: filterQuery === 'Offers' ? res.data : [],
             });
           }
         } else {
@@ -189,7 +190,14 @@ export default class Home extends Component {
 
   handleSkillOnChange = skills => {
     this.setState({ skills });
-    const { filterQuery, members, offers, offerTypes, memberId } = this.state;
+    const {
+      filterQuery,
+      members,
+      offers,
+      offerTypes,
+      memberId,
+      filteredOffers,
+    } = this.state;
     if (filterQuery === 'Members') {
       const filterMembersData = filterSkills(members, skills);
       this.setState({ filterData: filterMembersData });
@@ -201,12 +209,12 @@ export default class Home extends Component {
         filteredOffersSkills.length === 0 ||
         filtereOffersOfferTypes.length === 0
       ) {
-        this.setState({ filterData: [] });
+        this.setState({ filterData: filteredOffers });
       } else {
-        const filteredOffers = filteredOffersSkills.filter(item => {
+        const filtereOffers = filteredOffersSkills.filter(item => {
           return filtereOffersOfferTypes.filter(_item => item.id === _item.id);
         });
-        this.setState({ filterData: filteredOffers });
+        this.setState({ filterData: filtereOffers });
       }
     }
     fetch(`/api/v1/filter/${memberId}`, {
@@ -241,19 +249,19 @@ export default class Home extends Component {
 
   handleOfferTypeOnChange = offerTypes => {
     this.setState({ offerTypes });
-    const { offers, skills, memberId } = this.state;
+    const { offers, skills, memberId, filteredOffers } = this.state;
     const filteredOffersSkills = filterSkills(offers, skills);
     const filtereOffersOfferTypes = filterOfferTypes(offers, offerTypes);
     if (
       filteredOffersSkills.length === 0 ||
       filtereOffersOfferTypes.length === 0
     ) {
-      this.setState({ filterData: [] });
+      this.setState({ filterData: filteredOffers });
     } else {
-      const filteredOffers = filteredOffersSkills.filter(item =>
+      const filterOffers = filteredOffersSkills.filter(item =>
         filtereOffersOfferTypes.filter(_item => item.id === _item.id)
       );
-      this.setState({ filterData: filteredOffers });
+      this.setState({ filterData: filterOffers });
     }
 
     fetch(`/api/v1/filter/${memberId}`, {
