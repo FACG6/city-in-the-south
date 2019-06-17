@@ -22,12 +22,10 @@ class CreateOffer extends Component {
   };
 
   componentDidMount() {
-    this.setState({ memberId: localStorage.getItem('memberId') || 2 });
+    this.setState({ memberId: localStorage.getItem('memberId') });
   }
 
   handleSubmit = () => {
-    // eslint-disable-next-line react/prop-types
-    // const { history } = this.props;
     const {
       title,
       position,
@@ -70,7 +68,11 @@ class CreateOffer extends Component {
                 },
                 () =>
                   setTimeout(() => {
+                    // eslint-disable-next-line react/prop-types
+                    const { history } = this.props;
+                    const offerId = res.data.id;
                     this.setState({ errMsgAlert: '', showAlert: false });
+                    history.push(`/app/offers/${offerId}`);
                   }, 1000)
               );
             } else {
