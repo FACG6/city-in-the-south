@@ -43,10 +43,7 @@ export default class Home extends Component {
         localStorage.getItem('filterQuery') ||
         localStorage.setItem('filterQuery', 'Offers'),
     });
-    localStorage.setItem(
-      'userInfo',
-      JSON.stringify({ id: 2, username: 'fatma', avatar: '' })
-    );
+
     const { offset, memberId } = this.state;
     fetch(`/api/v1/filter/${memberId}`)
       .then(res => res.json())
