@@ -80,6 +80,7 @@ class OfferCard extends React.Component {
 
   handleSave = id => {
     const { saved, memberId } = this.state;
+    const { handleDelete } = this.props;
     if (saved) {
       fetch(`/api/v1/saved-offers/${memberId}`, {
         method: 'DELETE',
@@ -92,6 +93,10 @@ class OfferCard extends React.Component {
         .then(res => res.json())
         .then(res => {
           if (res.data) {
+            if (handleDelete) {
+              handleDelete(id);
+              return;
+            }
             this.setState(
               {
                 saved: false,
@@ -209,7 +214,7 @@ class OfferCard extends React.Component {
               <Button
                 onClick={e => {
                   e.stopPropagation();
-                  this.handleSave(offer.id);
+                  this.handleSave(offer.offer_id);
                 }}
                 className="offer-card__save-btn"
               >
