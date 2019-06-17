@@ -55,8 +55,8 @@ export default class Home extends Component {
           const filterSkill = res.data.skills;
           const { offer_type: filterOfferType } = res.data;
           this.setState({
-            skills: filterSkill[0] && filterSkill,
-            offerTypes: filterOfferType[0] && filterOfferType,
+            skills: filterSkill[0] ? filterSkill : [],
+            offerTypes: filterOfferType[0] ? filterOfferType : [],
           });
         } else {
           throw new Error();
@@ -84,11 +84,11 @@ export default class Home extends Component {
             { members: res.data },
             () => {
               const { members, skills } = this.state;
-              const filterMembersData = filterSkills(members, skills);
-              if (members[0]) {
-                this.setState({
-                  filterMembers: filterMembersData,
-                });
+              if (skills[0] && members[0]) {
+                const filterMembersData = filterSkills(members, skills);
+                this.setState({ filterMembers: filterMembersData });
+              } else {
+                this.setState({ filterMembers: members });
               }
             },
             () => {
@@ -100,7 +100,7 @@ export default class Home extends Component {
           throw new Error();
         }
       })
-      .catch(err =>
+      .catch(() =>
         this.setState(
           {
             errMSg: 'Something went wrong',
@@ -122,7 +122,7 @@ export default class Home extends Component {
             { offers: res.data },
             () => {
               const { offers, offerTypes, skills } = this.state;
-              if (offers[0]) {
+              if (offers[0] && offerTypes[0]) {
                 const filteredOffersSkills = filterSkills(offers, skills);
                 const filtereOffersOfferTypes = filterOfferTypes(
                   offers,
@@ -134,6 +134,8 @@ export default class Home extends Component {
                   );
                 });
                 this.setState({ filteredOffers: filteredOffersData });
+              } else {
+                this.setState({ filteredOffers: offers });
               }
             },
             () => {
@@ -228,7 +230,7 @@ export default class Home extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        if (res.data) throw new Error();
+        if (!res.data) throw new Error();
       })
       .catch(() =>
         this.setState(
