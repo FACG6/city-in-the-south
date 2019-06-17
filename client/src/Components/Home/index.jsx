@@ -177,7 +177,7 @@ export default class Home extends Component {
                 {localStorage.getItem('filterQuery') === 'Members'
                   ? filterMembers.length
                   : filteredOffers.length}{' '}
-                Results
+                results
               </Col>
               <Col className="dropdown-toggled" xs={3}>
                 {isClicked ? (
