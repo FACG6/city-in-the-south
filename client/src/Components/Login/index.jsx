@@ -50,7 +50,7 @@ export default class Login extends React.Component {
   };
 
   handleChange = ({ target: { value, name } }) =>
-    this.setState({ [name]: value });
+    this.setState({ [name]: value, message: '' });
 
   render() {
     const { username, password, message } = this.state;
