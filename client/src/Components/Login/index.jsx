@@ -27,12 +27,19 @@ export default class Login extends React.Component {
           pass: password,
         }),
       })
-        .then(response => response.json())
         .then(response => {
-          localStorage.setItem('userInfo', JSON.stringify(response.data));
-          auth.isAuthenticated = true;
-          setUserInfo(response.data);
-          this.props.history.push('/home');
+          if (response.status !== 200) {
+            this.setState({ message: 'Wrong Cridentials!!' });
+          }
+          return response.json();
+        })
+        .then(({ data, error }) => {
+          if (data) {
+            localStorage.setItem('userInfo', JSON.stringify(data));
+            auth.isAuthenticated = true;
+            setUserInfo(data);
+            this.props.history.push('/home');
+          }
         })
         .catch(err => {
           auth.error = err;
