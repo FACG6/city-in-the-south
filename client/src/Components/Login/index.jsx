@@ -2,6 +2,7 @@ import React from 'react';
 import './style.css';
 import { Form, Button, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import auth from '../../auth/auth';
 
 export default class Login extends React.Component {
   state = {
@@ -11,19 +12,48 @@ export default class Login extends React.Component {
   };
 
   handleClick = () => {
-    if (this.state.username && this.state.password) {
+    const { username, password } = this.state;
+    const { setUserInfo } = this.props;
+    if (username && password) {
       // make a requset to the back with method post and data{username , password}
+      fetch('/api/v1/login', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          pass: password,
+        }),
+      })
+        .then(response => {
+          if (response.status !== 200) {
+            this.setState({ message: 'Wrong Cridentials!!' });
+          }
+          return response.json();
+        })
+        .then(({ data, error }) => {
+          if (data) {
+            localStorage.setItem('userInfo', JSON.stringify(data));
+            auth.isAuthenticated = true;
+            setUserInfo(data);
+            this.props.history.push('/home');
+          }
+        })
+        .catch(err => {
+          auth.error = err;
+        });
     } else {
       this.setState({ message: 'Please enter all fields' });
     }
   };
 
   handleChange = ({ target: { value, name } }) =>
-    this.setState({ [name]: value });
+    this.setState({ [name]: value, message: '' });
 
   render() {
     const { username, password, message } = this.state;
-
     return (
       <Container>
         <Form className="content-login">
