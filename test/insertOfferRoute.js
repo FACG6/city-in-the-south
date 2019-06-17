@@ -13,11 +13,11 @@ test('Testing /api/v1/offers route with method POST', (t) => {
       { id: 2, name: 'Node js' },
       { id: 3, name: 'Express' },
     ],
-    offer_types: [
+    offerType: [
       { id: 1, name: 'Full Time' },
       { id: 2, name: 'Fixed price' },
     ],
-    member_id: 1,
+    memberId: 1,
   };
   supertest(router)
     .post('/api/v1/offers')

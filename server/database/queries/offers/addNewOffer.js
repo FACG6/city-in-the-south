@@ -1,6 +1,9 @@
 const connection = require('./../../config/db_connection');
 
-const addOfferDetails = (title, position, description, memberId) => {
+const addOfferDetails = (offerDetails) => {
+  const {
+    title, position, description, memberId,
+  } = offerDetails;
   const offerObj = {
     text: 'INSERT INTO offer (title, position, description, member_id) VALUES($1, $2, $3, $4) RETURNING *',
     values: [title, position, description, memberId],
