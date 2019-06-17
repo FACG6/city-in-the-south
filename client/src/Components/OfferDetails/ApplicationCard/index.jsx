@@ -17,17 +17,9 @@ class ApplicationCard extends Component {
   };
 
   componentDidMount() {
-    // from localStorage
-    const userInfo = {
-      id: 1,
-      fullName: 'Ayman AlQoqa',
-      username: 'Ayman321396',
-      avatar:
-        'https://m.media-amazon.com/images/M/MV5BMTcxOTk4NzkwOV5BMl5BanBnXkFtZTcwMDE3MTUzNA@@._V1_.jpg',
-    };
-    this.setState({ userInfo });
     const { application } = this.props;
-    this.setState({ application });
+    const userInfo = JSON.parse(window.localStorage.getItem('userInfo'));
+    this.setState({ application, userInfo });
   }
 
   handleProfile = () => {
@@ -40,7 +32,6 @@ class ApplicationCard extends Component {
   };
 
   handleHireMe = () => {
-    // handle hire me button
     const { application, match, history } = this.props;
     const { member_id } = application;
     const {
@@ -98,10 +89,12 @@ class ApplicationCard extends Component {
       .then(res => res.json())
       .then(res => {
         if (res.data) {
-          const { history } = this.props;
-          history.push(`app/offers/${offerId}`);
-        } else {
-          throw new Error();
+          const { status } = res.data[0];
+          this.setState(prevState => {
+            const updatedApp = { ...prevState.application };
+            updatedApp.status = status;
+            return { application: updatedApp };
+          });
         }
       })
       .catch(() =>
@@ -133,10 +126,12 @@ class ApplicationCard extends Component {
       .then(res => res.json())
       .then(res => {
         if (res.data) {
-          const { history } = this.props;
-          history.push(`app/offers/${offerId}`);
-        } else {
-          throw new Error();
+          const { status } = res.data[0];
+          this.setState(prevState => {
+            const updatedApp = { ...prevState.application };
+            updatedApp.status = status;
+            return { application: updatedApp };
+          });
         }
       })
       .catch(() =>
@@ -243,9 +238,7 @@ ApplicationCard.propTypes = {
     full_name: PropTypes.string.isRequired,
     avatar: PropTypes.string.isRequired,
     proposal: PropTypes.string.isRequired,
-    // status: PropTypes.string.isRequired,
   }).isRequired,
-  applicantMemberId: PropTypes.number.isRequired,
   viewProfile: PropTypes.bool,
   hireMe: PropTypes.bool,
   defaultAvatar: PropTypes.string.isRequired,
