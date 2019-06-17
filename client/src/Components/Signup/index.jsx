@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './style.css';
 import { Form, Button } from 'react-bootstrap';
 import signupValidation from './validation';
+import auth from '../../auth/auth';
 
 export default class SignUp extends Component {
   state = {
@@ -15,7 +16,7 @@ export default class SignUp extends Component {
 
   handleClick = e => {
     e.preventDefault();
-
+    const { setUserInfo } = this.props;
     const { username, password: pass, email, confPassword } = this.state;
     this.setState({ errormsg: '' });
     signupValidation
@@ -29,7 +30,7 @@ export default class SignUp extends Component {
         { abortEarly: false }
       )
       .then(() => {
-        fetch('api/v1/members', {
+        fetch('/api/v1/members', {
           method: 'POST',
           credentials: 'same-origin',
           headers: {
@@ -38,11 +39,17 @@ export default class SignUp extends Component {
           body: JSON.stringify({ username, email, pass }),
         })
           .then(res => res.json())
-          .then(res => localStorage.setItem('userInfo', JSON.stringify(response.data))
-          auth.isAuthenticated = true;
-          setUserInfo(response.data);
-          this.props.history.push('/home');
-          ).catch(err => auth.error=err);
+          .then(response => {
+            if (response.data) {
+              localStorage.setItem('userInfo', JSON.stringify(response.data));
+              auth.isAuthenticated = true;
+              setUserInfo(response.data);
+              this.props.history.push('/home');
+            } else {
+              this.setState({ errormsg: response.error.msg });
+            }
+          })
+          .catch(err => (auth.error = err));
       })
       .catch(({ inner }) => {
         if (inner) {
@@ -140,6 +147,7 @@ export default class SignUp extends Component {
               <span className="errormsg">{errormsg.confPassword}</span>
             )}
           </Form.Group>
+          <p className="errormsg">{errormsg.msg}</p>
           <Button
             variant="primary"
             type="submit"
