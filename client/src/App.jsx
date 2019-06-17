@@ -64,7 +64,14 @@ export default class App extends Component {
                   <Login {...props} setUserInfo={this.setUserInfo} />
                 )}
               />
-              <Route exact path="/signup" component={Signup} />
+              <Route
+                exact
+                path="/signup"
+                setUserInfo={this.setUserInfo}
+                render={props => (
+                  <Signup {...props} setUserInfo={this.setUserInfo} />
+                )}
+              />
               <Route exact path="/home" component={Home} />
               <Route path="/app" component={PrivatePages} />
               <Route component={PageNotFound} />

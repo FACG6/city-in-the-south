@@ -12,6 +12,7 @@ const {
 } = require('../controllers');
 
 router.post('/login', authentication.login);
+router.post('/members', member.addMember);
 
 router.post('/members', member.addMember);
 router.use(authentication.authentication);
