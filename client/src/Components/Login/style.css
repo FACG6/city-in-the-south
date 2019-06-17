@@ -23,12 +23,12 @@
   width: 277px;
   margin: 10px 24px;
   align-items: center;
-  font-weight: 500;
-  line-height: 22px;
+  font-weight: 600 !important;
   background-color: #0F9CAF !important;
   border:none ;
   color: #eee;
   border-radius: 4px;
+  font-size: 20px !important;
 }
 .content-login__submit:hover {
   background-color: rgb(11, 118, 133) !important;
