@@ -60,6 +60,7 @@
   {
     error: null,
     data: {
+      member_id:10,
       skills: [
                  {id:1, name:'javascript'},
                  {id:10, name:'Node js'},
@@ -274,8 +275,8 @@
 - body:
   ```
   {
-    member_id: 1,
-    offer_id: 2
+    memberId: 1,
+    offerId: 2
   }
   ```
 - response:
@@ -283,8 +284,8 @@
   {
     error: null
     data: {
-      member_id: 1,
-      offer_id: 2
+       memberId: 1,
+       offerId: 2
     }
   }
   ```
@@ -292,8 +293,7 @@
 - body:
   ```
   {
-    member_id: 1,
-    offer_id: 2
+    offerId: 2
   }
   ```
 - response:
@@ -341,11 +341,11 @@
               {id:10, name:'Node js'},
               {id:5, name:'Express'}
               ], // array of objects
-      offer_type: [
+      offerType: [
              {id:1, name:'Full Time'} ,
             {id:10, name:'Fixed price'}
             ] ,  // array of objects
-      member_id: 2,
+      memberId: 2,
   }
   ```
 - response:
@@ -429,7 +429,6 @@
   {
     member_id: 1,
     offer_id: 2,
-    status: pending
   }
   ```
 - response:

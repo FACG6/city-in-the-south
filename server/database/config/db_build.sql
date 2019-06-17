@@ -117,7 +117,7 @@ CREATE TABLE notification (
 CREATE TABLE hired_member (
   offer_id INTEGER REFERENCES offer(id) ON DELETE CASCADE,
   member_id INTEGER REFERENCES member(id),
-  status TEXT,
+  status TEXT DEFAULT 'pending',
   PRIMARY KEY(offer_id, member_id) 
 );
 

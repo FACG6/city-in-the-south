@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Button, Spinner } from 'react-bootstrap';
+import { Card, Button, Spinner, Alert } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -12,6 +12,7 @@ class OfferCard extends React.Component {
     statusDiv: '',
     hovered: '',
     saved: false,
+    memberId: 0,
   };
 
   componentDidMount() {
@@ -21,11 +22,50 @@ class OfferCard extends React.Component {
       finished: 'red',
       pending: 'orange',
       active: 'blue',
+      errMSg: '',
+      showAlert: false,
+      variant: '',
     };
+    this.setState({
+      memberId:
+        JSON.parse(localStorage.getItem('userInfo')) &&
+        JSON.parse(localStorage.getItem('userInfo')).id,
+    });
+    const memberId =
+      JSON.parse(localStorage.getItem('userInfo')) &&
+      JSON.parse(localStorage.getItem('userInfo')).id;
+    fetch(`/api/v1/saved-offers/${memberId}`, { method: 'GET' })
+      .then(res => res.json())
+      .then(res => {
+        if (res.data) {
+          res.data.filter(savedOffer => {
+            if (offer.id === savedOffer.id) {
+              this.setState({ saved: true });
+            } else {
+              this.setState({ saved: false });
+            }
+          });
+        } else {
+          throw new Error();
+        }
+      })
+      .catch(() =>
+        this.setState(
+          {
+            errMSg: 'Something went wrong',
+            showAlert: true,
+            variant: 'danger',
+          },
+          () =>
+            setTimeout(() => {
+              this.setState({ errMSg: '', showAlert: false });
+            }, 3000)
+        )
+      );
+
     this.setState(() => {
       return {
         offer,
-        saved: offer.saved,
         statusLabel: `offer-card__status--${status}`,
         statusDiv: `offer-card__border--${borderColor[status]}`,
       };
@@ -39,22 +79,112 @@ class OfferCard extends React.Component {
   };
 
   handleSave = id => {
-    const { saved } = this.state;
-    // send request to the backend to save (if this.state.saved === true) the offer
-    // if this.state.saved is false, send request to unsave the offer
-    // if(saved) axios.delete(`/api/v1/saved-offer/${id}`)
-    // else axios.post('/api/v1/saved-offers', body: {member_id, id} )
-    this.setState({ saved: !saved });
+    const { saved, memberId } = this.state;
+    if (saved) {
+      fetch(`/api/v1/saved-offers/${memberId}`, {
+        method: 'DELETE',
+        body: JSON.stringify({ offerId: id }),
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      })
+        .then(res => res.json())
+        .then(res => {
+          if (res.data) {
+            this.setState(
+              {
+                saved: false,
+                errMSg: 'Deleted successfully ',
+                showAlert: true,
+                variant: 'success',
+              },
+              () =>
+                setTimeout(() => {
+                  this.setState({ errMSg: '', showAlert: false });
+                }, 1000)
+            );
+          }
+          if (res.error) {
+            throw new Error();
+          }
+        })
+        .catch(() =>
+          this.setState(
+            {
+              errMSg: 'Something went wrong',
+              showAlert: true,
+              variant: 'danger',
+            },
+            () =>
+              setTimeout(() => {
+                this.setState({ errMSg: '', showAlert: false });
+              }, 3000)
+          )
+        );
+    } else {
+      fetch('/api/v1/saved-offers', {
+        method: 'POST',
+        body: JSON.stringify({ memberId, offerId: id }),
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      })
+        .then(res => res.json())
+        .then(res => {
+          if (res.data) {
+            this.setState(
+              {
+                saved: true,
+                errMSg: 'Added successfully ',
+                showAlert: true,
+                variant: 'success',
+              },
+              () =>
+                setTimeout(() => {
+                  this.setState({ errMSg: '', showAlert: false });
+                }, 1000)
+            );
+          } else {
+            throw new Error();
+          }
+        })
+        .catch(() =>
+          this.setState(
+            {
+              errMSg: 'Something went wrong',
+              showAlert: true,
+              variant: 'danger',
+            },
+            () =>
+              setTimeout(() => {
+                this.setState({ errMSg: '', showAlert: false });
+              }, 3000)
+          )
+        );
+    }
   };
 
   handleHover = () => this.setState({ hovered: 'offer-card--hovered' });
 
   render() {
-    const { offer, hovered, statusLabel, statusDiv } = this.state;
+    const {
+      offer,
+      hovered,
+      statusLabel,
+      statusDiv,
+      errMSg,
+      showAlert,
+      variant,
+    } = this.state;
     // eslint-disable-next-line react/prop-types
     const { hover, history } = this.props;
     return (
       <>
+        <Alert show={showAlert} key={1} variant={variant}>
+          {errMSg}
+        </Alert>
         {offer ? (
           <Card
             className={`offer-card ${hovered ? 'offer-card--hovered' : ''}`}
