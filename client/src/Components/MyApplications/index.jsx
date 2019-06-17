@@ -13,6 +13,9 @@ export default class MyApplications extends React.Component {
 
   componentDidMount() {
     // fetch for myApplications data and store it in the state
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    const { id } = userInfo;
+    console.log(id);
     this.setState({ myApplications: myApplicationsData });
   }
 
