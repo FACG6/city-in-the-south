@@ -18,8 +18,8 @@ export default function LandingPage() {
       </Row>
       <h2 className="landing__title landing__title--center">Success stories</h2>
       <Slider />
-      <section className="landing__aboutus">
-        <div className="landing__info">
+      <Row className="landing__aboutus">
+        <Col className="landing__info">
           <h2 className="landing__title">About us</h2>
           <p className="landing__paragraph">
             Lorem, ipsum dolor sit amet consectetur adipisicing elit.
@@ -31,9 +31,9 @@ export default function LandingPage() {
             similique, officiis illo, quisquam tempore quos ullam eum ab dolorem
             est quibusdam.
           </p>
-        </div>
-        <div className="landing__img" />
-      </section>
+        </Col>
+        <Col className="landing__img" />
+      </Row>
     </>
   );
 }
