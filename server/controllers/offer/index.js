@@ -6,6 +6,7 @@ const getMyOffers = require('./getMyOffers');
 const getSavedOffers = require('./getSavedOffers');
 const addOffer = require('./addOffer');
 const getOfferDetails = require('./getOfferDetails');
+const updateOfferStatus = require('./updateOfferStatus');
 
 module.exports = {
   deleteSavedOffer,
@@ -16,4 +17,5 @@ module.exports = {
   getSavedOffers,
   getMyOffers,
   deleteOffer,
+  updateOfferStatus,
 };

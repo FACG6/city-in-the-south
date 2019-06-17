@@ -1,30 +1,62 @@
 import React, { Component } from 'react';
-import { NavLink, Link } from 'react-router-dom';
-import { Navbar, Nav, Col, Dropdown } from 'react-bootstrap';
+import { NavLink, Link, withRouter } from 'react-router-dom';
+import { Navbar, Nav, Col, Dropdown, Alert } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import Notification from './Notification';
 import './style.css';
+import auth from '../../auth/auth';
 
 class Header extends Component {
   state = {
     userInfo: {
-      fullName: 'Ayman AlQoqa',
-      username: 'Ayman321396',
-      avatar:
+      fullName: null,
+      username: null,
+      avatar: null,
+      defaultAvatar:
         'https://m.media-amazon.com/images/M/MV5BMTcxOTk4NzkwOV5BMl5BanBnXkFtZTcwMDE3MTUzNA@@._V1_.jpg',
     },
   };
 
   componentDidMount() {
-    // const userInfo = localStorage.getItem('userInfo');
-    // this.setState({ userInfo });
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (userInfo) {
+      userInfo.defaultAvatar =
+        'https://m.media-amazon.com/images/M/MV5BMTcxOTk4NzkwOV5BMl5BanBnXkFtZTcwMDE3MTUzNA@@._V1_.jpg';
+      this.setState({ userInfo });
+    }
   }
+
+  componentDidUpdate() {
+    const {
+      userInfo: { username },
+    } = this.state;
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (userInfo && username !== userInfo.username) {
+      userInfo.defaultAvatar =
+        'https://m.media-amazon.com/images/M/MV5BMTcxOTk4NzkwOV5BMl5BanBnXkFtZTcwMDE3MTUzNA@@._V1_.jpg';
+      this.setState({ userInfo });
+    }
+  }
+
+  handleLogout = () => {
+    fetch('/api/v1/logout')
+      .then(res => res.json())
+      .then(res => {
+        if (res.data === 'success') {
+          auth.logout();
+          this.props.isLoggedOut();
+          this.props.history.push('/');
+        }
+      })
+      .catch();
+  };
 
   render() {
     const { islogged } = this.props;
     // default values
-    const { fullName, username, avatar } = this.state.userInfo;
-
+    const {
+      userInfo: { username, avatar, defaultAvatar },
+    } = this.state;
     return (
       <div className="header__container">
         <Navbar
@@ -87,9 +119,13 @@ class Header extends Component {
                     id="dropdown-basic"
                     className="nav__dropdown"
                   >
-                    <img src={avatar} alt="Avatar" className="nav__avatar" />{' '}
+                    <img
+                      src={avatar || defaultAvatar}
+                      alt="Avatar"
+                      className="nav__avatar"
+                    />{' '}
                     {'    '}
-                    {fullName}
+                    {username}
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu className="dropdown__menu-avatar">
@@ -102,8 +138,8 @@ class Header extends Component {
                     </Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item
-                      as={Link}
-                      to="/logout"
+                      // to="/logout"
+                      onClick={this.handleLogout}
                       className="dropdown__item"
                     >
                       Logout
@@ -118,6 +154,9 @@ class Header extends Component {
             </>
           )}
         </Navbar>
+        {auth.error && (
+          <Alert variant="danger">Network connection error!!!</Alert>
+        )}
       </div>
     );
   }
@@ -127,4 +166,4 @@ Header.propTypes = {
   islogged: PropTypes.bool.isRequired,
 };
 
-export default Header;
+export default withRouter(Header);
