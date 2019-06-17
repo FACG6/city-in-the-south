@@ -1,22 +1,37 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Card, Row, Col, Container, Spinner } from 'react-bootstrap';
-
-import offersDetails from '../utils/myOffers';
+import { Card, Row, Col, Container, Spinner, Alert } from 'react-bootstrap';
 
 import './style.css';
 
 class MyOffers extends Component {
   state = {
     offers: null,
+    showWrongAlert: false,
   };
 
   componentDidMount() {
-    // send the request to the backend to get offers (by member_id 'take it from local storage')
-    // use `GET` : `/api/v1/my-offers/:memberId`
-    // the response will be as { error: null, data: [ { // offer details } ] }
-    // this.setState({ offers: result.data });
-    this.setState({ offers: offersDetails });
+    // from local storage
+    const userInfo = {
+      id: 1,
+    };
+    const { id } = userInfo;
+    fetch(`/api/v1/my-offers/${id}`, {
+      method: 'GET',
+    })
+      .then(response => response.json())
+      .then(res => this.setState({ offers: res.data }))
+      .catch(() =>
+        this.setState(
+          {
+            showWrongAlert: true,
+          },
+          () =>
+            setTimeout(() => {
+              this.setState({ showWrongAlert: false });
+            }, 5000)
+        )
+      );
   }
 
   statusClassName = status => {
@@ -24,48 +39,55 @@ class MyOffers extends Component {
   };
 
   render() {
-    const { offers } = this.state;
+    const { offers, showWrongAlert } = this.state;
     // eslint-disable-next-line react/prop-types
     const { history } = this.props;
     return (
-      <Container>
-        <h1 className="myoffers__header"> My Offers </h1>
-        <Row>
-          {offers ? (
-            offers.map(item => {
-              return (
-                <Col xs={12} md={6} lg={4} key={item.id}>
-                  <Card
-                    className="myoffer__card"
-                    key={item.id}
-                    onClick={() => history.push(`/app/offers/${item.id}`)}
-                  >
-                    <Card.Header className="myoffer__card-header">
-                      <Card.Text
-                        className={`myoffers__status ${this.statusClassName(
-                          item.status
-                        )}`}
+      <>
+        {showWrongAlert && <Alert> Somthing went error! Try agailn </Alert>}
+        {offers && offers.length ? (
+          <Container>
+            <h1 className="myoffers__header"> My Offers </h1>
+            <Row>
+              {offers ? (
+                offers.map(item => {
+                  return (
+                    <Col xs={12} md={6} lg={3} key={item.id}>
+                      <Card
+                        className="myoffer__card"
+                        key={item.id}
+                        onClick={() => history.push(`/app/offers/${item.id}`)}
                       >
-                        {item.status}
-                      </Card.Text>
-                    </Card.Header>
-                    <Card.Body className="myoffers__body">
-                      <Card.Text className="myoffers__title">
-                        {item.title}
-                      </Card.Text>
-                      <Card.Text className="myoffers__position">
-                        {item.position}
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              );
-            })
-          ) : (
-            <Spinner animation="border" variant="info" />
-          )}
-        </Row>
-      </Container>
+                        <Card.Header className="myoffer__card-header">
+                          <Card.Text
+                            className={`myoffers__status ${this.statusClassName(
+                              item.status
+                            )}`}
+                          >
+                            {item.status}
+                          </Card.Text>
+                        </Card.Header>
+                        <Card.Body className="myoffers__body">
+                          <Card.Text className="myoffers__title">
+                            {item.title}
+                          </Card.Text>
+                          <Card.Text className="myoffers__position">
+                            {item.position}
+                          </Card.Text>
+                        </Card.Body>
+                      </Card>
+                    </Col>
+                  );
+                })
+              ) : (
+                <Spinner animation="border" variant="info" />
+              )}
+            </Row>
+          </Container>
+        ) : (
+          <span>there is no offers to show</span>
+        )}
+      </>
     );
   }
 }
