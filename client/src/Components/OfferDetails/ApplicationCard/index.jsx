@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import statusColor from '../../Helper/helper';
 
 import './style.css';
+import { Prev } from 'react-bootstrap/PageItem';
 
 class ApplicationCard extends Component {
   state = {
@@ -57,8 +58,12 @@ class ApplicationCard extends Component {
       .then(res => res.json())
       .then(res => {
         if(res.data){
-          const { offer_id } = res.data[0];
-          history.push(`/app/my-offers`);
+          const { status } = res.data[0];
+          this.setState(prevState => {
+            const newApplication = { ...prevState.application };
+            newApplication.status = status;
+            return { application: newApplication };
+          });
         }
       })
       .catch(() =>
