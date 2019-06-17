@@ -12,16 +12,13 @@ export default class MyApplications extends React.Component {
   };
 
   componentDidMount() {
-    // fetch for myApplications data and store it in the state
-    // const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-    const userInfo = { id: 1 };
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
     const { id } = userInfo;
     fetch(`/api/v1/${id}/my-applications`)
       .then(res => res.json())
-      .then(({ data }) => {
-        if (data) {
-          this.setState({ myApplications: data });
-        }
+      .then(({ data, error }) => {
+        if (data) this.setState({ myApplications: data });
+        else this.setState({ message: error.msg });
       })
       .catch(er => {
         this.setState({ message: er.message });
