@@ -23,7 +23,6 @@ class CoverLetter extends Component {
       .validate({ proposal }, { abortEarly: false })
       .then(() => {
         this.setState({ errMsg: '' });
-        // fetch with method post
         const proposalDetails = {
           offer_id,
           member_id: userInfo.id,
