@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Spinner } from 'react-bootstrap';
+import { Alert } from 'react-bootstrap';
 import { Typeahead } from 'react-bootstrap-typeahead';
-
-import { skills, offerType } from './staticData';
 
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import './style.css';
@@ -13,57 +11,173 @@ export default class AutoCompleteTags extends Component {
     options: [],
     selectedTags: [],
     allownew: true,
+    errMSg: '',
+    showAlert: false,
+    variant: '',
   };
 
   componentDidMount() {
-    // git the data form the back for skills and offer_type and setSatet for the skills and offer type
-    // const selected = options.filter(item => _.find(fetched, id => id === item.id))
     const { type, allowNew } = this.props;
     this.setState({ allownew: allowNew });
-    this.setState(
-      () => {
-        let options;
-        if (type === 'skill') {
-          options = skills;
-        } else if (type === 'offer_type') {
-          options = offerType;
-        }
-        return { options };
-      },
-      () => {
-        this.setState({ selectedTags: this.props.data });
-      }
-    );
+    if (type === 'skill') {
+      fetch('/api/v1/skills', { method: 'GET' })
+        .then(res => res.json())
+        .then(res => {
+          if (res.data) this.setState({ options: res.data });
+          if (res.error) {
+            throw new Error();
+          }
+        })
+        .catch(() =>
+          this.setState(
+            {
+              errMSg: 'Something went wrong',
+              showAlert: true,
+              variant: 'danger',
+            },
+            () =>
+              setTimeout(() => {
+                this.setState({ errMSg: '', showAlert: false });
+              }, 3000)
+          )
+        );
+    } else if (type === 'offer_type') {
+      fetch('/api/v1/offer-type', { method: 'GET' })
+        .then(res => res.json())
+        .then(res => {
+          if (res.data) this.setState({ options: res.data });
+          if (res.error) {
+            throw new Error();
+          }
+        })
+        .catch(() =>
+          this.setState(
+            {
+              errMSg: 'Something went wrong',
+              showAlert: true,
+              variant: 'danger',
+            },
+            () =>
+              setTimeout(() => {
+                this.setState({ errMSg: '', showAlert: false });
+              }, 3000)
+          )
+        );
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { data } = this.props;
+    if (prevProps.data !== data) {
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({ selectedTags: data });
+    }
   }
 
   handleChange = items => {
-    /* filter the skills if the user enter new skills we will make a request to the back to add the skills the user adding it 
-    and the same as for the offer_type
-  */
-    const { onchange } = this.props;
-    this.setState(
-      prevState => {
-        const newOptions = [...prevState.options];
-        const newTags = [...prevState.selectedTags];
-        if (items.length > newTags.length) {
-          if (items[items.length - 1].customOption) {
-            // send request to db to add skills/offertypes then return newOptions
-            // push the newOptions
-            newOptions.push({ id: 222, name: items[items.length - 1].name });
-            newTags.push({ id: 222, name: items[items.length - 1].name });
-          } else {
-            newTags.push(items[items.length - 1]);
-          }
-          return { options: newOptions, selectedTags: newTags };
+    const { onchange, type } = this.props;
+    const { selectedTags, options } = this.state;
+    if (items.length > selectedTags.length) {
+      if (items[items.length - 1].customOption) {
+        const newTags = [...selectedTags];
+        const newOptions = [...options];
+        if (type === 'skill') {
+          fetch('/api/v1/skills', {
+            method: 'POST',
+            body: JSON.stringify({ name: items[items.length - 1].name }),
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+          })
+            .then(res => res.json())
+            .then(res => {
+              if (res.data) {
+                newOptions.push(res.data);
+                newTags.push(res.data);
+                this.setState({ options: newOptions, selectedTags: newTags });
+                this.setState(
+                  {
+                    errMSg: 'Added successfully ',
+                    showAlert: true,
+                    variant: 'success',
+                  },
+                  () =>
+                    setTimeout(() => {
+                      this.setState({ errMSg: '', showAlert: false });
+                    }, 1000)
+                );
+              }
+              if (res.error) {
+                throw new Error();
+              }
+            })
+            .catch(() =>
+              this.setState(
+                {
+                  errMSg: 'Something went wrong',
+                  showAlert: true,
+                  variant: 'danger',
+                },
+                () =>
+                  setTimeout(() => {
+                    this.setState({ errMSg: '', showAlert: false });
+                  }, 3000)
+              )
+            );
         }
-        return { selectedTags: items };
-      },
-      /* here we need another on change its comming from the filter it self */
-      () => {
-        const { selectedTags } = this.state;
-        if (typeof onchange === 'function') onchange(selectedTags);
+        if (type === 'offer_type') {
+          fetch('/api/v1/offer-type', {
+            method: 'POST',
+            body: JSON.stringify({ name: items[items.length - 1].name }),
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+          })
+            .then(res => res.json())
+            .then(res => {
+              if (res.data) {
+                newOptions.push(res.data[0]);
+                newTags.push(res.data[0]);
+                this.setState({ options: newOptions, selectedTags: newTags });
+                this.setState(
+                  {
+                    errMSg: 'Added successfully ',
+                    showAlert: true,
+                    variant: 'success',
+                  },
+                  () =>
+                    setTimeout(() => {
+                      this.setState({ errMSg: '', showAlert: false });
+                    }, 1000)
+                );
+              }
+              if (res.error) {
+                throw new Error();
+              }
+            })
+            .catch(() => {
+              this.setState(
+                {
+                  errMSg: 'Something went wrong',
+                  showAlert: true,
+                  variant: 'danger',
+                },
+                () =>
+                  setTimeout(() => {
+                    this.setState({ errMSg: '', showAlert: false });
+                  }, 3000)
+              );
+            });
+        }
+      } else {
+        this.setState({ selectedTags: items });
       }
-    );
+    } else {
+      this.setState({ selectedTags: items });
+    }
+    if (typeof onchange === 'function') onchange(items);
   };
 
   handleInputChange = item => {
@@ -78,33 +192,42 @@ export default class AutoCompleteTags extends Component {
   };
 
   render() {
-    const { options, selectedTags, allownew } = this.state;
+    const {
+      options,
+      selectedTags,
+      allownew,
+      errMSg,
+      showAlert,
+      variant,
+    } = this.state;
     const { placeholder, type } = this.props;
     return (
       <>
         <h1 className="autocomplete__title">
-          {type === 'skill' ? 'Skills ' : 'Offer Type'}
+          {type === 'skill' ? 'Skills' : 'Offer Type'}
         </h1>
-        {options[0] ? (
-          <Typeahead
-            clearButton
-            multiple
-            onInputChange={this.handleInputChange}
-            onChange={this.handleChange}
-            id={`autoComplete${type}`}
-            key="id"
-            selected={selectedTags}
-            valueKey="id"
-            labelKey="name"
-            options={options}
-            allowNew={allownew}
-            newSelectionPrefix="Add a new item: "
-            placeholder={placeholder}
-            className="autComplete-dev"
-          />
-        ) : (
-          <Spinner animation="border" variant="info" />
-        )}
+
+        <Typeahead
+          clearButton
+          multiple
+          onInputChange={this.handleInputChange}
+          onChange={this.handleChange}
+          id={`autoComplete${type}`}
+          key="id"
+          selected={selectedTags}
+          valueKey="id"
+          labelKey="name"
+          options={options}
+          allowNew={allownew}
+          newSelectionPrefix="Add a new item: "
+          placeholder={placeholder}
+          className="autComplete-dev"
+        />
+        <br />
+
+        <Alert show={showAlert} key={1} variant={variant}>
+          {errMSg}
+        </Alert>
       </>
     );
   }
