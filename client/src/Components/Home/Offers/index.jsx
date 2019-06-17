@@ -8,7 +8,9 @@ export default function Offers({ filtered }) {
     <div>
       {filtered[0] ? (
         filtered.map(item => {
-          return <OfferCard offer={item} key={item.id} hover={false} />;
+          return (
+            <OfferCard offer={item} key={`offers-${item.id}`} hover={false} />
+          );
         })
       ) : (
         <div className="main-spinner"> There is no result</div>

@@ -44,6 +44,9 @@ export default class Home extends Component {
         localStorage.setItem('filterQuery', 'Offers'),
     });
 
+    const filterQuery =
+      localStorage.getItem('filterQuery') ||
+      localStorage.setItem('filterQuery', 'Offers');
     const { offset, memberId } = this.state;
     fetch(`/api/v1/filter/${memberId}`)
       .then(res => res.json())
@@ -83,13 +86,13 @@ export default class Home extends Component {
             this.setState({
               members: res.data,
               filterMembers: filterMembersData,
-              filterData: filterMembersData,
+              filterData: filterQuery === 'Members' && filterMembersData,
             });
           } else {
             this.setState({
               members: res.data,
               filterMembers: res.data,
-              filterData: res.data,
+              filterData: filterQuery === 'Members' && res.data,
             });
           }
         } else {
@@ -139,7 +142,7 @@ export default class Home extends Component {
               this.setState({
                 offers: res.data,
                 filteredOffers: filteredOffersData,
-                filterData: filteredOffersData,
+                filterData: filterQuery === 'Offers' && filteredOffersData,
               });
             }
           } else if (offerTypes[0]) {
@@ -150,17 +153,20 @@ export default class Home extends Component {
             this.setState({
               offers: res.data,
               filteredOffers: filtereOffersOfferTypes,
-              filterData: filtereOffersOfferTypes,
+              filterData: filterQuery === 'Offers' && filtereOffersOfferTypes,
             });
           } else if (skills[0]) {
             const filteredOffersSkills = filterSkills(res.data, skills);
             this.setState({
               offers: res.data,
               filteredOffers: filteredOffersSkills,
-              filterData: filteredOffersSkills,
+              filterData: filterQuery === 'Offers' && filteredOffersSkills,
             });
           } else {
-            this.setState({ filteredOffers: res.data, filterData: res.data });
+            this.setState({
+              filteredOffers: res.data,
+              filterData: filterQuery === 'Offers' && res.data,
+            });
           }
         } else {
           throw new Error();
