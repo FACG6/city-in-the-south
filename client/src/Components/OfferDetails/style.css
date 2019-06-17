@@ -49,8 +49,10 @@
   align-self: flex-end !important;
 }
 
-.status__completed, .status__accepted {
-  color: green;
+.status__completed, .status__accepted,
+.status__pending, .status__finished, 
+.status__refused, .status__active {
+  text-transform: capitalize;
 }
 
 .status__completed, .status__accepted {
