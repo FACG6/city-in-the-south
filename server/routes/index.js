@@ -11,10 +11,11 @@ const {
   erros,
 } = require('../controllers');
 
-
 router.post('/login', authentication.login);
 
 router.use(authentication.authentication);
+
+router.get('/isAuthenticated', authentication.isAuthenticated);
 
 router.get('/logout', authentication.logout);
 
@@ -42,6 +43,7 @@ router.post('/members', member.addMember);
 /* Offer */
 router.get('/offers/:offset', offer.getOffers);
 router.get('/offer/:offerId', offer.getOfferDetails);
+router.patch('/offer/:offerId', offer.updateOfferStatus);
 router.post('/offers', offer.addOffer);
 router.delete('/offers/:offerId', offer.deleteOffer);
 
