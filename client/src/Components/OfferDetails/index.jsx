@@ -146,7 +146,7 @@ export default class OfferDetails extends Component {
                   <span className={`status__${statusColor(offer[0].status)}`}>
                     {offer[0].status}
                   </span>
-                  {offer && offer[0] && offer[0].status === 'completed' ? (
+                  {offer && offer[0] && offer[0].status === 'completed' && (
                     <Button
                       className="offet-details__end-button"
                       variant="danger"
@@ -154,7 +154,7 @@ export default class OfferDetails extends Component {
                     >
                       End Contract
                     </Button>
-                  ) : null}
+                  )}
                 </>
               )}
             </Row>
@@ -189,6 +189,12 @@ export default class OfferDetails extends Component {
                         />
                       );
                     })}
+                  {!applications ||
+                    (!applications.data.length && (
+                      <>
+                        <span>there is no Application to show.</span>
+                      </>
+                    ))}
                 </Col>
               </>
             ) : (
