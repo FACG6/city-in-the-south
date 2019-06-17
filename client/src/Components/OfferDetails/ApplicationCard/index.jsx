@@ -30,8 +30,11 @@ class ApplicationCard extends Component {
   }
 
   handleProfile = () => {
-    // eslint-disable-next-line react/prop-types
-    const { application: username, history } = this.props;
+    const {
+      application: { username },
+      // eslint-disable-next-line react/prop-types
+      history,
+    } = this.props;
     history.push(`/app/profile/${username}`);
   };
 
@@ -43,7 +46,6 @@ class ApplicationCard extends Component {
       // eslint-disable-next-line react/prop-types
       params: { offerId },
     } = match;
-    // fetch('/hired-member', )
     fetch('/api/v1/hired-member', {
       method: 'POST',
       credentials: 'same-origin',
@@ -57,7 +59,7 @@ class ApplicationCard extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        if(res.data){
+        if (res.data) {
           const { status } = res.data[0];
           this.setState(prevState => {
             const newApplication = { ...prevState.application };
@@ -82,7 +84,6 @@ class ApplicationCard extends Component {
   handleAccept = () => {
     // send req to update application status(applicaton: accepted, offer:completed)
     // /api/v1/hired-member/2
-    // fetch()
   };
 
   handleRefuse = () => {
@@ -134,12 +135,12 @@ class ApplicationCard extends Component {
                     )}
                   </>
                 ) : (
-                  <Card.Text
-                    className={`status__${statusColor(application.status)}`}
-                  >
-                    {application.status}
-                  </Card.Text>
-                )}
+                    <Card.Text
+                      className={`status__${statusColor(application.status)}`}
+                    >
+                      {application.status}
+                    </Card.Text>
+                  )}
                 {userInfo.id === application.id &&
                   application.status &&
                   application.status === 'pending' && (
