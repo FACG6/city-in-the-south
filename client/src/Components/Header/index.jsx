@@ -26,6 +26,18 @@ class Header extends Component {
     }
   }
 
+  componentDidUpdate() {
+    const {
+      userInfo: { username },
+    } = this.state;
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (userInfo && username !== userInfo.username) {
+      userInfo.defaultAvatar =
+        'https://m.media-amazon.com/images/M/MV5BMTcxOTk4NzkwOV5BMl5BanBnXkFtZTcwMDE3MTUzNA@@._V1_.jpg';
+      this.setState({ userInfo });
+    }
+  }
+
   handleLogout = () => {
     fetch('/api/v1/logout')
       .then(res => res.json())
