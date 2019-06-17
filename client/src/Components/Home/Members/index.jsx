@@ -18,7 +18,7 @@ export default function Members({ filtered, history }) {
                 onClick={() => history.push(`/profile/${member.username}`)}
               >
                 <Card.Body>
-                  <Row>
+                  <Row key={member.id}>
                     <Col xs={6} md={5}>
                       <Card.Img
                         src={
