@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Image, Card, Button, Alert } from 'react-bootstrap';
@@ -82,12 +83,73 @@ class ApplicationCard extends Component {
   };
 
   handleAccept = () => {
-    // send req to update application status(applicaton: accepted, offer:completed)
-    // /api/v1/hired-member/2
+    const { userInfo } = this.state;
+    const { match } = this.props;
+    const {
+      params: { offerId },
+    } = match;
+    fetch(`/api/v1/hired-member/${userInfo.id}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ offer_id: offerId, status: 'accepted' }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.data) {
+          const { history } = this.props;
+          history.push(`app/offers/${offerId}`);
+        } else {
+          throw new Error();
+        }
+      })
+      .catch(() =>
+        this.setState(
+          {
+            showWrongAlert: true,
+          },
+          () =>
+            setTimeout(() => {
+              this.setState({ showWrongAlert: false });
+            }, 5000)
+        )
+      );
   };
 
   handleRefuse = () => {
-    // send req to update application status(application: refused)
+    const { userInfo } = this.state;
+    const { match } = this.props;
+    const {
+      params: { offerId },
+    } = match;
+    fetch(`/api/v1/hired-member/${userInfo.id}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ offer_id: offerId, status: 'refused' }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.data) {
+          const { history } = this.props;
+          history.push(`app/offers/${offerId}`);
+        } else {
+          throw new Error();
+        }
+      })
+      .catch(() =>
+        this.setState(
+          {
+            showWrongAlert: true,
+          },
+          () =>
+            setTimeout(() => {
+              this.setState({ showWrongAlert: false });
+            }, 5000)
+        )
+      );
   };
 
   render() {
@@ -135,12 +197,12 @@ class ApplicationCard extends Component {
                     )}
                   </>
                 ) : (
-                    <Card.Text
-                      className={`status__${statusColor(application.status)}`}
-                    >
-                      {application.status}
-                    </Card.Text>
-                  )}
+                  <Card.Text
+                    className={`status__${statusColor(application.status)}`}
+                  >
+                    {application.status}
+                  </Card.Text>
+                )}
                 {userInfo.id === application.id &&
                   application.status &&
                   application.status === 'pending' && (
