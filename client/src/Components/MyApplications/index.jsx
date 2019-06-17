@@ -21,9 +21,7 @@ export default class MyApplications extends React.Component {
     return (
       <>
         <Container className="page__container">
-          <div className="my-applications__title">
-            <span>My Applications</span>
-          </div>
+          <h2 className="my-applications__title">My Applications</h2>
           {myApplications
             ? myApplications.map(item => {
                 return (
