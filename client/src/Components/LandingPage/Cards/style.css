@@ -9,9 +9,11 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 1rem;
   padding: 1rem;
-  width: 14rem;
+  width: 20rem !important;
+  margin: 0 !important;
+  margin-bottom: 4rem !important;
+  height: 400px;
 }
 
 .cards__card:hover {
