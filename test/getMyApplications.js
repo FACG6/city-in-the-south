@@ -22,7 +22,7 @@ test('test getMyApplications', (t) => {
       );
       t.deepEqual(
         Object.keys(response.body.data[0]),
-        ['member_id', 'offer_id', 'username', 'full_name', 'avatar', 'proposal', 'status'],
+        ['id', 'title', 'position', 'description', 'status', 'member_id'],
         'data should be array of objects each object contains 6 keys',
       );
       t.end();
