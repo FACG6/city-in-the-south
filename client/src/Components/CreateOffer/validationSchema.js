@@ -7,6 +7,9 @@ const newOfferValidation = yup.object().shape({
   offerType: yup
     .array()
     .of(yup.object().shape({ id: yup.number(), name: yup.string() })),
+  skills: yup
+    .array()
+    .of(yup.object().shape({ id: yup.number(), name: yup.string() })),
 });
 
 export default newOfferValidation;
