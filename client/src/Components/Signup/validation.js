@@ -4,13 +4,13 @@ const signupValidation = yup.object().shape({
   confPassword: yup
     .string()
     .oneOf(
-      [yup.ref('password'), null],
+      [yup.ref('pass'), null],
       'Password did not match: Please try again...'
     )
     .max(254)
     .min(8)
     .required(),
-  password: yup
+  pass: yup
     .string()
     .max(254)
     .min(8, 'Password is too short - should be 8 chars minimum.')

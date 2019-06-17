@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 
 import AutoCompleteTags from '../CommonComponents/AutoCompleteTags';
@@ -12,37 +12,88 @@ class CreateOffer extends Component {
     title: '',
     position: '',
     description: '',
-    skills: null, // skills id's
-    offerType: null, // offer_types id's
-    // member_id: '',
+    skills: [],
+    offerType: [],
+    memberId: 0,
     errMsg: '',
+    errMsgAlert: '',
+    showAlert: false,
+    variant: '',
   };
 
   componentDidMount() {
-    // const member_id = get member_id from local storage
-    // this.setState({ member_id })
+    this.setState({
+      memberId: JSON.parse(localStorage.getItem('userInfo')).id,
+    });
   }
 
   handleSubmit = () => {
-    // eslint-disable-next-line react/prop-types
-    // const { history } = this.props;
-    const { title, position, description, offerType } = this.state;
+    const {
+      title,
+      position,
+      description,
+      offerType,
+      skills,
+      memberId,
+    } = this.state;
 
     newOfferValidation
       .validate(
-        { title, position, description, offerType },
+        { title, position, description, offerType, skills },
         { abortEarly: false }
       )
       .then(() => {
         this.setState({ errMsg: '' });
-        // send request to the backend with body
-        // axios
-        // .post('/api/v1/offers', { title, position, description, skills, offerType })
-        // get offer_id from response
-        // history.push(`/app/${offer_id}`);
-        // send request with new skills from memeber (which don't exist in autocomplete) to update filters table `PUT` : `/api/v1/filter/:memberId`
-        // and the same for offerTypes
-        // body of the request { skills: this.state.skills , offerTypes: this.state.offerTypes}
+        fetch('/api/v1/offers', {
+          method: 'POST',
+          body: JSON.stringify({
+            title,
+            position,
+            description,
+            offerType,
+            skills,
+            memberId,
+          }),
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+        })
+          .then(res => res.json())
+          .then(res => {
+            if (res.data) {
+              this.setState(
+                {
+                  errMsgAlert: 'Added successfully ',
+                  showAlert: true,
+                  variant: 'success',
+                },
+                () =>
+                  setTimeout(() => {
+                    // eslint-disable-next-line react/prop-types
+                    const { history } = this.props;
+                    const offerId = res.data.id;
+                    this.setState({ errMsgAlert: '', showAlert: false });
+                    history.push(`/app/offers/${offerId}`);
+                  }, 1000)
+              );
+            } else {
+              throw new Error();
+            }
+          })
+          .catch(() => {
+            this.setState(
+              {
+                errMsgAlert: 'Something went wrong',
+                showAlert: true,
+                variant: 'danger',
+              },
+              () =>
+                setTimeout(() => {
+                  this.setState({ errMsgAlert: '', showAlert: false });
+                }, 3000)
+            );
+          });
       })
       .catch(({ inner }) => {
         if (inner) {
@@ -66,7 +117,7 @@ class CreateOffer extends Component {
   render() {
     // eslint-disable-next-line react/prop-types
     const { history } = this.props;
-    const { errMsg } = this.state;
+    const { errMsg, variant, showAlert, errMsgAlert } = this.state;
     return (
       <Container className="page__container newoffer__container">
         <h1 className="newoffer__title"> New Offer </h1>
@@ -110,6 +161,7 @@ class CreateOffer extends Component {
                     type="offer_type"
                     placeholder="eg:  fixed price"
                     onchange={this.handleOfferTypes}
+                    allowNew
                   />
                   {errMsg.offerType && (
                     <div className="newoffer__errMsg">
@@ -145,6 +197,7 @@ class CreateOffer extends Component {
                   type="skill"
                   placeholder=" select skills"
                   onchange={this.handleSkills}
+                  allowNew
                 />
               </Row>
               <div>
@@ -164,7 +217,13 @@ class CreateOffer extends Component {
                     >
                       Cancel
                     </Button>
+                    <br />
                   </Col>
+                </Row>
+                <Row>
+                  <Alert show={showAlert} key={1} variant={variant}>
+                    {errMsgAlert}
+                  </Alert>
                 </Row>
               </div>
             </div>
