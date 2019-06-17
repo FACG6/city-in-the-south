@@ -159,6 +159,7 @@ export default class OfferDetails extends Component {
                       return (
                         <ApplicationCard
                           viewProfile
+                          hireMe={offer[0].status !== 'finished'}
                           defaultAvatar={userInfo.avatar}
                           key={Math.random()}
                           application={item}
@@ -180,7 +181,7 @@ export default class OfferDetails extends Component {
                   </>
                 ) : (
                   <>
-                    <CoverLetter offerId={offerId} userInfo={userInfo} />
+                    <CoverLetter offer_id={offerId} userInfo={userInfo} />
                   </>
                 )}
               </>
