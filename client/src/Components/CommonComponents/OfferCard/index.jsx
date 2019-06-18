@@ -194,7 +194,7 @@ class OfferCard extends React.Component {
           <Card
             className={`offer-card ${hovered ? 'offer-card--hovered' : ''}`}
             key={offer.id}
-            onClick={() => history.push(`/app/offers/${offer.id}`)}
+            onClick={() => history.push(`/app/offers/${offer.offer_id}`)}
           >
             {hover ? (
               <span className={`offer-card__border ${statusDiv}`}> </span>
