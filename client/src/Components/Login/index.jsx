@@ -57,12 +57,12 @@ export default class Login extends React.Component {
     return (
       <Container>
         <Form className="content-login">
-          <h2 className="content-login__word-login">Login</h2>
+          <h2 className="content-login__word-login">LOGIN</h2>
           <Form.Group
             controlId="formBasicUsername"
-            className="content-login__input "
+            className="content-login__input"
           >
-            <Form.Label>Username : </Form.Label>
+            <Form.Label>Username :</Form.Label>
             <Form.Control
               type="text"
               name="username"
@@ -96,7 +96,7 @@ export default class Login extends React.Component {
           <Form.Text className="content-login__text-muted">
             Don’t have an account?{' '}
             <Link className="link-signup-word" to="/signup">
-              Sign Up
+              sign up
             </Link>
           </Form.Text>
         </Form>
