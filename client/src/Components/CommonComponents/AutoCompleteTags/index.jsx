@@ -203,9 +203,9 @@ export default class AutoCompleteTags extends Component {
     const { placeholder, type } = this.props;
     return (
       <>
-        <h1 className="autocomplete__title">
+        <div className="autocomplete__title">
           {type === 'skill' ? 'Skills' : 'Offer Type'}
-        </h1>
+        </div>
 
         <Typeahead
           clearButton
