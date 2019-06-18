@@ -14,7 +14,7 @@ test('testing for get offer id', (t) => {
       if (err) {
         t.error(err);
       } else {
-        t.deepEqual(res.body.data[0].id, 5, 'the offer id must be 5');
+        t.deepEqual(res.body.data.id, 5, 'the offer id must be 5');
         t.end();
       }
     });
