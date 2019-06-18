@@ -5,15 +5,16 @@
   margin: 1%;
   box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.25);
   height: fit-content;
+  font-size: 14px !important;
 }
 
 .home__contanier {
   width: 90%;
-  margin: 50px 10px 50px 99px !important
+  margin: 50px auto !important;
 }
 
 .home__filter .autComplete-dev .form-control {
-  min-height: 109px !important;
+  min-height: 50px !important;
   height: auto !important;
   border-radius: 2px !important;
   background: #FFFFFF;
@@ -57,6 +58,8 @@
 
 .home__result-label {
   padding: 10px 0px !important;
+  color: #0F9CAF !important;
+  font-weight: 600;
 }
 
 .home__result-label, .dropdown-label {
