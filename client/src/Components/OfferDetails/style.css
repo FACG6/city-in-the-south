@@ -1,20 +1,36 @@
+.offer__container {
+  /* border: 1px solid #333; */
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  box-shadow: 0 0 30px -15px rgba(0, 0, 0, 0.3);
+}
+
 .offer-details__header {
-  background-color: rgba(234, 234, 234, 0.3);
+  background-color: rgba(247, 247, 247, 1) !important;
   justify-content: center;
 }
+
 .offer-details__position {
   color: #0f9caf;
   font-size: 1.375rem;
   text-transform: capitalize;
 }
+
+.offer-details__description,
 .offer-details__title {
+
   color: rgba(51, 51, 51, 0.7);
+}
+
+.offer-details__title {
   font-size: 1rem;
   text-transform: capitalize;
 }
+
 .offer-details__description {
-  border-right: 2px solid rgba(51, 51, 51, 0.4);
-  color: rgba(51, 51, 51, 0.7);
+  padding: 0 2rem 6rem 0;
+  margin-right: 0 !important;
 }
 .offer-details__row {
   margin: 10px 0;
@@ -22,37 +38,59 @@
 }
 
 .offet-details__end-button {
-  margin-left: 15px !important;
   font-size: 14px !important;
+  padding: 0 !important;
+  width: 6rem;
+  height: 2.7rem;
+  margin: 1.5rem;
 }
+
 .offer-details__header-col {
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
 }
 
-/* Applications */
 .offer-details__Applications-title {
-  font-size: 1.375rem;
+  font-size: 1.5rem !important;
   color: rgba(51, 51, 51, 0.8);
-  border-bottom: 1px solid rgba(102, 102, 102, 0.4);
   width: 166px;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
   text-transform: capitalize;
+  font-size: 1.375rem;
+  padding: 0 0 1rem 4px;
 }
+
+.applications-title {
+  border-bottom: 1px solid rgba(102, 102, 102, 0.4);
+  padding-bottom: 0.5rem;
+}
+
 .offer-details__proposal-container {
   padding: 0px;
   display: flex;
   flex-flow: column;
 }
+
 .offer-details__proposal-container__button {
   align-self: flex-end !important;
+  width: 8rem;
+  margin: 0 1rem 1rem 0;
+  background: #0f9caf !important;
+  border: 1px solid #0f9caf !important;
 }
 
 .status__completed, .status__accepted,
 .status__pending, .status__finished, 
 .status__refused, .status__active {
   text-transform: capitalize;
+  padding: 2rem 1rem !important;
+  letter-spacing: 1px;
+}
+
+.status__pending, .status__finished,
+.status__active {
+  padding: 2rem 3rem !important;
 }
 
 .status__completed, .status__accepted {
@@ -70,3 +108,8 @@
 .status__active {
   color: #1BA7E2;
 }
+
+.sideCard {
+  border-left: 1px solid rgba(51, 51, 51, 0.4);
+}
+
