@@ -22,15 +22,7 @@ test('Testing add Exp ', (t) => {
       if (err) {
         t.error(err);
       }
-      t.deepEqual(res.body.data, [{
-        id: 3,
-        title: 'exp title',
-        end_date: '2012-05-04T21:00:00.000Z',
-        start_date: '2012-12-01T22:00:00.000Z',
-        location: 'location...',
-        description: 'new description',
-        member_id: 2,
-      }], 'Expected return the added experience');
+      t.equal(res.body.data[0].title, 'exp title', 'Expected return the added experience');
       t.end();
     });
 });

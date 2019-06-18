@@ -17,14 +17,7 @@ test('Testing add Education ', (t) => {
       if (err) {
         t.error(err);
       }
-      t.deepEqual(res.body.data, [{
-        id: 3,
-        title: 'New Education',
-        date: '2012-05-04T21:00:00.000Z',
-        university: 'University',
-        description: 'desssss',
-        member_id: 1,
-      }], 'Expected return the added education');
+      t.equal(res.body.data[0].title, 'New Education', 'Expected return the added education');
       t.end();
     });
 });
