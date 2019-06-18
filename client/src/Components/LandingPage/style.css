@@ -75,7 +75,6 @@
   min-height: 20rem;
   background-image: url('https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1567&q=80');
   background-size: cover;
-  border-radius: 7px 0 0 7px;
 }
 
 .carousel-indicators li { 
@@ -125,5 +124,13 @@
 
   .landing__title{
     font-size: 1.25rem;
+  }
+
+  .landing__aboutus {
+    margin-bottom: 0 !important;
+  }
+
+  .carousel {
+    margin-bottom: 2rem !important;
   }
 }
