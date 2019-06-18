@@ -36,6 +36,7 @@ exports.educationSchema = yup.object().shape({
 });
 
 exports.experienceSchema = yup.object().shape({
+  id: yup.number(),
   title: yup.string().required(),
   endDate: yup.date().required(),
   startDate: yup.date().required(),
