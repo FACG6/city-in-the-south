@@ -25,3 +25,20 @@ exports.SavedOfferSchema = yup.object().shape({
 exports.postSkillSchema = yup.object().shape({
   name: yup.string().required(),
 });
+
+exports.educationSchema = yup.object().shape({
+  title: yup.string().required(),
+  date: yup.date().required(),
+  university: yup.string().required(),
+  description: yup.string().required(),
+  memberId: yup.number().required(),
+});
+
+exports.experienceSchema = yup.object().shape({
+  title: yup.string().required(),
+  endDate: yup.date().required(),
+  startDate: yup.date().required(),
+  location: yup.string().required(),
+  description: yup.string().required(),
+  memberId: yup.number().required(),
+});

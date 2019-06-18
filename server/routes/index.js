@@ -12,9 +12,7 @@ const {
 } = require('../controllers');
 
 router.post('/login', authentication.login);
-router.post('/members', member.addMember);
 
-router.post('/members', member.addMember);
 router.use(authentication.authentication);
 
 router.get('/isAuthenticated', authentication.isAuthenticated);
@@ -40,12 +38,11 @@ router
 
 /* Member */
 router.get('/members/:offset', member.getMembers);
+router.post('/members', member.addMember);
 
 /* Offer */
 router.get('/offers/:offset', offer.getOffers);
-
 router.get('/offer/:offerId', offer.getOfferDetails);
-router.patch('/offer/:offerId', offer.updateOfferStatus);
 router.post('/offers', offer.addOffer);
 router.delete('/offers/:offerId', offer.deleteOffer);
 
@@ -64,7 +61,17 @@ router.get('/skills', skills.getSkills);
 router.get('/skills/:memberId', skills.getMemberSkills);
 router.post('/skills', skills.addSkills);
 
+/** Profile */
+router.get('/member/:memberId', member.getMember);
+
+router.get('/education/:memberId', member.getEducations);
+router.post('/education', member.addEducation);
+router.delete('/education/:memberId', member.deleteEducation);
+
+router.get('/experience/:memberId', member.getExperiences);
+router.post('/experience', member.addExperience);
+router.delete('/experience/:memberId', member.deleteExperience);
+
 router.use(erros.notFound);
 router.use(erros.serverError);
-
 module.exports = router;
