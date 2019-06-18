@@ -24,7 +24,8 @@
   height: 37px;
 }
 
-.autComplete-dev .form-control .rbt-token .rbt-token-remove-button {
+.autComplete-dev .form-control
+.rbt-token .rbt-token-remove-button {
   bottom: 0;
   color: inherit;
   font-size: inherit;
