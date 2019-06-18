@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Row, Button, Form, Alert } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 import validationSchema from './validationSchema';
 
@@ -17,14 +18,15 @@ class CoverLetter extends Component {
   };
 
   handleApplyProposal = () => {
-    const { offer_id, userInfo, history } = this.props;
+    // eslint-disable-next-line react/prop-types
+    const { offerId, userInfo, history } = this.props;
     const { proposal } = this.state;
     validationSchema
       .validate({ proposal }, { abortEarly: false })
       .then(() => {
         this.setState({ errMsg: '' });
         const proposalDetails = {
-          offer_id,
+          offer_id: offerId,
           member_id: userInfo.id,
           proposal,
         };
@@ -109,3 +111,12 @@ class CoverLetter extends Component {
 }
 
 export default withRouter(CoverLetter);
+
+CoverLetter.propTypes = {
+  userInfo: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    username: PropTypes.string.isRequired,
+    avatar: PropTypes.string.isRequired,
+  }).isRequired,
+  offerId: PropTypes.number.isRequired,
+};
