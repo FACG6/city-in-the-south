@@ -29,26 +29,30 @@
   color: #eee;
   border-radius: 4px;
   font-size: 20px !important;
+  border: none !important;
 }
+
 .content-login__submit:hover {
   background-color: rgb(11, 118, 133) !important;
 }
 
 .content-login__text-muted {
-  padding: 10px 24px 30px;
+  padding: 5px 0 40px;
+  text-align: center;
   font-size: 15px;
+  opacity: .8;
 }
 
 .link-signup-word{
   color: #0F9CAF !important;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 20px;
   text-decoration: none;
 }
 
 .link-signup-word:hover{
-  font-weight: 600;
   text-decoration: none;
+  color: #1b7688 !important;
 }
 
 .content-login__input {
@@ -60,7 +64,7 @@
   font-size: 14px;
   line-height: 17px;
   letter-spacing: 0.03em;
-  color: #929292;
+  color: black;
   border-radius: 3px;
 }
 
