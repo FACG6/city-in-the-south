@@ -9,15 +9,10 @@
   margin-bottom: 1.3rem;
   border-bottom: 2px solid rgba(51, 51, 51, 0.8);
   width: fit-content; 
-  margin-left: 7px;
 }
 
-.newoffer__content .row:nth-child(3) {
-  padding-left: 18px !important;
-} 
-
 .newoffer__content {
-  padding: 0 0.7rem;
+  /* padding: 0 0.7rem; */
 }
 
 .newoffer__label{
@@ -31,21 +26,27 @@
 .newoffer__btns {
   margin-bottom: 2rem;
   margin-top: .1rem;
+  display: flex;
 }
 
 .newoffer__btn--cancel,
 .newoffer__btn--apply {
   width: 7rem;
-  margin-top: 10px !important;
   background: #0f9caf !important;
   color: #fff;
   border: none !important;
+  margin: 0 auto;
+}
+
+
+.newoffer__btn--cancel:hover,
+.newoffer__btn--apply:hover {
+  background: #097381 !important;
 }
 
 .newoffer__container 
 .autComplete-dev 
 .form-control {
-  margin-left: 1rem;
   width: 100%;
 }
 
@@ -63,7 +64,7 @@
 
 @media only screen and (min-width: 576px) {
   .col-lg-1 .newoffer__btn--cancel {
-    margin-left: 2rem
+    margin-left: 5rem
   }
 }
 
