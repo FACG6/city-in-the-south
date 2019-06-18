@@ -17,7 +17,7 @@
 } 
 
 .newoffer__content {
-  padding-left: 0.7rem;
+  padding: 0 0.7rem;
 }
 
 .newoffer__label{
@@ -25,13 +25,12 @@
 }
 
 .newoffer__description{
-  width: 70% !important;
   margin-bottom: 1rem;
 }
 
 .newoffer__btns {
   margin-bottom: 2rem;
-  margin-top: 1.8rem;
+  margin-top: .1rem;
 }
 
 .newoffer__btn--cancel,
@@ -67,8 +66,8 @@
     margin-left: 2rem
   }
 }
-  @media (max-width: 576px) {
-  /* For mobile phones: */
+
+@media (max-width: 576px) {
   .newoffer__description{
     width: 100% !important;
   }
