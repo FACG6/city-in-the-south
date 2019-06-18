@@ -6,12 +6,10 @@ const parseData = arr => arr.map(item => JSON.parse(item));
 const filterSchema = yup.object().shape({
   skills: yup
     .array()
-    .of(yup.object().shape({ id: yup.number(), name: yup.string() }))
-    .required(),
+    .of(yup.object().shape({ id: yup.number(), name: yup.string() })),
   offerType: yup
     .array()
-    .of(yup.object().shape({ id: yup.number(), name: yup.string() }))
-    .required(),
+    .of(yup.object().shape({ id: yup.number(), name: yup.string() })),
   memberId: yup.number().required(),
 });
 module.exports = (req, res, next) => {
