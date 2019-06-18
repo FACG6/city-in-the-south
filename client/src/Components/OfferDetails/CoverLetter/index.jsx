@@ -3,6 +3,8 @@ import { withRouter } from 'react-router-dom';
 import { Row, Button, Form, Alert } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
+import './style.css';
+
 import validationSchema from './validationSchema';
 
 class CoverLetter extends Component {

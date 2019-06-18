@@ -171,16 +171,16 @@ export default class OfferDetails extends Component {
               )}
             </Row>
             <Row className="offer-details__row">
-              <Col xs lg="9" className="offer-details__description">
-                <Row>
+              <Col xs lg="9">
+                <Row className="offer-details__description">
                   <p>{offer.description}</p>
                 </Row>
               </Col>
-              <Col xs lg="2">
-                <div>
+              <Col xs lg="2" className="sideCard">
+                <>
                   <SideCard title="skills" items={offer.skills} />
                   <SideCard title="offer type" items={offer.offer_types} />
-                </div>
+                </>
               </Col>
             </Row>
             {offer.member_id === userInfo.id ? (
