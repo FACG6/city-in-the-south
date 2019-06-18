@@ -3,7 +3,7 @@
   line-height: 19px;
   letter-spacing: 0.06em;
   color: rgba(51, 51, 51, 0.8);
-  padding: 2px 15px;
+  padding: 2px 0;
 }
 
 .autComplete-dev .form-control {
