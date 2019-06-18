@@ -75,7 +75,7 @@ export default class SignUp extends Component {
     return (
       <>
         <Form className="content-signup">
-          <h2 className="content-signup__word-sigup">Sign Up</h2>
+          <h2 className="content-signup__word-sigup">SIGN UP</h2>
           <Form.Group
             controlId="formBasicUsername"
             className="content-signup__username"
