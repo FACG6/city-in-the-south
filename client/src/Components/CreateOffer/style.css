@@ -66,7 +66,8 @@
     margin-left: 2rem
   }
 }
-  @media (max-width: 576px) {
+
+@media (max-width: 576px) {
   .newoffer__description{
     width: 100% !important;
   }
