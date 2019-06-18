@@ -145,7 +145,7 @@ export default class OfferDetails extends Component {
         {!errorOffer && !offer && <Spinner animation="grow" variant="info" />}
         {errorOffer && <PageNotFound />}
         {!errorOffer && offer && (
-          <Container className="page__container">
+          <Container className="offer__container">
             <Row className="offer-details__header">
               <Col className="offer-details__header-col">
                 <span className="offer-details__position">
@@ -171,7 +171,7 @@ export default class OfferDetails extends Component {
               )}
             </Row>
             <Row className="offer-details__row">
-              <Col xs lg="9">
+              <Col xs lg="10">
                 <Row className="offer-details__description">
                   <p>{offer.description}</p>
                 </Row>
@@ -185,10 +185,10 @@ export default class OfferDetails extends Component {
             </Row>
             {offer.member_id === userInfo.id ? (
               <>
-                <Row className="offer-details__Applications-title">
-                  Applications
-                </Row>
-                <Col xs lg="9" style={{ padding: '0px !important' }}>
+                <Col className="offer-details__Applications-title">
+                  <span className="applications-title"> Applications </span>
+                </Col>
+                <Col xs lg="9">
                   {applications.data &&
                     data.map(item => {
                       return (

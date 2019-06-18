@@ -88,6 +88,7 @@ class CoverLetter extends Component {
         )}
         <Row lg="9" className="offer-details__proposal-container">
           <Form.Control
+            className="proposal"
             as="textarea"
             rows="8"
             placeholder="Write your proposal here !!!"
