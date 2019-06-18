@@ -25,7 +25,7 @@
 }
 
 .newoffer__description{
-  width: 70% !important;
+  /* width: 0% !important; */
   margin-bottom: 1rem;
 }
 
@@ -68,7 +68,6 @@
   }
 }
   @media (max-width: 576px) {
-  /* For mobile phones: */
   .newoffer__description{
     width: 100% !important;
   }
