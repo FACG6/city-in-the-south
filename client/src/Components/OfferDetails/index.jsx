@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Button, Alert } from 'react-bootstrap';
+import { Container, Row, Col, Button, Alert, Spinner } from 'react-bootstrap';
 
 import SideCard from './SideCard';
 import ApplicationCard from './ApplicationCard';
@@ -18,16 +18,17 @@ export default class OfferDetails extends Component {
     applications: '',
     myApplication: '',
     showWrongAlert: '',
+    errorOffer: false,
   };
 
   componentDidMount() {
     const userInfo = JSON.parse(window.localStorage.getItem('userInfo'));
-    // eslint-disable-next-line react/prop-types
-    const { match } = this.props;
     const {
       // eslint-disable-next-line react/prop-types
-      params: { offerId },
-    } = match;
+      match: {
+        params: { offerId },
+      },
+    } = this.props;
     this.setState({ userInfo, offerId });
 
     // fetch offerDetails by offer_id
@@ -35,7 +36,11 @@ export default class OfferDetails extends Component {
       method: 'GET',
     })
       .then(response => response.json())
-      .then(res => this.setState({ offer: res.data }))
+      .then(res => {
+        if (res.data) {
+          this.setState({ offer: res.data });
+        } else this.setState({ errorOffer: true });
+      })
       .catch(() =>
         this.setState(
           {
@@ -131,12 +136,15 @@ export default class OfferDetails extends Component {
       userInfo,
       myApplication,
       showWrongAlert,
+      errorOffer,
     } = this.state;
     const { data } = applications;
     return (
       <>
         {showWrongAlert && <Alert> Somthing went error! Try agailn </Alert>}
-        {offer ? (
+        {!errorOffer && !offer && <Spinner animation="grow" variant="info" />}
+        {errorOffer && <PageNotFound />}
+        {!errorOffer && offer && (
           <Container className="page__container">
             <Row className="offer-details__header">
               <Col className="offer-details__header-col">
@@ -223,8 +231,6 @@ export default class OfferDetails extends Component {
               </>
             )}
           </Container>
-        ) : (
-          <PageNotFound />
         )}
       </>
     );
