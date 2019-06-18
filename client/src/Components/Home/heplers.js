@@ -2,7 +2,7 @@ const filterSkills = (arr, skillQuery) => {
   return arr.filter(
     item =>
       !skillQuery.filter(
-        query => !item.skill.filter(_query => _query.id === query.id).length
+        query => !item.skills.filter(_query => _query.id === query.id).length
       ).length
   );
 };
@@ -12,7 +12,7 @@ const filterOfferTypes = (arr, offerTypeQuery) => {
     item =>
       !offerTypeQuery.filter(
         query =>
-          !item.offer_type.filter(_query => _query.id === query.id).length
+          !item.offer_types.filter(_query => _query.id === query.id).length
       ).length
   );
 };

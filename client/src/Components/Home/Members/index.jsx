@@ -18,10 +18,14 @@ export default function Members({ filtered, history }) {
                 onClick={() => history.push(`/profile/${member.username}`)}
               >
                 <Card.Body>
-                  <Row>
+                  <Row key={member.id}>
                     <Col xs={6} md={5}>
                       <Card.Img
-                        src={member.avatar}
+                        src={
+                          member.avatar
+                            ? member.avatar
+                            : 'https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1'
+                        }
                         className="member-card__avatar"
                       />
                     </Col>
@@ -40,7 +44,7 @@ export default function Members({ filtered, history }) {
                     <br />
                     <br />
                     <div className="member-card__skills">
-                      {member.skill.map(skill => (
+                      {member.skills.map(skill => (
                         <h1 className="member-card__skill" key={skill.id}>
                           {skill.name}
                         </h1>
