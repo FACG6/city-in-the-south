@@ -1,12 +1,13 @@
 .landing__header{
   width: 100%;
-  height: 500px;
+  height: 450px;
   background:
     linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
     url('header.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
+  margin: 0 !important;
 }
 
 .landing__tweet {
@@ -18,6 +19,9 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  text-align: center;
+  letter-spacing: 1px;
+  font-size: 1.7rem;
 }
 
 .landing__tweet::before {
@@ -32,11 +36,13 @@
 
 .landing__title {
   color: #0F9CAF;
-  font-size: 1.25rem;
+  font-size: 1.9rem;
   font-weight: bold;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   margin-top: 2rem;
   text-transform: uppercase;
+  letter-spacing: 2px;
+  word-spacing: 7px
 }
 
 .landing__title--center {
@@ -46,12 +52,15 @@
 .landing__aboutus {
   display: flex;
   min-height: 20rem;
+  margin: 0 !important;
   margin-top: 2rem;
+  margin-bottom: 1rem !important;
 }
 
 .landing__info {
   padding: 0 4rem;
   flex: 1;
+  padding: 0 2rem 0 2rem !important;
 }
 
 .landing__paragraph {
@@ -68,8 +77,60 @@
   background-size: cover;
 }
 
+.carousel-indicators li { 
+  width: 21px !important; 
+  height: 21px !important; 
+  border-radius: 50%;
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  background: #fff !important;
+  position: relative !important;
+  border: 2px solid #0F9CAF !important
+  
+}
+
+.carousel-indicators li::after{ 
+  content: "" !important;
+  position: absolute !important;
+  width: 15px !important;
+  height: 15px !important;
+  border-radius: 50% !important;
+  background: #0F9CAF !important;
+  left: 50% !important;
+  top: 50% !important;
+  transform:translate(-47%, -51%) !important;
+}
+
+.carousel-indicators .active {
+  border: 2px solid #0F9CAF !important;
+}
+
+.carousel{
+  margin-bottom: 3rem !important;
+}
+
 @media only screen and (max-width: 500px) {
   .landing__aboutus {
     flex-direction: column;
+  }
+
+  .landing__header {
+    height: 300px;
+  }
+  .landing__tweet {
+    font-size: 1.4rem;
+    width: 80%;
+  }
+
+  .landing__title{
+    font-size: 1.25rem;
+  }
+
+  .landing__aboutus {
+    margin-bottom: 0 !important;
+  }
+
+  .carousel {
+    margin-bottom: 2rem !important;
   }
 }
