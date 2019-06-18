@@ -27,6 +27,7 @@ exports.postSkillSchema = yup.object().shape({
 });
 
 exports.educationSchema = yup.object().shape({
+  id: yup.number(),
   title: yup.string().required(),
   date: yup.date().required(),
   university: yup.string().required(),
