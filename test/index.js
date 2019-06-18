@@ -38,5 +38,6 @@ dbBuild()
   .then(() => require('./profiletest/patchFullName'))
   .then(() => require('./profiletest/patchBio'))
   .then(() => require('./profiletest/patchUsername'))
+  .then(() => require('./profiletest/updateEducation'))
   .then(() => require('./logout-controller'))
   .catch(err => console.log(err));
