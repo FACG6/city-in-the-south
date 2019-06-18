@@ -22,10 +22,12 @@ export default class OfferDetails extends Component {
 
   componentDidMount() {
     const userInfo = JSON.parse(window.localStorage.getItem('userInfo'));
+    // eslint-disable-next-line react/prop-types
+    const { match } = this.props;
     const {
       // eslint-disable-next-line react/prop-types
       params: { offerId },
-    } = this.props.match;
+    } = match;
     this.setState({ userInfo, offerId });
 
     // fetch offerDetails by offer_id
@@ -99,12 +101,14 @@ export default class OfferDetails extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        const { status } = res.data[0];
-        this.setState(prevState => {
-          const updatedOffer = { ...prevState.offer[0] };
-          updatedOffer.status = status;
-          return { offer: updatedOffer };
-        });
+        if (res.data) {
+          const { status } = res.data[0];
+          this.setState(prevState => {
+            const updatedOffer = { ...prevState.offer };
+            updatedOffer.status = status;
+            return { offer: updatedOffer };
+          });
+        }
       })
       .catch(() =>
         this.setState(
@@ -132,21 +136,21 @@ export default class OfferDetails extends Component {
     return (
       <>
         {showWrongAlert && <Alert> Somthing went error! Try agailn </Alert>}
-        {offer && offer.length ? (
+        {offer ? (
           <Container className="page__container">
             <Row className="offer-details__header">
               <Col className="offer-details__header-col">
                 <span className="offer-details__position">
-                  {offer[0].position}
+                  {offer.position}
                 </span>
-                <p className="offer-details__title">{offer[0].title}</p>
+                <p className="offer-details__title">{offer.title}</p>
               </Col>
-              {offer[0].member_id === userInfo.id && (
+              {offer.member_id === userInfo.id && (
                 <>
-                  <span className={`status__${statusColor(offer[0].status)}`}>
-                    {offer[0].status}
+                  <span className={`status__${statusColor(offer.status)}`}>
+                    {offer.status}
                   </span>
-                  {offer && offer[0] && offer[0].status === 'completed' && (
+                  {offer && offer.status === 'completed' && (
                     <Button
                       className="offet-details__end-button"
                       variant="danger"
@@ -161,17 +165,17 @@ export default class OfferDetails extends Component {
             <Row className="offer-details__row">
               <Col xs lg="9" className="offer-details__description">
                 <Row>
-                  <p>{offer[0].description}</p>
+                  <p>{offer.description}</p>
                 </Row>
               </Col>
               <Col xs lg="2">
                 <div>
-                  <SideCard title="skills" items={offer[0].skills} />
-                  <SideCard title="offer type" items={offer[0].offer_types} />
+                  <SideCard title="skills" items={offer.skills} />
+                  <SideCard title="offer type" items={offer.offer_types} />
                 </div>
               </Col>
             </Row>
-            {offer[0].member_id === userInfo.id ? (
+            {offer.member_id === userInfo.id ? (
               <>
                 <Row className="offer-details__Applications-title">
                   Applications
@@ -182,7 +186,7 @@ export default class OfferDetails extends Component {
                       return (
                         <ApplicationCard
                           viewProfile
-                          hireMe={offer[0].status !== 'finished'}
+                          hireMe={offer.status !== 'finished'}
                           defaultAvatar={userInfo.avatar}
                           key={Math.random()}
                           application={item}
@@ -210,7 +214,10 @@ export default class OfferDetails extends Component {
                   </>
                 ) : (
                   <>
-                    <CoverLetter offer_id={offerId} userInfo={userInfo} />
+                    <CoverLetter
+                      offerId={Number(offerId)}
+                      userInfo={userInfo}
+                    />
                   </>
                 )}
               </>
