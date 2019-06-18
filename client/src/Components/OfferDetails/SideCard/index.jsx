@@ -14,9 +14,9 @@ const SideCard = props => {
         {items
           ? items.map(item => {
               return (
-                <li key={items.indexOf(item)} className="side-card__li">
+                <li key={Math.random()} className="side-card__li">
                   <span> - </span>
-                  {item}
+                  {item.name}
                 </li>
               );
             })
