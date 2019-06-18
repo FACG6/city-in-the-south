@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 import { NavLink, Link, withRouter } from 'react-router-dom';
-import { Navbar, Nav, Col, Dropdown, Alert } from 'react-bootstrap';
+import {
+  Navbar,
+  Nav,
+  Col,
+  Dropdown,
+  Alert,
+  NavDropdown,
+  Button,
+  Form,
+  FormControl,
+} from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import Notification from './Notification';
 import './style.css';
@@ -53,26 +63,18 @@ class Header extends Component {
 
   render() {
     const { islogged } = this.props;
-    // default values
     const {
       userInfo: { username, avatar, defaultAvatar },
     } = this.state;
     return (
-      <div className="header__container">
-        <Navbar
-          collapseOnSelect
-          expand="lg"
-          variant="dark"
-          className="Navbar__container"
-        >
-          <Col className="ml-3 mr-5" xs>
-            <Navbar.Brand lg="2">
-              <Link to="/" className="navbar__link navbar__brand">
-                Work Together
-              </Link>
-            </Navbar.Brand>
-          </Col>
-          {/* if the member is not logged in */}
+      <Navbar bg="light" expand="lg" className="Navbar__container">
+        <Navbar.Brand>
+          <Link to="/" className="navbar__link navbar__brand">
+            Work Together
+          </Link>
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav" className="navigation">
           {!islogged && (
             <Col md="auto">
               <Nav>
@@ -86,7 +88,6 @@ class Header extends Component {
               </Nav>
             </Col>
           )}
-          {/* if the member is logged in */}
           {islogged && (
             <>
               <Col md="auto">
@@ -131,7 +132,7 @@ class Header extends Component {
                   <Dropdown.Menu className="dropdown__menu-avatar">
                     <Dropdown.Item
                       as={Link}
-                      to={`/app/profile/:${username}`}
+                      to={`/app/profile/${username}`}
                       className="dropdown__item"
                     >
                       Profile
@@ -153,11 +154,11 @@ class Header extends Component {
               </Col>
             </>
           )}
-        </Navbar>
+        </Navbar.Collapse>
         {auth.error && (
           <Alert variant="danger">Network connection error!!!</Alert>
         )}
-      </div>
+      </Navbar>
     );
   }
 }
