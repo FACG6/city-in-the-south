@@ -70,6 +70,9 @@
     font-weight: bold !important;
     border: none !important;
 }
+.content-signup__submit:hover {
+    background-color: rgb(12, 120, 134) !important;
+}
 
 .content-signup__text-muted {
     text-align: center;
