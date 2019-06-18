@@ -57,7 +57,7 @@ export default class Login extends React.Component {
     return (
       <Container>
         <Form className="content-login">
-          <h2 className="content-login__word-login">Login</h2>
+          <h2 className="content-login__word-login">LOGIN</h2>
           <Form.Group
             controlId="formBasicUsername"
             className="content-login__input "
