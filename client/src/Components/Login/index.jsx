@@ -96,7 +96,7 @@ export default class Login extends React.Component {
           <Form.Text className="content-login__text-muted">
             Don’t have an account?{' '}
             <Link className="link-signup-word" to="/signup">
-              Sign Up
+              sign up
             </Link>
           </Form.Text>
         </Form>
