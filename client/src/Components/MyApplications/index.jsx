@@ -1,27 +1,39 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
+import { Container, Alert } from 'react-bootstrap';
 
 import ApplicationCard from '../CommonComponents/OfferCard';
-import myApplicationsData from '../utils/myApplications';
 
 import './style.css';
 
 export default class MyApplications extends React.Component {
   state = {
     myApplications: [],
+    message: '',
   };
 
   componentDidMount() {
-    // fetch for myApplications data and store it in the state
-    this.setState({ myApplications: myApplicationsData });
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    const { id } = userInfo;
+    fetch(`/api/v1/${id}/my-applications`)
+      .then(res => res.json())
+      .then(({ data, error }) => {
+        if (data) this.setState({ myApplications: data });
+        else this.setState({ message: error.msg });
+      })
+      .catch(er => {
+        this.setState({ message: er.message });
+      });
   }
 
   render() {
-    const { myApplications } = this.state;
+    const { myApplications, message } = this.state;
     return (
       <>
         <Container className="page__container">
-          <h2 className="my-applications__title">My Applications</h2>
+          <div className="my-applications__title">
+            <span>My Applications</span>
+          </div>
+          {message && <Alert variant="danger">{message}</Alert>}
           {myApplications
             ? myApplications.map(item => {
                 return (
@@ -29,7 +41,6 @@ export default class MyApplications extends React.Component {
                     hover
                     offer={item}
                     key={item.id}
-                    saved={item.saved}
                     status={item.status}
                   />
                 );
