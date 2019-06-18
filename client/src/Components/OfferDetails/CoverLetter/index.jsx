@@ -3,6 +3,8 @@ import { withRouter } from 'react-router-dom';
 import { Row, Button, Form, Alert } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
+import './style.css';
+
 import validationSchema from './validationSchema';
 
 class CoverLetter extends Component {
@@ -86,6 +88,7 @@ class CoverLetter extends Component {
         )}
         <Row lg="9" className="offer-details__proposal-container">
           <Form.Control
+            className="proposal"
             as="textarea"
             rows="8"
             placeholder="Write your proposal here !!!"
