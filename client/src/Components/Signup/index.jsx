@@ -159,7 +159,7 @@ export default class SignUp extends Component {
           <Form.Text className="content-signup__text-muted">
             Already have an account?{' '}
             <Link to="/login" className="content-signup__word-login">
-              Login
+              login
             </Link>
           </Form.Text>
         </Form>
