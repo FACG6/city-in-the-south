@@ -13,7 +13,6 @@ const patchUserName = require('./patchUsername');
 const updateEducation = require('./updateEducation');
 const updateExperience = require('./updateExperience');
 const updateMemberSkills = require('./updateMemberSkills');
-const updateAvatar = require('./updateAvatar');
 
 module.exports = {
   getMembers,
@@ -31,5 +30,4 @@ module.exports = {
   updateEducation,
   updateExperience,
   updateMemberSkills,
-  updateAvatar,
 };

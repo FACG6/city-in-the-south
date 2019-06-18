@@ -70,7 +70,6 @@ router.get('/member/:memberId', member.getMember);
 router.patch('/member/fullname/:memberId', member.patchFullName);
 router.patch('/member/bio/:memberId', member.patchBio);
 router.patch('/member/username/:memberId', member.patchUserName);
-router.patch('/member/avatar/:memberId', member.updateAvatar);
 
 router.put('/member/member-skills/:memberId', member.updateMemberSkills);
 
