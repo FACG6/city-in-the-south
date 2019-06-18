@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 import statusColor from '../../Helper/helper';
 
 import './style.css';
-import { Prev } from 'react-bootstrap/PageItem';
 
 class ApplicationCard extends Component {
   state = {
@@ -32,7 +31,7 @@ class ApplicationCard extends Component {
   };
 
   handleHireMe = () => {
-    const { application, match, history } = this.props;
+    const { application, match } = this.props;
     const { member_id } = application;
     const {
       // eslint-disable-next-line react/prop-types
