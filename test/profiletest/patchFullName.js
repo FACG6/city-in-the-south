@@ -8,13 +8,13 @@ test('Testing For PATCH full name ', (t) => {
     .patch('/api/v1/member/fullname/3')
     .set('Cookie', [Cookie])
     .expect(200)
-    .send({ fullname: 'Fatmasiam' })
+    .send({ fullname: 'Fatma siam' })
     .expect('content-type', /json/)
     .end((err, res) => {
       if (err) {
         t.error(err);
       }
-      t.equal(res.body.data, 'Fatmasiam', 'Expected return the full name');
+      t.equal(res.body.data, 'Fatma siam', 'Expected return the full name');
       t.end();
     });
 });
