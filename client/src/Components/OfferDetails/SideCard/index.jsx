@@ -10,10 +10,10 @@ export default function SideCard(props) {
     <Row className="side-card">
       <Col>
         <div className="side-card__title">
-          <span>{title}</span>
+          <span>{title}</span>  
         </div>
         <ul>
-          {items &&
+          {items[0] &&
             items.map(item => {
               return (
                 <li key={Math.random()} className="side-card__li">
