@@ -54,28 +54,30 @@ export default class App extends Component {
         ) : (
           <Router>
             <Header islogged={islogged} isLoggedOut={this.isLoggedOut} />
-            <Switch>
-              <Route exact path="/" component={LandingPage} />
-              <Route
-                exact
-                path="/login"
-                setUserInfo={this.setUserInfo}
-                render={props => (
-                  <Login {...props} setUserInfo={this.setUserInfo} />
-                )}
-              />
-              <Route
-                exact
-                path="/signup"
-                setUserInfo={this.setUserInfo}
-                render={props => (
-                  <Signup {...props} setUserInfo={this.setUserInfo} />
-                )}
-              />
-              <Route exact path="/home" component={Home} />
-              <Route path="/app" component={PrivatePages} />
-              <Route component={PageNotFound} />
-            </Switch>
+            <div className="body-container">
+              <Switch>
+                <Route exact path="/" component={LandingPage} />
+                <Route
+                  exact
+                  path="/login"
+                  setUserInfo={this.setUserInfo}
+                  render={props => (
+                    <Login {...props} setUserInfo={this.setUserInfo} />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/signup"
+                  setUserInfo={this.setUserInfo}
+                  render={props => (
+                    <Signup {...props} setUserInfo={this.setUserInfo} />
+                  )}
+                />
+                <Route exact path="/home" component={Home} />
+                <Route path="/app" component={PrivatePages} />
+                <Route component={PageNotFound} />
+              </Switch>
+            </div>
             <Footer />
           </Router>
         )}
