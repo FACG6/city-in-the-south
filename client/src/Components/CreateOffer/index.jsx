@@ -119,7 +119,7 @@ class CreateOffer extends Component {
     const { history } = this.props;
     const { errMsg, variant, showAlert, errMsgAlert } = this.state;
     return (
-      <Container className="page__container newoffer__container">
+      <Container className="newoffer__container">
         <h1 className="newoffer__title">New Offer</h1>
         <Form>
           <Form.Group>
