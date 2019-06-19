@@ -7,7 +7,7 @@ body,
   margin: 0;
   font-family: 'Lato', sans-serif;
 }
-.page__container {
+.container-body {
   min-height: calc(100vh - 108px) !important;
   margin: 50px 0;
 }
