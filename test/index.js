@@ -3,6 +3,7 @@ const { dbBuild, dbFakeData } = require('../server/database/config/db_build');
 
 dbBuild()
   .then(dbFakeData)
+  .then(() => require('./client-tests/home-filter'))
   .then(() => require('./getMembers'))
   .then(() => require('./postOfferTypeOfferTest'))
   .then(() => require('./loginTest'))
