@@ -34,7 +34,8 @@ export default function SideProfile({
         <hr className="profile__title__line" />
       </h2>
       <div className="profile__skills">
-        {skills[0] && skills.map(skill => <p> - {skill.name}</p>)}
+        {skills[0] &&
+          skills.map(skill => <p key={`skill-${skill.id}`}> - {skill.name}</p>)}
       </div>
     </>
   );
