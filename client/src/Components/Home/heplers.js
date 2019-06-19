@@ -17,6 +17,29 @@ const filterOfferTypes = (arr, offerTypeQuery) => {
   );
 };
 
+function isSubArr(filteredArr, filteredByArr) {
+  // check if all ids in filteredByArr exist in filteredArr
+  return filteredByArr.every(item =>
+    filteredArr.some(_item => item.id === _item.id)
+  );
+}
+
+function filterSkillsOfferType(arr, skills, offertypes) {
+  let filteredArr;
+  if (skills[0] && offertypes[0]) {
+    filteredArr = arr
+      .filter(item => isSubArr(item.skills, skills))
+      .filter(item => isSubArr(item.offer_types, offertypes));
+  }
+  if (!skills[0] && offertypes[0]) {
+    filteredArr = arr.filter(item => isSubArr(item.offer_types, offertypes));
+  }
+  if (skills[0] && !offertypes[0]) {
+    filteredArr = arr.filter(item => isSubArr(item.skills, skills));
+  }
+  return filteredArr;
+}
+
 const searchLogic = (searchFor, dataArray) => {
   return dataArray.filter(obj =>
     Object.values(obj).some(value =>
@@ -27,4 +50,9 @@ const searchLogic = (searchFor, dataArray) => {
   );
 };
 
-module.exports = { filterSkills, filterOfferTypes, searchLogic };
+module.exports = {
+  filterSkills,
+  filterOfferTypes,
+  filterSkillsOfferType,
+  searchLogic,
+};
