@@ -54,7 +54,7 @@ export default class App extends Component {
         ) : (
           <Router>
             <Header islogged={islogged} isLoggedOut={this.isLoggedOut} />
-            <div className="container-body">
+            <div className="body-container">
               <Switch>
                 <Route exact path="/" component={LandingPage} />
                 <Route
