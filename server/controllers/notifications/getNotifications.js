@@ -4,7 +4,7 @@ module.exports = (req, res, next) => {
   const { member_id: memberId } = req.params;
   getNotifications(memberId)
     .then((result) => {
-      if (result.rowCount) {
+      if (result) {
         res.send({
           data: result.rows,
           error: null,
