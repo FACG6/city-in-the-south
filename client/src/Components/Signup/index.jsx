@@ -41,7 +41,10 @@ export default class SignUp extends Component {
           .then(res => res.json())
           .then(response => {
             if (response.data) {
-              localStorage.setItem('userInfo', JSON.stringify(response.data));
+              localStorage.setItem(
+                'userInfo',
+                JSON.stringify(response.data[0])
+              );
               auth.isAuthenticated = true;
               setUserInfo(response.data);
               this.props.history.push('/home');
