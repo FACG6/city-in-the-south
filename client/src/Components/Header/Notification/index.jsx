@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dropdown } from 'react-bootstrap';
+import { Dropdown, Alert } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import './style.css';
 
@@ -13,6 +13,7 @@ class Notification extends Component {
       unSeen: [],
     },
     message: '',
+    showAlert: false,
   };
 
   componentDidMount() {
@@ -28,12 +29,29 @@ class Notification extends Component {
         if (res.status === 200) return res.json();
         return new Error('notification error');
       })
-      .then(res => {
-        console.log(res.data);
+      .then(({ data }) => {
+        if (data) {
+          const seen = data.filter(item => item.seen === true);
+          const unSeen = data.filter(item => item.seen === false);
+          const notification = {
+            seen,
+            unSeen,
+          };
+          this.setState({ notification });
+        }
       })
-      .catch(() =>
-        this.setState({ message: 'Something error with notifications' })
-      );
+      .catch(() => {
+        this.setState(
+          {
+            message: 'get Notifications Error',
+            showAlert: true,
+          },
+          () =>
+            setTimeout(() => {
+              this.setState({ message: '', showAlert: false });
+            }, 3000)
+        );
+      });
   };
 
   handleNewNotification = memberId => {
@@ -108,6 +126,7 @@ class Notification extends Component {
     const {
       notification: { seen, unSeen },
     } = this.state;
+    const { message, showAlert } = this.state;
     const status = unSeen.length > 0;
     return (
       <>
@@ -158,6 +177,21 @@ class Notification extends Component {
             })}
           </Dropdown.Menu>
         </Dropdown>
+        {showAlert && (
+          <Alert
+            variant="danger"
+            style={{
+              zIndex: '10',
+              position: 'absolute',
+              left: '-50vw',
+              width: '25vw',
+              overflow: 'hidden',
+              textAlign: 'center',
+            }}
+          >
+            {message}
+          </Alert>
+        )}
       </>
     );
   }
