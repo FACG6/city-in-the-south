@@ -68,8 +68,25 @@ router.post('/skills', skills.addSkills);
 /* Notifications */
 router.get('/notifications/:member_id', notifications.getNotifications);
 router.patch('/notifications/:id', notifications.patchNotification);
+/** Profile */
+
+router.get('/member/:memberId', member.getMember);
+router.patch('/member/fullname/:memberId', member.patchFullName);
+router.patch('/member/bio/:memberId', member.patchBio);
+router.patch('/member/username/:memberId', member.patchUserName);
+
+router.put('/member/member-skills/:memberId', member.updateMemberSkills);
+
+router.get('/education/:memberId', member.getEducations);
+router.post('/education', member.addEducation);
+router.delete('/education/:memberId', member.deleteEducation);
+router.put('/education/:memberId', member.updateEducation);
+
+router.get('/experience/:memberId', member.getExperiences);
+router.post('/experience', member.addExperience);
+router.delete('/experience/:memberId', member.deleteExperience);
+router.put('/experience/:memberId', member.updateExperience);
 
 router.use(erros.notFound);
 router.use(erros.serverError);
-
 module.exports = router;
