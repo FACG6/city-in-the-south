@@ -6,7 +6,8 @@ const newOfferValidation = yup.object().shape({
   description: yup.string().required(),
   offerType: yup
     .array()
-    .of(yup.object().shape({ id: yup.number(), name: yup.string() })),
+    .of(yup.object().shape({ id: yup.number(), name: yup.string() }))
+    .required(),
   skills: yup
     .array()
     .of(yup.object().shape({ id: yup.number(), name: yup.string() })),

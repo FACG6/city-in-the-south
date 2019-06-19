@@ -12,8 +12,7 @@ class Header extends Component {
       fullName: null,
       username: null,
       avatar: null,
-      defaultAvatar:
-        'https://m.media-amazon.com/images/M/MV5BMTcxOTk4NzkwOV5BMl5BanBnXkFtZTcwMDE3MTUzNA@@._V1_.jpg',
+      defaultAvatar: '',
     },
   };
 
@@ -21,7 +20,7 @@ class Header extends Component {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
     if (userInfo) {
       userInfo.defaultAvatar =
-        'https://m.media-amazon.com/images/M/MV5BMTcxOTk4NzkwOV5BMl5BanBnXkFtZTcwMDE3MTUzNA@@._V1_.jpg';
+        'https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1';
       this.setState({ userInfo });
     }
   }
@@ -33,7 +32,7 @@ class Header extends Component {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
     if (userInfo && username !== userInfo.username) {
       userInfo.defaultAvatar =
-        'https://m.media-amazon.com/images/M/MV5BMTcxOTk4NzkwOV5BMl5BanBnXkFtZTcwMDE3MTUzNA@@._V1_.jpg';
+        'https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1';
       this.setState({ userInfo });
     }
   }
@@ -53,26 +52,18 @@ class Header extends Component {
 
   render() {
     const { islogged } = this.props;
-    // default values
     const {
       userInfo: { username, avatar, defaultAvatar },
     } = this.state;
     return (
-      <div className="header__container">
-        <Navbar
-          collapseOnSelect
-          expand="lg"
-          variant="dark"
-          className="Navbar__container"
-        >
-          <Col className="ml-3 mr-5" xs>
-            <Navbar.Brand lg="2">
-              <Link to="/" className="navbar__link navbar__brand">
-                Work Together
-              </Link>
-            </Navbar.Brand>
-          </Col>
-          {/* if the member is not logged in */}
+      <Navbar bg="light" expand="lg" className="Navbar__container">
+        <Navbar.Brand>
+          <Link to="/" className="navbar__link navbar__brand">
+            Work Together
+          </Link>
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav" className="navigation">
           {!islogged && (
             <Col md="auto">
               <Nav>
@@ -86,7 +77,6 @@ class Header extends Component {
               </Nav>
             </Col>
           )}
-          {/* if the member is logged in */}
           {islogged && (
             <>
               <Col md="auto">
@@ -131,7 +121,7 @@ class Header extends Component {
                   <Dropdown.Menu className="dropdown__menu-avatar">
                     <Dropdown.Item
                       as={Link}
-                      to={`/app/profile/:${username}`}
+                      to={`/app/profile/${username}`}
                       className="dropdown__item"
                     >
                       Profile
@@ -153,11 +143,11 @@ class Header extends Component {
               </Col>
             </>
           )}
-        </Navbar>
+        </Navbar.Collapse>
         {auth.error && (
           <Alert variant="danger">Network connection error!!!</Alert>
         )}
-      </div>
+      </Navbar>
     );
   }
 }
