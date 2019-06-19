@@ -9,6 +9,7 @@ const {
   offerType,
   skills,
   erros,
+  notifications,
 } = require('../controllers');
 
 router.post('/login', authentication.login);
@@ -63,6 +64,9 @@ router.post('/offer-type', offerType.addOfferType);
 router.get('/skills', skills.getSkills);
 router.get('/skills/:memberId', skills.getMemberSkills);
 router.post('/skills', skills.addSkills);
+
+/* Notifications */
+router.patch('/notifications/:id', notifications.patchNotification);
 
 router.use(erros.notFound);
 router.use(erros.serverError);
