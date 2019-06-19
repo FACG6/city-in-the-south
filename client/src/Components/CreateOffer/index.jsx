@@ -4,10 +4,9 @@ import { withRouter } from 'react-router-dom';
 
 import AutoCompleteTags from '../CommonComponents/AutoCompleteTags';
 import newOfferValidation from './validationSchema';
-// import PageTitle from '../CommonComponents/'
+import PageTitle from '../CommonComponents/PageTitle';
 
 import './style.css';
-import PageTitle from '../PageTitle';
 
 class CreateOffer extends Component {
   state = {
@@ -121,9 +120,8 @@ class CreateOffer extends Component {
     const { history } = this.props;
     const { errMsg, variant, showAlert, errMsgAlert } = this.state;
     return (
-      <Container className="newoffer__container">
-        {/* <h1 className="newoffer__title">New Offer</h1> */}
-        <PageTitle />
+      <Container className="page__container">
+        <PageTitle title="New Offer" />
         <Form>
           <Form.Group>
             <div className="newoffer__content">
@@ -209,13 +207,13 @@ class CreateOffer extends Component {
                   onClick={this.handleSubmit}
                 >
                   Create
-                    </Button>
+                </Button>
                 <Button
                   className="newoffer__btn--cancel"
                   onClick={() => history.goBack()}
                 >
                   Cancel
-                    </Button>
+                </Button>
                 <br />
                 <Row>
                   <Alert show={showAlert} key={1} variant={variant}>
