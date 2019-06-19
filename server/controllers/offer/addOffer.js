@@ -12,7 +12,7 @@ const newOfferValidation = yup.object().shape({
   description: yup.string().required(),
   offerType: yup
     .array()
-    .of(yup.object().shape({ id: yup.number(), name: yup.string() })),
+    .of(yup.object().shape({ id: yup.number(), name: yup.string() })).required(),
   skills: yup
     .array()
     .of(yup.object().shape({ id: yup.number(), name: yup.string() })),
@@ -30,30 +30,31 @@ module.exports = (req, res, next) => {
   const offerDetail = {
     title, position, description, memberId,
   };
+  let offerDetails;
   newOfferValidation
     .validate(
       OfferInfo,
       { abortEarly: false },
     )
+    .then(() => addOfferDetails(offerDetail))
+    .then((response) => {
+      offerDetails = { ...response.rows[0] };
+    })
     .then(() => {
-      let offerDetails;
-      addOfferDetails(offerDetail)
-        .then((response) => {
-          offerDetails = { ...response.rows[0] };
-          if (OfferInfo.skills[0]) {
-            OfferInfo.skills.map(item => addOfferSkill(offerDetails.id, item.id));
-          }
-          if (OfferInfo.offerType[0]) {
-            offerType.map(item => addOfferTypes(offerDetails.id, item.id));
-          }
-        })
-        .then(() => {
-          res.send({
-            error: null,
-            data: offerDetails,
-          });
-        })
-        .catch(err => next(err));
+      if (OfferInfo.skills[0]) {
+        return Promise.all(OfferInfo.skills.map(item => addOfferSkill(offerDetails.id, item.id)));
+      }
+    })
+    .then(() => {
+      if (OfferInfo.offerType[0]) {
+        return Promise.all(OfferInfo.offerType.map(item => addOfferTypes(offerDetails.id, item.id)));
+      }
+    })
+    .then(() => {
+      res.send({
+        error: null,
+        data: offerDetails,
+      });
     })
     .catch(() => next({ code: 400, msg: 'Ensure you enter validly data ' }));
 };
