@@ -6,11 +6,11 @@
   align-items: center;
   color: #eeeeee;
   justify-content: space-between;
-  font-size: 16px;
-  margin: 0 30px;
+  font-size: 14px;
 }
 .footer__icons {
   align-self: center;
+  width: 100px;
 }
 .footer__icons .fab {
   margin-left: 12px;
@@ -23,7 +23,10 @@
 
 .footer__container span,
 .footer__container ul {
-  margin: 0 40px;
+  margin: 0 30px;
+}
+.footer__container ul {
+  font-size: 17px;
 }
 
 .footer {
