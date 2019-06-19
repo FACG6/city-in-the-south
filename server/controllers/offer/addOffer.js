@@ -12,7 +12,7 @@ const newOfferValidation = yup.object().shape({
   description: yup.string().required(),
   offerType: yup
     .array()
-    .of(yup.object().shape({ id: yup.number(), name: yup.string() })),
+    .of(yup.object().shape({ id: yup.number(), name: yup.string() })).required(),
   skills: yup
     .array()
     .of(yup.object().shape({ id: yup.number(), name: yup.string() })),
@@ -39,12 +39,14 @@ module.exports = (req, res, next) => {
       let offerDetails;
       addOfferDetails(offerDetail)
         .then((response) => {
-          offerDetails = { ...response.rows[0] };
           if (OfferInfo.skills[0]) {
             OfferInfo.skills.map(item => addOfferSkill(offerDetails.id, item.id));
           }
+          offerDetails = { ...response.rows[0] };
+        })
+        .then(() => {
           if (OfferInfo.offerType[0]) {
-            offerType.map(item => addOfferTypes(offerDetails.id, item.id));
+            OfferInfo.offerType.map(item => addOfferTypes(offerDetails.id, item.id));
           }
         })
         .then(() => {
