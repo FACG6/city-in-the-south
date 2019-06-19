@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Dropdown } from 'react-bootstrap';
-import { withRouter, Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import './style.css';
-import { link } from 'fs';
 
 const io = require('socket.io-client');
 
@@ -19,6 +18,25 @@ class Notification extends Component {
   componentDidMount() {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
     const { id: memberId } = userInfo;
+    this.getNotifications(memberId);
+    this.handleNewNotification(memberId);
+  }
+
+  getNotifications = memberId => {
+    fetch(`/api/v1/notifications/${memberId}`, { method: 'GET' })
+      .then(res => {
+        if (res.status === 200) return res.json();
+        return new Error('notification error');
+      })
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(() =>
+        this.setState({ message: 'Something error with notifications' })
+      );
+  };
+
+  handleNewNotification = memberId => {
     this.socket = io(`/member-${memberId}`);
     const {
       notification: { seen, unSeen },
@@ -37,7 +55,7 @@ class Notification extends Component {
         });
       }
     });
-  }
+  };
 
   handleChangeToSeen = event => {
     const { id } = event.target;
@@ -57,7 +75,7 @@ class Notification extends Component {
     })
       .then(res => {
         if (res.status === 200) return res.json();
-        return new Error();
+        return new Error('notification error');
       })
       .then(res => {
         if (res) {
