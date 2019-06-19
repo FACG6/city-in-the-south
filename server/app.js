@@ -1,16 +1,21 @@
 const express = require('express');
+
+const app = express();
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
 const cookie = require('cookie-parser');
 const { join } = require('path');
 
 const router = require('./routes');
 
-const app = express();
+app.use((req, res, next) => {
+  req.io = io;
+  next();
+});
 
 app.use(express.json());
 
 app.use(cookie());
-
-app.set('port', process.env.PORT || 5000);
 
 app.use('/api/v1', router);
 
@@ -20,4 +25,4 @@ app.get('*', (_req, res) => {
   res.sendFile(join(__dirname, '..', 'client', 'build', 'index.html'));
 });
 
-module.exports = app;
+module.exports = http;
