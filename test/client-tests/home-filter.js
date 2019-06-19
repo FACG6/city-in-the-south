@@ -126,6 +126,8 @@ test('testing filter function ', (t) => {
   t.deepEquals(filteredbyoffers, offersbyoffers, 'offers filtered by offer_types');
   const filteredbyBoth = filterSkillsOfferType(offers, skills, offerType);
   t.deepEquals(filteredbyBoth, offersbyBoth, 'offers filtered by offer_types and skills');
+  const filterEmpty = filterSkillsOfferType([], skills, offerType);
+  t.deepEquals(filterEmpty, [], 'empty offers filtered by offer_types and skills');
 
   t.end();
 });

@@ -1,22 +1,3 @@
-const filterSkills = (arr, skillQuery) => {
-  return arr.filter(
-    item =>
-      !skillQuery.filter(
-        query => !item.skills.filter(_query => _query.id === query.id).length
-      ).length
-  );
-};
-
-const filterOfferTypes = (arr, offerTypeQuery) => {
-  return arr.filter(
-    item =>
-      !offerTypeQuery.filter(
-        query =>
-          !item.offer_types.filter(_query => _query.id === query.id).length
-      ).length
-  );
-};
-
 function isSubArr(filteredArr, filteredByArr) {
   // check if all ids in filteredByArr exist in filteredArr
   return filteredByArr.every(item =>
@@ -40,6 +21,38 @@ function filterSkillsOfferType(arr, skills, offertypes) {
   return filteredArr;
 }
 
+function getfilteredMembers(skills, offset, cb) {
+  fetch(`/api/v1/members/${offset}`, { method: 'GET' })
+    .then(res => res.json())
+    .then(res => {
+      if (res.data[0]) {
+        const filterMembers = filterSkillsOfferType(res.data, skills, []);
+        cb(null, { members: res.data, filterMembers });
+      } else {
+        throw new Error();
+      }
+    })
+    .catch(() => ({ errMSg: 'Something went wrong' }));
+}
+
+function getfilteredOffers(skills, offerTypes, offset, cb) {
+  fetch(`/api/v1/offers/${offset}`, { method: 'GET' })
+    .then(res => res.json())
+    .then(res => {
+      if (res.data[0]) {
+        const filteredOffers = filterSkillsOfferType(
+          res.data,
+          skills,
+          offerTypes
+        );
+        cb(null, { offers: res.data, filteredOffers });
+      } else {
+        throw new Error();
+      }
+    })
+    .catch(() => ({ errMSg: 'Something went wrong' }));
+}
+
 const searchLogic = (searchFor, dataArray) => {
   return dataArray.filter(obj =>
     Object.values(obj).some(value =>
@@ -51,8 +64,8 @@ const searchLogic = (searchFor, dataArray) => {
 };
 
 module.exports = {
-  filterSkills,
-  filterOfferTypes,
+  getfilteredMembers,
+  getfilteredOffers,
   filterSkillsOfferType,
   searchLogic,
 };
