@@ -11,10 +11,6 @@
   width: fit-content; 
 }
 
-.newoffer__content {
-  /* padding: 0 0.7rem; */
-}
-
 .newoffer__label{
   color: rgba(51, 51, 51, 0.8);
 }
@@ -37,11 +33,6 @@
   border: none !important;
   margin: 0 1rem 0 0 ;
 }
-.newoffer__btn--apply > button {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
 
 .newoffer__btn--cancel:hover,
 .newoffer__btn--apply:hover {
