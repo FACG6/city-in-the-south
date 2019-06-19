@@ -1,150 +1,238 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Button, Form } from 'react-bootstrap';
+import { Container, Row, Col, Button, Alert, Spinner } from 'react-bootstrap';
 
 import SideCard from './SideCard';
 import ApplicationCard from './ApplicationCard';
-// dummy data
-import offerData from '../utils/offer';
-import applicationsData from '../utils/applications';
+import CoverLetter from './CoverLetter';
+import PageNotFound from '../PageNotFound/index';
+
+import statusColor from '../Helper/helper';
 
 import './style.css';
 
 export default class OfferDetails extends Component {
   state = {
-    // default value, should be removed if fetch offer details implemented
-    offer: {},
-    applications: [],
+    userInfo: '',
+    offerId: '',
+    offer: '',
+    applications: '',
+    myApplication: '',
+    showWrongAlert: '',
+    errorOffer: false,
   };
 
   componentDidMount() {
+    const userInfo = JSON.parse(window.localStorage.getItem('userInfo'));
     const {
       // eslint-disable-next-line react/prop-types
-      match: { params: offerId },
+      match: {
+        params: { offerId },
+      },
     } = this.props;
-    // fetch offer details by offerId and save it in state
-    this.setState({ offer: offerData });
+    this.setState({ userInfo, offerId });
+
+    // fetch offerDetails by offer_id
+    fetch(`/api/v1/offer/${offerId}`, {
+      method: 'GET',
+    })
+      .then(response => response.json())
+      .then(res => {
+        if (res.data) {
+          this.setState({ offer: res.data });
+        } else this.setState({ errorOffer: true });
+      })
+      .catch(() =>
+        this.setState(
+          {
+            showWrongAlert: true,
+          },
+          () =>
+            setTimeout(() => {
+              this.setState({ showWrongAlert: false });
+            }, 5000)
+        )
+      );
+
     // fetch applications by offerId and save it in state
-    this.setState({ applications: applicationsData });
-    // take logged in userInfo from local storage and store it in state
+    fetch(`/api/v1/offer-applications/${offerId}`, {
+      method: 'GET',
+    })
+      .then(response => response.json())
+      .then(res => this.setState({ applications: res }))
+      .catch(() =>
+        this.setState(
+          {
+            showWrongAlert: true,
+          },
+          () =>
+            setTimeout(() => {
+              this.setState({ showWrongAlert: false });
+            }, 5000)
+        )
+      );
+
+    const { id } = userInfo;
+    // fetch myApplication by userId and offerId
+    fetch(`/api/v1/${id}/my-applications/${offerId}`, {
+      method: 'GET',
+    })
+      .then(response => response.json())
+      .then(myApplication => this.setState({ myApplication }))
+      .catch(() =>
+        this.setState(
+          {
+            showWrongAlert: true,
+          },
+          () =>
+            setTimeout(() => {
+              this.setState({ showWrongAlert: false });
+            }, 5000)
+        )
+      );
   }
 
-  offerColor = status => {
-    switch (status) {
-      case 'completed':
-      case 'accepted':
-        return '#0A8F07';
-      case 'pending':
-        return '#F77D0E';
-      case 'finished':
-      case 'refused':
-        return 'red';
-      case 'inactive':
-        return '#1BA7E2';
-      default:
-        return null;
-    }
-  };
-
   handleEndContract = () => {
-    // handle end contract login here....
+    const { offerId } = this.state;
+    fetch(`/api/v1/offer/${offerId}`, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      method: 'PATCH',
+      body: JSON.stringify({
+        offerId,
+        status: 'finished',
+      }),
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.data) {
+          const { status } = res.data[0];
+          this.setState(prevState => {
+            const updatedOffer = { ...prevState.offer };
+            updatedOffer.status = status;
+            return { offer: updatedOffer };
+          });
+        }
+      })
+      .catch(() =>
+        this.setState(
+          {
+            showWrongAlert: true,
+          },
+          () =>
+            setTimeout(() => {
+              this.setState({ showWrongAlert: false });
+            }, 5000)
+        )
+      );
   };
 
   render() {
-    // get useInfo from local storage
-    // const userInfo = localStorage.getItem('userInfo');
-    const userInfo = {
-      id: 3,
-      fullName: 'Ayman AlQoqa',
-      username: 'Ayman321396',
-      avatar:
-        'https://m.media-amazon.com/images/M/MV5BMTcxOTk4NzkwOV5BMl5BanBnXkFtZTcwMDE3MTUzNA@@._V1_.jpg',
-    };
-    const { offer, applications } = this.state;
-    const offerColor = this.offerColor(offer.status);
-    const { id: memberId } = userInfo;
-    const memberApplication = applications.filter(
-      application => application.member_id === memberId
-    );
+    const {
+      offer,
+      offerId,
+      applications,
+      userInfo,
+      myApplication,
+      showWrongAlert,
+      errorOffer,
+    } = this.state;
+    const { data } = applications;
     return (
-      <Container className="page__container">
-        <Row className="offer-details__header">
-          <Col className="offer-details__header-col">
-            <span className="offer-details__position">{offer.position}</span>
-            <p className="offer-details__title">{offer.title}</p>
-          </Col>
-
-          <Col className="offer-details__status" md="auto">
-            <span style={{ color: offerColor }}>
-              {offer.status
-                ? offer.status.replace(/_/g, ' ').toUpperCase()
-                : null}
-            </span>
-            <Button
-              className="offet-details__end-button"
-              variant="danger"
-              onClick={this.handleEndContract}
-            >
-              End Contract
-            </Button>
-          </Col>
-        </Row>
-        <Row className="offer-details__row">
-          <Col xs lg="9" className="offer-details__description">
-            <Row>
-              <p>{offer.description}</p>
+      <>
+        {showWrongAlert && <Alert> Somthing went error! Try agailn </Alert>}
+        {!errorOffer && !offer && <Spinner animation="grow" variant="info" />}
+        {errorOffer && <PageNotFound />}
+        {!errorOffer && offer && (
+          <Container className="page__container">
+            <Row className="offer-details__header">
+              <Col className="offer-details__header-col">
+                <span className="offer-details__position">
+                  {offer.position}
+                </span>
+                <p className="offer-details__title">{offer.title}</p>
+              </Col>
+              {offer.member_id === userInfo.id && (
+                <>
+                  <span className={`status__${statusColor(offer.status)}`}>
+                    {offer.status}
+                  </span>
+                  {offer && offer.status === 'completed' && (
+                    <Button
+                      className="offet-details__end-button"
+                      variant="danger"
+                      onClick={this.handleEndContract}
+                    >
+                      End Contract
+                    </Button>
+                  )}
+                </>
+              )}
             </Row>
-          </Col>
-          <Col xs lg="2">
-            <div>
-              <SideCard title="skills" items={offer.skills} />
-              <SideCard title="offer type" items={offer.offer_type} />
-            </div>
-          </Col>
-        </Row>
-        {memberId === offer.member_id ? (
-          // {/* applications */}
-          <div>
-            <Row className="offer-details__Applications-title">
-              Applications
+            <Row className="offer-details__row">
+              <Col xs lg="9" className="offer-details__description">
+                <Row>
+                  <p>{offer.description}</p>
+                </Row>
+              </Col>
+              <Col xs lg="2">
+                <div>
+                  <SideCard title="skills" items={offer.skills} />
+                  <SideCard title="offer type" items={offer.offer_types} />
+                </div>
+              </Col>
             </Row>
-            <Col xs lg="9" style={{ padding: '0px !important' }}>
-              {applications &&
-                applications.map(item => (
-                  <div key={item.member_id}>
+            {offer.member_id === userInfo.id ? (
+              <>
+                <Row className="offer-details__Applications-title">
+                  Applications
+                </Row>
+                <Col xs lg="9" style={{ padding: '0px !important' }}>
+                  {applications.data &&
+                    data.map(item => {
+                      return (
+                        <ApplicationCard
+                          viewProfile
+                          hireMe={offer.status !== 'finished'}
+                          defaultAvatar={userInfo.avatar}
+                          key={Math.random()}
+                          application={item}
+                        />
+                      );
+                    })}
+                  {!applications ||
+                    (!applications.data.length && (
+                      <>
+                        <span>there is no Application to show.</span>
+                      </>
+                    ))}
+                </Col>
+              </>
+            ) : (
+              <>
+                {myApplication &&
+                myApplication.data &&
+                myApplication.data.length ? (
+                  <>
                     <ApplicationCard
-                      application={item}
-                      offerColor={this.offerColor}
+                      key={Math.random()}
+                      application={myApplication.data[0]}
                     />
-                  </div>
-                ))}
-            </Col>
-          </div>
-        ) : (
-          // if logged in member is not offer owner
-          (!memberApplication[0] && (
-            <Col xs lg="9" className="offer-details__proposal-container">
-              <Form.Control
-                as="textarea"
-                rows="8"
-                placeholder="Write your proposal here !!!"
-                style={{ marginBottom: '10px' }}
-              />
-              <Button className="offer-details__proposal-container__button">
-                Apply
-              </Button>
-            </Col>
-          )) ||
-          (offer.status && memberApplication[0] && (
-            <Col xs lg="9">
-              <ApplicationCard
-                application={memberApplication[0]}
-                offerColor={this.offerColor}
-                viewMyProfile
-              />
-            </Col>
-          ))
+                  </>
+                ) : (
+                  <>
+                    <CoverLetter
+                      offerId={Number(offerId)}
+                      userInfo={userInfo}
+                    />
+                  </>
+                )}
+              </>
+            )}
+          </Container>
         )}
-      </Container>
+      </>
     );
   }
 }
