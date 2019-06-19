@@ -6,7 +6,7 @@ const { Cookie } = require('../testCookie');
 
 test('Testing for /api/v1/member/', (t) => {
   supertest(router)
-    .get('/api/v1/member/2')
+    .get('/api/v1/member/susan')
     .expect(200)
     .expect('content-type', /json/)
     .set('Cookie', [Cookie])
