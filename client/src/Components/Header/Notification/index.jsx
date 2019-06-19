@@ -154,7 +154,9 @@ class Notification extends Component {
                   <p id={item.id} className="dropdown__item-title">
                     {item.title}
                   </p>
-                  <p id={item.id}> {item.msg}</p>
+                  <p id={item.id} style={{ width: '100%', overflow: 'hidden' }}>
+                    {item.msg.substring(0, 45).concat(' ... ')}
+                  </p>
                 </Dropdown.Item>
               );
             })}
@@ -171,7 +173,9 @@ class Notification extends Component {
                   <p id={item.id} className="dropdown__item-title">
                     {item.title}
                   </p>
-                  <p id={item.id}>{item.msg}</p>
+                  <p id={item.id} style={{ width: '100%', overflow: 'hidden' }}>
+                    {item.msg.substring(0, 45).concat(' ... ')}
+                  </p>
                 </Dropdown.Item>
               );
             })}
