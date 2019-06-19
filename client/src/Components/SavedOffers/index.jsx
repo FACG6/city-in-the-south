@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Spinner, Alert } from 'react-bootstrap';
 
 import OfferCard from '../CommonComponents/OfferCard';
+import PageTitle from '../CommonComponents/PageTitle';
 
 import './style.css';
 
@@ -25,9 +26,9 @@ export default class SavedOffers extends Component {
       });
   }
 
-  handleDelete = offer_id => {
+  handleDelete = offerId => {
     const { offers } = this.state;
-    const newOffers = offers.filter(offer => offer.offer_id !== offer_id);
+    const newOffers = offers.filter(offer => offer.offer_id !== offerId);
     this.setState({ offers: newOffers });
   };
 
@@ -35,7 +36,7 @@ export default class SavedOffers extends Component {
     const { offers, message } = this.state;
     return (
       <Container className="page__container">
-        <h1 className="saved-offer__title"> Saved Offers </h1>
+        <PageTitle title="Saved Offers" />
         {message && <Alert variant="danger">{message}</Alert>}
         {offers ? (
           offers.map(item => {

@@ -1,9 +1,4 @@
-.slider__control{
-  color: black;
-}
-
 .carousel-control-next,
 .carousel-control-prev {
-  background: rgba(0, 0, 0, 0.03);
-  width: 5rem !important;
+  display: none !important;
 }
