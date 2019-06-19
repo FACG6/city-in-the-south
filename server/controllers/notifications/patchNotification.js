@@ -9,7 +9,9 @@ module.exports = (req, res, next) => {
           data: result.rows[0],
           error: null,
         });
+        return;
       }
+      next({ code: 500, msg: 'Internal Server Error' });
     })
     .catch((err) => {
       next(err);
