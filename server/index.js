@@ -20,3 +20,4 @@ if (process.env.NODE_ENV === 'development') {
       process.exit(0);
     });
 }
+module.exports = http;
