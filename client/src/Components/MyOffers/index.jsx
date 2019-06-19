@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Card, Row, Col, Container, Spinner, Alert } from 'react-bootstrap';
 
+import PageTitle from '../CommonComponents/PageTitle';
+
 import './style.css';
 
 class MyOffers extends Component {
@@ -42,8 +44,8 @@ class MyOffers extends Component {
       <>
         {showWrongAlert && <Alert> Somthing went error! Try agailn </Alert>}
         {offers && offers.length ? (
-          <Container>
-            <h1 className="myoffers__header"> My Offers </h1>
+          <Container className="page__container">
+            <PageTitle title="My Offers" />
             <Row>
               {offers ? (
                 offers.map(item => {

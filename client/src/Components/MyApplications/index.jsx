@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Alert } from 'react-bootstrap';
 
 import ApplicationCard from '../CommonComponents/OfferCard';
+import PageTitle from '../CommonComponents/PageTitle';
 
 import './style.css';
 
@@ -30,9 +31,7 @@ export default class MyApplications extends React.Component {
     return (
       <>
         <Container className="page__container">
-          <div className="my-applications__title">
-            <span>My Applications</span>
-          </div>
+          <PageTitle title="My Applications" />
           {message && <Alert variant="danger">{message}</Alert>}
           {myApplications
             ? myApplications.map(item => {

@@ -5,7 +5,7 @@ import './style.css';
 
 export default function PageTitle(props) {
   const { title } = props;
-  return <h2>{title}</h2>;
+  return <h3 className="pageTitle">{title}</h3>;
 }
 
 PageTitle.propTypes = {
