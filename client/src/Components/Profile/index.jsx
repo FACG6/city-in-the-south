@@ -27,13 +27,13 @@ export default class Profile extends Component {
   };
 
   componentDidMount() {
-    const { username, id, avatar } = JSON.parse(
-      localStorage.getItem('userInfo')
-    );
-
-    this.setState({ username, avatar, id });
-
-    fetch(`/api/v1/member/${id}`, { method: 'GET' })
+    const {
+      // eslint-disable-next-line react/prop-types
+      match: { params },
+    } = this.props;
+    const { id } = this.props;
+    let userId = 0;
+    fetch(`/api/v1/member/${params.username}`, { method: 'GET' })
       .then(res => res.json())
       .then(res => {
         if (res.data) {
@@ -44,6 +44,9 @@ export default class Profile extends Component {
             full_name: fullName,
             phone,
             skills,
+            username,
+            avatar,
+            id,
           } = res.data[0];
           this.setState({
             address,
@@ -52,10 +55,63 @@ export default class Profile extends Component {
             fullname: fullName,
             phone,
             skills,
+            username,
+            avatar:
+              avatar ||
+              'https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1',
+            id,
           });
+          userId = id;
         } else {
           throw new Error();
         }
+      })
+      .then(() => {
+        fetch(`/api/v1/education/${userId}`, { method: 'GET' })
+          .then(res => res.json())
+          .then(res => {
+            if (res.data) {
+              this.setState({ educations: res.data });
+            } else {
+              throw new Error();
+            }
+          })
+          .catch(() => {
+            this.setState(
+              {
+                errMSg: 'Something went wrong',
+                showAlert: true,
+                variant: 'danger',
+              },
+              () =>
+                setTimeout(() => {
+                  this.setState({ errMSg: '', showAlert: false });
+                }, 3000)
+            );
+          });
+
+        fetch(`/api/v1/experience/${userId}`, { method: 'GET' })
+          .then(res => res.json())
+          .then(res => {
+            if (res.data) {
+              this.setState({ experiences: res.data });
+            } else {
+              throw new Error();
+            }
+          })
+          .catch(() => {
+            this.setState(
+              {
+                errMSg: 'Something went wrong',
+                showAlert: true,
+                variant: 'danger',
+              },
+              () =>
+                setTimeout(() => {
+                  this.setState({ errMSg: '', showAlert: false });
+                }, 3000)
+            );
+          });
       })
       .catch(() =>
         this.setState(
@@ -70,51 +126,6 @@ export default class Profile extends Component {
             }, 3000)
         )
       );
-    fetch(`/api/v1/education/${id}`, { method: 'GET' })
-      .then(res => res.json())
-      .then(res => {
-        if (res.data) {
-          this.setState({ educations: res.data });
-        } else {
-          throw new Error();
-        }
-      })
-      .catch(() => {
-        this.setState(
-          {
-            errMSg: 'Something went wrong',
-            showAlert: true,
-            variant: 'danger',
-          },
-          () =>
-            setTimeout(() => {
-              this.setState({ errMSg: '', showAlert: false });
-            }, 3000)
-        );
-      });
-
-    fetch(`/api/v1/experience/${id}`, { method: 'GET' })
-      .then(res => res.json())
-      .then(res => {
-        if (res.data) {
-          this.setState({ experiences: res.data });
-        } else {
-          throw new Error();
-        }
-      })
-      .catch(() => {
-        this.setState(
-          {
-            errMSg: 'Something went wrong',
-            showAlert: true,
-            variant: 'danger',
-          },
-          () =>
-            setTimeout(() => {
-              this.setState({ errMSg: '', showAlert: false });
-            }, 3000)
-        );
-      });
   }
 
   render() {
@@ -133,12 +144,14 @@ export default class Profile extends Component {
       errMSg,
       showAlert,
       variant,
+      id,
     } = this.state;
     return (
       <Container className="profile__contanier">
         <Row>
           <Col sm={12} lg={3} md={3}>
             <SideProfile
+              key={`member-${id}`}
               username={username}
               address={address}
               email={email}
@@ -163,7 +176,11 @@ export default class Profile extends Component {
 
             {educations[0]
               ? educations.map(education => (
-                  <Education education={education} hover={hover} />
+                  <Education
+                    key={`education-${education.id}`}
+                    education={education}
+                    hover={hover}
+                  />
                 ))
               : null}
             <hr className="profile__line" />
@@ -174,7 +191,11 @@ export default class Profile extends Component {
             <h2 className="profile__title">EXPERIENCE</h2>
             {experiences[0]
               ? experiences.map(experience => (
-                  <Experience experience={experience} hover={hover} />
+                  <Experience
+                    key={`experience-${experience.id}`}
+                    experience={experience}
+                    hover={hover}
+                  />
                 ))
               : null}
             <hr className="profile__line" />
