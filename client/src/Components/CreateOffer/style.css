@@ -35,7 +35,11 @@
   background: #0f9caf !important;
   color: #fff;
   border: none !important;
-  margin: 0 auto;
+  margin: 0 1rem 0 0 ;
+}
+.newoffer__btn--apply > button {
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 
