@@ -44,6 +44,7 @@ export default class SavedOffers extends Component {
               <OfferCard
                 hover
                 offer={item}
+                id={item.offer_id}
                 key={item.offer_id}
                 status={item.status}
                 handleDelete={this.handleDelete}
