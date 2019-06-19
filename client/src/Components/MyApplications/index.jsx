@@ -40,6 +40,7 @@ export default class MyApplications extends React.Component {
                   <ApplicationCard
                     hover
                     offer={item}
+                    id={item.id}
                     key={item.id}
                     status={item.status}
                   />

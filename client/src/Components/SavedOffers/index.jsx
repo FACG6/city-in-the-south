@@ -25,9 +25,9 @@ export default class SavedOffers extends Component {
       });
   }
 
-  handleDelete = offer_id => {
+  handleDelete = offerId => {
     const { offers } = this.state;
-    const newOffers = offers.filter(offer => offer.offer_id !== offer_id);
+    const newOffers = offers.filter(offer => offer.offer_id !== offerId);
     this.setState({ offers: newOffers });
   };
 
@@ -43,6 +43,7 @@ export default class SavedOffers extends Component {
               <OfferCard
                 hover
                 offer={item}
+                id={item.offer_id}
                 key={item.offer_id}
                 status={item.status}
                 handleDelete={this.handleDelete}
