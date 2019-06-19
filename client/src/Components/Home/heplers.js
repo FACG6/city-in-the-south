@@ -25,7 +25,7 @@ function isSubArr(filteredArr, filteredByArr) {
 }
 
 function filterSkillsOfferType(arr, skills, offertypes) {
-  let filteredArr;
+  let filteredArr = arr;
   if (skills[0] && offertypes[0]) {
     filteredArr = arr
       .filter(item => isSubArr(item.skills, skills))
