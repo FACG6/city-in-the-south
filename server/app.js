@@ -8,13 +8,6 @@ const { join } = require('path');
 
 const router = require('./routes');
 
-// Notifications
-// const offSocket = io.of('/offer');
-// offSocket.on('connection', (socket) => {
-//   console.log('special socket');
-// });
-//
-
 app.use((req, res, next) => {
   req.io = io;
   next();
