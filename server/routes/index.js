@@ -66,7 +66,7 @@ router.post('/skills', skills.addSkills);
 
 /** Profile */
 
-router.get('/member/:memberId', member.getMember);
+router.get('/member/:username', member.getMember);
 router.patch('/member/fullname/:memberId', member.patchFullName);
 router.patch('/member/bio/:memberId', member.patchBio);
 router.patch('/member/username/:memberId', member.patchUserName);
