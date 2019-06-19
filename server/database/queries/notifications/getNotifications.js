@@ -1,9 +1,9 @@
 const connection = require('../../config/db_connection');
 
-const getNotifications = (member_id) => {
+const getNotifications = (memberId) => {
   const sql = {
     text: 'select * from notification where member_id=$1',
-    values: [member_id],
+    values: [memberId],
   };
   return connection.query(sql);
 };
