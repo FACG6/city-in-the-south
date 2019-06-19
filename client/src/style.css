@@ -8,8 +8,7 @@ body,
   font-family: 'Lato', sans-serif;
 }
 .container-body {
-  min-height: calc(100vh - 108px) !important;
-  margin: 50px 0;
+  min-height: calc(100vh - 120px) !important;
 }
 .loading {
   position: absolute;
