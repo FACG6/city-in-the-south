@@ -4,8 +4,10 @@ import { withRouter } from 'react-router-dom';
 
 import AutoCompleteTags from '../CommonComponents/AutoCompleteTags';
 import newOfferValidation from './validationSchema';
+// import PageTitle from '../CommonComponents/'
 
 import './style.css';
+import PageTitle from '../PageTitle';
 
 class CreateOffer extends Component {
   state = {
@@ -120,7 +122,8 @@ class CreateOffer extends Component {
     const { errMsg, variant, showAlert, errMsgAlert } = this.state;
     return (
       <Container className="newoffer__container">
-        <h1 className="newoffer__title">New Offer</h1>
+        {/* <h1 className="newoffer__title">New Offer</h1> */}
+        <PageTitle />
         <Form>
           <Form.Group>
             <div className="newoffer__content">
@@ -201,25 +204,19 @@ class CreateOffer extends Component {
                 </Col>
               </Row>
               <div>
-                <Row className="newoffer__btns">
-                  <Col sm={12} md={12} lg={1}>
-                    <Button
-                      className="newoffer__btn--apply"
-                      onClick={this.handleSubmit}
-                    >
-                      Create
+                <Button
+                  className="newoffer__btn--apply"
+                  onClick={this.handleSubmit}
+                >
+                  Create
                     </Button>
-                  </Col>
-                  <Col sm={12} md={12} lg={1}>
-                    <Button
-                      className="newoffer__btn--cancel"
-                      onClick={() => history.goBack()}
-                    >
-                      Cancel
+                <Button
+                  className="newoffer__btn--cancel"
+                  onClick={() => history.goBack()}
+                >
+                  Cancel
                     </Button>
-                    <br />
-                  </Col>
-                </Row>
+                <br />
                 <Row>
                   <Alert show={showAlert} key={1} variant={variant}>
                     {errMsgAlert}
