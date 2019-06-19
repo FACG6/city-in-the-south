@@ -7,7 +7,7 @@ body,
   margin: 0;
   font-family: 'Lato', sans-serif;
 }
-.container-body {
+.body-container {
   min-height: calc(100vh - 120px) !important;
 }
 .loading {
