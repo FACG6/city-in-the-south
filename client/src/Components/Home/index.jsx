@@ -13,7 +13,12 @@ import AutoCompleteTags from '../CommonComponents/AutoCompleteTags';
 import Offers from './Offers';
 import Members from './Members';
 
-import { filterOfferTypes, filterSkills, searchLogic } from './heplers';
+import {
+  getfilteredMembers,
+  getfilteredOffers,
+  filterSkillsOfferType,
+  searchLogic,
+} from './heplers';
 
 import './style.css';
 
@@ -38,136 +43,78 @@ export default class Home extends Component {
   };
 
   componentDidMount() {
-    this.setState({
-      filterQuery:
-        localStorage.getItem('filterQuery') ||
-        localStorage.setItem('filterQuery', 'Offers'),
-    });
-
     const filterQuery =
       localStorage.getItem('filterQuery') ||
       localStorage.setItem('filterQuery', 'Offers');
+
     const { offset, memberId } = this.state;
+
     fetch(`/api/v1/filter/${memberId}`)
       .then(res => res.json())
       .then(res => {
         if (res.data) {
-          const filterSkill = res.data.skills;
-          const { offer_type: filterOfferType } = res.data;
-          this.setState({
-            skills: filterSkill[0] ? filterSkill : [],
-            offerTypes: filterOfferType[0] ? filterOfferType : [],
-          });
-        } else {
-          throw new Error();
-        }
-      })
-      .catch(() =>
-        this.setState(
-          {
-            errMSg: 'Something went wrong',
-            showAlert: true,
-            variant: 'danger',
-          },
-          () =>
-            setTimeout(() => {
-              this.setState({ errMSg: '', showAlert: false });
-            }, 3000)
-        )
-      );
-
-    fetch(`/api/v1/members/${offset}`, { method: 'GET' })
-      .then(res => res.json())
-      .then(res => {
-        if (res.data[0]) {
-          const { skills } = this.state;
-          if (skills[0]) {
-            const filterMembersData = filterSkills(res.data, skills);
-            this.setState({
-              members: res.data,
-              filterMembers: filterMembersData,
-              filterData: filterQuery === 'Members' ? filterMembersData : [],
-            });
-          } else {
-            this.setState({
-              members: res.data,
-              filterMembers: res.data,
-              filterData: filterQuery === 'Members' ? res.data : [],
-            });
+          const { offer_type: offerTypes, skills } = res.data;
+          if (filterQuery === 'Members') {
+            getfilteredMembers(
+              skills,
+              offset,
+              (err, { members, filterMembers }) => {
+                if (err) {
+                  this.setState(
+                    {
+                      errMSg: 'Something went wrong',
+                      showAlert: true,
+                      variant: 'danger',
+                    },
+                    () =>
+                      setTimeout(() => {
+                        this.setState({ errMSg: '', showAlert: false });
+                      }, 3000)
+                  );
+                } else {
+                  this.setState({
+                    members,
+                    filterMembers,
+                    filterData: filterMembers,
+                    skills,
+                    offerTypes,
+                    filterQuery,
+                  });
+                }
+              }
+            );
           }
-        } else {
-          throw new Error();
-        }
-      })
-      .catch(() =>
-        this.setState(
-          {
-            errMSg: 'Something went wrong',
-            showAlert: true,
-            variant: 'danger',
-          },
-          () =>
-            setTimeout(() => {
-              this.setState({ errMSg: '', showAlert: false });
-            }, 3000)
-        )
-      );
 
-    fetch(`/api/v1/offers/${offset}`, { method: 'GET' })
-      .then(res => res.json())
-      .then(res => {
-        if (res.data[0]) {
-          const { offerTypes, skills } = this.state;
-          if (offerTypes[0] && skills[0]) {
-            const filteredOffersSkills = filterSkills(res.data, skills);
-            const filtereOffersOfferTypes = filterOfferTypes(
-              res.data,
-              offerTypes
+          if (filterQuery === 'Offers') {
+            getfilteredOffers(
+              skills,
+              offerTypes,
+              offset,
+              (err, { offers, filteredOffers }) => {
+                if (err) {
+                  this.setState(
+                    {
+                      errMSg: 'Something went wrong',
+                      showAlert: true,
+                      variant: 'danger',
+                    },
+                    () =>
+                      setTimeout(() => {
+                        this.setState({ errMSg: '', showAlert: false });
+                      }, 3000)
+                  );
+                } else {
+                  this.setState({
+                    offers,
+                    filteredOffers,
+                    filterData: filteredOffers,
+                    skills,
+                    offerTypes,
+                    filterQuery,
+                  });
+                }
+              }
             );
-            if (
-              filteredOffersSkills.length === 0 ||
-              filtereOffersOfferTypes.length === 0
-            ) {
-              this.setState({
-                offers: [],
-                filteredOffers: [],
-                filterData: [],
-              });
-            } else {
-              const filteredOffersData = filteredOffersSkills.filter(item => {
-                return filtereOffersOfferTypes.filter(
-                  _item => item.id === _item.id
-                );
-              });
-              this.setState({
-                offers: res.data,
-                filteredOffers: filteredOffersData,
-                filterData: filterQuery === 'Offers' ? filteredOffersData : [],
-              });
-            }
-          } else if (offerTypes[0]) {
-            const filtereOffersOfferTypes = filterOfferTypes(
-              res.data,
-              offerTypes
-            );
-            this.setState({
-              offers: res.data,
-              filteredOffers: filtereOffersOfferTypes,
-              filterData:
-                filterQuery === 'Offers' ? filtereOffersOfferTypes : [],
-            });
-          } else if (skills[0]) {
-            const filteredOffersSkills = filterSkills(res.data, skills);
-            this.setState({
-              offers: res.data,
-              filteredOffers: filteredOffersSkills,
-              filterData: filterQuery === 'Offers' ? filteredOffersSkills : [],
-            });
-          } else {
-            this.setState({
-              filteredOffers: res.data,
-              filterData: filterQuery === 'Offers' ? res.data : [],
-            });
           }
         } else {
           throw new Error();
@@ -189,26 +136,14 @@ export default class Home extends Component {
   }
 
   handleSkillOnChange = skills => {
-    this.setState({ skills });
     const { filterQuery, members, offers, offerTypes, memberId } = this.state;
     if (filterQuery === 'Members') {
-      const filterMembersData = filterSkills(members, skills);
-      this.setState({ filterData: filterMembersData });
+      const filterData = filterSkillsOfferType(members, skills, []);
+      this.setState({ filterData, skills });
     }
     if (filterQuery === 'Offers') {
-      const filteredOffersSkills = filterSkills(offers, skills);
-      const filtereOffersOfferTypes = filterOfferTypes(offers, offerTypes);
-      if (
-        filteredOffersSkills.length === 0 ||
-        filtereOffersOfferTypes.length === 0
-      ) {
-        this.setState({ filterData: [] });
-      } else {
-        const filteredOffers = filteredOffersSkills.filter(item => {
-          return filtereOffersOfferTypes.filter(_item => item.id === _item.id);
-        });
-        this.setState({ filterData: filteredOffers });
-      }
+      const filterData = filterSkillsOfferType(offers, skills, offerTypes);
+      this.setState({ filterData, skills });
     }
     fetch(`/api/v1/filter/${memberId}`, {
       method: 'PATCH',
@@ -241,21 +176,9 @@ export default class Home extends Component {
   };
 
   handleOfferTypeOnChange = offerTypes => {
-    this.setState({ offerTypes });
     const { offers, skills, memberId } = this.state;
-    const filteredOffersSkills = filterSkills(offers, skills);
-    const filtereOffersOfferTypes = filterOfferTypes(offers, offerTypes);
-    if (
-      filteredOffersSkills.length === 0 ||
-      filtereOffersOfferTypes.length === 0
-    ) {
-      this.setState({ filterData: [] });
-    } else {
-      const filteredOffers = filteredOffersSkills.filter(item =>
-        filtereOffersOfferTypes.filter(_item => item.id === _item.id)
-      );
-      this.setState({ filterData: filteredOffers });
-    }
+    const filterData = filterSkillsOfferType(offers, skills, offerTypes);
+    this.setState({ filterData, offerTypes });
 
     fetch(`/api/v1/filter/${memberId}`, {
       method: 'PATCH',
