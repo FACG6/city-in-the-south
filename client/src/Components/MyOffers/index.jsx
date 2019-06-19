@@ -11,11 +11,7 @@ class MyOffers extends Component {
   };
 
   componentDidMount() {
-    // from local storage
-    const userInfo = {
-      id: 1,
-    };
-    const { id } = userInfo;
+    const { id } = JSON.parse(localStorage.getItem('userInfo'));
     fetch(`/api/v1/my-offers/${id}`, {
       method: 'GET',
     })
