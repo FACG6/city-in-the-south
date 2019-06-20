@@ -1,13 +1,15 @@
 
 .member-card__avatar {
   border-radius: 50% !important;
-  width: 80% !important;
+  width: 50px !important;
 }
 
 .member-card {
-  min-height: 160px !important;
+  min-height: 250px !important;
   margin-bottom: 15px !important;
   cursor: pointer;
+  min-width: 200px !important;
+  display: flex !important;
 }
 
 .member-card:hover {
@@ -26,13 +28,15 @@
   border-radius: 3px;
   width: fit-content;
 }
+.member-card__skill:nth-child(1) {
+  margin-left: 0px;
+}
 
 .member-card__username {
-  letter-spacing: 0.04em;
   color: rgba(51, 51, 51, 0.7);
   font-size: 18px;
   font-weight: bold;
-  padding-top: 8.5%;
-  padding-left: 0 !important;
-  float: left !important;
+  position: absolute;
+  top: 15px;
+  left: 70px;
 }
