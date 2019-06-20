@@ -126,7 +126,21 @@ export default class Home extends Component {
             },
           })
             .then(result => result.json())
-            .then(result => console.log(result));
+            .then(result => {
+              if (result.data) {
+                this.setState(
+                  {
+                    errMSg: 'added successfully',
+                    showAlert: true,
+                    variant: 'success',
+                  },
+                  () =>
+                    setTimeout(() => {
+                      this.setState({ errMSg: '', showAlert: false });
+                    }, 100)
+                );
+              }
+            });
         }
       })
       .catch(() =>
