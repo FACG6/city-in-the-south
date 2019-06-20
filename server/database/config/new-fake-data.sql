@@ -49,3 +49,15 @@ INSERT INTO education (title, date, university, description, member_id) VALUES
 INSERT INTO experience (title, start_date, end_date, location, description, member_id) VALUES
   ('Assistant Director', '2013-06-22 19:10:25-07', '2018-08-14 05:10:40-15', 'Brunel University','The assistant director at an educational institution oversees academic, cultural, and recreational matters at the school.', (SELECT id FROM member LIMIT 1 OFFSET 1)),
   ('Director', '2013-06-22 19:10:25-07', '2018-08-14 05:10:40-15', 'Imperial College London','An education director supervises school curriculums and teaching standards', (SELECT id FROM member LIMIT 1 OFFSET 0));
+
+
+INSERT INTO offer_skill (skill_id, offer_id) VALUES 
+  ((SELECT id FROM skill LIMIT 1 OFFSET 1), (SELECT id FROM offer LIMIT 1 OFFSET 1)),
+  ((SELECT id FROM skill LIMIT 1 OFFSET 2), (SELECT id FROM offer LIMIT 1 OFFSET 0)),
+  ((SELECT id FROM skill LIMIT 1 OFFSET 2), (SELECT id FROM offer LIMIT 1 OFFSET 1)),
+  ((SELECT id FROM skill LIMIT 1 OFFSET 0), (SELECT id FROM offer LIMIT 1 OFFSET 2));
+
+INSERT INTO offer_offer_type (offer_type_id, offer_id) VALUES 
+  ((SELECT id FROM offer_type LIMIT 1 OFFSET 0), (SELECT id FROM offer LIMIT 1 OFFSET 0)),
+  ((SELECT id FROM offer_type LIMIT 1 OFFSET 1), (SELECT id FROM offer LIMIT 1 OFFSET 1)),
+  ((SELECT id FROM offer_type LIMIT 1 OFFSET 1), (SELECT id FROM offer LIMIT 1 OFFSET 2));
