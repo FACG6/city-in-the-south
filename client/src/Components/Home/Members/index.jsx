@@ -28,15 +28,18 @@ export default function Members({ filtered, history }) {
                         }
                         className="member-card__avatar"
                       />
+                      <Card.Title className="member-card__username">
+                        {member.username}
+                      </Card.Title>
                     </Col>
-                    <Col
+                    {/* <Col
                       xs={6}
                       md={7}
                       className="member-card__username"
                       key={member.id}
                     >
                       <Card.Text>{member.username}</Card.Text>
-                    </Col>
+                    </Col> */}
                   </Row>
                   <br />
                   <div>
