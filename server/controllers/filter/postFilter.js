@@ -1,8 +1,7 @@
 const { postFilter } = require('../../database/queries/filter/postFilter');
 
 module.exports = (req, res, next) => {
-  const { memberId } = req.body;
-  postFilter(memberId)
+  postFilter(req.body)
     .then(({ rows }) => {
       res.status(200).send({ error: null, data: rows });
     })
