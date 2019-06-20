@@ -16,7 +16,6 @@
 .member-card__skills{
   display: flex;
   flex-wrap: wrap;
-  padding: 0;
 }
 .member-card__skill {
   font-size: 14px;
@@ -26,6 +25,9 @@
   color: #494949;
   border-radius: 3px;
   width: fit-content;
+}
+.member-card__skill:nth-child(1) {
+  margin-left: 0px;
 }
 
 .member-card__username {
