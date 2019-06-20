@@ -1,19 +1,19 @@
 .header__container {
-  background-color: #0f9caf;
-  color: #eeeeee;
+  color: #fff;
   font-size: 14px;
 }
-.Navbar__container {
-  margin: 0 30px;
+.Navbar__container.bg-light {
+  background-color: #0f9caf !important;
+  color: #fff !important;
 }
+
 .navbar__brand {
-  font-size: 20px;
+  font-size: 25px;
 }
 
 .nav__avatar {
-  width: 30px;
-  height: 30px;
-  border: 1px solid rgba(0, 0, 0, 0.6);
+  width: 40px;
+  height: 40px;
 
   border-radius: 50%;
 }
@@ -23,7 +23,7 @@
 }
 .navbar__link {
   text-decoration: none !important;
-  color: #eeeeee !important;
+  color: #eee !important;
   margin: 0 5px !important;
 }
 .navbar__link:hover {
@@ -32,13 +32,20 @@
 .Navbar__container .active {
   background-color: rgba(0, 0, 0, 0.15) !important;
   border-radius: 5px !important;
+  color: #333 !important
 }
 .navbar__link--text {
-  margin: 5px 10px;
+  margin: 10px 10px;
 }
 .Navbar__container .dropdown__item {
-  color: #333 !important;
   text-decoration: none !important;
+}
+
+@media (min-width: 992px){
+  .Navbar__container .navigation {
+    right: 0;
+    position: absolute;
+  }
 }
 
 .dropdown__menu a:active,
@@ -48,13 +55,13 @@
 .dropdown__menu {
   width: 350px;
   overflow: hidden;
-  padding: 0 !important;
 }
 .dropdown__menu-avatar {
   width: 80px;
   overflow: hidden;
-  padding: 0 !important;
 }
-.header__container .fas {
-  position: relative;
+
+.Navbar__container {
+  margin: 0 !important;
 }
+

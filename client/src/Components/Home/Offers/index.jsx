@@ -9,7 +9,12 @@ export default function Offers({ filtered }) {
       {filtered[0] ? (
         filtered.map(item => {
           return (
-            <OfferCard offer={item} key={`offers-${item.id}`} hover={false} />
+            <OfferCard
+              offer={item}
+              id={item.id}
+              key={`offers-${item.id}`}
+              hover={false}
+            />
           );
         })
       ) : (

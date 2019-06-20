@@ -1,9 +1,8 @@
 .content-login {
-  height: 318px;
+  height: auto;
   width: 358px;
-  left: 475px;
   padding: 29px 0 0 20px;
-  margin: 54px 0 0 375px;
+  margin: 70px auto;
   box-sizing: border-box;
   border-radius: 2px;
   background: #FFFFFF;
@@ -11,10 +10,8 @@
 }
 
 .content-login__word-login {
-  margin-left: 115px;
+  padding: 20px 0;
   font-weight: 600;
-  font-size: 24px;
-  line-height: 29px;
   align-items: center;
   text-align: center;
   letter-spacing: 0.04em;
@@ -24,23 +21,38 @@
 .content-login__submit {
   height: 40px;
   width: 277px;
-  margin-left: 24px;
+  margin: 10px 24px;
   align-items: center;
-  font-weight: 500;
-  line-height: 22px;
-  background-color: #0F9CAF ;
+  font-weight: 600 !important;
+  background-color: #0F9CAF !important;
   border:none ;
   color: #eee;
   border-radius: 4px;
-}
-.content-login__text-muted {
-  margin: 0 37px 0 64px;
+  font-size: 20px !important;
+  border: none !important;
 }
 
-.content-login__word-signup {
+.content-login__submit:hover {
+  background-color: rgb(11, 118, 133) !important;
+}
+
+.content-login__text-muted {
+  padding: 5px 0 40px;
   text-align: center;
-  color: #0F9CAF;
-  cursor: pointer;
+  font-size: 15px;
+  opacity: .8;
+}
+
+.link-signup-word{
+  color: #0F9CAF !important;
+  font-weight: 600;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.link-signup-word:hover{
+  text-decoration: none;
+  color: #1b7688 !important;
 }
 
 .content-login__input {
@@ -52,7 +64,7 @@
   font-size: 14px;
   line-height: 17px;
   letter-spacing: 0.03em;
-  color: #929292;
+  color: black;
   border-radius: 3px;
 }
 

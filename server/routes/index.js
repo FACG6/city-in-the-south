@@ -9,6 +9,7 @@ const {
   offerType,
   skills,
   erros,
+  notifications,
 } = require('../controllers');
 
 router.post('/login', authentication.login);
@@ -64,9 +65,12 @@ router.get('/skills', skills.getSkills);
 router.get('/skills/:memberId', skills.getMemberSkills);
 router.post('/skills', skills.addSkills);
 
+/* Notifications */
+router.get('/notifications/:member_id', notifications.getNotifications);
+router.patch('/notifications/:id', notifications.patchNotification);
 /** Profile */
 
-router.get('/member/:memberId', member.getMember);
+router.get('/member/:username', member.getMember);
 router.patch('/member/fullname/:memberId', member.patchFullName);
 router.patch('/member/bio/:memberId', member.patchBio);
 router.patch('/member/username/:memberId', member.patchUserName);

@@ -102,10 +102,12 @@ export default class AutoCompleteTags extends Component {
                     showAlert: true,
                     variant: 'success',
                   },
-                  () =>
+                  () => {
+                    if (typeof onchange === 'function') onchange(newTags);
                     setTimeout(() => {
                       this.setState({ errMSg: '', showAlert: false });
-                    }, 1000)
+                    }, 1000);
+                  }
                 );
               }
               if (res.error) {
@@ -119,10 +121,11 @@ export default class AutoCompleteTags extends Component {
                   showAlert: true,
                   variant: 'danger',
                 },
-                () =>
+                () => {
                   setTimeout(() => {
-                    this.setState({ errMSg: '', showAlert: false });
-                  }, 3000)
+                    this.setState({ errMSg: '', showAlert: true });
+                  }, 3000);
+                }
               )
             );
         }
@@ -147,10 +150,12 @@ export default class AutoCompleteTags extends Component {
                     showAlert: true,
                     variant: 'success',
                   },
-                  () =>
+                  () => {
+                    if (typeof onchange === 'function') onchange(newTags);
                     setTimeout(() => {
                       this.setState({ errMSg: '', showAlert: false });
-                    }, 1000)
+                    }, 1000);
+                  }
                 );
               }
               if (res.error) {
@@ -172,12 +177,15 @@ export default class AutoCompleteTags extends Component {
             });
         }
       } else {
-        this.setState({ selectedTags: items });
+        this.setState({ selectedTags: items }, () => {
+          if (typeof onchange === 'function') onchange(items);
+        });
       }
     } else {
-      this.setState({ selectedTags: items });
+      this.setState({ selectedTags: items }, () => {
+        if (typeof onchange === 'function') onchange(items);
+      });
     }
-    if (typeof onchange === 'function') onchange(items);
   };
 
   handleInputChange = item => {

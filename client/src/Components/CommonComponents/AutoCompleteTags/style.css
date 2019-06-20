@@ -1,15 +1,15 @@
 .autocomplete__title{
   font-size: 16px;
   line-height: 19px;
-  display: flex;
   letter-spacing: 0.06em;
   color: rgba(51, 51, 51, 0.8);
+  padding: 2px 0;
 }
 
 .autComplete-dev .form-control {
-  min-height: 50px !important;
+  min-height: 40px !important;
   height: auto !important;
-  border-radius: 2px !important;
+  border-radius: 5px !important;
 }
 
 .autComplete-dev .form-control .rbt-token {
@@ -17,15 +17,15 @@
   border: 0;
   color: #eee;
   display: inline-block;
-  line-height: 1em;
-  margin: 0 3px 3px 0;
+  margin: 3px;
   padding: 10px 32px 10px 14px;
   position: relative;
   border-radius: 25px;
   height: 37px;
 }
 
-.autComplete-dev .form-control .rbt-token .rbt-token-remove-button {
+.autComplete-dev .form-control
+.rbt-token .rbt-token-remove-button {
   bottom: 0;
   color: inherit;
   font-size: inherit;

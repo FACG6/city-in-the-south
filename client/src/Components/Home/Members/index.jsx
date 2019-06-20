@@ -15,7 +15,7 @@ export default function Members({ filtered, history }) {
               <Card
                 className="member-card"
                 key={member.id}
-                onClick={() => history.push(`/profile/${member.username}`)}
+                onClick={() => history.push(`/app/profile/${member.username}`)}
               >
                 <Card.Body>
                   <Row key={member.id}>
