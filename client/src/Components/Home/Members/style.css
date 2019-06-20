@@ -8,6 +8,7 @@
   min-height: 250px !important;
   margin-bottom: 15px !important;
   cursor: pointer;
+  min-width: 200px !important;
 }
 
 .member-card:hover {
@@ -34,7 +35,7 @@
   color: rgba(51, 51, 51, 0.7);
   font-size: 18px;
   font-weight: bold;
-  padding-top: 8.5%;
-  padding-left: 0 !important;
-  float: left !important;
+  position: absolute;
+  top: 15px;
+  left: 70px;
 }
