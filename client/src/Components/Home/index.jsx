@@ -46,7 +46,6 @@ export default class Home extends Component {
     const filterQuery =
       localStorage.getItem('filterQuery') ||
       localStorage.setItem('filterQuery', 'Offers');
-
     const { offset, memberId } = this.state;
 
     fetch(`/api/v1/filter/${memberId}`)
@@ -116,8 +115,18 @@ export default class Home extends Component {
               }
             );
           }
-        } else {
-          throw new Error();
+        }
+        if (!res.data) {
+          fetch('/api/v1/filter', {
+            method: 'POST',
+            body: JSON.stringify({ memberId }),
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+          })
+            .then(result => result.json())
+            .then(result => console.log(result));
         }
       })
       .catch(() =>
