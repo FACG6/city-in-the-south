@@ -32,14 +32,6 @@ export default function Members({ filtered, history }) {
                         {member.username}
                       </Card.Title>
                     </Col>
-                    {/* <Col
-                      xs={6}
-                      md={7}
-                      className="member-card__username"
-                      key={member.id}
-                    >
-                      <Card.Text>{member.username}</Card.Text>
-                    </Col> */}
                   </Row>
                   <br />
                   <div>
