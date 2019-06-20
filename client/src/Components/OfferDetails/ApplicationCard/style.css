@@ -31,3 +31,13 @@
   color: #eeeeee !important;
   border: 1px solid #0f9caf !important;
 }
+
+.accept-btn {
+  background: #37a000 !important;
+  border: 1px solid #37a000 !important;
+}
+
+.refuse-btn {
+  background: #f11909 !important;
+  border: 1px solid red !important;
+}
