@@ -9,6 +9,7 @@
   margin-bottom: 15px !important;
   cursor: pointer;
   min-width: 200px !important;
+  display: flex !important;
 }
 
 .member-card:hover {
