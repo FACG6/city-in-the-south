@@ -41,8 +41,6 @@ export default function Members({ filtered, history }) {
                   <br />
                   <div>
                     Skills :
-                    <br />
-                    <br />
                     <div className="member-card__skills">
                       {member.skills.map(skill => (
                         <h1 className="member-card__skill" key={skill.id}>
