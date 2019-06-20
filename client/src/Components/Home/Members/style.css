@@ -6,7 +6,7 @@
 
 .member-card {
   min-height: 250px !important;
-  min-width: 150px !important;
+  min-width: 200px !important;
   margin-bottom: 15px !important;
   cursor: pointer;
 }
@@ -29,7 +29,6 @@
 }
 
 .member-card__username {
-  letter-spacing: 0.04em;
   color: rgba(51, 51, 51, 0.7);
   font-size: 18px;
   font-weight: bold;
