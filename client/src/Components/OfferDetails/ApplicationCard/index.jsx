@@ -197,16 +197,16 @@ class ApplicationCard extends Component {
                     application.status === 'pending' ? (
                       <>
                         <Button
-                          className="application-card__button"
-                          onClick={this.handleAccept}
-                        >
-                          Accept
-                        </Button>
-                        <Button
-                          className="application-card__button"
+                          className="application-card__button refuse-btn"
                           onClick={this.handleRefuse}
                         >
                           Refuse
+                        </Button>
+                        <Button
+                          className="application-card__button accept-btn"
+                          onClick={this.handleAccept}
+                        >
+                          Accept
                         </Button>
                       </>
                     ) : (
