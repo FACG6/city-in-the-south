@@ -13,11 +13,10 @@ class OfferCard extends React.Component {
     hovered: '',
     saved: false,
     memberId: 0,
-    offerId: '',
   };
 
   componentDidMount() {
-    const { offer, status, id } = this.props;
+    const { offer, status } = this.props;
     const borderColor = {
       completed: 'green',
       finished: 'red',
@@ -28,7 +27,6 @@ class OfferCard extends React.Component {
       variant: '',
     };
     this.setState({
-      offerId: id,
       memberId:
         JSON.parse(localStorage.getItem('userInfo')) &&
         JSON.parse(localStorage.getItem('userInfo')).id,
@@ -41,7 +39,7 @@ class OfferCard extends React.Component {
       .then(res => {
         if (res.data) {
           res.data.filter(savedOffer => {
-            if (id === savedOffer.id) {
+            if (offer.id === savedOffer.id) {
               this.setState({ saved: true });
             } else {
               this.setState({ saved: false });
@@ -184,7 +182,6 @@ class OfferCard extends React.Component {
       errMSg,
       showAlert,
       variant,
-      offerId,
     } = this.state;
     // eslint-disable-next-line react/prop-types
     const { hover, history } = this.props;
@@ -197,7 +194,7 @@ class OfferCard extends React.Component {
           <Card
             className={`offer-card ${hovered ? 'offer-card--hovered' : ''}`}
             key={offer.id}
-            onClick={() => history.push(`/app/offers/${offerId}`)}
+            onClick={() => history.push(`/app/offers/${offer.offer_id}`)}
           >
             {hover ? (
               <span className={`offer-card__border ${statusDiv}`}> </span>
@@ -208,16 +205,18 @@ class OfferCard extends React.Component {
                 <br />
                 <span className="offer-card__title">{offer.title}</span>
               </div>
-              {hover ? (
-                <span className={`offer-card__status ${statusLabel}`}>
-                  {' '}
-                  {offer.status}
-                </span>
-              ) : null}
+              <div className="test">
+                {hover ? (
+                  <span className={`offer-card__status ${statusLabel}`}>
+                    {' '}
+                    {offer.status}
+                  </span>
+                ) : null}
+              </div>
               <Button
                 onClick={e => {
                   e.stopPropagation();
-                  this.handleSave(offerId);
+                  this.handleSave(offer.offer_id);
                 }}
                 className="offer-card__save-btn"
               >
