@@ -6,7 +6,6 @@
 
 .member-card {
   min-height: 250px !important;
-  min-width: 200px !important;
   margin-bottom: 15px !important;
   cursor: pointer;
 }
@@ -17,6 +16,7 @@
 .member-card__skills{
   display: flex;
   flex-wrap: wrap;
+  padding: 0;
 }
 .member-card__skill {
   font-size: 14px;
