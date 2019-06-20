@@ -197,7 +197,7 @@ class ApplicationCard extends Component {
                     {application.status}
                   </Card.Text>
                 )}
-                {userInfo.id === application.id &&
+                {userInfo.id === application.member_id &&
                   application.status &&
                   application.status === 'pending' && (
                     <>
