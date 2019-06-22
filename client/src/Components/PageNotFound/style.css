@@ -28,11 +28,11 @@
   border: 1px solid #efefef;
   padding: .5em;
   border-radius: 3px;
-  float: left;
-  margin: 2em 0 0 -155px;
+  text-align: center;
+  position: absolute;
+  bottom: 30%;
   left: 50%;
-  position: relative;
-  transition: all .3s linear;
+  transform: translateX(-50%)
 }
 
 .go-back:hover {
