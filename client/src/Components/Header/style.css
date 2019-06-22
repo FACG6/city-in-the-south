@@ -2,6 +2,7 @@
   color: #fff;
   font-size: 14px;
 }
+
 .Navbar__container.bg-light {
   background-color: #0f9caf !important;
   color: #fff !important;
@@ -17,26 +18,32 @@
 
   border-radius: 50%;
 }
+
 .nav__dropdown {
   background-color: #0f9caf !important;
   border: none !important;
 }
+
 .navbar__link {
   text-decoration: none !important;
   color: #eee !important;
   margin: 0 5px !important;
 }
+
 .navbar__link:hover {
   color: rgba(51, 51, 51, 0.7) !important;
 }
+
 .Navbar__container .active {
   background-color: rgba(0, 0, 0, 0.15) !important;
   border-radius: 5px !important;
   color: #333 !important
 }
+
 .navbar__link--text {
   margin: 10px 10px;
 }
+
 .Navbar__container .dropdown__item {
   text-decoration: none !important;
 }
@@ -52,10 +59,12 @@
 .dropdown__menu-avatar a:active {
   background-color: #eee !important;
 }
+
 .dropdown__menu {
   width: 350px;
   overflow: hidden;
 }
+
 .dropdown__menu-avatar {
   width: 80px;
   overflow: hidden;
@@ -64,6 +73,7 @@
 .Navbar__container {
   margin: 0 !important;
 }
+
 .logo{
   position: absolute;
   top: 0;
