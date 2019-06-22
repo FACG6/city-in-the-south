@@ -6,7 +6,8 @@
 .profile__img {
   margin: 10px 0px;
   border-radius: 5px;
-  height: 300px;
+  height: 270px;
+  width: 200px;
 }
 
 .profile__contactInfo, .profile__skills {
@@ -14,4 +15,18 @@
   margin: .7rem;
   font-size: 16px;
   color: rgba(51, 51, 51, 0.8);
+}
+
+@media (max-width: 992px) {
+  .profile__contanier {
+    margin: 26px auto !important;
+  }
+  .profile__img{
+    margin: 0 25% !important;
+    height: 270px;
+    width: 200px;
+  }
+  .profile__title__line {
+    display: none !important;
+  }
 }

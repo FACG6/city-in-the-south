@@ -93,21 +93,21 @@
 
 .offer-card:hover 
 .offer-card__status--completed {
-  background: green;
+  color: green;
 }
 .offer-card:hover
 .offer-card__status--finished {
-  background: red;
+  color: red;
 }
 
 .offer-card:hover
 .offer-card__status--pending {
-  background: orange;
+  color: orange;
 }
 
 .offer-card:hover
 .offer-card__status--active {
-  background: #1BA7E2;
+  color: #1BA7E2;
 }
 
 .offer-card__border {

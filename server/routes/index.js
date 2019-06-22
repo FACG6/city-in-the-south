@@ -39,6 +39,7 @@ router
   .get(filter.getFilter)
   .patch(filter.updateFilter);
 
+router.post('/filter', filter.postFilter);
 /* Member */
 router.get('/members/:offset', member.getMembers);
 

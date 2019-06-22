@@ -191,30 +191,33 @@ class ApplicationCard extends Component {
                     )}
                   </>
                 ) : (
-                  <Card.Text
-                    className={`status__${statusColor(application.status)}`}
-                  >
-                    {application.status}
+                  <Card.Text>
+                    {userInfo.id === application.member_id &&
+                    application.status &&
+                    application.status === 'pending' ? (
+                      <>
+                        <Button
+                          className="application-card__button refuse-btn"
+                          onClick={this.handleRefuse}
+                        >
+                          Refuse
+                        </Button>
+                        <Button
+                          className="application-card__button accept-btn"
+                          onClick={this.handleAccept}
+                        >
+                          Accept
+                        </Button>
+                      </>
+                    ) : (
+                      <span
+                        className={`status__${statusColor(application.status)}`}
+                      >
+                        {application.status}
+                      </span>
+                    )}
                   </Card.Text>
                 )}
-                {userInfo.id === application.id &&
-                  application.status &&
-                  application.status === 'pending' && (
-                    <>
-                      <Button
-                        className="application-card__button"
-                        onClick={this.handleAccept}
-                      >
-                        Accept
-                      </Button>
-                      <Button
-                        className="application-card__button"
-                        onClick={this.handleRefuse}
-                      >
-                        Refuse
-                      </Button>
-                    </>
-                  )}
               </div>
             </Card.Body>
           </Card>

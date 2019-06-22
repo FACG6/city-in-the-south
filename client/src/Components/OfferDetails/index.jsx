@@ -153,11 +153,11 @@ export default class OfferDetails extends Component {
                 </span>
                 <p className="offer-details__title">{offer.title}</p>
               </Col>
+              <span className={`status__${statusColor(offer.status)}`}>
+                {offer.status}
+              </span>
               {offer.member_id === userInfo.id && (
                 <>
-                  <span className={`status__${statusColor(offer.status)}`}>
-                    {offer.status}
-                  </span>
                   {offer && offer.status === 'completed' && (
                     <Button
                       className="offet-details__end-button"
