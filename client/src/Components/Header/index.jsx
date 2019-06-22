@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Notification from './Notification';
 import './style.css';
 import auth from '../../auth/auth';
+import logo from '../../assets/img/logo.png';
 
 class Header extends Component {
   state = {
@@ -59,7 +60,7 @@ class Header extends Component {
       <Navbar bg="light" expand="lg" className="Navbar__container">
         <Navbar.Brand>
           <Link to="/" className="navbar__link navbar__brand">
-            Work Together
+            <img src={logo} alt="logo" className="logo" />
           </Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
