@@ -16,3 +16,14 @@ exports.insertSkills = (name) => {
   };
   return connection.query(sql);
 };
+
+exports.getOfferSkills = (offerId) => {
+  const sql = {
+    text: `select skill.* from offer_skill
+    inner join offer on offer_skill.offer_id=offer.id
+    inner join skill on offer_skill.skill_id=skill.id
+    where offer_skill.offer_id=$1`,
+    values: [offerId],
+  };
+  return connection.query(sql);
+};
