@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './style.css';
-// import UnderConstruction from '../UnderConstruction';
 
 export default function PageNotFound() {
   return (
