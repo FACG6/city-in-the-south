@@ -60,7 +60,7 @@ class Header extends Component {
       <Navbar bg="light" expand="lg" className="Navbar__container">
         <Navbar.Brand>
           <Link to="/" className="navbar__link navbar__brand">
-            <img src={logo} alt="logo" className="logo" />
+            <img src={logo} alt="imageLogo" className="logo" />
           </Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
