@@ -1,0 +1,44 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,300,500);
+
+.page-not-found { 
+  background-color: #39c4d6; 
+  color: #fff;
+  font-size: 100%;
+  line-height: 1.5;
+  font-family: "Roboto", sans-serif;
+  height: calc(100vh - 100px);
+}
+
+.go-back {
+  font-weight: 300;
+  color: #fff;
+  font-size: 1.1em;
+  text-decoration: none;
+  border: 1px solid #efefef;
+  padding: .5em;
+  border-radius: 3px;
+  float: left;
+  margin: 5em 0 0 -155px;
+  left: 50%;
+  position: relative;
+  transition: all .3s linear;
+}
+
+.go-back:hover {
+  background-color: #007aff;
+  color: #fff;
+  text-decoration: none;
+}
+
+.oops {
+  font-size: 2em;
+  text-align: center;
+  font-weight: 100;
+}
+
+.not-found {
+  text-align: center;
+  font-size: 10em;
+  font-weight: 100;
+  text-shadow:   1px 20px #0062cc;
+}
