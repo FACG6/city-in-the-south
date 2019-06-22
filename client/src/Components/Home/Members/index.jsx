@@ -15,7 +15,7 @@ export default function Members({ filtered, history }) {
               <Card
                 className="member-card"
                 key={member.id}
-                onClick={() => history.push(`/profile/${member.username}`)}
+                onClick={() => history.push(`/app/profile/${member.username}`)}
               >
                 <Card.Body>
                   <Row key={member.id}>
@@ -28,21 +28,14 @@ export default function Members({ filtered, history }) {
                         }
                         className="member-card__avatar"
                       />
-                    </Col>
-                    <Col
-                      xs={6}
-                      md={7}
-                      className="member-card__username"
-                      key={member.id}
-                    >
-                      <Card.Text>{member.username}</Card.Text>
+                      <Card.Title className="member-card__username">
+                        {member.username}
+                      </Card.Title>
                     </Col>
                   </Row>
                   <br />
                   <div>
                     Skills :
-                    <br />
-                    <br />
                     <div className="member-card__skills">
                       {member.skills.map(skill => (
                         <h1 className="member-card__skill" key={skill.id}>

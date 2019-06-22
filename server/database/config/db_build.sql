@@ -94,7 +94,7 @@ CREATE TABLE member_skill (
 );
 
 CREATE TABLE filter (
-  member_id INTEGER REFERENCES member(id),
+  member_id INTEGER UNIQUE REFERENCES member(id),
   skills VARCHAR[],
   offer_type VARCHAR[]
 );

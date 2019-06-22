@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 
 import AutoCompleteTags from '../CommonComponents/AutoCompleteTags';
 import newOfferValidation from './validationSchema';
+import PageTitle from '../CommonComponents/PageTitle';
 
 import './style.css';
 
@@ -119,14 +120,14 @@ class CreateOffer extends Component {
     const { history } = this.props;
     const { errMsg, variant, showAlert, errMsgAlert } = this.state;
     return (
-      <Container className="page__container newoffer__container">
-        <h1 className="newoffer__title"> New Offer </h1>
+      <Container className="page__container">
+        <PageTitle title="New Offer" />
         <Form>
           <Form.Group>
             <div className="newoffer__content">
               <Row>
-                <Col sm={12} md={12} lg={6}>
-                  <Form.Label className="newoffer__label"> Title: </Form.Label>
+                <Col sm={12} md={12} lg={8}>
+                  <Form.Label className="newoffer__label">Title :</Form.Label>
                   <Form.Control
                     type="text"
                     name="title"
@@ -140,8 +141,7 @@ class CreateOffer extends Component {
                     </div>
                   )}
                   <Form.Label className="newoffer__label">
-                    {' '}
-                    Position:{' '}
+                    Position :
                   </Form.Label>
                   <Form.Control
                     type="text"
@@ -151,21 +151,21 @@ class CreateOffer extends Component {
                   />
                   {errMsg.position && (
                     <div className="newoffer__errMsg">
-                      <i className="fas fa-exclamation newoffer__errMsg--icon" />{' '}
+                      <i className="fas fa-exclamation newoffer__errMsg--icon" />
                       {errMsg.position}
                     </div>
                   )}
                 </Col>
-                <Col sm={12} md={12} lg={6}>
+                <Col sm={12} md={12} lg={4}>
                   <AutoCompleteTags
                     type="offer_type"
-                    placeholder="eg:  fixed price"
+                    placeholder="eg: fixed price"
                     onchange={this.handleOfferTypes}
                     allowNew
                   />
                   {errMsg.offerType && (
                     <div className="newoffer__errMsg">
-                      <i className="fas fa-exclamation newoffer__errMsg--icon" />{' '}
+                      <i className="fas fa-exclamation newoffer__errMsg--icon" />
                       Offertype is required field
                     </div>
                   )}
@@ -174,52 +174,47 @@ class CreateOffer extends Component {
               <Row>
                 <Col>
                   <Form.Label className="newoffer__label">
-                    {' '}
-                    Description:{' '}
+                    Description :
                   </Form.Label>
                   <Form.Control
                     as="textarea"
                     name="description"
                     className="newoffer__description"
-                    rows="3"
+                    rows="5"
                     onChange={this.handleInput}
                   />
                   {errMsg.description && (
                     <div className="newoffer__errMsg">
-                      <i className="fas fa-exclamation newoffer__errMsg--icon" />{' '}
+                      <i className="fas fa-exclamation newoffer__errMsg--icon" />
                       {errMsg.description}
                     </div>
                   )}
                 </Col>
               </Row>
               <Row>
-                <AutoCompleteTags
-                  type="skill"
-                  placeholder=" select skills"
-                  onchange={this.handleSkills}
-                  allowNew
-                />
+                <Col sm={12} md={12} lg={8}>
+                  <AutoCompleteTags
+                    type="skill"
+                    placeholder="select skills"
+                    onchange={this.handleSkills}
+                    allowNew
+                  />
+                </Col>
               </Row>
               <div>
-                <Row className="newoffer__btns">
-                  <Col sm={12} md={12} lg={1}>
-                    <Button
-                      className="newoffer__btn--apply"
-                      onClick={this.handleSubmit}
-                    >
-                      Create
-                    </Button>
-                  </Col>
-                  <Col sm={12} md={12} lg={1}>
-                    <Button
-                      className="newoffer__btn--cancel"
-                      onClick={() => history.goBack()}
-                    >
-                      Cancel
-                    </Button>
-                    <br />
-                  </Col>
-                </Row>
+                <Button
+                  className="newoffer__btn--apply"
+                  onClick={this.handleSubmit}
+                >
+                  Create
+                </Button>
+                <Button
+                  className="newoffer__btn--cancel"
+                  onClick={() => history.goBack()}
+                >
+                  Cancel
+                </Button>
+                <br />
                 <Row>
                   <Alert show={showAlert} key={1} variant={variant}>
                     {errMsgAlert}

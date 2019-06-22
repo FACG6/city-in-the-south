@@ -104,7 +104,11 @@ class Notification extends Component {
             seen: newSeen,
             unSeen: newUnSeen,
           };
-          this.props.history.push(data.url);
+          const {
+            // eslint-disable-next-line react/prop-types
+            history: { push },
+          } = this.props;
+          push(data.url);
           this.setState({ notification });
         }
       })
@@ -114,12 +118,16 @@ class Notification extends Component {
   };
 
   handleLink = event => {
+    const {
+      // eslint-disable-next-line react/prop-types
+      history: { push },
+    } = this.props;
     const { id } = event.target;
     const {
       notification: { seen },
     } = this.state;
-    const data = seen.filter(item => item.id == id);
-    this.props.history.push(data[0].url);
+    const data = seen.filter(item => item.id === Number(id));
+    push(data[0].url);
   };
 
   render() {
@@ -127,11 +135,16 @@ class Notification extends Component {
       notification: { seen, unSeen },
     } = this.state;
     const { message, showAlert } = this.state;
+    const showNotification = seen[0] || unSeen[0];
     const status = unSeen.length > 0;
     return (
       <>
         <Dropdown alignRight>
-          <Dropdown.Toggle id="dropdown-basic" className="nav__dropdown">
+          <Dropdown.Toggle
+            id="dropdown-basic"
+            className="nav__dropdown"
+            disabled={!showNotification}
+          >
             {status ? (
               <i className="fas fa-bell fa-lg">
                 <span className="notification-no">{unSeen.length}</span>

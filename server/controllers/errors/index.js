@@ -4,6 +4,7 @@ exports.notFound = (req, res) => {
 
 // eslint-disable-next-line no-unused-vars
 exports.serverError = (err, req, res, next) => {
+  console.log(err);
   switch (err.code) {
     case 400:
       res.status(400).send({ error: { code: 400, msg: err }, data: null });

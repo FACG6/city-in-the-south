@@ -46,79 +46,113 @@ export default class Home extends Component {
     const filterQuery =
       localStorage.getItem('filterQuery') ||
       localStorage.setItem('filterQuery', 'Offers');
-
     const { offset, memberId } = this.state;
 
     fetch(`/api/v1/filter/${memberId}`)
       .then(res => res.json())
       .then(res => {
-        if (res.data) {
-          const { offer_type: offerTypes, skills } = res.data;
-          if (filterQuery === 'Members') {
-            getfilteredMembers(
-              skills,
-              offset,
-              (err, { members, filterMembers }) => {
-                if (err) {
-                  this.setState(
-                    {
-                      errMSg: 'Something went wrong',
-                      showAlert: true,
-                      variant: 'danger',
-                    },
-                    () =>
-                      setTimeout(() => {
-                        this.setState({ errMSg: '', showAlert: false });
-                      }, 3000)
-                  );
-                } else {
-                  this.setState({
-                    members,
-                    filterMembers,
-                    filterData: filterMembers,
-                    skills,
-                    offerTypes,
-                    filterQuery,
-                  });
-                }
-              }
-            );
-          }
+        let offerTypes;
+        let skills;
 
-          if (filterQuery === 'Offers') {
-            getfilteredOffers(
-              skills,
-              offerTypes,
-              offset,
-              (err, { offers, filteredOffers }) => {
-                if (err) {
-                  this.setState(
-                    {
-                      errMSg: 'Something went wrong',
-                      showAlert: true,
-                      variant: 'danger',
-                    },
-                    () =>
-                      setTimeout(() => {
-                        this.setState({ errMSg: '', showAlert: false });
-                      }, 3000)
-                  );
-                } else {
-                  this.setState({
-                    offers,
-                    filteredOffers,
-                    filterData: filteredOffers,
-                    skills,
-                    offerTypes,
-                    filterQuery,
-                  });
-                }
+        if (!res.data.skills) {
+          const {
+            offerTypes: stateOfferTypes,
+            skills: stateSkills,
+          } = this.state;
+
+          offerTypes = stateOfferTypes;
+          skills = stateSkills;
+
+          fetch('/api/v1/filter', {
+            method: 'POST',
+            body: JSON.stringify({ memberId, skills: [], offerTypes: [] }),
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+          })
+            .then(result => result.json())
+            .then(result => {
+              if (result.data) {
+                this.setState(
+                  {
+                    errMSg: 'added successfully',
+                    showAlert: true,
+                    variant: 'success',
+                  },
+                  () =>
+                    setTimeout(() => {
+                      this.setState({ errMSg: '', showAlert: false });
+                    }, 100)
+                );
               }
-            );
-          }
-        } else {
-          throw new Error();
+            });
         }
+        if (res.data.skills) {
+          const {
+            offer_type: filterOfferTypes,
+            skills: filterSkills,
+          } = res.data;
+
+          offerTypes = filterOfferTypes;
+          skills = filterSkills;
+        }
+
+        getfilteredMembers(
+          skills,
+          offset,
+          (err, { members, filterMembers }) => {
+            if (err) {
+              this.setState(
+                {
+                  errMSg: 'Something went wrong',
+                  showAlert: true,
+                  variant: 'danger',
+                },
+                () =>
+                  setTimeout(() => {
+                    this.setState({ errMSg: '', showAlert: false });
+                  }, 3000)
+              );
+            } else {
+              getfilteredOffers(
+                skills,
+                offerTypes,
+                offset,
+                (error, { offers, filteredOffers }) => {
+                  if (error) {
+                    this.setState(
+                      {
+                        errMSg: 'Something went wrong',
+                        showAlert: true,
+                        variant: 'danger',
+                      },
+                      () =>
+                        setTimeout(() => {
+                          this.setState({ errMSg: '', showAlert: false });
+                        }, 3000)
+                    );
+                  } else {
+                    const filterData =
+                      filterQuery === 'Members'
+                        ? filterMembers
+                        : filteredOffers;
+                    this.setState({
+                      offers,
+                      members,
+                      filterMembers,
+                      filteredOffers,
+                      filterData,
+                      skills,
+                      offerTypes,
+                      filterQuery,
+                    });
+                  }
+                }
+              );
+            }
+          }
+        );
       })
       .catch(() =>
         this.setState(

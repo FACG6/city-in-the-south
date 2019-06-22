@@ -13,10 +13,12 @@ class OfferCard extends React.Component {
     hovered: '',
     saved: false,
     memberId: 0,
+    offerId: '',
   };
 
   componentDidMount() {
-    const { offer, status } = this.props;
+    // eslint-disable-next-line react/prop-types
+    const { offer, status, id } = this.props;
     const borderColor = {
       completed: 'green',
       finished: 'red',
@@ -27,6 +29,7 @@ class OfferCard extends React.Component {
       variant: '',
     };
     this.setState({
+      offerId: id,
       memberId:
         JSON.parse(localStorage.getItem('userInfo')) &&
         JSON.parse(localStorage.getItem('userInfo')).id,
@@ -38,16 +41,13 @@ class OfferCard extends React.Component {
       .then(res => res.json())
       .then(res => {
         if (res.data) {
-          res.data.filter(savedOffer => {
-            if (offer.id === savedOffer.id) {
-              this.setState({ saved: true });
-            } else {
-              this.setState({ saved: false });
-            }
-          });
-        } else {
-          throw new Error();
+          return res.data;
         }
+      })
+      .then(result => {
+        result.map(savedOffer => {
+          if (offer.id === savedOffer.offer_id) this.setState({ saved: true });
+        });
       })
       .catch(() =>
         this.setState(
@@ -80,6 +80,7 @@ class OfferCard extends React.Component {
 
   handleSave = id => {
     const { saved, memberId } = this.state;
+    // eslint-disable-next-line react/prop-types
     const { handleDelete } = this.props;
     if (saved) {
       fetch(`/api/v1/saved-offers/${memberId}`, {
@@ -95,6 +96,18 @@ class OfferCard extends React.Component {
           if (res.data) {
             if (handleDelete) {
               handleDelete(id);
+              this.setState(
+                {
+                  saved: false,
+                  errMSg: 'Deleted successfully ',
+                  showAlert: true,
+                  variant: 'success',
+                },
+                () =>
+                  setTimeout(() => {
+                    this.setState({ errMSg: '', showAlert: false });
+                  }, 1000)
+              );
               return;
             }
             this.setState(
@@ -109,9 +122,6 @@ class OfferCard extends React.Component {
                   this.setState({ errMSg: '', showAlert: false });
                 }, 1000)
             );
-          }
-          if (res.error) {
-            throw new Error();
           }
         })
         .catch(() =>
@@ -151,8 +161,6 @@ class OfferCard extends React.Component {
                   this.setState({ errMSg: '', showAlert: false });
                 }, 1000)
             );
-          } else {
-            throw new Error();
           }
         })
         .catch(() =>
@@ -182,6 +190,7 @@ class OfferCard extends React.Component {
       errMSg,
       showAlert,
       variant,
+      offerId,
     } = this.state;
     // eslint-disable-next-line react/prop-types
     const { hover, history } = this.props;
@@ -193,11 +202,11 @@ class OfferCard extends React.Component {
         {offer ? (
           <Card
             className={`offer-card ${hovered ? 'offer-card--hovered' : ''}`}
-            key={offer.id}
-            onClick={() => history.push(`/app/offers/${offer.offer_id}`)}
+            key={`offer${offer.id}`}
+            onClick={() => history.push(`/app/offers/${offerId}`)}
           >
             {hover ? (
-              <span className={`offer-card__border ${statusDiv}`}> </span>
+              <span className={`offer-card__border ${statusDiv}`} />
             ) : null}
             <Card.Header className="offer-card__header">
               <div>
@@ -214,12 +223,12 @@ class OfferCard extends React.Component {
               <Button
                 onClick={e => {
                   e.stopPropagation();
-                  this.handleSave(offer.offer_id);
+                  this.handleSave(offerId);
                 }}
                 className="offer-card__save-btn"
               >
                 <i
-                  className={`fas fa-bookmark offer-card__favourite ${this.savedClassStatus()}`}
+                  className={`fas fa-bookmark offer-card__favourite  ${this.savedClassStatus()}`}
                 >
                   {' '}
                 </i>

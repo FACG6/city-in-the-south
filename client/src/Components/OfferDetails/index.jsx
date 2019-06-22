@@ -145,7 +145,7 @@ export default class OfferDetails extends Component {
         {!errorOffer && !offer && <Spinner animation="grow" variant="info" />}
         {errorOffer && <PageNotFound />}
         {!errorOffer && offer && (
-          <Container className="page__container">
+          <Container className="offer__container">
             <Row className="offer-details__header">
               <Col className="offer-details__header-col">
                 <span className="offer-details__position">
@@ -153,11 +153,11 @@ export default class OfferDetails extends Component {
                 </span>
                 <p className="offer-details__title">{offer.title}</p>
               </Col>
+              <span className={`status__${statusColor(offer.status)}`}>
+                {offer.status}
+              </span>
               {offer.member_id === userInfo.id && (
                 <>
-                  <span className={`status__${statusColor(offer.status)}`}>
-                    {offer.status}
-                  </span>
                   {offer && offer.status === 'completed' && (
                     <Button
                       className="offet-details__end-button"
@@ -171,24 +171,24 @@ export default class OfferDetails extends Component {
               )}
             </Row>
             <Row className="offer-details__row">
-              <Col xs lg="9" className="offer-details__description">
-                <Row>
+              <Col xs lg="10">
+                <Row className="offer-details__description">
                   <p>{offer.description}</p>
                 </Row>
               </Col>
-              <Col xs lg="2">
-                <div>
+              <Col xs lg="2" className="sideCard">
+                <>
                   <SideCard title="skills" items={offer.skills} />
                   <SideCard title="offer type" items={offer.offer_types} />
-                </div>
+                </>
               </Col>
             </Row>
             {offer.member_id === userInfo.id ? (
               <>
-                <Row className="offer-details__Applications-title">
-                  Applications
-                </Row>
-                <Col xs lg="9" style={{ padding: '0px !important' }}>
+                <Col className="offer-details__Applications-title">
+                  <span className="applications-title"> Applications </span>
+                </Col>
+                <Col xs lg="9">
                   {applications.data &&
                     data.map(item => {
                       return (
