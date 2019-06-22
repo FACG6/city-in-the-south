@@ -65,3 +65,9 @@
   margin: 0 !important;
 }
 
+.logo{
+  position: absolute;
+  top: 0;
+  width: 110px;
+  height: 65px;
+}
