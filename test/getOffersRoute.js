@@ -6,24 +6,14 @@ const { Cookie } = require('./testCookie');
 
 test('Testing for /api/v1/offers/:offset route', (t) => {
   const fields = {
-    id: 1,
-    title: 'Ui Application For Website',
-    position: 'Front End Developer',
-    description: 'We are looking for a Front End Web Developer who is motivated to combine the art of UX design with the art of programming, and help bring to life elements and pages in terms of both how they look and how they function. The Front End developer will be embedded with the E-Commerce team and will serve as the go-to person responsible for translating mock-ups into website pages and functionality, with mobile-first, conversion optimization and user-centric designing in mind',
+    id: 6,
+    title: 'Small Shop seeks workers',
+    position: 'Marketing Manager',
+    description: 'We are looking to hire a Marketing Manager who will be in charge of overseeing the promotion of our companys brands.  As a successful hire, you will be  responsible  for developing pricing  strategies identify identifying new customers, supporting lead',
     status: 'active',
     member_id: 1,
-    skills: [
-      {
-        id: 3,
-        name: 'javascript',
-      },
-    ],
-    offer_types: [
-      {
-        id: 1,
-        name: 'full-time',
-      },
-    ],
+    skills: [],
+    offer_types: [],
   };
   supertest(router)
     .get('/api/v1/offers/0')

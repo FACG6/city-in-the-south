@@ -47,7 +47,7 @@ export default class Profile extends Component {
             username,
             avatar,
             id,
-          } = res.data[0];
+          } = res.data;
           this.setState({
             address,
             bio,
