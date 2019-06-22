@@ -7,6 +7,19 @@
   height: calc(100vh - 106px);
 }
 
+.oops {
+  font-size: 2em;
+  text-align: center;
+  font-weight: 500;
+ }
+  
+.not-found {
+  text-align: center;
+  font-size: 10em;
+  font-weight: 100;
+  text-shadow: 5px 5px #1a65505e;
+}
+
 .go-back {
   font-weight: 300;
   color: #fff;
@@ -26,17 +39,4 @@
   background-color: #027281;
   color: #fff;
   text-decoration: none;
-}
-
-.oops {
-  font-size: 2em;
-  text-align: center;
-  font-weight: 500;
-}
-
-.not-found {
-  text-align: center;
-  font-size: 10em;
-  font-weight: 100;
-  text-shadow: 5px 5px #1a65505e;
 }
