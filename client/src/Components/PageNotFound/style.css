@@ -4,7 +4,7 @@
   font-size: 100%;
   line-height: 1.5;
   font-family: "Roboto", sans-serif;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 106px);
 }
 
 .go-back {
@@ -16,14 +16,14 @@
   padding: .5em;
   border-radius: 3px;
   float: left;
-  margin: 5em 0 0 -155px;
+  margin: 2em 0 0 -155px;
   left: 50%;
   position: relative;
   transition: all .3s linear;
 }
 
 .go-back:hover {
-  background-color: #007aff;
+  background-color: #027281;
   color: #fff;
   text-decoration: none;
 }
