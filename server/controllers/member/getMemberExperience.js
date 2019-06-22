@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
     .then((response) => {
       res.send({
         error: null,
-        data: response.rows,
+        data: response.rows[0],
       });
     })
     .catch(err => next(err));
