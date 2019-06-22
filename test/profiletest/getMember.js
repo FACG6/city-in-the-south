@@ -12,7 +12,7 @@ test('Testing for /api/v1/member/', (t) => {
     .set('Cookie', [Cookie])
     .end((err, res) => {
       if (err) t.error(err);
-      t.equal(res.body.data[0].username, 'susan', 'Should return the same username');
+      t.equal(res.body.data.username, 'susan', 'Should return the same username');
       t.end();
     });
 });

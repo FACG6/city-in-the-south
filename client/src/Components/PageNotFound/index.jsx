@@ -1,11 +1,15 @@
 import React from 'react';
-import UnderConstruction from '../UnderConstruction';
+import { Link } from 'react-router-dom';
+import './style.css';
 
 export default function PageNotFound() {
   return (
-    <>
-      <h1>PageNotFound</h1>
-      <UnderConstruction />
-    </>
+    <div className="page-not-found">
+      <h1 className="number">404</h1>
+      <p className="oops">Oops! Something is wrong.</p>
+      <Link to="/" className="go-back">
+        Go back in the initial page, is better
+      </Link>
+    </div>
   );
 }

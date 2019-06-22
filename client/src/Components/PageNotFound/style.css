@@ -1,0 +1,42 @@
+.page-not-found { 
+  background-color: #39c4d6; 
+  color: #fff;
+  font-size: 100%;
+  line-height: 1.5;
+  font-family: "Roboto", sans-serif;
+  height: calc(100vh - 106px);
+}
+
+.oops {
+  font-size: 2em;
+  text-align: center;
+  font-weight: 500;
+ }
+  
+.number {
+  text-align: center;
+  font-size: 10em;
+  font-weight: 100;
+  text-shadow: 5px 5px #1a65505e;
+}
+
+.go-back {
+  font-weight: 300;
+  color: #fff;
+  font-size: 1.1em;
+  text-decoration: none;
+  border: 1px solid #efefef;
+  padding: .5em;
+  border-radius: 3px;
+  text-align: center;
+  position: absolute;
+  bottom: 30%;
+  left: 50%;
+  transform: translateX(-50%)
+}
+
+.go-back:hover {
+  background-color: #0f9caf;
+  color: #fff;
+  text-decoration: none;
+}
