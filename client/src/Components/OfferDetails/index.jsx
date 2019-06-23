@@ -23,8 +23,6 @@ export default class OfferDetails extends Component {
   };
 
   componentDidMount() {
-    this._isMounted = true;
-
     const userInfo = JSON.parse(window.localStorage.getItem('userInfo'));
     const {
       // eslint-disable-next-line react/prop-types
