@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, Button, Spinner, Alert } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import auth from '../../../auth/auth';
 
 import './style.css';
 
@@ -30,13 +31,9 @@ class OfferCard extends React.Component {
     };
     this.setState({
       offerId: id,
-      memberId:
-        JSON.parse(localStorage.getItem('userInfo')) &&
-        JSON.parse(localStorage.getItem('userInfo')).id,
+      memberId: auth.getUserInfo() && auth.getUserInfo().id,
     });
-    const memberId =
-      JSON.parse(localStorage.getItem('userInfo')) &&
-      JSON.parse(localStorage.getItem('userInfo')).id;
+    const memberId = auth.getUserInfo() && auth.getUserInfo().id;
     fetch(`/api/v1/saved-offers/${memberId}`, { method: 'GET' })
       .then(res => res.json())
       .then(res => {
