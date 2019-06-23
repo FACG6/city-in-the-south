@@ -36,12 +36,10 @@ export default class Login extends React.Component {
         })
         .then(({ data }) => {
           if (data) {
-            // eslint-disable-next-line react/prop-types
             localStorage.setItem('userInfo', JSON.stringify(data));
             auth.isAuthenticated = true;
             setUserInfo(data);
             const {
-              // eslint-disable-next-line react/prop-types
               history: { push },
             } = this.props;
             push('/home');
@@ -75,7 +73,6 @@ export default class Login extends React.Component {
       <Container>
         <Form className="login__form">
           <h2 className="login__form-title">LOGIN</h2>
-
           <Form.Group>
             <Form.Label>Username :</Form.Label>
             <Form.Control

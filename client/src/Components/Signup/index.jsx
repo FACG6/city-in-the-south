@@ -105,7 +105,6 @@ export default class SignUp extends Component {
             />
             {errormsg && <span className="errormsg">{errormsg.username}</span>}
           </Form.Group>
-
           <Form.Group controlId="formBasicEmail">
             <Form.Label>
               E-mail : <span className="content-signup__email-star">*</span>
@@ -119,7 +118,6 @@ export default class SignUp extends Component {
             />
             {errormsg && <span className="errormsg">{errormsg.email}</span>}
           </Form.Group>
-
           <Form.Group controlId="formBasicPassword">
             <Form.Label>
               Password :{' '}
