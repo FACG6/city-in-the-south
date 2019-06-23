@@ -11,6 +11,7 @@ import statusColor from '../Helper/helper';
 import './style.css';
 
 export default class OfferDetails extends Component {
+  _isMounted = false;
   state = {
     userInfo: '',
     offerId: '',
@@ -22,6 +23,8 @@ export default class OfferDetails extends Component {
   };
 
   componentDidMount() {
+    this._isMounted = true;
+
     const userInfo = JSON.parse(window.localStorage.getItem('userInfo'));
     const {
       // eslint-disable-next-line react/prop-types
@@ -29,8 +32,10 @@ export default class OfferDetails extends Component {
         params: { offerId },
       },
     } = this.props;
-    this.setState({ userInfo, offerId });
-    this.fetchData(offerId, userInfo);
+    if (this._isMounted) {
+      this.setState({ userInfo, offerId });
+      this.fetchData(offerId, userInfo);
+    }
   }
 
   componentWillReceiveProps(_nextProps) {
@@ -142,6 +147,10 @@ export default class OfferDetails extends Component {
         )
       );
   };
+
+  componentWillUnmount() {
+    this._isMounted = true;
+  }
 
   render() {
     const {
