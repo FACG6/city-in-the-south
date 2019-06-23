@@ -167,7 +167,9 @@ class ApplicationCard extends Component {
                   className="application-card__avatar"
                 />
                 <span style={{ paddingLeft: '10px' }}>
-                  {application.username}
+                  {application.full_name
+                    ? application.full_name
+                    : application.username}
                 </span>
               </Card.Title>
             </Card.Header>
