@@ -20,11 +20,6 @@ class Notification extends Component {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
     const { id: memberId } = userInfo;
     this.getNotifications(memberId);
-  }
-
-  componentDidUpdate() {
-    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-    const { id: memberId } = userInfo;
     this.handleNewNotification(memberId);
   }
 
@@ -61,10 +56,10 @@ class Notification extends Component {
 
   handleNewNotification = memberId => {
     this.socket = io(`/member-${memberId}`);
-    const {
-      notification: { seen, unSeen },
-    } = this.state;
     this.socket.on('myOfferNotification', data => {
+      const {
+        notification: { seen, unSeen },
+      } = this.state;
       if (data.seen) {
         this.setState({
           notification: { unSeen, seen: [...seen, data] },
