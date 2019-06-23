@@ -19,6 +19,30 @@
   box-shadow:  0 0 30px -15px rgba(0, 0, 0, 0.3);
 }
 
+.myoffers__delete {
+  display: none;
+  border: none;
+  background: none;
+  position: absolute !important;
+  top: 14px !important;
+  right: 11px !important;
+  padding-top: 0 !important;
+  height: 20px;
+  width: 30px;
+}
+
+.myoffers__delete:focus{
+  outline: none;
+}
+
+.myoffer__card:hover .myoffers__delete{
+  color: red;
+  font-size: 16px;
+  display: block;
+  text-align: center;
+  padding: 0 !important;
+}
+
 .myoffers__body {
   font-family: Lato;
   letter-spacing: 0.4px;
@@ -26,6 +50,10 @@
 
 .myoffers__position {
   color: #0F9CAF !important;
+}
+
+.confirm__delete{
+  border-top: none !important;
 }
 
 .myoffers__title {
@@ -46,9 +74,18 @@
 }
 
 .myoffers__status{
-  float: right;
+  float: left;
   text-transform: capitalize;
+}
+
+.myoffers__delete-btn{
+  float: right;
+}
+
+.myoffers__status,
+.myoffers__delete-btn {
   letter-spacing: 1px;
+  color: rgba(238, 238, 238, 0.3);
 }
 
 .myoffers__status--pending {
@@ -73,11 +110,14 @@
   .myoffer__card {
     margin-bottom: 0.7rem;
   }
-} 
 
-.offer-empty{
-  color: #0F9CAF;
-  text-align: center;
-  vertical-align: middle;
-  line-height: 70vh;
-}
+  .myoffers__delete {
+    display: block;
+  }
+
+  .myoffers__delete{
+    color: red !important;
+    font-size: 14px;
+  }
+
+} 
