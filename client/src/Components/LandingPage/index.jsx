@@ -19,9 +19,9 @@ export default function LandingPage() {
       <h2 className="landing__title landing__title--center">Success stories</h2>
       <Slider />
       <Row className="landing__aboutus">
-        <Col className="landing__info">
+        <Col className="about__info">
           <h2 className="landing__title">About us</h2>
-          <p className="landing__paragraph">
+          <p className="about__paragraph">
             Lorem, ipsum dolor sit amet consectetur adipisicing elit.
             Consectetur libero velit soluta voluptas neque, reiciendis ullam,
             quidem cupiditate sequi necessitatibus facilis perspiciatis quis
@@ -32,7 +32,7 @@ export default function LandingPage() {
             est quibusdam.
           </p>
         </Col>
-        <Col className="landing__img" />
+        <Col className="about__img" />
       </Row>
     </>
   );
