@@ -5,11 +5,6 @@ import './style.css';
 export default function PageNotFound() {
   return (
     <div className="page-not-found">
-      <br />
-      <br />
-      <br />
-      <br />
-
       <h1 className="number">404</h1>
       <p className="oops">Oops! Page Not Found ... !</p>
       <br />
