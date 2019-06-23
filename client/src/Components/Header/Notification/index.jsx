@@ -20,6 +20,11 @@ class Notification extends Component {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
     const { id: memberId } = userInfo;
     this.getNotifications(memberId);
+  }
+
+  componentDidUpdate() {
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    const { id: memberId } = userInfo;
     this.handleNewNotification(memberId);
   }
 
@@ -108,8 +113,9 @@ class Notification extends Component {
             // eslint-disable-next-line react/prop-types
             history: { push },
           } = this.props;
-          push(data.url);
+          console.log(data.url);
           this.setState({ notification });
+          push(data.url);
         }
       })
       .catch(() =>
@@ -127,6 +133,7 @@ class Notification extends Component {
       notification: { seen },
     } = this.state;
     const data = seen.filter(item => item.id === Number(id));
+    console.log(data[0].url);
     push(data[0].url);
   };
 
