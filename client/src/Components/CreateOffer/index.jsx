@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import AutoCompleteTags from '../CommonComponents/AutoCompleteTags';
 import newOfferValidation from './validationSchema';
 import PageTitle from '../CommonComponents/PageTitle';
+import auth from '../../auth/auth';
 
 import './style.css';
 
@@ -24,7 +25,7 @@ class CreateOffer extends Component {
 
   componentDidMount() {
     this.setState({
-      memberId: JSON.parse(localStorage.getItem('userInfo')).id,
+      memberId: auth.getUserInfo() && auth.getUserInfo().id,
     });
   }
 
