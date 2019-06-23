@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
 import { Container, Row, Col, Button, Alert, Spinner } from 'react-bootstrap';
 
@@ -12,6 +13,7 @@ import './style.css';
 
 export default class OfferDetails extends Component {
   _isMounted = false;
+
   state = {
     userInfo: '',
     offerId: '',
@@ -45,9 +47,19 @@ export default class OfferDetails extends Component {
         params: { offerId },
       },
     } = _nextProps;
+    const {
+      // eslint-disable-next-line react/prop-types
+      match: {
+        params: { offerId: prevOfferId },
+      },
+    } = this.props;
     const { userInfo } = this.state;
     this.setState({ userInfo, offerId });
-    this.fetchData(offerId, userInfo);
+    if (offerId !== prevOfferId) this.fetchData(offerId, userInfo);
+  }
+
+  componentWillUnmount() {
+    this._isMounted = true;
   }
 
   fetchData = (offerId, userInfo) => {
@@ -147,10 +159,6 @@ export default class OfferDetails extends Component {
         )
       );
   };
-
-  componentWillUnmount() {
-    this._isMounted = true;
-  }
 
   render() {
     const {
