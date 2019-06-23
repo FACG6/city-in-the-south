@@ -112,7 +112,7 @@ class CreateOffer extends Component {
   handleOfferTypes = offerType => this.setState({ offerType });
 
   handleInput = ({ target: { name, value } }) => {
-    this.setState({ [name]: value });
+    this.setState({ [name]: value, errMsg: '' });
   };
 
   render() {
