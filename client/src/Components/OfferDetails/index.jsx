@@ -30,7 +30,22 @@ export default class OfferDetails extends Component {
       },
     } = this.props;
     this.setState({ userInfo, offerId });
+    this.fetchData(offerId, userInfo);
+  }
 
+  componentWillReceiveProps(_nextProps) {
+    const {
+      // eslint-disable-next-line react/prop-types
+      match: {
+        params: { offerId },
+      },
+    } = _nextProps;
+    const { userInfo } = this.state;
+    this.setState({ userInfo, offerId });
+    this.fetchData(offerId, userInfo);
+  }
+
+  fetchData = (offerId, userInfo) => {
     // fetch offerDetails by offer_id
     fetch(`/api/v1/offer/${offerId}`, {
       method: 'GET',
@@ -89,7 +104,7 @@ export default class OfferDetails extends Component {
             }, 5000)
         )
       );
-  }
+  };
 
   handleEndContract = () => {
     const { offerId } = this.state;
