@@ -1,6 +1,6 @@
 import React from 'react';
 import './style.css';
-import { Form, Button, Container } from 'react-bootstrap';
+import { Form, Button, Container, FormGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import auth from '../../auth/auth';
 
@@ -29,16 +29,18 @@ export default class Login extends React.Component {
       })
         .then(response => {
           if (response.status !== 200) {
-            this.setState({ message: 'Wrong Cridentials!!' });
+            this.setState({ message: 'Check username or password ... !!' });
           }
           return response.json();
         })
         .then(({ data, error }) => {
           if (data) {
+            // eslint-disable-next-line react/prop-types
+            const { history } = this.props;
             localStorage.setItem('userInfo', JSON.stringify(data));
             auth.isAuthenticated = true;
             setUserInfo(data);
-            this.props.history.push('/home');
+            history.push('/home');
           }
         })
         .catch(err => {
@@ -56,12 +58,10 @@ export default class Login extends React.Component {
     const { username, password, message } = this.state;
     return (
       <Container>
-        <Form className="content-login">
-          <h2 className="content-login__word-login">LOGIN</h2>
-          <Form.Group
-            controlId="formBasicUsername"
-            className="content-login__input"
-          >
+        <Form className="login__form">
+          <h2 className="login__form-title">LOGIN</h2>
+
+          <Form.Group>
             <Form.Label>Username :</Form.Label>
             <Form.Control
               type="text"
@@ -71,11 +71,7 @@ export default class Login extends React.Component {
               onChange={this.handleChange}
             />
           </Form.Group>
-
-          <Form.Group
-            controlId="formBasicPassword"
-            className="content-login__input "
-          >
+          <Form.Group>
             <Form.Label>Password :</Form.Label>
             <Form.Control
               type="password"
@@ -88,12 +84,12 @@ export default class Login extends React.Component {
           <p className="message">{message}</p>
           <Button
             type="button"
-            className="content-login__submit"
+            className="login__form-btn"
             onClick={this.handleClick}
           >
             Login
           </Button>
-          <Form.Text className="content-login__text-muted">
+          <Form.Text className="login__form__text-muted">
             Don’t have an account?{' '}
             <Link className="link-signup-word" to="/signup">
               sign up
