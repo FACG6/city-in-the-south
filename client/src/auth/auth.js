@@ -28,8 +28,12 @@ const auth = {
   getUserInfo() {
     return this.userInfo;
   },
+  setUserInfo(userInfo) {
+    this.userInfo = userInfo;
+  },
   logout() {
     this.isAuthenticated = false;
+    this.userInfo = null;
   },
 };
 export default auth;
