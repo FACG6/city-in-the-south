@@ -29,13 +29,13 @@ export default class Login extends React.Component {
       })
         .then(response => {
           if (response.status !== 200) {
-            this.setState({ message: 'Wrong Cridentials!!' });
+            this.setState({ message: 'Wrong Credentials!!' });
           }
           return response.json();
         })
         .then(({ data }) => {
           if (data) {
-            localStorage.setItem('userInfo', JSON.stringify(data));
+            auth.setUserInfo(data);
             auth.isAuthenticated = true;
             setUserInfo(data);
             const {
