@@ -1,5 +1,6 @@
 const auth = {
   isAuthenticated: false,
+  userInfo: null,
   error: null,
   authenticate(cb) {
     fetch('/api/v1/isAuthenticated', {
@@ -11,8 +12,9 @@ const auth = {
     })
       .then(res => res.json())
       .then(res => {
-        if (res.success) {
+        if (res.success && res.data) {
           this.isAuthenticated = true;
+          this.userInfo = res.data;
           cb();
         } else {
           this.isAuthenticated = false;
@@ -22,6 +24,9 @@ const auth = {
       .catch(err => {
         this.error = err;
       });
+  },
+  getUserInfo() {
+    return this.userInfo;
   },
   logout() {
     this.isAuthenticated = false;
