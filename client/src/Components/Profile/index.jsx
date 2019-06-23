@@ -56,6 +56,7 @@ export default class Profile extends Component {
                   memberName={username}
                   memberId={member.id}
                   bio={member.bio}
+                  fullName={member.full_name}
                 />
               </Col>
             </Row>
