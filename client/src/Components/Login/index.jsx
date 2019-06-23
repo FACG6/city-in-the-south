@@ -42,7 +42,7 @@ export default class Login extends React.Component {
               // eslint-disable-next-line react/prop-types
               history: { push },
             } = this.props;
-            push('/home');
+            push('/app/home');
           }
         })
         .catch(err => {
@@ -63,7 +63,7 @@ export default class Login extends React.Component {
       return (
         <Redirect
           to={{
-            pathname: '/home',
+            pathname: '/app/home',
             state: { from: location },
           }}
         />
