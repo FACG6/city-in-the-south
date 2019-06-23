@@ -82,7 +82,7 @@ class Header extends Component {
             <>
               <Col md="auto">
                 <Nav>
-                  <NavLink to="/home" className="navbar__link">
+                  <NavLink to="/app/home" className="navbar__link">
                     <div className="navbar__link--text">Home</div>
                   </NavLink>
 
