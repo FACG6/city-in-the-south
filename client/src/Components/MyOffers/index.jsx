@@ -47,9 +47,9 @@ class MyOffers extends Component {
     return `myoffers__status--${status}`;
   };
 
-  handleDeleteOffer = () => {
+  handleDeleteOffer = e => {
+    e.stopPropagation();
     const { deletedOfferId } = this.state;
-    // console.log(5553, );
     fetch(`/api/v1/offers/${deletedOfferId}`, {
       method: 'DELETE',
       headers: {
@@ -138,10 +138,7 @@ class MyOffers extends Component {
                                 </Button>
                                 <Button
                                   variant="danger"
-                                  onClick={e => {
-                                    e.stopPropagation();
-                                    this.handleDeleteOffer();
-                                  }}
+                                  onClick={this.handleDeleteOffer}
                                 >
                                   Delete
                                 </Button>
