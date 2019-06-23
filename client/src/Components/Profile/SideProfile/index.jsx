@@ -25,17 +25,21 @@ export default class MemberInfo extends Component {
         )}
         <>
           <Row>
-            <img
-              src={
-                member.avatar
-                  ? member.avatar
-                  : 'https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1'
-              }
-              width="100%"
-              alt={`${member.username} profile img`}
-              className="profile__img"
-            />
-            <h3 className="profile__username">{member.username}</h3>
+            <Col sm={12}>
+              <img
+                src={
+                  member.avatar
+                    ? member.avatar
+                    : 'https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1'
+                }
+                width="100%"
+                alt={`${member.username} profile img`}
+                className="profile__img"
+              />
+            </Col>
+            <Col sm={12}>
+              <h3 className="profile__username">{member.username}</h3>
+            </Col>
           </Row>
           <Row>
             <Col>
@@ -65,5 +69,5 @@ export default class MemberInfo extends Component {
 }
 
 MemberInfo.propTypes = {
-  // memberName: PropTypes.string.isRequired,
+  // member: PropTypes.string.isRequired, // object
 };
