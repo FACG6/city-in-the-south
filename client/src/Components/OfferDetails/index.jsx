@@ -12,8 +12,6 @@ import statusColor from '../Helper/helper';
 import './style.css';
 
 export default class OfferDetails extends Component {
-  _isMounted = false;
-
   state = {
     userInfo: '',
     offerId: '',
@@ -34,10 +32,8 @@ export default class OfferDetails extends Component {
         params: { offerId },
       },
     } = this.props;
-    if (this._isMounted) {
-      this.setState({ userInfo, offerId });
-      this.fetchData(offerId, userInfo);
-    }
+    this.setState({ userInfo, offerId });
+    this.fetchData(offerId, userInfo);
   }
 
   componentWillReceiveProps(_nextProps) {
@@ -54,12 +50,7 @@ export default class OfferDetails extends Component {
       },
     } = this.props;
     const { userInfo } = this.state;
-    this.setState({ userInfo, offerId });
     if (offerId !== prevOfferId) this.fetchData(offerId, userInfo);
-  }
-
-  componentWillUnmount() {
-    this._isMounted = true;
   }
 
   fetchData = (offerId, userInfo) => {
