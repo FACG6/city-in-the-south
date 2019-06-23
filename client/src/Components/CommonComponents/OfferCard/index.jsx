@@ -196,9 +196,17 @@ class OfferCard extends React.Component {
     const { hover, history } = this.props;
     return (
       <>
-        <Alert show={showAlert} key={1} variant={variant}>
-          {errMSg}
-        </Alert>
+        {showAlert ? (
+          <Alert
+            show={showAlert}
+            key={1}
+            variant={variant}
+            style={{ width: '97%', 'margin-left': '15px' }}
+          >
+            {errMSg}
+          </Alert>
+        ) : null}
+
         {offer ? (
           <Card
             className={`offer-card ${hovered ? 'offer-card--hovered' : ''}`}

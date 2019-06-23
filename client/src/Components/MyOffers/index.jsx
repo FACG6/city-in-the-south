@@ -83,7 +83,7 @@ class MyOffers extends Component {
             </Row>
           </Container>
         ) : (
-          <span>there is no offers to show</span>
+          <h2 className="offer-empty">There are no offers to show!!</h2>
         )}
       </>
     );
