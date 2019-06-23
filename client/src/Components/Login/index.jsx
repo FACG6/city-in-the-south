@@ -33,7 +33,7 @@ export default class Login extends React.Component {
           }
           return response.json();
         })
-        .then(({ data, error }) => {
+        .then(({ data }) => {
           if (data) {
             localStorage.setItem('userInfo', JSON.stringify(data));
             auth.isAuthenticated = true;
