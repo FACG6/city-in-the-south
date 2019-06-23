@@ -10,10 +10,10 @@ export default function LandingPage() {
     <>
       <Row className="landing__header">
         <Col>
-          <h2 className="landing__tweet">
+          <h1 className="landing__tweet">
             Want good (fair and meaningful) work or want to offer good work?
             Join us and find/show opportunities to connect and work together.
-          </h2>
+          </h1>
         </Col>
       </Row>
       <h2 className="landing__title landing__title--center">Success stories</h2>
