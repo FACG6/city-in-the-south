@@ -1,18 +1,21 @@
-.page-not-found { 
-  background-color: #39c4d6; 
-  color: #fff;
+.page-not-found {
+  background-color: #fff;
+  color: #0f9caf;
   font-size: 100%;
   line-height: 1.5;
   font-family: "Roboto", sans-serif;
   height: calc(100vh - 106px);
+  text-align: center !important;
+  margin: 0 auto !important;
 }
 
 .oops {
   font-size: 2em;
   text-align: center;
   font-weight: 500;
- }
-  
+  /* text-align: center !important */
+}
+
 .number {
   text-align: center;
   font-size: 10em;
@@ -21,22 +24,29 @@
 }
 
 .go-back {
-  font-weight: 300;
+  font-weight: 500;
   color: #fff;
   font-size: 1.1em;
   text-decoration: none;
-  border: 1px solid #efefef;
   padding: .5em;
   border-radius: 3px;
   text-align: center;
-  position: absolute;
-  bottom: 30%;
-  left: 50%;
-  transform: translateX(-50%)
+  transform: translateX(-50%);
+  color: #0f9caf;
 }
 
 .go-back:hover {
   background-color: #0f9caf;
   color: #fff;
   text-decoration: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .number {
+    font-size: 100px;
+    text-shadow: 2px 3px #1a65505e;
+  }
+  .oops {
+    font-size: 20px;
+  }
 }
