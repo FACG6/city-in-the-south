@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 import { Form, Button, Container } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import auth from '../../auth/auth';
 
 export default class Login extends React.Component {
@@ -53,7 +53,18 @@ export default class Login extends React.Component {
     this.setState({ [name]: value, message: '' });
 
   render() {
+    const { location } = this.props;
     const { username, password, message } = this.state;
+    if (auth.isAuthenticated) {
+      return (
+        <Redirect
+          to={{
+            pathname: '/',
+            state: { from: location },
+          }}
+        />
+      );
+    }
     return (
       <Container>
         <Form className="content-login">
