@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Card, Row, Col, Container, Spinner, Alert } from 'react-bootstrap';
+import {
+  Card,
+  Row,
+  Col,
+  Container,
+  Modal,
+  Button,
+  Spinner,
+  Alert,
+} from 'react-bootstrap';
 
 import PageTitle from '../CommonComponents/PageTitle';
 
@@ -10,6 +19,8 @@ class MyOffers extends Component {
   state = {
     offers: null,
     showWrongAlert: false,
+    show: false,
+    deletedOfferId: '',
   };
 
   componentDidMount() {
@@ -36,16 +47,57 @@ class MyOffers extends Component {
     return `myoffers__status--${status}`;
   };
 
+  handleDeleteOffer = () => {
+    const { deletedOfferId } = this.state;
+    // console.log(5553, );
+    fetch(`/api/v1/offers/${deletedOfferId}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(() => {
+        this.setState({ show: false });
+        this.setState(prevState => {
+          const newOffers = prevState.offers.filter(
+            offer => offer.id !== deletedOfferId
+          );
+          return { offers: newOffers };
+        });
+      })
+      .catch(() =>
+        this.setState(
+          {
+            showWrongAlert: true,
+          },
+          () =>
+            setTimeout(() => {
+              this.setState({ showWrongAlert: false });
+            }, 5000)
+        )
+      );
+  };
+
+  handleClose = e => {
+    e.stopPropagation();
+    this.setState({ show: false });
+  };
+
+  handleShow(id) {
+    this.setState({ deletedOfferId: id, show: true });
+  }
+
   render() {
-    const { offers, showWrongAlert } = this.state;
+    const { offers, showWrongAlert, show } = this.state;
     // eslint-disable-next-line react/prop-types
     const { history } = this.props;
     return (
       <>
         {showWrongAlert && <Alert> Somthing went error! Try agailn </Alert>}
-        {offers && offers.length ? (
-          <Container className="page__container">
-            <PageTitle title="My Offers" />
+        <Container className="page__container">
+          <PageTitle title="My Offers" />
+          {offers && offers.length ? (
             <Row>
               {offers ? (
                 offers.map(item => {
@@ -63,6 +115,38 @@ class MyOffers extends Component {
                             )}`}
                           >
                             {item.status}
+                            <button
+                              className="myoffers__delete"
+                              type="button"
+                              onClick={e => {
+                                e.stopPropagation();
+                                this.handleShow(item.id);
+                              }}
+                            >
+                              <i className="far fa-trash-alt myoffers__delete-icon" />
+                            </button>
+                            <Modal show={show} onHide={this.handleClose}>
+                              <Modal.Body>
+                                Are you sure to delete this offer ?!
+                              </Modal.Body>
+                              <Modal.Footer className="confirm__delete">
+                                <Button
+                                  variant="secondary"
+                                  onClick={this.handleClose}
+                                >
+                                  Close
+                                </Button>
+                                <Button
+                                  variant="danger"
+                                  onClick={e => {
+                                    e.stopPropagation();
+                                    this.handleDeleteOffer();
+                                  }}
+                                >
+                                  Delete
+                                </Button>
+                              </Modal.Footer>
+                            </Modal>
                           </Card.Text>
                         </Card.Header>
                         <Card.Body className="myoffers__body">
@@ -81,10 +165,10 @@ class MyOffers extends Component {
                 <Spinner animation="border" variant="info" />
               )}
             </Row>
-          </Container>
-        ) : (
-          <span>there is no offers to show</span>
-        )}
+          ) : (
+            <span>there is no offers to show</span>
+          )}
+        </Container>
       </>
     );
   }
