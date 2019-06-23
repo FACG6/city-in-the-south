@@ -3,6 +3,7 @@ import { Container, Spinner, Alert } from 'react-bootstrap';
 
 import OfferCard from '../CommonComponents/OfferCard';
 import PageTitle from '../CommonComponents/PageTitle';
+import auth from '../../auth/auth';
 
 import './style.css';
 
@@ -13,7 +14,7 @@ export default class SavedOffers extends Component {
   };
 
   componentDidMount() {
-    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    const userInfo = auth.getUserInfo();
     const { id } = userInfo;
     fetch(`/api/v1/saved-offers/${id}`)
       .then(res => res.json())
