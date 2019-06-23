@@ -21,7 +21,9 @@
   transform: translate(-50%, -50%);
   text-align: center;
   letter-spacing: 1px;
-  font-size: 1.7rem;
+  font-size: 2.1rem;
+  line-height: 50px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .landing__tweet::before {
