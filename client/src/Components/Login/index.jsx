@@ -63,7 +63,7 @@ export default class Login extends React.Component {
       return (
         <Redirect
           to={{
-            pathname: '/',
+            pathname: '/home',
             state: { from: location },
           }}
         />
