@@ -6,6 +6,7 @@ import SideCard from './SideCard';
 import ApplicationCard from './ApplicationCard';
 import CoverLetter from './CoverLetter';
 import PageNotFound from '../PageNotFound/index';
+import auth from '../../auth/auth';
 
 import statusColor from '../Helper/helper';
 
@@ -23,7 +24,7 @@ export default class OfferDetails extends Component {
   };
 
   componentDidMount() {
-    const userInfo = JSON.parse(window.localStorage.getItem('userInfo'));
+    const userInfo = auth.getUserInfo();
     const {
       // eslint-disable-next-line react/prop-types
       match: {
