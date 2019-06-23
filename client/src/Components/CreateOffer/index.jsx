@@ -140,7 +140,7 @@ class CreateOffer extends Component {
                       {errMsg.title}
                     </div>
                   )}
-                  <Form.Label className="newoffer__label">
+                  <Form.Label className="newoffer__label newoffer__label-padding">
                     Position :
                   </Form.Label>
                   <Form.Control
@@ -173,7 +173,7 @@ class CreateOffer extends Component {
               </Row>
               <Row>
                 <Col>
-                  <Form.Label className="newoffer__label">
+                  <Form.Label className="newoffer__label newoffer__label-padding">
                     Description :
                   </Form.Label>
                   <Form.Control
