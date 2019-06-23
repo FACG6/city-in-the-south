@@ -75,3 +75,9 @@
   }
 } 
 
+.offer-empty{
+  color: #0F9CAF;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 70vh;
+}
