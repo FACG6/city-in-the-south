@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Card, Row, Col, Container, Spinner, Alert } from 'react-bootstrap';
+import auth from '../../auth/auth';
 
 import PageTitle from '../CommonComponents/PageTitle';
 
@@ -13,7 +14,7 @@ class MyOffers extends Component {
   };
 
   componentDidMount() {
-    const { id } = JSON.parse(localStorage.getItem('userInfo'));
+    const { id } = auth.getUserInfo();
     fetch(`/api/v1/my-offers/${id}`, {
       method: 'GET',
     })
