@@ -163,7 +163,7 @@ class MyOffers extends Component {
               )}
             </Row>
           ) : (
-            <span>there is no offers to show</span>
+            <span>There is no offers to show.</span>
           )}
         </Container>
       </>
