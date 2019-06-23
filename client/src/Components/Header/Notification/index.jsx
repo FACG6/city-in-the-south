@@ -152,7 +152,7 @@ class Notification extends Component {
           <Dropdown.Menu className="dropdown__menu">
             {!showNotification && (
               <Dropdown.Item>
-                <p style={{ paddingTop:"10px" }}>No Notifications</p>
+                <p style={{ paddingTop: '10px' }}>No Notifications</p>
               </Dropdown.Item>
             )}
             {/* render un seen notifications */}
