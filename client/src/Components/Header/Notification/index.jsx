@@ -56,10 +56,10 @@ class Notification extends Component {
 
   handleNewNotification = memberId => {
     this.socket = io(`/member-${memberId}`);
-    const {
-      notification: { seen, unSeen },
-    } = this.state;
     this.socket.on('myOfferNotification', data => {
+      const {
+        notification: { seen, unSeen },
+      } = this.state;
       if (data.seen) {
         this.setState({
           notification: { unSeen, seen: [...seen, data] },
@@ -108,8 +108,8 @@ class Notification extends Component {
             // eslint-disable-next-line react/prop-types
             history: { push },
           } = this.props;
-          push(data.url);
           this.setState({ notification });
+          push(data.url);
         }
       })
       .catch(() =>

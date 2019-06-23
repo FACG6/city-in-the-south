@@ -1,7 +1,8 @@
 import React from 'react';
 import './style.css';
-import { Form, Button, Container, FormGroup } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Form, Button, Container } from 'react-bootstrap';
+
+import { Link, Redirect } from 'react-router-dom';
 import auth from '../../auth/auth';
 
 export default class Login extends React.Component {
@@ -33,14 +34,17 @@ export default class Login extends React.Component {
           }
           return response.json();
         })
-        .then(({ data, error }) => {
+        .then(({ data }) => {
           if (data) {
             // eslint-disable-next-line react/prop-types
-            const { history } = this.props;
             localStorage.setItem('userInfo', JSON.stringify(data));
             auth.isAuthenticated = true;
             setUserInfo(data);
-            history.push('/home');
+            const {
+              // eslint-disable-next-line react/prop-types
+              history: { push },
+            } = this.props;
+            push('/home');
           }
         })
         .catch(err => {
@@ -55,7 +59,18 @@ export default class Login extends React.Component {
     this.setState({ [name]: value, message: '' });
 
   render() {
+    const { location } = this.props;
     const { username, password, message } = this.state;
+    if (auth.isAuthenticated) {
+      return (
+        <Redirect
+          to={{
+            pathname: '/home',
+            state: { from: location },
+          }}
+        />
+      );
+    }
     return (
       <Container>
         <Form className="login__form">

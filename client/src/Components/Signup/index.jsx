@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import './style.css';
 import { Form, Button, Container } from 'react-bootstrap';
 import signupValidation from './validation';
@@ -76,6 +76,17 @@ export default class SignUp extends Component {
 
   render() {
     const { username, email, password, confPassword, errormsg } = this.state;
+    const { location } = this.props;
+    if (auth.isAuthenticated) {
+      return (
+        <Redirect
+          to={{
+            pathname: '/home',
+            state: { from: location },
+          }}
+        />
+      );
+    }
     return (
       <Container>
         <Form className="content-signup">
