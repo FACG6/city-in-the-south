@@ -2,18 +2,17 @@
   margin-top: 1rem;
 }
 
-.newoffer__label{
+.newoffer__label {
   color: rgba(51, 51, 51, 0.8);
-  padding-top: 15px;
 }
 
-.newoffer__description{
+.newoffer__description {
   margin-bottom: 1rem;
 }
 
 .newoffer__btns {
   margin-bottom: 2rem;
-  margin-top: .1rem;
+  margin-top: 0.1rem;
   display: flex;
 }
 
@@ -23,7 +22,7 @@
   background: #0f9caf !important;
   color: #fff;
   border: none !important;
-  margin: 0 1rem 0 0 ;
+  margin: 0 5rem 0 0;
 }
 
 .newoffer__btn--cancel:hover,
@@ -31,9 +30,7 @@
   background: #097381 !important;
 }
 
-.newoffer__container 
-.autComplete-dev 
-.form-control {
+.newoffer__container .autComplete-dev .form-control {
   width: 100%;
 }
 
@@ -49,30 +46,29 @@
   padding-right: 0.5rem;
 }
 
-@media only screen and (min-width: 576px) {
-  .col-lg-1 .newoffer__btn--cancel {
-    margin-left: 5rem
-  }
-}
-
 @media (max-width: 576px) {
-  .newoffer__description{
+  .newoffer__btn--cancel {
+    margin: 0;
+    float: right;
+  }
+  .newoffer__description {
     width: 100% !important;
   }
 
   .newoffer__btn--cancel {
     width: 7rem;
-    margin-top: 10px !important;
+    float: right;
   }
 
   .autComplete-dev .form-control {
     margin-left: 0;
   }
 
-
-.autComplete-dev .form-control {
-  width: 22.9rem;
+  .autComplete-dev .form-control {
+    width: 21.7rem;
+  }
 }
 
-} 
-
+.newoffer__label-padding {
+  padding-top: 12px;
+}
