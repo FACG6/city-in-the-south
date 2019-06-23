@@ -148,9 +148,7 @@ class ApplicationCard extends Component {
 
   render() {
     const { application, userInfo, showWrongAlert } = this.state;
-    console.log('application', application);
     const { viewProfile, hireMe } = this.props;
-    console.log('this props', this.props);
     return (
       <>
         {showWrongAlert && <Alert> Somthing went error! Try agailn </Alert>}
