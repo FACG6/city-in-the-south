@@ -38,7 +38,11 @@ export default class Login extends React.Component {
             localStorage.setItem('userInfo', JSON.stringify(data));
             auth.isAuthenticated = true;
             setUserInfo(data);
-            this.props.history.push('/home');
+            const {
+              // eslint-disable-next-line react/prop-types
+              history: { push },
+            } = this.props;
+            push('/home');
           }
         })
         .catch(err => {
