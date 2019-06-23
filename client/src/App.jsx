@@ -25,10 +25,11 @@ export default class App extends Component {
 
   componentDidMount() {
     auth.authenticate(() => {
-      this.setState({ islogged: auth.isAuthenticated });
+      // this.setState({ islogged: auth.isAuthenticated });
       if (auth.isAuthenticated) {
-        const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-        this.setState({ userInfo });
+        const userInfo = auth.getUserInfo();
+        localStorage.setItem('userInfo', JSON.stringify(userInfo));
+        this.setState({ userInfo, islogged: auth.isAuthenticated });
       } else {
         this.setState({ islogged: auth.isAuthenticated });
       }
