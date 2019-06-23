@@ -12,7 +12,7 @@ test('Testing for get experience', (t) => {
     .set('Cookie', [Cookie])
     .end((err, res) => {
       if (err) t.error(err);
-      t.equal(res.body.data[0].title, 'Assistant Director', 'Should return the same title');
+      t.equal(res.body.data.title, 'Assistant Director', 'Should return the same title');
       t.end();
     });
 });
