@@ -16,6 +16,12 @@ router.post('/login', authentication.login);
 router.post('/members', member.addMember);
 
 router.post('/members', member.addMember);
+router.get('/members/:offset', member.getMembers);
+router.get('/skills', skills.getSkills);
+router.get('/offer-type', offerType.getOfferTypes);
+router.get('/offers/:offset', offer.getOffers);
+router.get('/filter/:member_id', filter.getFilter);
+router.route('/filter/:member_id').patch(filter.updateFilter);
 router.use(authentication.authentication);
 
 router.get('/isAuthenticated', authentication.isAuthenticated);
@@ -34,17 +40,11 @@ router.post('/hired-member', application.addHireMember);
 router.patch('/hired-member/:memberId', application.updateHireMember);
 
 /* filter */
-router
-  .route('/filter/:member_id')
-  .get(filter.getFilter)
-  .patch(filter.updateFilter);
-
 router.post('/filter', filter.postFilter);
+
 /* Member */
-router.get('/members/:offset', member.getMembers);
 
 /* Offer */
-router.get('/offers/:offset', offer.getOffers);
 
 router.get('/offer/:offerId', offer.getOfferDetails);
 router.patch('/offer/:offerId', offer.updateOfferStatus);
@@ -58,11 +58,9 @@ router.get('/saved-offers/:memberId', offer.getSavedOffers);
 router.delete('/saved-offers/:memberId', offer.deleteSavedOffer);
 
 /* Offer Type */
-router.get('/offer-type', offerType.getOfferTypes);
 router.post('/offer-type', offerType.addOfferType);
 
 /* Skills */
-router.get('/skills', skills.getSkills);
 router.get('/skills/:memberId', skills.getMemberSkills);
 router.post('/skills', skills.addSkills);
 
