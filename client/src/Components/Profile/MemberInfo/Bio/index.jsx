@@ -14,7 +14,7 @@ export default class Bio extends Component {
   }
 
   render() {
-    const { userInfo, bio } = this.state;
+    const { bio } = this.state;
     return (
       <Row>
         <Col>

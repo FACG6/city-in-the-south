@@ -51,7 +51,7 @@ export default class Education extends Component {
           {!eduError &&
             educations[0] &&
             educations.map(education => (
-              <Row>
+              <Row key={`education-${education.id}`}>
                 <Col lg={5} md={4}>
                   <br />
                   <div>

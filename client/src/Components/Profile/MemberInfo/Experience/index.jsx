@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Container, Spinner, Alert } from 'react-bootstrap';
+import { Row, Col, Spinner, Alert } from 'react-bootstrap';
 
 import './style.css';
 
@@ -14,7 +14,7 @@ export default class Experience extends Component {
   componentDidMount() {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
     this.setState({ userInfo });
-    const { memberName, memberId } = this.props;
+    const { memberId } = this.props;
     fetch(`/api/v1/experience/${memberId}`, { method: 'GET' })
       .then(res => res.json())
       .then(res => {
@@ -51,7 +51,7 @@ export default class Experience extends Component {
           {!errExp &&
             experiences[0] &&
             experiences.map(experience => (
-              <Row>
+              <Row key={`experience-${experience.id}`}>
                 <Col lg={5}>
                   <br />
                   <h3 className="profile__experience_title">

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Row, Col, Container, Alert } from 'react-bootstrap';
 
 import './style.css';
@@ -17,7 +16,7 @@ export default class MemberInfo extends Component {
   }
 
   render() {
-    const { userInfo, member, showAlert } = this.state;
+    const { member, showAlert } = this.state;
     return (
       <Container>
         {showAlert && (
