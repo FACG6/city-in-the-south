@@ -9,7 +9,6 @@ import {
   SavedOffers,
   Profile,
   MyOffers,
-  Home,
 } from './Components';
 import PrivateRoute from './auth/PrivateRoute';
 
@@ -28,7 +27,6 @@ function PrivatePages() {
           path="/app/offers/:offerId"
           component={OfferDetails}
         />
-        <PrivateRoute exact path="/app/home" component={Home} />
         <PrivateRoute exact path="/app/new-offer" component={CreateOffer} />
         <PrivateRoute exact path="/app/saved-offers" component={SavedOffers} />
         <PrivateRoute exact path="/app/profile/:username" component={Profile} />
