@@ -4,7 +4,7 @@
   margin: 0 0.5rem !important;
 }
 
-.proposal {
+.offer-details__proposal-container .proposal {
   border: none !important;
-  outline: none !important;
+  box-shadow: none !important;
 }
