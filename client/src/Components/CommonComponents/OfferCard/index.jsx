@@ -186,16 +186,12 @@ class OfferCard extends React.Component {
   handleHover = () => this.setState({ hovered: 'offer-card--hovered' });
 
   handleOnClick = () => {
-    const { memberId, offerId } = this.state;
+    const { offerId } = this.state;
     const {
       // eslint-disable-next-line react/prop-types
       history: { push },
     } = this.props;
-    if (memberId === 'guest') {
-      push('/app/login');
-    } else {
-      push(`/app/offers/${offerId}`);
-    }
+    push(`/app/offers/${offerId}`);
   };
 
   render() {
