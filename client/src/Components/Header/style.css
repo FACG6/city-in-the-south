@@ -35,8 +35,9 @@
 }
 
 .Navbar__container .active {
-  color: #000 !important;
-  border-bottom: 3px solid #000;
+  color: #eee !important;
+  font-weight: 600;
+  border-bottom: 4px solid #ddd;
 }
 
 .navbar__link--text {
