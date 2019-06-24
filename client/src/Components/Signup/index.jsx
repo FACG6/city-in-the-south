@@ -47,7 +47,7 @@ export default class SignUp extends Component {
               );
               auth.isAuthenticated = true;
               setUserInfo(response.data);
-              this.props.history.push('/app/home');
+              this.props.history.push('/home');
             } else {
               this.setState({ errormsg: response.error.msg });
             }
@@ -80,7 +80,7 @@ export default class SignUp extends Component {
       return (
         <Redirect
           to={{
-            pathname: '/app/home',
+            pathname: '/home',
             state: { from: location },
           }}
         />
