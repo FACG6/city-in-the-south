@@ -119,7 +119,7 @@ class Header extends Component {
                       className="nav__avatar"
                     />{' '}
                     {'    '}
-                    {username}
+                    <span style={{ margin: '5px' }}>{username}</span>
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu className="dropdown__menu-avatar">
