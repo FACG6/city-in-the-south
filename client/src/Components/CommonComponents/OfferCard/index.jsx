@@ -209,7 +209,7 @@ class OfferCard extends React.Component {
             show={showAlert}
             key={1}
             variant={variant}
-            style={{ width: '97%', 'margin-left': '15px' }}
+            style={{ width: '97%', marginLeft: '15px' }}
           >
             {errMSg}
           </Alert>
@@ -241,13 +241,9 @@ class OfferCard extends React.Component {
                   e.stopPropagation();
                   this.handleSave(offerId);
                 }}
-                className="offer-card__save-btn"
+                className={`offer-card__save-btn ${this.savedClassStatus()}`}
               >
-                <i
-                  className={`fas fa-bookmark offer-card__favourite  ${this.savedClassStatus()}`}
-                >
-                  {' '}
-                </i>
+                <i className="fas fa-bookmark offer-card__favourite"> </i>
               </Button>
             </Card.Header>
             <Card.Body>
