@@ -12,6 +12,7 @@ import {
 } from 'react-bootstrap';
 
 import PageTitle from '../CommonComponents/PageTitle';
+import auth from '../../auth/auth';
 
 import './style.css';
 
