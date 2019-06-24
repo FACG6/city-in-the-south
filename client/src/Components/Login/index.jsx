@@ -40,9 +40,17 @@ export default class Login extends React.Component {
             auth.isAuthenticated = true;
             setUserInfo(data);
             const {
-              history: { push },
+              // eslint-disable-next-line react/prop-types
+              history: {
+                push,
+                location: { state },
+              },
             } = this.props;
-            push('/home');
+            const prevPath = state.from.state.from.pathname;
+            if (prevPath) {
+              return push(prevPath);
+            }
+            return push('/home');
           }
         })
         .catch(err => {
