@@ -35,8 +35,9 @@ export default class Home extends Component {
     filterMembers: [],
     filterData: [],
     memberId:
-      JSON.parse(localStorage.getItem('userInfo')) &&
-      JSON.parse(localStorage.getItem('userInfo')).id,
+      (JSON.parse(localStorage.getItem('userInfo')) &&
+        JSON.parse(localStorage.getItem('userInfo')).id) ||
+      'guest',
     errMSg: '',
     showAlert: false,
     variant: '',
@@ -46,8 +47,8 @@ export default class Home extends Component {
     const filterQuery =
       localStorage.getItem('filterQuery') ||
       localStorage.setItem('filterQuery', 'Offers');
-    const { offset, memberId } = this.state;
 
+    const { offset, memberId } = this.state;
     fetch(`/api/v1/filter/${memberId}`)
       .then(res => res.json())
       .then(res => {
