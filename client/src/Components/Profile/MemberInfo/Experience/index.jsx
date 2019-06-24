@@ -5,9 +5,10 @@ import './style.css';
 
 export default class Experience extends Component {
   state = {
-    experiences: '',
+    experiences: [],
     userInfo: '',
     showAlert: false,
+    errExp: false,
   };
 
   componentDidMount() {
@@ -17,11 +18,10 @@ export default class Experience extends Component {
     fetch(`/api/v1/experience/${memberId}`, { method: 'GET' })
       .then(res => res.json())
       .then(res => {
-        if (res.data) {
-          // console.log(33,res.data);
+        if (res.data.length) {
           this.setState({ experiences: res.data });
         } else {
-          throw new Error();
+          this.setState({ errExp: true });
         }
       })
       .catch(() => {
@@ -34,32 +34,46 @@ export default class Experience extends Component {
   }
 
   render() {
-    const { experiences, showAlert } = this.state;
+    const { experiences, showAlert, errExp } = this.state;
     return (
-      <Container>
-        {showAlert && <Alert>Somthing went error ! Try again.</Alert>}
-        {experiences ? (
-          <Row>
-            <Col lg={4}>
-              <h2 className="profile__title">EXPERIENCE</h2>
-              <h3 className="profile__experience_title">{experiences.title}</h3>
-              <p className="profile__experience_date">
-                {experiences.start_date} - {experiences.end_date}{' '}
-              </p>
+      <Row>
+        <Col>
+          <h2 className="profile__title">EXPERIENCE</h2>
+          {showAlert && <Alert>Somthing went error ! Try again.</Alert>}
+          {!errExp && !experiences[0] && (
+            <Spinner animation="grow" variant="info" />
+          )}
+          {errExp && !experiences[0] && (
+            <Col lg={12}>
+              <h5 className="profile__empty-msg"> There is no experiences </h5>
             </Col>
-            <Col lg={8}>
-              <h3 className="profile__experience__un">
-                {experiences.location}
-              </h3>
-              <p className="profile_experience_desc">
-                {experiences.description}
-              </p>
-            </Col>
-          </Row>
-        ) : (
-          <Spinner animation="grow" variant="info" />
-        )}
-      </Container>
+          )}
+          {!errExp &&
+            experiences[0] &&
+            experiences.map(experience => (
+              <Row>
+                <Col lg={5}>
+                  <br />
+                  <h3 className="profile__experience_title">
+                    {experience.title}
+                  </h3>
+                  <p className="profile__experience_date">
+                    {new Date(experience.start_date).toLocaleDateString()} -{' '}
+                    {new Date(experiences[0].end_date).toLocaleDateString()}{' '}
+                  </p>
+                </Col>
+                <Col lg={7}>
+                  <h3 className="profile__experience__un">
+                    {experience.location}
+                  </h3>
+                  <p className="profile_experience_desc">
+                    {experience.description}
+                  </p>
+                </Col>
+              </Row>
+            ))}
+        </Col>
+      </Row>
     );
   }
 }

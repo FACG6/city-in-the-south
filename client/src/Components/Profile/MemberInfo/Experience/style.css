@@ -1,14 +1,16 @@
 .profile__experience_title, .profile__experience__un {
-  line-height: 10px;
   color: #0f9caf;
   text-transform: uppercase;
-  font-size: 22px;
+  font-size: 16px;
 }
-
+.profile__experience_title , .profile__experience_date{
+  text-align: center;
+}
 .profile__experience_date, .profile_experience_desc {
   font-size: 14px;
   color: rgba(51, 51, 51, 0.8);
-  word-break: break-all
+  word-break: break-all;
+  padding-top: .3rem !important;
 }
 
 .profile__experience__un {
