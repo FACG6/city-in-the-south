@@ -148,9 +148,6 @@ class Header extends Component {
             </>
           )}
         </Navbar.Collapse>
-        {auth.error && (
-          <Alert variant="danger">Network connection error!!!</Alert>
-        )}
       </Navbar>
     );
   }
