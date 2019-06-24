@@ -46,6 +46,7 @@ export default class SignUp extends Component {
                 'userInfo',
                 JSON.stringify(response.data[0])
               );
+              auth.setUserInfo(response.data);
               auth.isAuthenticated = true;
               setUserInfo(response.data);
               history.push('/home');

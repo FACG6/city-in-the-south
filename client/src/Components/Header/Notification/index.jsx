@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Dropdown, Alert } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
+import auth from '../../../auth/auth';
+
 import './style.css';
 
 const io = require('socket.io-client');
@@ -17,7 +19,7 @@ class Notification extends Component {
   };
 
   componentDidMount() {
-    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    const userInfo = auth.getUserInfo();
     const { id: memberId } = userInfo;
     this.getNotifications(memberId);
     this.handleNewNotification(memberId);

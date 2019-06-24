@@ -21,6 +21,7 @@ import {
 } from './heplers';
 
 import './style.css';
+import auth from '../../auth/auth';
 
 export default class Home extends Component {
   state = {
@@ -34,10 +35,7 @@ export default class Home extends Component {
     filteredOffers: [],
     filterMembers: [],
     filterData: [],
-    memberId:
-      (JSON.parse(localStorage.getItem('userInfo')) &&
-        JSON.parse(localStorage.getItem('userInfo')).id) ||
-      'guest',
+    memberId: (auth.getUserInfo() && auth.getUserInfo().id) || 'guest',
     errMSg: '',
     showAlert: false,
     variant: '',
@@ -47,7 +45,6 @@ export default class Home extends Component {
     const filterQuery =
       localStorage.getItem('filterQuery') ||
       localStorage.setItem('filterQuery', 'Offers');
-
     const { offset, memberId } = this.state;
     fetch(`/api/v1/filter/${memberId}`)
       .then(res => res.json())

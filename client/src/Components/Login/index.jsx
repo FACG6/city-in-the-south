@@ -36,7 +36,7 @@ export default class Login extends React.Component {
         })
         .then(({ data }) => {
           if (data) {
-            localStorage.setItem('userInfo', JSON.stringify(data));
+            auth.setUserInfo(data);
             auth.isAuthenticated = true;
             setUserInfo(data);
             const {

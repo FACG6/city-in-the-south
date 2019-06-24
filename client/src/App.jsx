@@ -27,7 +27,6 @@ export default class App extends Component {
     auth.authenticate(() => {
       if (auth.isAuthenticated) {
         const userInfo = auth.getUserInfo();
-        localStorage.setItem('userInfo', JSON.stringify(userInfo));
         this.setState({ userInfo, islogged: auth.isAuthenticated });
       } else {
         this.setState({ islogged: auth.isAuthenticated });
@@ -36,12 +35,12 @@ export default class App extends Component {
   }
 
   isLoggedOut = () => {
-    localStorage.removeItem('userInfo');
+    auth.logout();
     this.setState({ islogged: false });
   };
 
   setUserInfo = (_userInfo, _islogged) => {
-    const userInfo = JSON.parse(localStorage.getItem('userInfo')) || _userInfo;
+    const userInfo = auth.getUserInfo() || _userInfo;
     this.setState({ userInfo, islogged: auth.isAuthenticated });
   };
 
