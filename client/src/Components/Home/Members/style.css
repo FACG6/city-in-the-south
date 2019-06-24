@@ -33,10 +33,12 @@
 }
 
 .member-card__username {
-  color: rgba(51, 51, 51, 0.7);
-  font-size: 18px;
+  color: rgba(19, 18, 18, 0.8);
+  font-size: 15px;
   font-weight: bold;
   position: absolute;
-  top: 15px;
+  top: 7px;
   left: 70px;
+  max-width: 100px;
+  padding-right: 5px;
 }
