@@ -12,7 +12,7 @@ test('Testing for get edu', (t) => {
     .set('Cookie', [Cookie])
     .end((err, res) => {
       if (err) t.error(err);
-      t.equal(res.body.data.title, 'Certified Computer Professional2002', 'Should return the same title');
+      t.equal(res.body.data[0].title, 'Certified Computer Professional2002', 'Should return the same title');
       t.end();
     });
 });
