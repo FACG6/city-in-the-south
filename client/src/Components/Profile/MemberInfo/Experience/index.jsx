@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col, Spinner, Alert } from 'react-bootstrap';
 
+import auth from '../../../../auth/auth';
 import './style.css';
 
 export default class Experience extends Component {
@@ -12,7 +13,7 @@ export default class Experience extends Component {
   };
 
   componentDidMount() {
-    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    const userInfo = auth.getUserInfo();
     this.setState({ userInfo });
     const { memberId } = this.props;
     fetch(`/api/v1/experience/${memberId}`, { method: 'GET' })
