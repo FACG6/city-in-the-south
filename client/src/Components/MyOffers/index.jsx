@@ -81,7 +81,7 @@ class MyOffers extends Component {
   };
 
   handleClose = e => {
-    e.stopPropagation();
+    if (e) e.stopPropagation();
     this.setState({ show: false });
   };
 
