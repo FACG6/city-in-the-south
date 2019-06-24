@@ -148,7 +148,7 @@ class ApplicationCard extends Component {
 
   render() {
     const { application, userInfo, showWrongAlert } = this.state;
-    const { defaultAvatar, viewProfile, hireMe } = this.props;
+    const { viewProfile, hireMe } = this.props;
     return (
       <>
         {showWrongAlert && <Alert> Somthing went error! Try agailn </Alert>}
@@ -157,11 +157,17 @@ class ApplicationCard extends Component {
             <Card.Header>
               <Card.Title>
                 <Image
-                  src={application.avatar ? application.avatar : defaultAvatar}
+                  src={
+                    application.avatar
+                      ? application.avatar
+                      : 'https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1'
+                  }
                   className="application-card__avatar"
                 />
                 <span style={{ paddingLeft: '10px' }}>
-                  {application.full_name}
+                  {application.full_name
+                    ? application.full_name
+                    : application.username}
                 </span>
               </Card.Title>
             </Card.Header>
@@ -243,5 +249,4 @@ ApplicationCard.propTypes = {
   }).isRequired,
   viewProfile: PropTypes.bool,
   hireMe: PropTypes.bool,
-  defaultAvatar: PropTypes.string.isRequired,
 };
