@@ -73,6 +73,7 @@ export default class App extends Component {
                     <Signup {...props} setUserInfo={this.setUserInfo} />
                   )}
                 />
+                <Route exact path="/home" component={Home} />
                 <Route path="/app" component={PrivatePages} />
                 <Route component={PageNotFound} />
               </Switch>
