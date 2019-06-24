@@ -29,7 +29,7 @@ export default function Members({ filtered, history }) {
                         className="member-card__avatar"
                       />
                       <Card.Title className="member-card__username">
-                        {member.username}
+                        {member.full_name ? member.username : member.username}
                       </Card.Title>
                     </Col>
                   </Row>

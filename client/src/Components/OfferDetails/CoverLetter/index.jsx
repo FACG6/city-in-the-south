@@ -16,7 +16,7 @@ class CoverLetter extends Component {
   };
 
   handleOnChange = ({ target: { value } }) => {
-    this.setState({ proposal: value });
+    this.setState({ proposal: value, errMsg: '' });
   };
 
   handleApplyProposal = () => {
@@ -95,12 +95,6 @@ class CoverLetter extends Component {
             style={{ marginBottom: '10px' }}
             onChange={this.handleOnChange}
           />
-          {errMsg.proposal && (
-            <div className="newoffer__errMsg">
-              <i className="fas fa-exclamation newoffer__errMsg--icon" />{' '}
-              {errMsg.proposal}
-            </div>
-          )}
           <Button
             className="offer-details__proposal-container__button"
             onClick={this.handleApplyProposal}
@@ -108,6 +102,12 @@ class CoverLetter extends Component {
             Apply
           </Button>
         </Row>
+        {errMsg.proposal && (
+          <div className="newoffer__errMsg">
+            <i className="fas fa-exclamation newoffer__errMsg--icon" />{' '}
+            {errMsg.proposal}
+          </div>
+        )}
       </>
     );
   }
