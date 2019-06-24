@@ -25,7 +25,7 @@ export default class MemberInfo extends Component {
         )}
         <>
           <Row>
-            <Col sm={12}>
+            <Col sm={4} lg={12} className='user__img'>
               <img
                 src={
                   member.avatar
@@ -37,22 +37,14 @@ export default class MemberInfo extends Component {
                 className="profile__img"
               />
             </Col>
-            <Col sm={12}>
-              <h3 className="profile__username">{member.username}</h3>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
+            <Col sm={6} lg={12}>
+              <h3 className="profile__username">{member.username} </h3>
               <h2 className="profile__title">CONTACT</h2>
               <div className="profile__contactInfo">
                 {member.address && <p>{member.address}</p>}
                 {member.email && <p>Email: {member.email}</p>}
                 {member.phone && <p>Phone: {member.phone}</p>}
               </div>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
               <h2 className="profile__title">SKILLS</h2>
               <div className="profile__skills">
                 {member.skills &&
