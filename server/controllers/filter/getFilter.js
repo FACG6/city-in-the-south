@@ -3,6 +3,9 @@ const { getFilterData } = require('../../database/queries/filter/index');
 const parseData = arr => arr.map(item => JSON.parse(item));
 
 module.exports = (req, res, next) => {
+  if (req.params.member_id === 'guest') {
+    return res.send({ error: null, data: { member_id: 'guest', skills: [], offer_type: [] } });
+  }
   getFilterData(req.params.member_id)
     .then((response) => {
       let data = response.rows[0];
