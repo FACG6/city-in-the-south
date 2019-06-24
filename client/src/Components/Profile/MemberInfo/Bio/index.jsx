@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 
 export default class Bio extends Component {
   state = {
@@ -16,12 +16,12 @@ export default class Bio extends Component {
   render() {
     const { userInfo, bio } = this.state;
     return (
-      <>
+      <Row>
         <Col>
           <h2 className="profile__title">BIO</h2>
           <p className="profile__bio">{bio}</p>
         </Col>
-      </>
+      </Row>
     );
   }
 }
