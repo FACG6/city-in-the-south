@@ -10,7 +10,6 @@ export default function Members({ filtered, history }) {
     <Row key={Math.random()}>
       {filtered[0] ? (
         filtered.map(member => {
-          console.log(111111111, member);
           return (
             <Col xs={12} md={4} lg={4} key={member.id}>
               <Card
