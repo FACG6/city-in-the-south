@@ -18,7 +18,7 @@ class Header extends Component {
   };
 
   componentDidMount() {
-    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    const userInfo = auth.getUserInfo();
     if (userInfo) {
       userInfo.defaultAvatar =
         'https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1';
@@ -30,7 +30,7 @@ class Header extends Component {
     const {
       userInfo: { username },
     } = this.state;
-    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    const userInfo = auth.getUserInfo();
     if (userInfo && username !== userInfo.username) {
       userInfo.defaultAvatar =
         'https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1';

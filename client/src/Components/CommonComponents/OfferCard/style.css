@@ -51,7 +51,7 @@
   cursor: pointer;
 }
 
-.offer-card__favourite--saved {
+.offer-card__favourite--saved svg {
   color: #0F9CAF;
 }
 

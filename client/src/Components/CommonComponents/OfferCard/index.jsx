@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, Button, Spinner, Alert } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import auth from '../../../auth/auth';
 
 import './style.css';
 
@@ -30,15 +31,9 @@ class OfferCard extends React.Component {
     };
     this.setState({
       offerId: id,
-      memberId:
-        (JSON.parse(localStorage.getItem('userInfo')) &&
-          JSON.parse(localStorage.getItem('userInfo')).id) ||
-        'guest',
+      memberId: (auth.getUserInfo() && auth.getUserInfo().id) || 'guest',
     });
-    const memberId =
-      (JSON.parse(localStorage.getItem('userInfo')) &&
-        JSON.parse(localStorage.getItem('userInfo')).id) ||
-      'guest';
+    const memberId = (auth.getUserInfo() && auth.getUserInfo().id) || 'guest';
     if (memberId !== 'guest') {
       fetch(`/api/v1/saved-offers/${memberId}`, { method: 'GET' })
         .then(res => res.json())
@@ -214,7 +209,7 @@ class OfferCard extends React.Component {
             show={showAlert}
             key={1}
             variant={variant}
-            style={{ width: '97%', 'margin-left': '15px' }}
+            style={{ width: '97%', marginLeft: '15px' }}
           >
             {errMSg}
           </Alert>
@@ -246,13 +241,9 @@ class OfferCard extends React.Component {
                   e.stopPropagation();
                   this.handleSave(offerId);
                 }}
-                className="offer-card__save-btn"
+                className={`offer-card__save-btn ${this.savedClassStatus()}`}
               >
-                <i
-                  className={`fas fa-bookmark offer-card__favourite  ${this.savedClassStatus()}`}
-                >
-                  {' '}
-                </i>
+                <i className="fas fa-bookmark offer-card__favourite"> </i>
               </Button>
             </Card.Header>
             <Card.Body>

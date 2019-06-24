@@ -12,6 +12,7 @@ import {
 } from 'react-bootstrap';
 
 import PageTitle from '../CommonComponents/PageTitle';
+import auth from '../../auth/auth';
 
 import './style.css';
 
@@ -24,7 +25,7 @@ class MyOffers extends Component {
   };
 
   componentDidMount() {
-    const { id } = JSON.parse(localStorage.getItem('userInfo'));
+    const { id } = auth.getUserInfo();
     fetch(`/api/v1/my-offers/${id}`, {
       method: 'GET',
     })
@@ -80,7 +81,7 @@ class MyOffers extends Component {
   };
 
   handleClose = e => {
-    e.stopPropagation();
+    if (e) e.stopPropagation();
     this.setState({ show: false });
   };
 

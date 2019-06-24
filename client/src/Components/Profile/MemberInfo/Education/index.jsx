@@ -14,12 +14,11 @@ export default class Education extends Component {
 
   componentDidMount() {
     const { memberId } = this.props;
-    this.setState({ memberId });
     fetch(`/api/v1/education/${memberId}`, { method: 'GET' })
       .then(res => res.json())
       .then(res => {
         if (res.data.length) {
-          this.setState({ educations: res.data });
+          this.setState({ educations: res.data, memberId });
         } else this.setState({ eduError: true });
       })
       .catch(() => {
@@ -67,7 +66,7 @@ export default class Education extends Component {
                   <br />
                   <div>
                     <span className="profile__education__un">
-                      {education.university} 
+                      {education.university}
                       <span className="profile__education_date">
                         {new Date(education.date).toLocaleDateString()}
                       </span>

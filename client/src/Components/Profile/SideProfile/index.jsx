@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col, Container, Alert } from 'react-bootstrap';
-
+import auth from '../../../auth/auth';
 import './style.css';
 
 export default class MemberInfo extends Component {
@@ -11,7 +11,7 @@ export default class MemberInfo extends Component {
 
   componentDidMount() {
     const { member } = this.props;
-    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    const userInfo = auth.getUserInfo();
     this.setState({ userInfo, member });
   }
 
@@ -24,7 +24,7 @@ export default class MemberInfo extends Component {
         )}
         <>
           <Row>
-            <Col sm={4} lg={12} className='user__img'>
+            <Col sm={4} lg={12} className="user__img">
               <img
                 src={
                   member.avatar
