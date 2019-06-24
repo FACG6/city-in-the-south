@@ -31,38 +31,42 @@ class OfferCard extends React.Component {
     this.setState({
       offerId: id,
       memberId:
-        JSON.parse(localStorage.getItem('userInfo')) &&
-        JSON.parse(localStorage.getItem('userInfo')).id,
+        (JSON.parse(localStorage.getItem('userInfo')) &&
+          JSON.parse(localStorage.getItem('userInfo')).id) ||
+        'guest',
     });
     const memberId =
-      JSON.parse(localStorage.getItem('userInfo')) &&
-      JSON.parse(localStorage.getItem('userInfo')).id;
-    fetch(`/api/v1/saved-offers/${memberId}`, { method: 'GET' })
-      .then(res => res.json())
-      .then(res => {
-        if (res.data) {
-          return res.data;
-        }
-      })
-      .then(result => {
-        result.map(savedOffer => {
-          if (offer.id === savedOffer.offer_id) this.setState({ saved: true });
-        });
-      })
-      .catch(() =>
-        this.setState(
-          {
-            errMSg: 'Something went wrong',
-            showAlert: true,
-            variant: 'danger',
-          },
-          () =>
-            setTimeout(() => {
-              this.setState({ errMSg: '', showAlert: false });
-            }, 3000)
-        )
-      );
-
+      (JSON.parse(localStorage.getItem('userInfo')) &&
+        JSON.parse(localStorage.getItem('userInfo')).id) ||
+      'guest';
+    if (memberId !== 'guest') {
+      fetch(`/api/v1/saved-offers/${memberId}`, { method: 'GET' })
+        .then(res => res.json())
+        .then(res => {
+          if (res.data) {
+            return res.data;
+          }
+        })
+        .then(result => {
+          result.map(savedOffer => {
+            if (offer.id === savedOffer.offer_id)
+              this.setState({ saved: true });
+          });
+        })
+        .catch(() =>
+          this.setState(
+            {
+              errMSg: 'Something went wrong',
+              showAlert: true,
+              variant: 'danger',
+            },
+            () =>
+              setTimeout(() => {
+                this.setState({ errMSg: '', showAlert: false });
+              }, 3000)
+          )
+        );
+    }
     this.setState(() => {
       return {
         offer,
@@ -82,7 +86,7 @@ class OfferCard extends React.Component {
     const { saved, memberId } = this.state;
     // eslint-disable-next-line react/prop-types
     const { handleDelete } = this.props;
-    if (saved) {
+    if (saved && memberId !== 'guest') {
       fetch(`/api/v1/saved-offers/${memberId}`, {
         method: 'DELETE',
         body: JSON.stringify({ offerId: id }),
@@ -137,7 +141,7 @@ class OfferCard extends React.Component {
               }, 3000)
           )
         );
-    } else {
+    } else if (!saved && memberId !== 'guest') {
       fetch('/api/v1/saved-offers', {
         method: 'POST',
         body: JSON.stringify({ memberId, offerId: id }),
@@ -181,6 +185,19 @@ class OfferCard extends React.Component {
 
   handleHover = () => this.setState({ hovered: 'offer-card--hovered' });
 
+  handleOnClick = () => {
+    const { memberId, offerId } = this.state;
+    const {
+      // eslint-disable-next-line react/prop-types
+      history: { push },
+    } = this.props;
+    if (memberId === 'guest') {
+      push('/app/login');
+    } else {
+      push(`/app/offers/${offerId}`);
+    }
+  };
+
   render() {
     const {
       offer,
@@ -203,7 +220,8 @@ class OfferCard extends React.Component {
           <Card
             className={`offer-card ${hovered ? 'offer-card--hovered' : ''}`}
             key={`offer${offer.id}`}
-            onClick={() => history.push(`/app/offers/${offerId}`)}
+            // onClick={() => history.push(`/app/offers/${offerId}`)}
+            onClick={this.handleOnClick}
           >
             {hover ? (
               <span className={`offer-card__border ${statusDiv}`} />
