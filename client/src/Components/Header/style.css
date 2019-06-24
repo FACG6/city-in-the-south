@@ -35,13 +35,12 @@
 }
 
 .Navbar__container .active {
-  background-color: rgba(0, 0, 0, 0.15) !important;
-  border-radius: 5px !important;
-  color: #333 !important
+  color: #000 !important;
+  border-bottom: 3px solid #000;
 }
 
 .navbar__link--text {
-  margin: 10px 10px;
+  margin: 18px 10px;
 }
 
 .Navbar__container .dropdown__item {

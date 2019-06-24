@@ -142,11 +142,7 @@ class Notification extends Component {
     return (
       <>
         <Dropdown alignRight>
-          <Dropdown.Toggle
-            id="dropdown-basic"
-            className="nav__dropdown"
-            disabled={!showNotification}
-          >
+          <Dropdown.Toggle id="dropdown-basic" className="nav__dropdown">
             {status ? (
               <i className="fas fa-bell fa-lg">
                 <span className="notification-no">{unSeen.length}</span>
@@ -156,6 +152,11 @@ class Notification extends Component {
             )}
           </Dropdown.Toggle>
           <Dropdown.Menu className="dropdown__menu">
+            {!showNotification && (
+              <Dropdown.Item>
+                <p style={{ paddingTop: '10px' }}>No Notifications</p>
+              </Dropdown.Item>
+            )}
             {/* render un seen notifications */}
             {unSeen.map((item, index) => {
               return (

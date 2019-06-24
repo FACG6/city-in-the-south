@@ -35,7 +35,7 @@ export default class Home extends Component {
     filteredOffers: [],
     filterMembers: [],
     filterData: [],
-    memberId: auth.getUserInfo() && auth.getUserInfo().id,
+    memberId: (auth.getUserInfo() && auth.getUserInfo().id) || 'guest',
     errMSg: '',
     showAlert: false,
     variant: '',

@@ -25,7 +25,6 @@ export default class App extends Component {
 
   componentDidMount() {
     auth.authenticate(() => {
-      // this.setState({ islogged: auth.isAuthenticated });
       if (auth.isAuthenticated) {
         const userInfo = auth.getUserInfo();
         // localStorage.setItem('userInfo', JSON.stringify(userInfo));

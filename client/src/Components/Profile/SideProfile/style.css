@@ -1,32 +1,38 @@
 .profile__username {
   text-align: center;
   margin-top: 15px;
+  font-size: 20px;
+  color: rgba(51, 51, 51, 0.8);
 }
 
 .profile__img {
   margin: 10px 0px;
   border-radius: 5px;
-  height: 270px;
+  max-height: 270px;
   width: 200px;
 }
 
 .profile__contactInfo, .profile__skills {
-  color: rgb(47, 47, 47);
-  margin: .7rem;
   font-size: 16px;
   color: rgba(51, 51, 51, 0.8);
+  padding-left: 10px;
 }
 
-@media (max-width: 992px) {
-  .profile__contanier {
-    margin: 26px auto !important;
+.user__img{
+  text-align: center;
+  padding-top: 1.5rem;
+}
+
+@media only screen and (max-width: 992px) {
+  .profile__username {
+    text-align: left;
   }
-  .profile__img{
-    margin: 0 25% !important;
-    height: 270px;
-    width: 200px;
-  }
-  .profile__title__line {
-    display: none !important;
+}
+
+@media  only screen and (max-width: 600px){
+  .profile__img {
+    max-height: 150px;
+    width: 150px;
+    border-radius: 50%;
   }
 }

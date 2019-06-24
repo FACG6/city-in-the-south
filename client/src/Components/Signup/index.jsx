@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import './style.css';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Container } from 'react-bootstrap';
 import signupValidation from './validation';
 import auth from '../../auth/auth';
 
@@ -41,6 +41,7 @@ export default class SignUp extends Component {
           .then(res => res.json())
           .then(response => {
             if (response.data) {
+              const { history } = this.props;
               localStorage.setItem(
                 'userInfo',
                 JSON.stringify(response.data[0])
@@ -48,7 +49,7 @@ export default class SignUp extends Component {
               auth.setUserInfo(response.data);
               auth.isAuthenticated = true;
               setUserInfo(response.data);
-              this.props.history.push('/home');
+              history.push('/home');
             } else {
               this.setState({ errormsg: response.error.msg });
             }
@@ -88,13 +89,10 @@ export default class SignUp extends Component {
       );
     }
     return (
-      <>
+      <Container>
         <Form className="content-signup">
           <h2 className="content-signup__word-sigup">SIGN UP</h2>
-          <Form.Group
-            controlId="formBasicUsername"
-            className="content-signup__username"
-          >
+          <Form.Group controlId="formBasicUsername">
             <Form.Label>
               Username :{' '}
               <span className="content-signup__username-star">*</span>
@@ -108,11 +106,7 @@ export default class SignUp extends Component {
             />
             {errormsg && <span className="errormsg">{errormsg.username}</span>}
           </Form.Group>
-
-          <Form.Group
-            controlId="formBasicEmail"
-            className="content-signup__email"
-          >
+          <Form.Group controlId="formBasicEmail">
             <Form.Label>
               E-mail : <span className="content-signup__email-star">*</span>
             </Form.Label>
@@ -125,11 +119,7 @@ export default class SignUp extends Component {
             />
             {errormsg && <span className="errormsg">{errormsg.email}</span>}
           </Form.Group>
-
-          <Form.Group
-            controlId="formBasicPassword"
-            className="content-signup__password"
-          >
+          <Form.Group controlId="formBasicPassword">
             <Form.Label>
               Password :{' '}
               <span className="content-signup__password-star">*</span>
@@ -143,10 +133,7 @@ export default class SignUp extends Component {
             />
             {errormsg && <span className="errormsg">{errormsg.password}</span>}
           </Form.Group>
-          <Form.Group
-            controlId="formBasicPassword"
-            className="content-signup__confirm-password"
-          >
+          <Form.Group controlId="formBasicPassword">
             <Form.Label>
               Confirm Password :{' '}
               <span className="content-signup__confirm-password-star">*</span>
@@ -178,7 +165,7 @@ export default class SignUp extends Component {
             </Link>
           </Form.Text>
         </Form>
-      </>
+      </Container>
     );
   }
 }

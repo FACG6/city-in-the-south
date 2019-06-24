@@ -18,7 +18,7 @@ class CreateOffer extends Component {
     offerType: [],
     memberId: 0,
     errMsg: '',
-    errMsgAlert: '',
+    messageAlert: '',
     showAlert: false,
     variant: '',
   };
@@ -66,7 +66,7 @@ class CreateOffer extends Component {
             if (res.data) {
               this.setState(
                 {
-                  errMsgAlert: 'Added successfully ',
+                  messageAlert: 'Added successfully ',
                   showAlert: true,
                   variant: 'success',
                 },
@@ -75,7 +75,7 @@ class CreateOffer extends Component {
                     // eslint-disable-next-line react/prop-types
                     const { history } = this.props;
                     const offerId = res.data.id;
-                    this.setState({ errMsgAlert: '', showAlert: false });
+                    this.setState({ messageAlert: '', showAlert: false });
                     history.push(`/app/offers/${offerId}`);
                   }, 1000)
               );
@@ -86,13 +86,13 @@ class CreateOffer extends Component {
           .catch(() => {
             this.setState(
               {
-                errMsgAlert: 'Something went wrong',
+                messageAlert: 'Something went wrong',
                 showAlert: true,
                 variant: 'danger',
               },
               () =>
                 setTimeout(() => {
-                  this.setState({ errMsgAlert: '', showAlert: false });
+                  this.setState({ messageAlert: '', showAlert: false });
                 }, 3000)
             );
           });
@@ -113,13 +113,13 @@ class CreateOffer extends Component {
   handleOfferTypes = offerType => this.setState({ offerType });
 
   handleInput = ({ target: { name, value } }) => {
-    this.setState({ [name]: value });
+    this.setState({ [name]: value, errMsg: '' });
   };
 
   render() {
     // eslint-disable-next-line react/prop-types
     const { history } = this.props;
-    const { errMsg, variant, showAlert, errMsgAlert } = this.state;
+    const { errMsg, variant, showAlert, messageAlert } = this.state;
     return (
       <Container className="page__container">
         <PageTitle title="New Offer" />
@@ -141,7 +141,7 @@ class CreateOffer extends Component {
                       {errMsg.title}
                     </div>
                   )}
-                  <Form.Label className="newoffer__label">
+                  <Form.Label className="newoffer__label newoffer__label-padding">
                     Position :
                   </Form.Label>
                   <Form.Control
@@ -174,7 +174,7 @@ class CreateOffer extends Component {
               </Row>
               <Row>
                 <Col>
-                  <Form.Label className="newoffer__label">
+                  <Form.Label className="newoffer__label newoffer__label-padding">
                     Description :
                   </Form.Label>
                   <Form.Control
@@ -218,7 +218,7 @@ class CreateOffer extends Component {
                 <br />
                 <Row>
                   <Alert show={showAlert} key={1} variant={variant}>
-                    {errMsgAlert}
+                    {messageAlert}
                   </Alert>
                 </Row>
               </div>

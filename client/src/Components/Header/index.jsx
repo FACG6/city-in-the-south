@@ -68,6 +68,9 @@ class Header extends Component {
           {!islogged && (
             <Col md="auto">
               <Nav>
+                <NavLink to="/home" className="navbar__link">
+                  <div className="navbar__link--text">Home</div>
+                </NavLink>
                 <NavLink to="/login" className="navbar__link">
                   <div className="navbar__link--text">Login</div>
                 </NavLink>
@@ -145,9 +148,6 @@ class Header extends Component {
             </>
           )}
         </Navbar.Collapse>
-        {auth.error && (
-          <Alert variant="danger">Network connection error!!!</Alert>
-        )}
       </Navbar>
     );
   }
