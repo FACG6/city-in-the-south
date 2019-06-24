@@ -12,6 +12,12 @@
   align-self: center;
   width: 100px;
 }
+.footer__icons a {
+  padding: 4px;
+}
+.footer__icons a:hover {
+  color: #eeeeee;
+}
 .footer__icons .fab {
   margin-left: 12px;
 }

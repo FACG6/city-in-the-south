@@ -119,7 +119,7 @@ class Header extends Component {
                       className="nav__avatar"
                     />{' '}
                     {'    '}
-                    {username}
+                    <span>{username}</span>
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu className="dropdown__menu-avatar">

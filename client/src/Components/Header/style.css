@@ -15,8 +15,8 @@
 .nav__avatar {
   width: 40px;
   height: 40px;
-
   border-radius: 50%;
+  margin-right: 7px;
 }
 
 .nav__dropdown {
@@ -48,7 +48,7 @@
   text-decoration: none !important;
 }
 
-@media (min-width: 992px){
+@media (min-width: 992px) {
   .Navbar__container .navigation {
     right: 0;
     position: absolute;
@@ -74,7 +74,7 @@
   margin: 0 !important;
 }
 
-.logo{
+.logo {
   position: absolute;
   top: 0;
   width: 110px;
