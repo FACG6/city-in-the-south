@@ -31,12 +31,9 @@ function addNotification(offerId, memberId, io, next) {
       if (result.rows) {
         const offerMemberId = result.rows[0].member_id;
         const memberSocket = io.of(`/member-${offerMemberId}`);
-        memberSocket.on('connect', (socket) => {
-          socket.emit('myOfferNotification', result.rows[0]);
-        });
+        memberSocket.emit('myOfferNotification', result.rows[0]);
       }
     })
-
     .catch(() => next({ code: 500, msg: 'Internal Server Error' }));
 }
 
