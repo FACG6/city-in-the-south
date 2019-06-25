@@ -1,12 +1,15 @@
-.header__container .notification-no {
+.notification-number {
   color: #eeeeee;
   position: absolute;
   z-index: 1;
-  top: -8px;
-  left: 12px;
-  font-size: 0.7em;
+  top: 0px;
+  left: 15px;
+  font-size: 0.6em;
   background-color: red;
-  padding: 2px;
+  padding: 1px;
+  width: 20px;
+  font-weight: bold;
+  border-radius: 50%;
 }
 .dropdown_item-unseen {
   background-color: #cecccc61 !important;

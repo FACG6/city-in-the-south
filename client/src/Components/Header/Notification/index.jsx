@@ -144,9 +144,10 @@ class Notification extends Component {
         <Dropdown alignRight>
           <Dropdown.Toggle id="dropdown-basic" className="nav__dropdown">
             {status ? (
-              <i className="fas fa-bell fa-lg">
-                <span className="notification-no">{unSeen.length}</span>
-              </i>
+              <>
+                <i className="fas fa-bell fa-lg" />
+                <span className="notification-number">{unSeen.length}</span>
+              </>
             ) : (
               <i className="far fa-bell fa-lg" />
             )}
