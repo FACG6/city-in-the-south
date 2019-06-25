@@ -5,6 +5,7 @@ import { Image, Card, Button, Alert } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 import statusColor from '../../Helper/helper';
+import auth from '../../../auth/auth';
 
 import './style.css';
 
@@ -17,7 +18,7 @@ class ApplicationCard extends Component {
 
   componentDidMount() {
     const { application } = this.props;
-    const userInfo = JSON.parse(window.localStorage.getItem('userInfo'));
+    const userInfo = auth.getUserInfo();
     this.setState({ application, userInfo });
   }
 
