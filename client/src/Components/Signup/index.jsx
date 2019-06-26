@@ -42,11 +42,7 @@ export default class SignUp extends Component {
           .then(response => {
             if (response.data) {
               const { history } = this.props;
-              localStorage.setItem(
-                'userInfo',
-                JSON.stringify(response.data[0])
-              );
-              auth.setUserInfo(response.data);
+              auth.setUserInfo(response.data[0]);
               auth.isAuthenticated = true;
               setUserInfo(response.data);
               history.push('/home');
@@ -54,7 +50,9 @@ export default class SignUp extends Component {
               this.setState({ errormsg: response.error.msg });
             }
           })
-          .catch(err => (auth.error = err));
+          .catch(err => {
+            auth.error = err;
+          });
       })
       .catch(({ inner }) => {
         if (inner) {
